@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Sublimetext on VS tech corner</title>
+    <link>http://vincentserpoul.github.io/blog/tags/sublimetext/</link>
+    <description>Recent content in Sublimetext on VS tech corner</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 09 Feb 2016 14:48:27 +0800</lastBuildDate>
+    <atom:link href="http://vincentserpoul.github.io/blog/tags/sublimetext/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>golang dev environment setup</title>
+      <link>http://vincentserpoul.github.io/blog/post/golang-dev-env-setup/</link>
+      <pubDate>Tue, 09 Feb 2016 14:48:27 +0800</pubDate>
+      
+      <guid>http://vincentserpoul.github.io/blog/post/golang-dev-env-setup/</guid>
+      <description>
+
+&lt;h1 id=&#34;golang-environment:5968a8b0c74379a526ed74fea62d73ec&#34;&gt;Golang environment&lt;/h1&gt;
+
+&lt;p&gt;install golang&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.wolfe.id.au/2015/03/05/using-sublime-text-for-go-development/&#34;&gt;http://www.wolfe.id.au/2015/03/05/using-sublime-text-for-go-development/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;install sublimetext3
+    install gosublime
+    install gooracle&lt;/p&gt;
+
+&lt;p&gt;install go/tools
+    go get -u golang.org/x/tools/cmd/goimports
+    go get -u golang.org/x/tools/cmd/vet
+    go get -u golang.org/x/tools/cmd/oracle
+    go get -u golang.org/x/tools/cmd/godoc&lt;/p&gt;
+
+&lt;p&gt;install gometalinter (&lt;a href=&#34;https://github.com/alecthomas/gometalinter&#34;&gt;https://github.com/alecthomas/gometalinter&lt;/a&gt;)&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
