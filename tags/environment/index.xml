@@ -6,8 +6,33 @@
     <description>Recent content in Environment on VS tech corner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 09 Feb 2016 14:48:27 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 15 Feb 2016 20:48:27 +0800</lastBuildDate>
     <atom:link href="http://vincentserpoul.github.io/tags/environment/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>javascript dev environment setup</title>
+      <link>http://vincentserpoul.github.io/post/javascript-dev-env-setup/</link>
+      <pubDate>Mon, 15 Feb 2016 20:48:27 +0800</pubDate>
+      
+      <guid>http://vincentserpoul.github.io/post/javascript-dev-env-setup/</guid>
+      <description>
+
+&lt;h1 id=&#34;javascript-environment:fd4b88456c775c1279613cb81b55c1ee&#34;&gt;Javascript environment&lt;/h1&gt;
+
+&lt;p&gt;install nodejs and npm&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://nodejs.org/en/&#34;&gt;https://nodejs.org/en/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;install nodejs packages globally
+npm install -g jscs eslint eslint-plugin-react webpack webpack-dev-server serve&lt;/p&gt;
+
+&lt;p&gt;install sublimetext3 and these plugins
+    install babel
+    install Sublime-Linter-Contrib-eslint
+    install React ES6 snippets
+    install JSCS-Formatter&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>golang dev environment setup</title>
@@ -33,7 +58,47 @@
     go get -u golang.org/x/tools/cmd/oracle
     go get -u golang.org/x/tools/cmd/godoc&lt;/p&gt;
 
-&lt;p&gt;install gometalinter (&lt;a href=&#34;https://github.com/alecthomas/gometalinter&#34;&gt;https://github.com/alecthomas/gometalinter&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;install gometalinter (&lt;a href=&#34;https://github.com/alecthomas/gometalinter&#34;&gt;https://github.com/alecthomas/gometalinter&lt;/a&gt;)
+install interfacer (&lt;a href=&#34;https://github.com/mvdan/interfacer/&#34;&gt;https://github.com/mvdan/interfacer/&lt;/a&gt;)
+install gosimple (&lt;a href=&#34;https://github.com/dominikh/go-simple&#34;&gt;https://github.com/dominikh/go-simple&lt;/a&gt;)&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Sublime text setup with essential tools</title>
+      <link>http://vincentserpoul.github.io/post/sublimetext-dev-env-setup/</link>
+      <pubDate>Fri, 15 Jan 2016 20:48:27 +0800</pubDate>
+      
+      <guid>http://vincentserpoul.github.io/post/sublimetext-dev-env-setup/</guid>
+      <description>
+
+&lt;h1 id=&#34;download-and-install-the-latest-sublime-text:f3532878df49fcb6e169c354b4fe59d3&#34;&gt;Download and install the latest Sublime text&lt;/h1&gt;
+
+&lt;p&gt;Go to the sublime text website and download Sublime text 3 for your OS.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.sublimetext.com/3&#34;&gt;https://www.sublimetext.com/3&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;download-and-install-the-sublime-text-package-manager:f3532878df49fcb6e169c354b4fe59d3&#34;&gt;Download and install the sublime text package manager&lt;/h1&gt;
+
+&lt;p&gt;Go the package control website, download and install it on your sublime text (follow the instructions on the website).&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://packagecontrol.io/installation&#34;&gt;https://packagecontrol.io/installation&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;download-and-install-sublime-linter:f3532878df49fcb6e169c354b4fe59d3&#34;&gt;Download and install sublime linter&lt;/h1&gt;
+
+&lt;p&gt;Go to the sublime linter website, download and install it on your sublime text.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.sublimelinter.com/en/latest/installation.html&#34;&gt;http://www.sublimelinter.com/en/latest/installation.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;download-and-install-prettyjson:f3532878df49fcb6e169c354b4fe59d3&#34;&gt;Download and install prettyJSON&lt;/h1&gt;
+
+&lt;p&gt;JSON format is pretty common these days, try this prettifier, it will save you some time when you get long string of JSON.&lt;/p&gt;
+
+&lt;p&gt;You can install it from the sublime text package manager.&lt;/p&gt;
+
+&lt;h1 id=&#34;finally:f3532878df49fcb6e169c354b4fe59d3&#34;&gt;Finally&lt;/h1&gt;
+
+&lt;p&gt;You are ready to go wrestle with your favorite language!&lt;/p&gt;
 </description>
     </item>
     

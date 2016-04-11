@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Javascript on VS tech corner</title>
+    <link>http://vincentserpoul.github.io/tags/javascript/</link>
+    <description>Recent content in Javascript on VS tech corner</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 15 Feb 2016 20:48:27 +0800</lastBuildDate>
+    <atom:link href="http://vincentserpoul.github.io/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>javascript dev environment setup</title>
+      <link>http://vincentserpoul.github.io/post/javascript-dev-env-setup/</link>
+      <pubDate>Mon, 15 Feb 2016 20:48:27 +0800</pubDate>
+      
+      <guid>http://vincentserpoul.github.io/post/javascript-dev-env-setup/</guid>
+      <description>
+
+&lt;h1 id=&#34;javascript-environment:fd4b88456c775c1279613cb81b55c1ee&#34;&gt;Javascript environment&lt;/h1&gt;
+
+&lt;p&gt;install nodejs and npm&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://nodejs.org/en/&#34;&gt;https://nodejs.org/en/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;install nodejs packages globally
+npm install -g jscs eslint eslint-plugin-react webpack webpack-dev-server serve&lt;/p&gt;
+
+&lt;p&gt;install sublimetext3 and these plugins
+    install babel
+    install Sublime-Linter-Contrib-eslint
+    install React ES6 snippets
+    install JSCS-Formatter&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
