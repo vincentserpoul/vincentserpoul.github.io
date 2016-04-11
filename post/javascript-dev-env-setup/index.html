@@ -76,6 +76,44 @@
 
 <p>In sublime text, open the console (view &gt; show console) and check if there is any error message.</p>
 
+<p>Alright, let&rsquo;s check if everything is fine. Let&rsquo;s create a test project in a new folder.</p>
+
+<p>Add a .eslintrc file, with this content:</p>
+
+<pre><code>{
+  &quot;extends&quot;: &quot;airbnb&quot;,
+  &quot;ecmaFeatures&quot;: {
+    &quot;jsx&quot;: true,
+    &quot;modules&quot;: true
+  },
+  &quot;env&quot;: {
+    &quot;browser&quot;: true,
+    &quot;node&quot;: true
+  },
+  &quot;parser&quot;: &quot;babel-eslint&quot;,
+  &quot;rules&quot;: {
+    &quot;quotes&quot;: [2, &quot;single&quot;],
+    &quot;strict&quot;: [2, &quot;never&quot;],
+    &quot;react/jsx-uses-react&quot;: 2,
+    &quot;react/jsx-uses-vars&quot;: 2,
+    &quot;react/react-in-jsx-scope&quot;: 2,
+    &quot;no-console&quot;: 0
+  },
+  &quot;plugins&quot;: [
+    &quot;react&quot;
+  ]
+}
+</code></pre>
+
+<p>then create a simple test.js with this content:</p>
+
+<pre><code>echo &quot;test&quot;
+</code></pre>
+
+<p>You should see the linter complaining, telling you something is wrong and you need to correct your javascript (check the lower grey line of sublime for the comment).</p>
+
+<p>If you don&rsquo;t see anything, check the console again.</p>
+
     </section>
 
     <hr>

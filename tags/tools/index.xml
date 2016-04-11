@@ -40,6 +40,44 @@
 &lt;h1 id=&#34;make-sure-your-linter-is-working:fd4b88456c775c1279613cb81b55c1ee&#34;&gt;Make sure your linter is working&lt;/h1&gt;
 
 &lt;p&gt;In sublime text, open the console (view &amp;gt; show console) and check if there is any error message.&lt;/p&gt;
+
+&lt;p&gt;Alright, let&amp;rsquo;s check if everything is fine. Let&amp;rsquo;s create a test project in a new folder.&lt;/p&gt;
+
+&lt;p&gt;Add a .eslintrc file, with this content:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+  &amp;quot;extends&amp;quot;: &amp;quot;airbnb&amp;quot;,
+  &amp;quot;ecmaFeatures&amp;quot;: {
+    &amp;quot;jsx&amp;quot;: true,
+    &amp;quot;modules&amp;quot;: true
+  },
+  &amp;quot;env&amp;quot;: {
+    &amp;quot;browser&amp;quot;: true,
+    &amp;quot;node&amp;quot;: true
+  },
+  &amp;quot;parser&amp;quot;: &amp;quot;babel-eslint&amp;quot;,
+  &amp;quot;rules&amp;quot;: {
+    &amp;quot;quotes&amp;quot;: [2, &amp;quot;single&amp;quot;],
+    &amp;quot;strict&amp;quot;: [2, &amp;quot;never&amp;quot;],
+    &amp;quot;react/jsx-uses-react&amp;quot;: 2,
+    &amp;quot;react/jsx-uses-vars&amp;quot;: 2,
+    &amp;quot;react/react-in-jsx-scope&amp;quot;: 2,
+    &amp;quot;no-console&amp;quot;: 0
+  },
+  &amp;quot;plugins&amp;quot;: [
+    &amp;quot;react&amp;quot;
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;then create a simple test.js with this content:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;echo &amp;quot;test&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You should see the linter complaining, telling you something is wrong and you need to correct your javascript (check the lower grey line of sublime for the comment).&lt;/p&gt;
+
+&lt;p&gt;If you don&amp;rsquo;t see anything, check the console again.&lt;/p&gt;
 </description>
     </item>
     
