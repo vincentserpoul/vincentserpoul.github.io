@@ -17,27 +17,27 @@
       <guid>http://vincentserpoul.github.io/post/javascript-dev-env-setup/</guid>
       <description>
 
-&lt;h1 id=&#34;nodejs:fd4b88456c775c1279613cb81b55c1ee&#34;&gt;NodeJS&lt;/h1&gt;
+&lt;h2 id=&#34;nodejs:fd4b88456c775c1279613cb81b55c1ee&#34;&gt;NodeJS&lt;/h2&gt;
 
 &lt;p&gt;Go to the nodejs website and install nodejs latest stable version:&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://nodejs.org/en/download/stable/&#34;&gt;https://nodejs.org/en/download/stable/&lt;/a&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;npm:fd4b88456c775c1279613cb81b55c1ee&#34;&gt;NPM&lt;/h1&gt;
+&lt;h2 id=&#34;npm:fd4b88456c775c1279613cb81b55c1ee&#34;&gt;NPM&lt;/h2&gt;
 
 &lt;p&gt;Go to the npm website and follow the instructions&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://docs.npmjs.com/getting-started/installing-node&#34;&gt;https://docs.npmjs.com/getting-started/installing-node&lt;/a&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;install-nodejs-essential-packages:fd4b88456c775c1279613cb81b55c1ee&#34;&gt;Install nodejs essential packages&lt;/h1&gt;
+&lt;h2 id=&#34;install-nodejs-essential-packages:fd4b88456c775c1279613cb81b55c1ee&#34;&gt;Install nodejs essential packages&lt;/h2&gt;
 
 &lt;p&gt;npm install -g eslint jshint webpack webpack-dev-server babel-eslint serve&lt;/p&gt;
 
-&lt;h1 id=&#34;install-sublime-text-essential-plugins:fd4b88456c775c1279613cb81b55c1ee&#34;&gt;Install sublime-text essential plugins&lt;/h1&gt;
+&lt;h2 id=&#34;install-sublime-text-essential-plugins:fd4b88456c775c1279613cb81b55c1ee&#34;&gt;Install sublime-text essential plugins&lt;/h2&gt;
 
 &lt;p&gt;With the help of the package manager, in sublime-text, install the following packages: babel, Sublime-Linter-Contrib-eslint, React ES6 snippets, SublimeLinter-jshint&lt;/p&gt;
 
-&lt;h1 id=&#34;make-sure-your-linter-is-working:fd4b88456c775c1279613cb81b55c1ee&#34;&gt;Make sure your linter is working&lt;/h1&gt;
+&lt;h2 id=&#34;make-sure-your-linter-is-working:fd4b88456c775c1279613cb81b55c1ee&#34;&gt;Make sure your linter is working&lt;/h2&gt;
 
 &lt;p&gt;In sublime text, open the console (view &amp;gt; show console) and check if there is any error message.&lt;/p&gt;
 

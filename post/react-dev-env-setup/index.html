@@ -7,7 +7,7 @@
     <head>
                 <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="description" content="javascript tooling">
+        <meta name="description" content="react setup with essential tools">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
         <meta name="mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-capable" content="yes">
@@ -17,15 +17,15 @@
 	
         <meta property="og:site_name" content="VS tech corner">
         <meta property="og:title" content="VS tech corner">
-        <meta property="og:url" content="http://vincentserpoul.github.io/post/javascript-dev-env-setup/">
+        <meta property="og:url" content="http://vincentserpoul.github.io/post/react-dev-env-setup/">
         <meta property="og:description" content="">
     
         <meta property="og:type" content="article" />
         <meta property="og:article:author" content="" />
-        <meta property="og:article:published_time" content="2016-03-10T20:48:27&#43;08:00" />
+        <meta property="og:article:published_time" content="2016-04-11T20:48:27&#43;08:00" />
     
         <meta name="generator" content="Hugo 0.15" />
-        <title>javascript dev environment setup &middot; VS tech corner </title>
+        <title>react setup with essential tools &middot; VS tech corner </title>
         <link rel="canonical" href="http://vincentserpoul.github.io/" />
         <link rel="alternate" type="application/rss+xml" title="RSS" href="">
         <link rel="stylesheet" type='text/css' href="http://vincentserpoul.github.io/css/main.css"/>
@@ -46,39 +46,54 @@
 	<div class="container">
 		<article class="post">
 	<header class="post-header">
-        <h3 class="p-post-title">javascript dev environment setup</h3>
+        <h3 class="p-post-title">react setup with essential tools</h3>
     </header>
 
     <section class="post-content">
         
 
-<h2 id="nodejs:fd4b88456c775c1279613cb81b55c1ee">NodeJS</h2>
+<h2 id="working-with-es6-7:83f0229eca70e6ad3111f657bb50d1b7">Working with ES6-7</h2>
 
-<p>Go to the nodejs website and install nodejs latest stable version:</p>
+<p>In order to work with ECMAScript 2015 and even with future implementations of ES, you can use Babel.</p>
 
-<p><a href="https://nodejs.org/en/download/stable/">https://nodejs.org/en/download/stable/</a></p>
+<p>Babel is a transpiler, it will convert your ES6-7 to plain ES5 javascript that most browsers (&gt;ie9 most probably) will understand.</p>
 
-<h2 id="npm:fd4b88456c775c1279613cb81b55c1ee">NPM</h2>
+<p>To install babel</p>
 
-<p>Go to the npm website and follow the instructions</p>
+<pre><code>npm install -g babel 
+</code></pre>
 
-<p><a href="https://docs.npmjs.com/getting-started/installing-node">https://docs.npmjs.com/getting-started/installing-node</a></p>
+<p>Then in you javascript project, you canb create a .babelrc file with the following content:</p>
 
-<h2 id="install-nodejs-essential-packages:fd4b88456c775c1279613cb81b55c1ee">Install nodejs essential packages</h2>
+<pre><code>{
+  &quot;presets&quot;: [&quot;es2015&quot;, &quot;stage-0&quot;, &quot;react&quot;]
+}
+</code></pre>
 
-<p>npm install -g eslint jshint webpack webpack-dev-server babel-eslint serve</p>
+<h2 id="react-and-its-surrounding-libraries:83f0229eca70e6ad3111f657bb50d1b7">React and its surrounding libraries</h2>
 
-<h2 id="install-sublime-text-essential-plugins:fd4b88456c775c1279613cb81b55c1ee">Install sublime-text essential plugins</h2>
+<p>After starting using React, I realized it was vey good and was surrounded with libraries which makes it even better: redux, immutable, react-router&hellip;</p>
 
-<p>With the help of the package manager, in sublime-text, install the following packages: babel, Sublime-Linter-Contrib-eslint, React ES6 snippets, SublimeLinter-jshint</p>
+<p>I usually try to use these three, for most of the projects I&rsquo;m working on. Sometimes, it feels way too over engineered, but still, once you understand their use, it&rsquo;s pretty straightforward and logical to implement them.</p>
 
-<h2 id="make-sure-your-linter-is-working:fd4b88456c775c1279613cb81b55c1ee">Make sure your linter is working</h2>
+<p>The most important value added of redux, as well as immutable is the separation of concern. It gives you the power of designing components independantly from eachother.</p>
 
-<p>In sublime text, open the console (view &gt; show console) and check if there is any error message.</p>
+<h2 id="react-and-its-tools:83f0229eca70e6ad3111f657bb50d1b7">React and its tools</h2>
 
-<p>Alright, let&rsquo;s check if everything is fine. Let&rsquo;s create a test project in a new folder.</p>
+<p>In order to help you develop with react and also redux, you have a few tools to help you.</p>
 
-<p>Add a .eslintrc file, with this content:</p>
+<h3 id="eslint-for-react:83f0229eca70e6ad3111f657bb50d1b7">eslint for react</h3>
+
+<pre><code>npm install -g eslint-plugin-react
+</code></pre>
+
+<h3 id="sublime-text-plugin:83f0229eca70e6ad3111f657bb50d1b7">sublime text plugin</h3>
+
+<p>You can install a useful plugins in react, available in the package installer: React ES6 snippets.</p>
+
+<h3 id="eslintrc-file-for-babel-and-react:83f0229eca70e6ad3111f657bb50d1b7">eslintrc file for babel and react</h3>
+
+<p>You can use this eslintrc file as a starting point.</p>
 
 <pre><code>{
   &quot;extends&quot;: &quot;airbnb&quot;,
@@ -93,21 +108,34 @@
   &quot;parser&quot;: &quot;babel-eslint&quot;,
   &quot;rules&quot;: {
     &quot;quotes&quot;: [2, &quot;single&quot;],
-    &quot;strict&quot;: [2, &quot;never&quot;]
-  }
+    &quot;strict&quot;: [2, &quot;never&quot;],
+    &quot;react/jsx-uses-react&quot;: 2,
+    &quot;react/jsx-uses-vars&quot;: 2,
+    &quot;react/react-in-jsx-scope&quot;: 2,
+    &quot;no-console&quot;: 0
+  },
+  &quot;plugins&quot;: [
+    &quot;react&quot;
+  ]
 }
 </code></pre>
 
-<p>then create a simple test.js with this content:</p>
+<h3 id="chrome-tools:83f0229eca70e6ad3111f657bb50d1b7">Chrome tools</h3>
 
-<pre><code>echo &quot;test&quot;
+<p>You can install react devTools in Chrome:</p>
+
+<p><a href="https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi">https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi</a></p>
+
+<p>You can also install redux devTools in chrome too:</p>
+
+<p><a href="https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd">https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd</a></p>
+
+<p>redux devTools will require you to modifiy the way you call create store:</p>
+
+<pre><code>store = (window.devToolsExtension ? window.devToolsExtension()(createStore) : createStore)([...your content here]);
 </code></pre>
 
-<p>You should see the linter complaining, telling you something is wrong and you need to correct your javascript (check the lower grey line of sublime for the comment).</p>
-
-<p>If you don&rsquo;t see anything, check the console again.</p>
-
-<p>Last resort, if things are still not working, you can go there and troubleshoot: <a href="http://www.sublimelinter.com/en/latest/troubleshooting.html">http://www.sublimelinter.com/en/latest/troubleshooting.html</a></p>
+<p>You will then be able to play with the different state of your app directly in chrome.</p>
 
     </section>
 
@@ -117,21 +145,21 @@
         <section class="f-1">
             
             
-            <p class="f-post-time"><time datetime="2016-03-10T20:48:27&#43;08:00">March 10, 2016</time></p>
+            <p class="f-post-time"><time datetime="2016-04-11T20:48:27&#43;08:00">April 11, 2016</time></p>
         </section>
                         
         <section class="f-2">
             <section class="share">
                 <span>Share:
-                <a class="icon-twitter" href="http://twitter.com/share?text=javascript%20dev%20environment%20setup&url=http%3a%2f%2fvincentserpoul.github.io%2fpost%2fjavascript-dev-env-setup%2f"
+                <a class="icon-twitter" href="http://twitter.com/share?text=react%20setup%20with%20essential%20tools&url=http%3a%2f%2fvincentserpoul.github.io%2fpost%2freact-dev-env-setup%2f"
                     onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                     <i class="fa fa-twitter"></i>
                 </a>
-                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fvincentserpoul.github.io%2fpost%2fjavascript-dev-env-setup%2f"
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fvincentserpoul.github.io%2fpost%2freact-dev-env-setup%2f"
                     onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                     <i class="fa fa-facebook"></i>
                 </a>
-                <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fvincentserpoul.github.io%2fpost%2fjavascript-dev-env-setup%2f"
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fvincentserpoul.github.io%2fpost%2freact-dev-env-setup%2f"
                    onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                     <i class="fa fa-google-plus"></i>
                 </a>
@@ -140,7 +168,7 @@
 
             
             	<span class="f-post-tags"><i class="fa fa-tag"></i>
-            	javascript, sublimetext, tools, environment, development, setup
+            	react, tools, environment, development, setup
             	</span>
             
         </section>
