@@ -3,28 +3,28 @@
   
   <url>
     <loc>http://vincentserpoul.github.io/</loc>
-    <lastmod>2016-02-15T20:48:27+08:00</lastmod>
+    <lastmod>2016-03-10T20:48:27+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://vincentserpoul.github.io/post/javascript-dev-env-setup/</loc>
-    <lastmod>2016-02-15T20:48:27+08:00</lastmod>
+    <lastmod>2016-03-10T20:48:27+08:00</lastmod>
   </url>
   
   <url>
     <loc>http://vincentserpoul.github.io/post/golang-dev-env-setup/</loc>
-    <lastmod>2016-02-09T14:48:27+08:00</lastmod>
+    <lastmod>2016-02-20T20:48:27+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://vincentserpoul.github.io/post/sublimetext-dev-env-setup/</loc>
+    <lastmod>2016-02-10T20:48:27+08:00</lastmod>
   </url>
   
   <url>
     <loc>http://vincentserpoul.github.io/about/</loc>
     <lastmod>2016-02-09T14:46:46+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://vincentserpoul.github.io/post/sublimetext-dev-env-setup/</loc>
-    <lastmod>2016-01-15T20:48:27+08:00</lastmod>
   </url>
   
 </urlset>
