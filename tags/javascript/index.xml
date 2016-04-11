@@ -31,7 +31,7 @@
 
 &lt;h1 id=&#34;install-nodejs-essential-packages:fd4b88456c775c1279613cb81b55c1ee&#34;&gt;Install nodejs essential packages&lt;/h1&gt;
 
-&lt;p&gt;npm install -g eslint eslint-plugin-react webpack webpack-dev-server serve&lt;/p&gt;
+&lt;p&gt;npm install -g eslint jshint webpack webpack-dev-server babel-eslint serve&lt;/p&gt;
 
 &lt;h1 id=&#34;install-sublime-text-essential-plugins:fd4b88456c775c1279613cb81b55c1ee&#34;&gt;Install sublime-text essential plugins&lt;/h1&gt;
 
@@ -58,15 +58,8 @@
   &amp;quot;parser&amp;quot;: &amp;quot;babel-eslint&amp;quot;,
   &amp;quot;rules&amp;quot;: {
     &amp;quot;quotes&amp;quot;: [2, &amp;quot;single&amp;quot;],
-    &amp;quot;strict&amp;quot;: [2, &amp;quot;never&amp;quot;],
-    &amp;quot;react/jsx-uses-react&amp;quot;: 2,
-    &amp;quot;react/jsx-uses-vars&amp;quot;: 2,
-    &amp;quot;react/react-in-jsx-scope&amp;quot;: 2,
-    &amp;quot;no-console&amp;quot;: 0
-  },
-  &amp;quot;plugins&amp;quot;: [
-    &amp;quot;react&amp;quot;
-  ]
+    &amp;quot;strict&amp;quot;: [2, &amp;quot;never&amp;quot;]
+  }
 }
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -78,6 +71,8 @@
 &lt;p&gt;You should see the linter complaining, telling you something is wrong and you need to correct your javascript (check the lower grey line of sublime for the comment).&lt;/p&gt;
 
 &lt;p&gt;If you don&amp;rsquo;t see anything, check the console again.&lt;/p&gt;
+
+&lt;p&gt;Last resort, if things are still not working, you can go there and troubleshoot: &lt;a href=&#34;http://www.sublimelinter.com/en/latest/troubleshooting.html&#34;&gt;http://www.sublimelinter.com/en/latest/troubleshooting.html&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     

@@ -66,7 +66,7 @@
 
 <h1 id="install-nodejs-essential-packages:fd4b88456c775c1279613cb81b55c1ee">Install nodejs essential packages</h1>
 
-<p>npm install -g eslint eslint-plugin-react webpack webpack-dev-server serve</p>
+<p>npm install -g eslint jshint webpack webpack-dev-server babel-eslint serve</p>
 
 <h1 id="install-sublime-text-essential-plugins:fd4b88456c775c1279613cb81b55c1ee">Install sublime-text essential plugins</h1>
 
@@ -93,15 +93,8 @@
   &quot;parser&quot;: &quot;babel-eslint&quot;,
   &quot;rules&quot;: {
     &quot;quotes&quot;: [2, &quot;single&quot;],
-    &quot;strict&quot;: [2, &quot;never&quot;],
-    &quot;react/jsx-uses-react&quot;: 2,
-    &quot;react/jsx-uses-vars&quot;: 2,
-    &quot;react/react-in-jsx-scope&quot;: 2,
-    &quot;no-console&quot;: 0
-  },
-  &quot;plugins&quot;: [
-    &quot;react&quot;
-  ]
+    &quot;strict&quot;: [2, &quot;never&quot;]
+  }
 }
 </code></pre>
 
@@ -113,6 +106,8 @@
 <p>You should see the linter complaining, telling you something is wrong and you need to correct your javascript (check the lower grey line of sublime for the comment).</p>
 
 <p>If you don&rsquo;t see anything, check the console again.</p>
+
+<p>Last resort, if things are still not working, you can go there and troubleshoot: <a href="http://www.sublimelinter.com/en/latest/troubleshooting.html">http://www.sublimelinter.com/en/latest/troubleshooting.html</a></p>
 
     </section>
 
