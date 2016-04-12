@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Spa on VS tech corner</title>
+    <link>http://vincentserpoul.github.io/tags/spa/</link>
+    <description>Recent content in Spa on VS tech corner</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 12 Apr 2016 12:22:20 +0800</lastBuildDate>
+    <atom:link href="http://vincentserpoul.github.io/tags/spa/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>learning react</title>
+      <link>http://vincentserpoul.github.io/post/sublimetext-dev-env-setup/</link>
+      <pubDate>Tue, 12 Apr 2016 12:22:20 +0800</pubDate>
+      
+      <guid>http://vincentserpoul.github.io/post/sublimetext-dev-env-setup/</guid>
+      <description>
+
+&lt;h2 id=&#34;react:30bee4de84ade46b3f4515e37a96388a&#34;&gt;React&lt;/h2&gt;
+
+&lt;p&gt;Nothing beats the facebook React page:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://facebook.github.io/react/docs/getting-started.html&#34;&gt;https://facebook.github.io/react/docs/getting-started.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;redux:30bee4de84ade46b3f4515e37a96388a&#34;&gt;Redux&lt;/h2&gt;
+
+&lt;p&gt;Nothing beats the redux tutorial:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://redux.js.org/&#34;&gt;http://redux.js.org/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;And also available on egghead, by Dan Abramov himself:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://egghead.io/series/getting-started-with-redux&#34;&gt;https://egghead.io/series/getting-started-with-redux&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;an-great-detailed-introduction-to-your-spa-setup:30bee4de84ade46b3f4515e37a96388a&#34;&gt;An great detailed introduction to your SPA setup&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://blog.joanboixados.com/building-a-boilerplate-for-a-koa-redux-react-application-including-webpack-mocha-and-sass/&#34;&gt;http://blog.joanboixados.com/building-a-boilerplate-for-a-koa-redux-react-application-including-webpack-mocha-and-sass/&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;an-advanced-spa-still-under-construction:30bee4de84ade46b3f4515e37a96388a&#34;&gt;An advanced SPA (still under construction)&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.gitbook.com/book/tonyhb/redux-without-profanity/details&#34;&gt;https://www.gitbook.com/book/tonyhb/redux-without-profanity/details&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
