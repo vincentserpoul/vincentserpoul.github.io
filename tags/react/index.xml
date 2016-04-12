@@ -17,13 +17,13 @@
       <guid>http://vincentserpoul.github.io/post/learning-react/</guid>
       <description>
 
-&lt;h2 id=&#34;react:30bee4de84ade46b3f4515e37a96388a&#34;&gt;React&lt;/h2&gt;
+&lt;h3 id=&#34;react:30bee4de84ade46b3f4515e37a96388a&#34;&gt;React&lt;/h3&gt;
 
 &lt;p&gt;Nothing beats the facebook React page:&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://facebook.github.io/react/docs/getting-started.html&#34;&gt;https://facebook.github.io/react/docs/getting-started.html&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;redux:30bee4de84ade46b3f4515e37a96388a&#34;&gt;Redux&lt;/h2&gt;
+&lt;h3 id=&#34;redux:30bee4de84ade46b3f4515e37a96388a&#34;&gt;Redux&lt;/h3&gt;
 
 &lt;p&gt;Nothing beats the redux tutorial:&lt;/p&gt;
 
@@ -33,11 +33,11 @@
 
 &lt;p&gt;&lt;a href=&#34;https://egghead.io/series/getting-started-with-redux&#34;&gt;https://egghead.io/series/getting-started-with-redux&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;a-great-detailed-introduction-to-your-spa-setup:30bee4de84ade46b3f4515e37a96388a&#34;&gt;A great detailed introduction to your SPA setup&lt;/h2&gt;
+&lt;h3 id=&#34;a-great-detailed-introduction-to-your-spa-setup:30bee4de84ade46b3f4515e37a96388a&#34;&gt;A great detailed introduction to your SPA setup&lt;/h3&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://blog.joanboixados.com/building-a-boilerplate-for-a-koa-redux-react-application-including-webpack-mocha-and-sass/&#34;&gt;http://blog.joanboixados.com/building-a-boilerplate-for-a-koa-redux-react-application-including-webpack-mocha-and-sass/&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;an-advanced-spa-still-under-construction:30bee4de84ade46b3f4515e37a96388a&#34;&gt;An advanced SPA (still under construction)&lt;/h2&gt;
+&lt;h3 id=&#34;an-advanced-spa-still-under-construction:30bee4de84ade46b3f4515e37a96388a&#34;&gt;An advanced SPA (still under construction)&lt;/h3&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://www.gitbook.com/book/tonyhb/redux-without-profanity/details&#34;&gt;https://www.gitbook.com/book/tonyhb/redux-without-profanity/details&lt;/a&gt;&lt;/p&gt;
 </description>
@@ -51,7 +51,7 @@
       <guid>http://vincentserpoul.github.io/post/react-dev-env-setup/</guid>
       <description>
 
-&lt;h2 id=&#34;working-with-es6-7:83f0229eca70e6ad3111f657bb50d1b7&#34;&gt;Working with ES6-7&lt;/h2&gt;
+&lt;h3 id=&#34;working-with-es6-7:83f0229eca70e6ad3111f657bb50d1b7&#34;&gt;Working with ES6-7&lt;/h3&gt;
 
 &lt;p&gt;In order to work with ECMAScript 2015 and even with future implementations of ES, you can use Babel.&lt;/p&gt;
 
@@ -69,7 +69,7 @@
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;react-and-its-surrounding-libraries:83f0229eca70e6ad3111f657bb50d1b7&#34;&gt;React and its surrounding libraries&lt;/h2&gt;
+&lt;h3 id=&#34;react-and-its-surrounding-libraries:83f0229eca70e6ad3111f657bb50d1b7&#34;&gt;React and its surrounding libraries&lt;/h3&gt;
 
 &lt;p&gt;After starting using React, I realized it was vey good and was surrounded with libraries which makes it even better: redux, immutable, react-router&amp;hellip;&lt;/p&gt;
 
@@ -77,20 +77,20 @@
 
 &lt;p&gt;The most important value added of redux, as well as immutable is the separation of concern. It gives you the power of designing components independantly from eachother.&lt;/p&gt;
 
-&lt;h2 id=&#34;react-and-its-tools:83f0229eca70e6ad3111f657bb50d1b7&#34;&gt;React and its tools&lt;/h2&gt;
+&lt;h3 id=&#34;react-and-its-tools:83f0229eca70e6ad3111f657bb50d1b7&#34;&gt;React and its tools&lt;/h3&gt;
 
 &lt;p&gt;In order to help you develop with react and also redux, you have a few tools to help you.&lt;/p&gt;
 
-&lt;h3 id=&#34;eslint-for-react:83f0229eca70e6ad3111f657bb50d1b7&#34;&gt;eslint for react&lt;/h3&gt;
+&lt;h4 id=&#34;eslint-for-react:83f0229eca70e6ad3111f657bb50d1b7&#34;&gt;eslint for react&lt;/h4&gt;
 
 &lt;pre&gt;&lt;code&gt;npm install -g eslint-plugin-react
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;sublime-text-plugin:83f0229eca70e6ad3111f657bb50d1b7&#34;&gt;sublime text plugin&lt;/h3&gt;
+&lt;h4 id=&#34;sublime-text-plugin:83f0229eca70e6ad3111f657bb50d1b7&#34;&gt;sublime text plugin&lt;/h4&gt;
 
 &lt;p&gt;You can install a useful plugins in react, available in the package installer: React ES6 snippets.&lt;/p&gt;
 
-&lt;h3 id=&#34;eslintrc-file-for-babel-and-react:83f0229eca70e6ad3111f657bb50d1b7&#34;&gt;.eslintrc file for babel and react&lt;/h3&gt;
+&lt;h4 id=&#34;eslintrc-file-for-babel-and-react:83f0229eca70e6ad3111f657bb50d1b7&#34;&gt;.eslintrc file for babel and react&lt;/h4&gt;
 
 &lt;p&gt;You can use this eslintrc file as a starting point.&lt;/p&gt;
 
@@ -119,7 +119,7 @@
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;chrome-tools:83f0229eca70e6ad3111f657bb50d1b7&#34;&gt;Chrome tools&lt;/h3&gt;
+&lt;h4 id=&#34;chrome-tools:83f0229eca70e6ad3111f657bb50d1b7&#34;&gt;Chrome tools&lt;/h4&gt;
 
 &lt;p&gt;You can install react devTools in Chrome:&lt;/p&gt;
 
