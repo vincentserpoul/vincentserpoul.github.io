@@ -31,11 +31,11 @@
 
 &lt;h3 id=&#34;install-nodejs-essential-packages:fd4b88456c775c1279613cb81b55c1ee&#34;&gt;Install nodejs essential packages&lt;/h3&gt;
 
-&lt;p&gt;npm install -g eslint jshint webpack webpack-dev-server babel-eslint serve&lt;/p&gt;
+&lt;p&gt;npm install -g eslint webpack webpack-dev-server babel-eslint serve&lt;/p&gt;
 
 &lt;h3 id=&#34;install-sublime-text-essential-plugins:fd4b88456c775c1279613cb81b55c1ee&#34;&gt;Install sublime-text essential plugins&lt;/h3&gt;
 
-&lt;p&gt;With the help of the package manager, in sublime-text, install the following packages: babel, Sublime-Linter-Contrib-eslint, React ES6 snippets, SublimeLinter-jshint&lt;/p&gt;
+&lt;p&gt;With the help of the package manager, in sublime-text, install the following packages: babel, Sublime-Linter-Contrib-eslint, React ES6 snippets&lt;/p&gt;
 
 &lt;h3 id=&#34;make-sure-your-linter-is-working:fd4b88456c775c1279613cb81b55c1ee&#34;&gt;Make sure your linter is working&lt;/h3&gt;
 

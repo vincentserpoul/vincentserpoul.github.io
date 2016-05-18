@@ -33,6 +33,10 @@
 
 &lt;p&gt;&lt;a href=&#34;https://egghead.io/series/getting-started-with-redux&#34;&gt;https://egghead.io/series/getting-started-with-redux&lt;/a&gt;&lt;/p&gt;
 
+&lt;p&gt;A list of tutorials:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/happypoulp/redux-tutorial&#34;&gt;https://github.com/happypoulp/redux-tutorial&lt;/a&gt;&lt;/p&gt;
+
 &lt;h3 id=&#34;a-great-detailed-introduction-to-your-spa-setup:30bee4de84ade46b3f4515e37a96388a&#34;&gt;A great detailed introduction to your SPA setup&lt;/h3&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://blog.joanboixados.com/building-a-boilerplate-for-a-koa-redux-react-application-including-webpack-mocha-and-sass/&#34;&gt;http://blog.joanboixados.com/building-a-boilerplate-for-a-koa-redux-react-application-including-webpack-mocha-and-sass/&lt;/a&gt;&lt;/p&gt;
@@ -160,11 +164,11 @@
 
 &lt;h3 id=&#34;install-nodejs-essential-packages:fd4b88456c775c1279613cb81b55c1ee&#34;&gt;Install nodejs essential packages&lt;/h3&gt;
 
-&lt;p&gt;npm install -g eslint jshint webpack webpack-dev-server babel-eslint serve&lt;/p&gt;
+&lt;p&gt;npm install -g eslint webpack webpack-dev-server babel-eslint serve&lt;/p&gt;
 
 &lt;h3 id=&#34;install-sublime-text-essential-plugins:fd4b88456c775c1279613cb81b55c1ee&#34;&gt;Install sublime-text essential plugins&lt;/h3&gt;
 
-&lt;p&gt;With the help of the package manager, in sublime-text, install the following packages: babel, Sublime-Linter-Contrib-eslint, React ES6 snippets, SublimeLinter-jshint&lt;/p&gt;
+&lt;p&gt;With the help of the package manager, in sublime-text, install the following packages: babel, Sublime-Linter-Contrib-eslint, React ES6 snippets&lt;/p&gt;
 
 &lt;h3 id=&#34;make-sure-your-linter-is-working:fd4b88456c775c1279613cb81b55c1ee&#34;&gt;Make sure your linter is working&lt;/h3&gt;
 
