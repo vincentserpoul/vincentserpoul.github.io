@@ -223,19 +223,59 @@
 
 &lt;p&gt;&lt;a href=&#34;http://www.wolfe.id.au/2015/03/05/using-sublime-text-for-go-development/&#34;&gt;http://www.wolfe.id.au/2015/03/05/using-sublime-text-for-go-development/&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;install sublimetext3
-    install gosublime
-    install gooracle&lt;/p&gt;
+&lt;p&gt;Within &lt;a href=&#34;http://vincentserpoul.github.io/sublimetext-dev-environment&#34;&gt;sublimetext, from the package manager&lt;/a&gt;, install gosublime, install gooracle.&lt;/p&gt;
 
-&lt;p&gt;install go/tools
-    go get -u golang.org/x/tools/cmd/goimports
-    go get -u golang.org/x/tools/cmd/vet
-    go get -u golang.org/x/tools/cmd/oracle
-    go get -u golang.org/x/tools/cmd/godoc&lt;/p&gt;
+&lt;p&gt;install go/tools:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;go get -u golang.org/x/tools/cmd/goimports
+go get -u golang.org/x/tools/cmd/vet
+go get -u golang.org/x/tools/cmd/oracle
+go get -u golang.org/x/tools/cmd/godoc
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;install gometalinter (&lt;a href=&#34;https://github.com/alecthomas/gometalinter&#34;&gt;https://github.com/alecthomas/gometalinter&lt;/a&gt;)
 install interfacer (&lt;a href=&#34;https://github.com/mvdan/interfacer/&#34;&gt;https://github.com/mvdan/interfacer/&lt;/a&gt;)
-install gosimple (&lt;a href=&#34;https://github.com/dominikh/go-simple&#34;&gt;https://github.com/dominikh/go-simple&lt;/a&gt;)&lt;/p&gt;
+install gosimple (&lt;a href=&#34;https://github.com/dominikh/go-simple&#34;&gt;https://github.com/dominikh/go-simple&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p&gt;Here is the package settings I use for gosublime:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+
+    // you may set specific environment variables here
+    // e.g &amp;quot;env&amp;quot;: { &amp;quot;PATH&amp;quot;: &amp;quot;$HOME/go/bin:$PATH&amp;quot; }
+    // in values, $PATH and ${PATH} are replaced with
+    // the corresponding environment(PATH) variable, if it exists.
+    &amp;quot;env&amp;quot;: {&amp;quot;GOPATH&amp;quot;: &amp;quot;/home/go&amp;quot; },
+
+    &amp;quot;fmt_cmd&amp;quot;: [&amp;quot;goimports&amp;quot;],
+    &amp;quot;ipc_timeout&amp;quot;: 5,
+
+    // enable comp-lint, this will effectively disable the live linter
+    &amp;quot;comp_lint_enabled&amp;quot;: true,
+
+    // list of commands to run
+    &amp;quot;comp_lint_commands&amp;quot;: [
+        // run `golint` on all files in the package
+        // &amp;quot;shell&amp;quot;:true is required in order to run the command through your shell (to expand `*.go`)
+        // also see: the documentation for the `shell` setting in the default settings file ctrl+dot,ctrl+4
+        {&amp;quot;cmd&amp;quot;: [&amp;quot;golint *.go&amp;quot;], &amp;quot;shell&amp;quot;: true},
+
+        // run go vet on the package
+        {&amp;quot;cmd&amp;quot;: [&amp;quot;go&amp;quot;, &amp;quot;vet&amp;quot;]},
+
+        // run `go install` on the package. GOBIN is set,
+        // so `main` packages shouldn&#39;t result in the installation of a binary
+        {&amp;quot;cmd&amp;quot;: [&amp;quot;go&amp;quot;, &amp;quot;install&amp;quot;]}
+    ],
+
+    &amp;quot;on_save&amp;quot;: [
+        // run comp-lint when you save,
+        // naturally, you can also bind this command `gs_comp_lint`
+        // to a key binding if you want
+        {&amp;quot;cmd&amp;quot;: &amp;quot;gs_comp_lint&amp;quot;}
+    ]
+}
+&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
@@ -284,6 +324,79 @@ install gosimple (&lt;a href=&#34;https://github.com/dominikh/go-simple&#34;&gt;
       
       <guid>http://vincentserpoul.github.io/about/</guid>
       <description>&lt;p&gt;Try out for Hugo!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>GIT basic usage</title>
+      <link>http://vincentserpoul.github.io/post/git-basic-usage/</link>
+      <pubDate>Thu, 20 Feb 2014 08:27:27 +0800</pubDate>
+      
+      <guid>http://vincentserpoul.github.io/post/git-basic-usage/</guid>
+      <description>
+
+&lt;h3 id=&#34;git-basic-commands:9b7daffe836baef8e726595ca41fde03&#34;&gt;Git basic commands&lt;/h3&gt;
+
+&lt;h4 id=&#34;when-you-have-a-new-repo:9b7daffe836baef8e726595ca41fde03&#34;&gt;When you have a new repo&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;    git clone git@github.com:vincentserpoul/rbac.git
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;https or git? the git protocal provides better security and easiness if you are using a correct key.&lt;/p&gt;
+
+&lt;p&gt;If you use the git protocol, you can easily associate your private key in the ~/.ssh/config file with the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Host github
+    Hostname github.com
+    User vincentserpoul
+    IdentityFile ~/.ssh/myprivatekey
+    IdentitiesOnly yes
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;when-you-have-a-new-modification-ready-for-commit:9b7daffe836baef8e726595ca41fde03&#34;&gt;When you have a new modification ready for commit&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;git status
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You will get an overview of what&amp;rsquo;s new
+If there is any new files (Untracked files), you will first need to add them:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git add mynewfile.ext
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git status
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;it will give you the list of the files you are about to commit (Changes not staged for commit).
+You can then commit all the files or the selected ones.
+Group the commits by functionalities and follow &lt;a href=&#34;http://chris.beams.io/posts/git-commit/&#34;&gt;this&lt;/a&gt; to write your commit message properly (TL;DR: use imperative for the verb - no ing - and keep it short for the subject line, 50 chars)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git commit -m &amp;quot;add feature A&amp;quot; -a
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Once you reached that, you will need to first sync with the remote repo&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git fetch origin master
+git rebase origin/master
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will first get all the commits in the remote repo (supposingly called origin), replay all the commits that have been pushed there and replay yours above them.
+If there are any issues, you will have to resolve them.
+Modify the problematic file and then:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git add problematicfile.ext
+git rebase --continue
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You should be all good right now.
+Let&amp;rsquo;s look at our branching strategy.&lt;/p&gt;
+
+&lt;h3 id=&#34;git-common-flow:9b7daffe836baef8e726595ca41fde03&#34;&gt;Git common flow&lt;/h3&gt;
+
+&lt;p&gt;Nothing fancy here:
+&lt;img src=&#34;http://nvie.com/img/git-model@2x.png&#34; alt=&#34;gitflow&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     

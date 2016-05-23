@@ -113,7 +113,7 @@
     </header>
     
     <section class="post-excerpt">
-        <p>Golang environment install golang http://www.wolfe.id.au/2015/03/05/using-sublime-text-for-go-development/ install sublimetext3 install gosublime install gooracle install go/tools go get -u golang.org/x/tools/cmd/goimports go get -u golang.org/x/tools/cmd/vet go get -u golang.org/x/tools/cmd/oracle go get -u golang.org/x/tools/cmd/godoc install gometalinter (https://github.com/alecthomas/gometalinter) install interfacer (https://github.com/mvdan/interfacer/) install gosimple (https://github.com/dominikh/go-simple)</p>
+        <p>Golang environment install golang http://www.wolfe.id.au/2015/03/05/using-sublime-text-for-go-development/ Within sublimetext, from the package manager, install gosublime, install gooracle. install go/tools: go get -u golang.org/x/tools/cmd/goimports go get -u golang.org/x/tools/cmd/vet go get -u golang.org/x/tools/cmd/oracle go get -u golang.org/x/tools/cmd/godoc install gometalinter (https://github.com/alecthomas/gometalinter) install interfacer (https://github.com/mvdan/interfacer/) install gosimple (https://github.com/dominikh/go-simple). Here is the package settings I use for gosublime: { // you may set specific environment variables here // e.g &quot;env&quot;: { &quot;PATH&quot;: &quot;$HOME/go/bin:$PATH&quot; } // in values, $PATH and ${PATH} are replaced with // the corresponding environment(PATH) variable, if it exists.</p>
     </section>
 
     <footer class="post-footer">
@@ -161,6 +161,27 @@
     <footer class="post-footer">
         <span>
             
+            
+        </span>
+    </footer>
+</article>
+	
+		<article class="li post">
+    <header class="post-header">
+        <h3 class="post-title"><a href="http://vincentserpoul.github.io/post/git-basic-usage/">GIT basic usage</a></h3>
+        <p class="post-time"><time datetime="2014-02-20T08:27:27&#43;08:00">February 20, 2014</time></p>
+    </header>
+    
+    <section class="post-excerpt">
+        <p>Git basic commands When you have a new repo git clone git@github.com:vincentserpoul/rbac.git https or git? the git protocal provides better security and easiness if you are using a correct key. If you use the git protocol, you can easily associate your private key in the ~/.ssh/config file with the following: Host github Hostname github.com User vincentserpoul IdentityFile ~/.ssh/myprivatekey IdentitiesOnly yes When you have a new modification ready for commit git status You will get an overview of what&rsquo;s new If there is any new files (Untracked files), you will first need to add them: git add mynewfile.ext Then git status it will give you the list of the files you are about to commit (Changes not staged for commit).</p>
+    </section>
+
+    <footer class="post-footer">
+        <span>
+            
+            
+            	&nbsp;&nbsp;<i class="fa fa-tag"></i>
+            	git, versioning, beginner, commands
             
         </span>
     </footer>
