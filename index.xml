@@ -318,19 +318,9 @@ install gosimple (&lt;a href=&#34;https://github.com/dominikh/go-simple&#34;&gt;
     </item>
     
     <item>
-      <title>about</title>
-      <link>http://vincentserpoul.github.io/about/</link>
-      <pubDate>Tue, 09 Feb 2016 14:46:46 +0800</pubDate>
-      
-      <guid>http://vincentserpoul.github.io/about/</guid>
-      <description>&lt;p&gt;Try out for Hugo!&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
       <title>GIT basic usage</title>
       <link>http://vincentserpoul.github.io/post/git-basic-usage/</link>
-      <pubDate>Thu, 20 Feb 2014 08:27:27 +0800</pubDate>
+      <pubDate>Fri, 20 Feb 2015 08:27:27 +0800</pubDate>
       
       <guid>http://vincentserpoul.github.io/post/git-basic-usage/</guid>
       <description>
@@ -397,6 +387,16 @@ Let&amp;rsquo;s look at our branching strategy.&lt;/p&gt;
 
 &lt;p&gt;Nothing fancy here:
 &lt;img src=&#34;http://nvie.com/img/git-model@2x.png&#34; alt=&#34;gitflow&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>about</title>
+      <link>http://vincentserpoul.github.io/about/</link>
+      <pubDate>Fri, 09 Jan 2015 14:46:46 +0800</pubDate>
+      
+      <guid>http://vincentserpoul.github.io/about/</guid>
+      <description>&lt;p&gt;Try out for Hugo!&lt;/p&gt;
 </description>
     </item>
     
