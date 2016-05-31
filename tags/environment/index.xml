@@ -195,9 +195,13 @@ go get -u golang.org/x/tools/cmd/oracle
 go get -u golang.org/x/tools/cmd/godoc
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;install gometalinter (&lt;a href=&#34;https://github.com/alecthomas/gometalinter&#34;&gt;https://github.com/alecthomas/gometalinter&lt;/a&gt;)
-install interfacer (&lt;a href=&#34;https://github.com/mvdan/interfacer/&#34;&gt;https://github.com/mvdan/interfacer/&lt;/a&gt;)
-install gosimple (&lt;a href=&#34;https://github.com/dominikh/go-simple&#34;&gt;https://github.com/dominikh/go-simple&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;install gometalinter (&lt;a href=&#34;https://github.com/alecthomas/gometalinter&#34;&gt;https://github.com/alecthomas/gometalinter&lt;/a&gt;)&lt;/p&gt;
+
+&lt;p&gt;install interfacer (&lt;a href=&#34;https://github.com/mvdan/interfacer/&#34;&gt;https://github.com/mvdan/interfacer/&lt;/a&gt;)&lt;/p&gt;
+
+&lt;p&gt;install gosimple (&lt;a href=&#34;https://github.com/dominikh/go-simple&#34;&gt;https://github.com/dominikh/go-simple&lt;/a&gt;)&lt;/p&gt;
+
+&lt;p&gt;install gocov (&lt;a href=&#34;https://github.com/axw/gocov&#34;&gt;https://github.com/axw/gocov&lt;/a&gt;)&lt;/p&gt;
 
 &lt;p&gt;Here is the package settings I use for gosublime:&lt;/p&gt;
 
