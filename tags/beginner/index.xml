@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Beginner on VS tech corner</title>
+    <link>https://vincentserpoul.github.io/tags/beginner/</link>
+    <description>Recent content in Beginner on VS tech corner</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 20 Feb 2015 08:27:27 +0800</lastBuildDate>
+    <atom:link href="https://vincentserpoul.github.io/tags/beginner/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>GIT basic usage</title>
+      <link>https://vincentserpoul.github.io/post/git-basic-usage/</link>
+      <pubDate>Fri, 20 Feb 2015 08:27:27 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/post/git-basic-usage/</guid>
+      <description>
+
+&lt;h3 id=&#34;git-basic-commands:9b7daffe836baef8e726595ca41fde03&#34;&gt;Git basic commands&lt;/h3&gt;
+
+&lt;h4 id=&#34;when-you-have-a-new-repo:9b7daffe836baef8e726595ca41fde03&#34;&gt;When you have a new repo&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;    git clone git@github.com:vincentserpoul/rbac.git
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;https or git? the git protocal provides better security and easiness if you are using a correct key.&lt;/p&gt;
+
+&lt;p&gt;If you use the git protocol, you can easily associate your private key in the ~/.ssh/config file with the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Host github
+    Hostname github.com
+    User vincentserpoul
+    IdentityFile ~/.ssh/myprivatekey
+    IdentitiesOnly yes
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;when-you-have-a-new-modification-ready-for-commit:9b7daffe836baef8e726595ca41fde03&#34;&gt;When you have a new modification ready for commit&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;git status
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You will get an overview of what&amp;rsquo;s new
+If there is any new files (Untracked files), you will first need to add them:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git add mynewfile.ext
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git status
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;it will give you the list of the files you are about to commit (Changes not staged for commit).
+You can then commit all the files or the selected ones.
+Group the commits by functionalities and follow &lt;a href=&#34;http://chris.beams.io/posts/git-commit/&#34;&gt;this&lt;/a&gt; to write your commit message properly (TL;DR: use imperative for the verb - no ing - and keep it short for the subject line, 50 chars)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git commit -m &amp;quot;add feature A&amp;quot; -a
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Once you reached that, you will need to first sync with the remote repo&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git fetch origin master
+git rebase origin/master
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will first get all the commits in the remote repo (supposingly called origin), replay all the commits that have been pushed there and replay yours above them.
+If there are any issues, you will have to resolve them.
+Modify the problematic file and then:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git add problematicfile.ext
+git rebase --continue
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You should be all good right now.
+Let&amp;rsquo;s look at our branching strategy.&lt;/p&gt;
+
+&lt;h3 id=&#34;git-common-flow:9b7daffe836baef8e726595ca41fde03&#34;&gt;Git common flow&lt;/h3&gt;
+
+&lt;p&gt;Nothing fancy here:
+&lt;img src=&#34;http://nvie.com/img/git-model@2x.png&#34; alt=&#34;gitflow&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
