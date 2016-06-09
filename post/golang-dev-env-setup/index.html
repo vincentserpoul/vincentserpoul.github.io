@@ -17,18 +17,18 @@
 	
         <meta property="og:site_name" content="VS tech corner">
         <meta property="og:title" content="VS tech corner">
-        <meta property="og:url" content="http://vincentserpoul.github.io/post/golang-dev-env-setup/">
+        <meta property="og:url" content="https://vincentserpoul.github.io/post/golang-dev-env-setup/">
         <meta property="og:description" content="">
     
         <meta property="og:type" content="article" />
         <meta property="og:article:author" content="" />
-        <meta property="og:article:published_time" content="2016-02-09T14:48:27&#43;08:00" />
+        <meta property="og:article:published_time" content="2016-02-20T20:48:27&#43;08:00" />
     
         <meta name="generator" content="Hugo 0.16-DEV" />
         <title>golang dev environment setup &middot; VS tech corner </title>
-        <link rel="canonical" href="http://vincentserpoul.github.io/" />
+        <link rel="canonical" href="https://vincentserpoul.github.io/" />
         <link rel="alternate" type="application/rss+xml" title="RSS" href="">
-        <link rel="stylesheet" type='text/css' href="http://vincentserpoul.github.io/css/main.css"/>
+        <link rel="stylesheet" type='text/css' href="https://vincentserpoul.github.io/css/main.css"/>
         <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300|Montserrat:700' rel='stylesheet' type='text/css'>
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
         <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
@@ -38,7 +38,7 @@
 
     <header id="site-header">
         <div class="container">
-            <a href="http://vincentserpoul.github.io/" alt="VS tech corner"><h1 class="blog-title heading">VS tech corner</h1></a>
+            <a href="https://vincentserpoul.github.io/" alt="VS tech corner"><h1 class="blog-title heading">VS tech corner</h1></a>
             <p class="blog-description"></p>
         </div>
     </header>
@@ -52,23 +52,69 @@
     <section class="post-content">
         
 
-<h1 id="golang-environment:5968a8b0c74379a526ed74fea62d73ec">Golang environment</h1>
+<h3 id="golang-environment:5968a8b0c74379a526ed74fea62d73ec">Golang environment</h3>
 
 <p>install golang</p>
 
 <p><a href="http://www.wolfe.id.au/2015/03/05/using-sublime-text-for-go-development/">http://www.wolfe.id.au/2015/03/05/using-sublime-text-for-go-development/</a></p>
 
-<p>install sublimetext3
-    install gosublime
-    install gooracle</p>
+<p>Within <a href="/sublimetext-dev-environment">sublimetext, from the package manager</a>, install gosublime, install gooracle.</p>
 
-<p>install go/tools
-    go get -u golang.org/x/tools/cmd/goimports
-    go get -u golang.org/x/tools/cmd/vet
-    go get -u golang.org/x/tools/cmd/oracle
-    go get -u golang.org/x/tools/cmd/godoc</p>
+<p>install go/tools:</p>
+
+<pre><code>go get -u golang.org/x/tools/cmd/goimports
+go get -u golang.org/x/tools/cmd/vet
+go get -u golang.org/x/tools/cmd/oracle
+go get -u golang.org/x/tools/cmd/godoc
+</code></pre>
 
 <p>install gometalinter (<a href="https://github.com/alecthomas/gometalinter">https://github.com/alecthomas/gometalinter</a>)</p>
+
+<p>install interfacer (<a href="https://github.com/mvdan/interfacer/">https://github.com/mvdan/interfacer/</a>)</p>
+
+<p>install gosimple (<a href="https://github.com/dominikh/go-simple">https://github.com/dominikh/go-simple</a>)</p>
+
+<p>install gocov (<a href="https://github.com/axw/gocov">https://github.com/axw/gocov</a>)</p>
+
+<p>Here is the package settings I use for gosublime:</p>
+
+<pre><code>{
+
+    // you may set specific environment variables here
+    // e.g &quot;env&quot;: { &quot;PATH&quot;: &quot;$HOME/go/bin:$PATH&quot; }
+    // in values, $PATH and ${PATH} are replaced with
+    // the corresponding environment(PATH) variable, if it exists.
+    &quot;env&quot;: {&quot;GOPATH&quot;: &quot;/home/go&quot; },
+
+    &quot;fmt_cmd&quot;: [&quot;goimports&quot;],
+    &quot;ipc_timeout&quot;: 5,
+
+    // enable comp-lint, this will effectively disable the live linter
+    &quot;comp_lint_enabled&quot;: true,
+
+    // list of commands to run
+    &quot;comp_lint_commands&quot;: [
+        // run `golint` on all files in the package
+        // &quot;shell&quot;:true is required in order to run the command through your shell (to expand `*.go`)
+        // also see: the documentation for the `shell` setting in the default settings file ctrl+dot,ctrl+4
+        {&quot;cmd&quot;: [&quot;golint *.go&quot;], &quot;shell&quot;: true},
+
+        // run go vet on the package
+        {&quot;cmd&quot;: [&quot;go&quot;, &quot;vet&quot;]},
+
+        // run `go install` on the package. GOBIN is set,
+        // so `main` packages shouldn't result in the installation of a binary
+        {&quot;cmd&quot;: [&quot;go&quot;, &quot;install&quot;]}
+    ],
+
+    &quot;on_save&quot;: [
+        // run comp-lint when you save,
+        // naturally, you can also bind this command `gs_comp_lint`
+        // to a key binding if you want
+        {&quot;cmd&quot;: &quot;gs_comp_lint&quot;}
+    ]
+}
+</code></pre>
 
     </section>
 
@@ -78,21 +124,21 @@
         <section class="f-1">
             
             
-            <p class="f-post-time"><time datetime="2016-02-09T14:48:27&#43;08:00">February 9, 2016</time></p>
+            <p class="f-post-time"><time datetime="2016-02-20T20:48:27&#43;08:00">February 20, 2016</time></p>
         </section>
                         
         <section class="f-2">
             <section class="share">
                 <span>Share:
-                <a class="icon-twitter" href="http://twitter.com/share?text=golang%20dev%20environment%20setup&url=http%3a%2f%2fvincentserpoul.github.io%2fpost%2fgolang-dev-env-setup%2f"
+                <a class="icon-twitter" href="http://twitter.com/share?text=golang%20dev%20environment%20setup&url=https%3a%2f%2fvincentserpoul.github.io%2fpost%2fgolang-dev-env-setup%2f"
                     onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                     <i class="fa fa-twitter"></i>
                 </a>
-                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fvincentserpoul.github.io%2fpost%2fgolang-dev-env-setup%2f"
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fvincentserpoul.github.io%2fpost%2fgolang-dev-env-setup%2f"
                     onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                     <i class="fa fa-facebook"></i>
                 </a>
-                <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fvincentserpoul.github.io%2fpost%2fgolang-dev-env-setup%2f"
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=https%3a%2f%2fvincentserpoul.github.io%2fpost%2fgolang-dev-env-setup%2f"
                    onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                     <i class="fa fa-google-plus"></i>
                 </a>
@@ -112,13 +158,11 @@
 </main>
     <footer id="site-footer">
         <div class="container">
-            <a href="http://vincentserpoul.github.io/index.xml" title="Get the RSS feed"><span class="tooltip"><i class="fa fa-rss"></i></span></a>
-            <section>&copy; <a href="http://vincentserpoul.github.io/"></a> 2015 | All rights reserved</section>
-            <section>Theme by <a href="http://www.jrdnbwmn.com">Jordan Bowman</a>. Generated with <a href="http://gohugo.io/">Hugo</a>.</section>
+            <a href="https://vincentserpoul.github.io/index.xml" title="Get the RSS feed"><span class="tooltip"><i class="fa fa-rss"></i></span></a>
         </div>
     </footer>
 
-    <script type="text/javascript" src="http://vincentserpoul.github.io/js/fittext.js"></script>
+    <script type="text/javascript" src="https://vincentserpoul.github.io/js/fittext.js"></script>
     <script type="text/javascript">
       $(".heading").fitText();
     </script>

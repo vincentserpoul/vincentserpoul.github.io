@@ -2,38 +2,284 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Setup on VS tech corner</title>
-    <link>http://vincentserpoul.github.io/tags/setup/</link>
+    <link>https://vincentserpoul.github.io/tags/setup/</link>
     <description>Recent content in Setup on VS tech corner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 09 Feb 2016 14:48:27 +0800</lastBuildDate>
-    <atom:link href="http://vincentserpoul.github.io/tags/setup/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 11 Apr 2016 20:48:27 +0800</lastBuildDate>
+    <atom:link href="https://vincentserpoul.github.io/tags/setup/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>react setup with essential tools</title>
+      <link>https://vincentserpoul.github.io/post/react-dev-env-setup/</link>
+      <pubDate>Mon, 11 Apr 2016 20:48:27 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/post/react-dev-env-setup/</guid>
+      <description>
+
+&lt;h3 id=&#34;working-with-es6-7:83f0229eca70e6ad3111f657bb50d1b7&#34;&gt;Working with ES6-7&lt;/h3&gt;
+
+&lt;p&gt;In order to work with ECMAScript 2015 and even with future implementations of ES, you can use Babel.&lt;/p&gt;
+
+&lt;p&gt;Babel is a transpiler, it will convert your ES6-7 to plain ES5 javascript that most browsers (&amp;gt;ie9 most probably) will understand.&lt;/p&gt;
+
+&lt;p&gt;To install babel&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;npm install -g babel 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then within your javascript project, you can create a .babelrc file with the following content:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+  &amp;quot;presets&amp;quot;: [&amp;quot;es2015&amp;quot;, &amp;quot;stage-0&amp;quot;, &amp;quot;react&amp;quot;]
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;react-and-its-surrounding-libraries:83f0229eca70e6ad3111f657bb50d1b7&#34;&gt;React and its surrounding libraries&lt;/h3&gt;
+
+&lt;p&gt;After starting using React, I realized it was vey good and was surrounded with libraries which makes it even better: redux, immutable, react-router&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;I usually try to use these three, for most of the projects I&amp;rsquo;m working on. Sometimes, it feels way too over engineered, but still, once you understand their use, it&amp;rsquo;s pretty straightforward and logical to implement them.&lt;/p&gt;
+
+&lt;p&gt;The most important value added of redux, as well as immutable is the separation of concern. It gives you the power of designing components independantly from eachother.&lt;/p&gt;
+
+&lt;h3 id=&#34;react-and-its-tools:83f0229eca70e6ad3111f657bb50d1b7&#34;&gt;React and its tools&lt;/h3&gt;
+
+&lt;p&gt;In order to help you develop with react and also redux, you have a few tools to help you.&lt;/p&gt;
+
+&lt;h4 id=&#34;eslint-for-react:83f0229eca70e6ad3111f657bb50d1b7&#34;&gt;eslint for react&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;npm install -g eslint-plugin-react
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;sublime-text-plugin:83f0229eca70e6ad3111f657bb50d1b7&#34;&gt;sublime text plugin&lt;/h4&gt;
+
+&lt;p&gt;You can install a useful plugins in react, available in the package installer: React ES6 snippets.&lt;/p&gt;
+
+&lt;h4 id=&#34;eslintrc-file-for-babel-and-react:83f0229eca70e6ad3111f657bb50d1b7&#34;&gt;.eslintrc file for babel and react&lt;/h4&gt;
+
+&lt;p&gt;You can use this eslintrc file as a starting point.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+  &amp;quot;extends&amp;quot;: &amp;quot;airbnb&amp;quot;,
+  &amp;quot;ecmaFeatures&amp;quot;: {
+    &amp;quot;jsx&amp;quot;: true,
+    &amp;quot;modules&amp;quot;: true
+  },
+  &amp;quot;env&amp;quot;: {
+    &amp;quot;browser&amp;quot;: true,
+    &amp;quot;node&amp;quot;: true
+  },
+  &amp;quot;parser&amp;quot;: &amp;quot;babel-eslint&amp;quot;,
+  &amp;quot;rules&amp;quot;: {
+    &amp;quot;quotes&amp;quot;: [2, &amp;quot;single&amp;quot;],
+    &amp;quot;strict&amp;quot;: [2, &amp;quot;never&amp;quot;],
+    &amp;quot;react/jsx-uses-react&amp;quot;: 2,
+    &amp;quot;react/jsx-uses-vars&amp;quot;: 2,
+    &amp;quot;react/react-in-jsx-scope&amp;quot;: 2,
+    &amp;quot;no-console&amp;quot;: 0
+  },
+  &amp;quot;plugins&amp;quot;: [
+    &amp;quot;react&amp;quot;
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;chrome-tools:83f0229eca70e6ad3111f657bb50d1b7&#34;&gt;Chrome tools&lt;/h4&gt;
+
+&lt;p&gt;You can install react devTools in Chrome:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi&#34;&gt;https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;You can also install redux devTools in chrome too:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd&#34;&gt;https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;redux devTools will require you to modifiy the way you call create store:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;store = (window.devToolsExtension ? window.devToolsExtension()(createStore) : createStore)([...your content here]);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You will then be able to play with the different state of your app directly in chrome.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>javascript dev environment setup</title>
+      <link>https://vincentserpoul.github.io/post/javascript-dev-env-setup/</link>
+      <pubDate>Thu, 10 Mar 2016 20:48:27 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/post/javascript-dev-env-setup/</guid>
+      <description>
+
+&lt;h3 id=&#34;nodejs:fd4b88456c775c1279613cb81b55c1ee&#34;&gt;NodeJS&lt;/h3&gt;
+
+&lt;p&gt;Go to the nodejs website and install nodejs latest stable version:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://nodejs.org/en/download/stable/&#34;&gt;https://nodejs.org/en/download/stable/&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;npm:fd4b88456c775c1279613cb81b55c1ee&#34;&gt;NPM&lt;/h3&gt;
+
+&lt;p&gt;Go to the npm website and follow the instructions&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://docs.npmjs.com/getting-started/installing-node&#34;&gt;https://docs.npmjs.com/getting-started/installing-node&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;install-nodejs-essential-packages:fd4b88456c775c1279613cb81b55c1ee&#34;&gt;Install nodejs essential packages&lt;/h3&gt;
+
+&lt;p&gt;npm install -g eslint webpack webpack-dev-server babel-eslint serve&lt;/p&gt;
+
+&lt;h3 id=&#34;install-sublime-text-essential-plugins:fd4b88456c775c1279613cb81b55c1ee&#34;&gt;Install sublime-text essential plugins&lt;/h3&gt;
+
+&lt;p&gt;With the help of the package manager, in sublime-text, install the following packages: babel, Sublime-Linter-Contrib-eslint, React ES6 snippets&lt;/p&gt;
+
+&lt;h3 id=&#34;make-sure-your-linter-is-working:fd4b88456c775c1279613cb81b55c1ee&#34;&gt;Make sure your linter is working&lt;/h3&gt;
+
+&lt;p&gt;In sublime text, open the console (view &amp;gt; show console) and check if there is any error message.&lt;/p&gt;
+
+&lt;p&gt;Alright, let&amp;rsquo;s check if everything is fine. Let&amp;rsquo;s create a test project in a new folder.&lt;/p&gt;
+
+&lt;p&gt;Add a .eslintrc file, with this content:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+  &amp;quot;extends&amp;quot;: &amp;quot;airbnb&amp;quot;,
+  &amp;quot;ecmaFeatures&amp;quot;: {
+    &amp;quot;jsx&amp;quot;: true,
+    &amp;quot;modules&amp;quot;: true
+  },
+  &amp;quot;env&amp;quot;: {
+    &amp;quot;browser&amp;quot;: true,
+    &amp;quot;node&amp;quot;: true
+  },
+  &amp;quot;parser&amp;quot;: &amp;quot;babel-eslint&amp;quot;,
+  &amp;quot;rules&amp;quot;: {
+    &amp;quot;quotes&amp;quot;: [2, &amp;quot;single&amp;quot;],
+    &amp;quot;strict&amp;quot;: [2, &amp;quot;never&amp;quot;]
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;then create a simple test.js with this content:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;echo &amp;quot;test&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You should see the linter complaining, telling you something is wrong and you need to correct your javascript (check the lower grey line of sublime for the comment).&lt;/p&gt;
+
+&lt;p&gt;If you don&amp;rsquo;t see anything, check the console again.&lt;/p&gt;
+
+&lt;p&gt;Last resort, if things are still not working, you can go there and troubleshoot: &lt;a href=&#34;http://www.sublimelinter.com/en/latest/troubleshooting.html&#34;&gt;http://www.sublimelinter.com/en/latest/troubleshooting.html&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>golang dev environment setup</title>
-      <link>http://vincentserpoul.github.io/post/golang-dev-env-setup/</link>
-      <pubDate>Tue, 09 Feb 2016 14:48:27 +0800</pubDate>
+      <link>https://vincentserpoul.github.io/post/golang-dev-env-setup/</link>
+      <pubDate>Sat, 20 Feb 2016 20:48:27 +0800</pubDate>
       
-      <guid>http://vincentserpoul.github.io/post/golang-dev-env-setup/</guid>
+      <guid>https://vincentserpoul.github.io/post/golang-dev-env-setup/</guid>
       <description>
 
-&lt;h1 id=&#34;golang-environment:5968a8b0c74379a526ed74fea62d73ec&#34;&gt;Golang environment&lt;/h1&gt;
+&lt;h3 id=&#34;golang-environment:5968a8b0c74379a526ed74fea62d73ec&#34;&gt;Golang environment&lt;/h3&gt;
 
 &lt;p&gt;install golang&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://www.wolfe.id.au/2015/03/05/using-sublime-text-for-go-development/&#34;&gt;http://www.wolfe.id.au/2015/03/05/using-sublime-text-for-go-development/&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;install sublimetext3
-    install gosublime
-    install gooracle&lt;/p&gt;
+&lt;p&gt;Within &lt;a href=&#34;https://vincentserpoul.github.io/sublimetext-dev-environment&#34;&gt;sublimetext, from the package manager&lt;/a&gt;, install gosublime, install gooracle.&lt;/p&gt;
 
-&lt;p&gt;install go/tools
-    go get -u golang.org/x/tools/cmd/goimports
-    go get -u golang.org/x/tools/cmd/vet
-    go get -u golang.org/x/tools/cmd/oracle
-    go get -u golang.org/x/tools/cmd/godoc&lt;/p&gt;
+&lt;p&gt;install go/tools:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;go get -u golang.org/x/tools/cmd/goimports
+go get -u golang.org/x/tools/cmd/vet
+go get -u golang.org/x/tools/cmd/oracle
+go get -u golang.org/x/tools/cmd/godoc
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;install gometalinter (&lt;a href=&#34;https://github.com/alecthomas/gometalinter&#34;&gt;https://github.com/alecthomas/gometalinter&lt;/a&gt;)&lt;/p&gt;
+
+&lt;p&gt;install interfacer (&lt;a href=&#34;https://github.com/mvdan/interfacer/&#34;&gt;https://github.com/mvdan/interfacer/&lt;/a&gt;)&lt;/p&gt;
+
+&lt;p&gt;install gosimple (&lt;a href=&#34;https://github.com/dominikh/go-simple&#34;&gt;https://github.com/dominikh/go-simple&lt;/a&gt;)&lt;/p&gt;
+
+&lt;p&gt;install gocov (&lt;a href=&#34;https://github.com/axw/gocov&#34;&gt;https://github.com/axw/gocov&lt;/a&gt;)&lt;/p&gt;
+
+&lt;p&gt;Here is the package settings I use for gosublime:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+
+    // you may set specific environment variables here
+    // e.g &amp;quot;env&amp;quot;: { &amp;quot;PATH&amp;quot;: &amp;quot;$HOME/go/bin:$PATH&amp;quot; }
+    // in values, $PATH and ${PATH} are replaced with
+    // the corresponding environment(PATH) variable, if it exists.
+    &amp;quot;env&amp;quot;: {&amp;quot;GOPATH&amp;quot;: &amp;quot;/home/go&amp;quot; },
+
+    &amp;quot;fmt_cmd&amp;quot;: [&amp;quot;goimports&amp;quot;],
+    &amp;quot;ipc_timeout&amp;quot;: 5,
+
+    // enable comp-lint, this will effectively disable the live linter
+    &amp;quot;comp_lint_enabled&amp;quot;: true,
+
+    // list of commands to run
+    &amp;quot;comp_lint_commands&amp;quot;: [
+        // run `golint` on all files in the package
+        // &amp;quot;shell&amp;quot;:true is required in order to run the command through your shell (to expand `*.go`)
+        // also see: the documentation for the `shell` setting in the default settings file ctrl+dot,ctrl+4
+        {&amp;quot;cmd&amp;quot;: [&amp;quot;golint *.go&amp;quot;], &amp;quot;shell&amp;quot;: true},
+
+        // run go vet on the package
+        {&amp;quot;cmd&amp;quot;: [&amp;quot;go&amp;quot;, &amp;quot;vet&amp;quot;]},
+
+        // run `go install` on the package. GOBIN is set,
+        // so `main` packages shouldn&#39;t result in the installation of a binary
+        {&amp;quot;cmd&amp;quot;: [&amp;quot;go&amp;quot;, &amp;quot;install&amp;quot;]}
+    ],
+
+    &amp;quot;on_save&amp;quot;: [
+        // run comp-lint when you save,
+        // naturally, you can also bind this command `gs_comp_lint`
+        // to a key binding if you want
+        {&amp;quot;cmd&amp;quot;: &amp;quot;gs_comp_lint&amp;quot;}
+    ]
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Sublime text setup with essential tools</title>
+      <link>https://vincentserpoul.github.io/post/sublimetext-dev-env-setup/</link>
+      <pubDate>Wed, 10 Feb 2016 20:48:27 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/post/sublimetext-dev-env-setup/</guid>
+      <description>
+
+&lt;h3 id=&#34;download-and-install-the-latest-sublime-text:f3532878df49fcb6e169c354b4fe59d3&#34;&gt;Download and install the latest Sublime text&lt;/h3&gt;
+
+&lt;p&gt;Go to the sublime text website and download Sublime text 3 for your OS.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.sublimetext.com/3&#34;&gt;https://www.sublimetext.com/3&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;download-and-install-the-sublime-text-package-manager:f3532878df49fcb6e169c354b4fe59d3&#34;&gt;Download and install the sublime text package manager&lt;/h3&gt;
+
+&lt;p&gt;Go the package control website, download and install it on your sublime text (follow the instructions on the website).&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://packagecontrol.io/installation&#34;&gt;https://packagecontrol.io/installation&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;download-and-install-sublime-linter:f3532878df49fcb6e169c354b4fe59d3&#34;&gt;Download and install sublime linter&lt;/h3&gt;
+
+&lt;p&gt;Go to the sublime linter website, download and install it on your sublime text.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.sublimelinter.com/en/latest/installation.html&#34;&gt;http://www.sublimelinter.com/en/latest/installation.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;download-and-install-prettyjson:f3532878df49fcb6e169c354b4fe59d3&#34;&gt;Download and install prettyJSON&lt;/h3&gt;
+
+&lt;p&gt;JSON format is pretty common these days, try this prettifier, it will save you some time when you get long string of JSON.&lt;/p&gt;
+
+&lt;p&gt;You can install it from the sublime text package manager.&lt;/p&gt;
+
+&lt;h3 id=&#34;finally:f3532878df49fcb6e169c354b4fe59d3&#34;&gt;Finally&lt;/h3&gt;
+
+&lt;p&gt;You are ready to go wrestle with your favorite language!&lt;/p&gt;
 </description>
     </item>
     
