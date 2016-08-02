@@ -17,7 +17,7 @@
       <guid>https://vincentserpoul.github.io/post/ethereum-dev-environment/</guid>
       <description>
 
-&lt;h1 id=&#34;part-1-setup-your-ethereum-node:083ea129beec172162d0aa0257f848bc&#34;&gt;Part 1 - Setup your ethereum node&lt;/h1&gt;
+&lt;h2 id=&#34;part-1-setup-your-ethereum-node:083ea129beec172162d0aa0257f848bc&#34;&gt;Part 1 - Setup your ethereum node&lt;/h2&gt;
 
 &lt;p&gt;There are many ways you can setup a node to dev an Ethereum dapp.
 You can use the live network: not advisable obviously for cost and speed reasons.
@@ -27,7 +27,7 @@ You can the ethereum testrpc: easiest!&lt;/p&gt;
 
 &lt;p&gt;I will talk about the last two setup in this article.&lt;/p&gt;
 
-&lt;h2 id=&#34;using-testrpc:083ea129beec172162d0aa0257f848bc&#34;&gt;Using testrpc&lt;/h2&gt;
+&lt;h3 id=&#34;using-testrpc:083ea129beec172162d0aa0257f848bc&#34;&gt;Using testrpc&lt;/h3&gt;
 
 &lt;p&gt;Simply install through npm (if you want it globally available, add -g after install, as usual)&lt;/p&gt;
 
@@ -39,7 +39,7 @@ You can the ethereum testrpc: easiest!&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;node_modules/ethereumjs-testrpc/bin/testrpc
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;using-geth:083ea129beec172162d0aa0257f848bc&#34;&gt;Using geth&lt;/h2&gt;
+&lt;h3 id=&#34;using-geth:083ea129beec172162d0aa0257f848bc&#34;&gt;Using geth&lt;/h3&gt;
 
 &lt;p&gt;Download geth latest release (&lt;a href=&#34;https://github.com/ethereum/go-ethereum/releases&#34;&gt;https://github.com/ethereum/go-ethereum/releases&lt;/a&gt;)
 and extract it.&lt;/p&gt;
@@ -65,7 +65,7 @@ and extract it.&lt;/p&gt;
 ./geth init ./customGenesis.json
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;run-your-node-with-console-attached:083ea129beec172162d0aa0257f848bc&#34;&gt;Run your node with console attached&lt;/h3&gt;
+&lt;h4 id=&#34;run-your-node-with-console-attached:083ea129beec172162d0aa0257f848bc&#34;&gt;Run your node with console attached&lt;/h4&gt;
 
 &lt;pre&gt;&lt;code&gt;./geth \
     --identity &amp;quot;gethTest&amp;quot; \
@@ -79,7 +79,7 @@ and extract it.&lt;/p&gt;
     --dev console
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;create-a-base-account:083ea129beec172162d0aa0257f848bc&#34;&gt;Create a base account&lt;/h3&gt;
+&lt;h4 id=&#34;create-a-base-account:083ea129beec172162d0aa0257f848bc&#34;&gt;Create a base account&lt;/h4&gt;
 
 &lt;pre&gt;&lt;code&gt;&amp;gt; eth.accounts
 []
@@ -91,7 +91,7 @@ Repeat passphrase:
 [&amp;quot;0xedea6958c57fc0cd4bd63b3e7b395393dc76bfb6&amp;quot;]
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;mine-on-your-newly-created-account:083ea129beec172162d0aa0257f848bc&#34;&gt;Mine on your newly created account&lt;/h3&gt;
+&lt;h4 id=&#34;mine-on-your-newly-created-account:083ea129beec172162d0aa0257f848bc&#34;&gt;Mine on your newly created account&lt;/h4&gt;
 
 &lt;pre&gt;&lt;code&gt;miner.setEtherbase(eth.accounts[0])
 miner.start(8)

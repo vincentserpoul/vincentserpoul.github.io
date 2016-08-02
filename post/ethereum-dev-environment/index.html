@@ -52,7 +52,7 @@
     <section class="post-content">
         
 
-<h1 id="part-1-setup-your-ethereum-node:083ea129beec172162d0aa0257f848bc">Part 1 - Setup your ethereum node</h1>
+<h2 id="part-1-setup-your-ethereum-node:083ea129beec172162d0aa0257f848bc">Part 1 - Setup your ethereum node</h2>
 
 <p>There are many ways you can setup a node to dev an Ethereum dapp.
 You can use the live network: not advisable obviously for cost and speed reasons.
@@ -62,7 +62,7 @@ You can the ethereum testrpc: easiest!</p>
 
 <p>I will talk about the last two setup in this article.</p>
 
-<h2 id="using-testrpc:083ea129beec172162d0aa0257f848bc">Using testrpc</h2>
+<h3 id="using-testrpc:083ea129beec172162d0aa0257f848bc">Using testrpc</h3>
 
 <p>Simply install through npm (if you want it globally available, add -g after install, as usual)</p>
 
@@ -74,7 +74,7 @@ You can the ethereum testrpc: easiest!</p>
 <pre><code>node_modules/ethereumjs-testrpc/bin/testrpc
 </code></pre>
 
-<h2 id="using-geth:083ea129beec172162d0aa0257f848bc">Using geth</h2>
+<h3 id="using-geth:083ea129beec172162d0aa0257f848bc">Using geth</h3>
 
 <p>Download geth latest release (<a href="https://github.com/ethereum/go-ethereum/releases">https://github.com/ethereum/go-ethereum/releases</a>)
 and extract it.</p>
@@ -100,7 +100,7 @@ and extract it.</p>
 ./geth init ./customGenesis.json
 </code></pre>
 
-<h3 id="run-your-node-with-console-attached:083ea129beec172162d0aa0257f848bc">Run your node with console attached</h3>
+<h4 id="run-your-node-with-console-attached:083ea129beec172162d0aa0257f848bc">Run your node with console attached</h4>
 
 <pre><code>./geth \
     --identity &quot;gethTest&quot; \
@@ -114,7 +114,7 @@ and extract it.</p>
     --dev console
 </code></pre>
 
-<h3 id="create-a-base-account:083ea129beec172162d0aa0257f848bc">Create a base account</h3>
+<h4 id="create-a-base-account:083ea129beec172162d0aa0257f848bc">Create a base account</h4>
 
 <pre><code>&gt; eth.accounts
 []
@@ -126,7 +126,7 @@ Repeat passphrase:
 [&quot;0xedea6958c57fc0cd4bd63b3e7b395393dc76bfb6&quot;]
 </code></pre>
 
-<h3 id="mine-on-your-newly-created-account:083ea129beec172162d0aa0257f848bc">Mine on your newly created account</h3>
+<h4 id="mine-on-your-newly-created-account:083ea129beec172162d0aa0257f848bc">Mine on your newly created account</h4>
 
 <pre><code>miner.setEtherbase(eth.accounts[0])
 miner.start(8)
