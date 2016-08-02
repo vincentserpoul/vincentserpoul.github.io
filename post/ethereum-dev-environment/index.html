@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" prefix="og: http://ogp.me/ns#" xmlns:og="http://ogp.me/ns#"><!--<![endif]-->
+
+    <head>
+                <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="Ethereum dev environment">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="author" content="">
+        <meta name="keywords" content="awesome, definitely">
+	
+        <meta property="og:site_name" content="VS tech corner">
+        <meta property="og:title" content="VS tech corner">
+        <meta property="og:url" content="https://vincentserpoul.github.io/post/ethereum-dev-environment/">
+        <meta property="og:description" content="">
+    
+        <meta property="og:type" content="article" />
+        <meta property="og:article:author" content="" />
+        <meta property="og:article:published_time" content="2015-08-20T08:27:27&#43;08:00" />
+    
+        <meta name="generator" content="Hugo 0.15" />
+        <title>Ethereum dev environment &middot; VS tech corner </title>
+        <link rel="canonical" href="https://vincentserpoul.github.io/" />
+        <link rel="alternate" type="application/rss+xml" title="RSS" href="">
+        <link rel="stylesheet" type='text/css' href="https://vincentserpoul.github.io/css/main.css"/>
+        <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300|Montserrat:700' rel='stylesheet' type='text/css'>
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+        <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    </head>
+<body>
+<!--[if lt IE 7]><p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chrome/‎">install Google Chrome</a> to experience this site.</p><![endif]-->
+
+    <header id="site-header">
+        <div class="container">
+            <a href="https://vincentserpoul.github.io/" alt="VS tech corner"><h1 class="blog-title heading">VS tech corner</h1></a>
+            <p class="blog-description"></p>
+        </div>
+    </header>
+<main class="content" role="main">
+	<div class="container">
+		<article class="post">
+	<header class="post-header">
+        <h3 class="p-post-title">Ethereum dev environment</h3>
+    </header>
+
+    <section class="post-content">
+        
+
+<h1 id="part-1-setup-your-ethereum-node:083ea129beec172162d0aa0257f848bc">Part 1 - Setup your ethereum node</h1>
+
+<p>There are many ways you can setup a node to dev an Ethereum dapp.
+You can use the live network: not advisable obviously for cost and speed reasons.
+You can use the test network: not advisable for speed reasons.
+You can use a testchain set up with Geth: easy but a bit tedious as you need to mine.
+You can the ethereum testrpc: easiest!</p>
+
+<p>I will talk about the last two setup in this article.</p>
+
+<h2 id="using-testrpc:083ea129beec172162d0aa0257f848bc">Using testrpc</h2>
+
+<p>Simply install through npm (if you want it globally available, add -g after install, as usual)</p>
+
+<pre><code>npm install ethereumjs-testrpc
+</code></pre>
+
+<p>And then run it</p>
+
+<pre><code>node_modules/ethereumjs-testrpc/bin/testrpc
+</code></pre>
+
+<h2 id="using-geth:083ea129beec172162d0aa0257f848bc">Using geth</h2>
+
+<p>Download geth latest release (<a href="https://github.com/ethereum/go-ethereum/releases">https://github.com/ethereum/go-ethereum/releases</a>)
+and extract it.</p>
+
+<p>Create a file customGenesis.json</p>
+
+<pre><code>{
+  &quot;nonce&quot;: &quot;0x0000000000000042&quot;,
+  &quot;timestamp&quot;: &quot;0x0&quot;,
+  &quot;parentHash&quot;: &quot;0x0000000000000000000000000000000000000000000000000000000000000000&quot;,
+  &quot;extraData&quot;: &quot;0x0&quot;,
+  &quot;gasLimit&quot;: &quot;0x8000000&quot;,
+  &quot;difficulty&quot;: &quot;0x400&quot;,
+  &quot;mixhash&quot;: &quot;0x0000000000000000000000000000000000000000000000000000000000000000&quot;,
+  &quot;coinbase&quot;: &quot;0x3333333333333333333333333333333333333333&quot;,
+  &quot;alloc&quot;: {}
+}
+</code></pre>
+
+<p>then init yout node with the genesis block above</p>
+
+<pre><code>chmod +x geth
+./geth init ./customGenesis.json
+</code></pre>
+
+<h3 id="run-your-node-with-console-attached:083ea129beec172162d0aa0257f848bc">Run your node with console attached</h3>
+
+<pre><code>./geth \
+    --identity &quot;gethTest&quot; \
+    --rpc --rpcport &quot;9012&quot; \
+    --rpccorsdomain &quot;YOUR_TEST_DOMAIN_APP_RUN_FROM&quot; \
+    --datadir &quot;./testChain&quot; \
+    --port &quot;30303&quot; \
+    --nodiscover \
+    --rpcapi &quot;db,eth,net,web3&quot; \
+    --networkid 1999 \
+    --dev console
+</code></pre>
+
+<h3 id="create-a-base-account:083ea129beec172162d0aa0257f848bc">Create a base account</h3>
+
+<pre><code>&gt; eth.accounts
+[]
+&gt; personal.newAccount()
+Passphrase:
+Repeat passphrase:
+&quot;0xedea6958c57fc0cd4bd63b3e7b395393dc76bfb6&quot;
+&gt; eth.accounts
+[&quot;0xedea6958c57fc0cd4bd63b3e7b395393dc76bfb6&quot;]
+</code></pre>
+
+<h3 id="mine-on-your-newly-created-account:083ea129beec172162d0aa0257f848bc">Mine on your newly created account</h3>
+
+<pre><code>miner.setEtherbase(eth.accounts[0])
+miner.start(8)
+miner.stop()
+</code></pre>
+
+<p>Check if the mining worked</p>
+
+<pre><code>&gt; eth.getBalance(eth.accounts[0]).toNumber();
+55000000000000000000
+</code></pre>
+
+<p>In the next posts, we will start talking about development of dapps.</p>
+
+    </section>
+
+    <hr>
+
+    <footer class="post-footer">
+        <section class="f-1">
+            
+            
+            <p class="f-post-time"><time datetime="2015-08-20T08:27:27&#43;08:00">August 20, 2015</time></p>
+        </section>
+                        
+        <section class="f-2">
+            <section class="share">
+                <span>Share:
+                <a class="icon-twitter" href="http://twitter.com/share?text=Ethereum%20dev%20environment&url=https%3a%2f%2fvincentserpoul.github.io%2fpost%2fethereum-dev-environment%2f"
+                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="fa fa-twitter"></i>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fvincentserpoul.github.io%2fpost%2fethereum-dev-environment%2f"
+                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="fa fa-facebook"></i>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=https%3a%2f%2fvincentserpoul.github.io%2fpost%2fethereum-dev-environment%2f"
+                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="fa fa-google-plus"></i>
+                </a>
+                </span>
+            </section>
+
+            
+            	<span class="f-post-tags"><i class="fa fa-tag"></i>
+            	golang, blockchain, ethereum, geth, dev, testrpc
+            	</span>
+            
+        </section>
+                        
+    </footer>
+</article>
+	</div>
+</main>
+    <footer id="site-footer">
+        <div class="container">
+            <a href="https://vincentserpoul.github.io/index.xml" title="Get the RSS feed"><span class="tooltip"><i class="fa fa-rss"></i></span></a>
+        </div>
+    </footer>
+
+    <script type="text/javascript" src="https://vincentserpoul.github.io/js/fittext.js"></script>
+    <script type="text/javascript">
+      $(".heading").fitText();
+    </script>
+
+
+</body>
+</html>

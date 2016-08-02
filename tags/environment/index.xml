@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Environment on VS tech corner</title>
-    <link>http://vincentserpoul.github.io/tags/environment/</link>
+    <link>https://vincentserpoul.github.io/tags/environment/</link>
     <description>Recent content in Environment on VS tech corner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 11 Apr 2016 20:48:27 +0800</lastBuildDate>
-    <atom:link href="http://vincentserpoul.github.io/tags/environment/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://vincentserpoul.github.io/tags/environment/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>react setup with essential tools</title>
-      <link>http://vincentserpoul.github.io/post/react-dev-env-setup/</link>
+      <link>https://vincentserpoul.github.io/post/react-dev-env-setup/</link>
       <pubDate>Mon, 11 Apr 2016 20:48:27 +0800</pubDate>
       
-      <guid>http://vincentserpoul.github.io/post/react-dev-env-setup/</guid>
+      <guid>https://vincentserpoul.github.io/post/react-dev-env-setup/</guid>
       <description>
 
 &lt;h3 id=&#34;working-with-es6-7:83f0229eca70e6ad3111f657bb50d1b7&#34;&gt;Working with ES6-7&lt;/h3&gt;
@@ -106,10 +106,10 @@
     
     <item>
       <title>javascript dev environment setup</title>
-      <link>http://vincentserpoul.github.io/post/javascript-dev-env-setup/</link>
+      <link>https://vincentserpoul.github.io/post/javascript-dev-env-setup/</link>
       <pubDate>Thu, 10 Mar 2016 20:48:27 +0800</pubDate>
       
-      <guid>http://vincentserpoul.github.io/post/javascript-dev-env-setup/</guid>
+      <guid>https://vincentserpoul.github.io/post/javascript-dev-env-setup/</guid>
       <description>
 
 &lt;h3 id=&#34;nodejs:fd4b88456c775c1279613cb81b55c1ee&#34;&gt;NodeJS&lt;/h3&gt;
@@ -173,10 +173,10 @@
     
     <item>
       <title>golang dev environment setup</title>
-      <link>http://vincentserpoul.github.io/post/golang-dev-env-setup/</link>
+      <link>https://vincentserpoul.github.io/post/golang-dev-env-setup/</link>
       <pubDate>Sat, 20 Feb 2016 20:48:27 +0800</pubDate>
       
-      <guid>http://vincentserpoul.github.io/post/golang-dev-env-setup/</guid>
+      <guid>https://vincentserpoul.github.io/post/golang-dev-env-setup/</guid>
       <description>
 
 &lt;h3 id=&#34;golang-environment:5968a8b0c74379a526ed74fea62d73ec&#34;&gt;Golang environment&lt;/h3&gt;
@@ -185,7 +185,7 @@
 
 &lt;p&gt;&lt;a href=&#34;http://www.wolfe.id.au/2015/03/05/using-sublime-text-for-go-development/&#34;&gt;http://www.wolfe.id.au/2015/03/05/using-sublime-text-for-go-development/&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;Within &lt;a href=&#34;http://vincentserpoul.github.io/sublimetext-dev-environment&#34;&gt;sublimetext, from the package manager&lt;/a&gt;, install gosublime, install gooracle.&lt;/p&gt;
+&lt;p&gt;Within &lt;a href=&#34;https://vincentserpoul.github.io/sublimetext-dev-environment&#34;&gt;sublimetext, from the package manager&lt;/a&gt;, install gosublime, install gooracle.&lt;/p&gt;
 
 &lt;p&gt;install go/tools:&lt;/p&gt;
 
@@ -247,10 +247,10 @@ go get -u golang.org/x/tools/cmd/godoc
     
     <item>
       <title>Sublime text setup with essential tools</title>
-      <link>http://vincentserpoul.github.io/post/sublimetext-dev-env-setup/</link>
+      <link>https://vincentserpoul.github.io/post/sublimetext-dev-env-setup/</link>
       <pubDate>Wed, 10 Feb 2016 20:48:27 +0800</pubDate>
       
-      <guid>http://vincentserpoul.github.io/post/sublimetext-dev-env-setup/</guid>
+      <guid>https://vincentserpoul.github.io/post/sublimetext-dev-env-setup/</guid>
       <description>
 
 &lt;h3 id=&#34;download-and-install-the-latest-sublime-text:f3532878df49fcb6e169c354b4fe59d3&#34;&gt;Download and install the latest Sublime text&lt;/h3&gt;
