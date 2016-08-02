@@ -80,7 +80,6 @@ go get -u golang.org/x/tools/cmd/godoc
     ]
 }
 &lt;/code&gt;&lt;/pre&gt;
-<<<<<<< HEAD
 </description>
     </item>
     
@@ -180,8 +179,6 @@ miner.stop()
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;In the next posts, we will start talking about development of dapps.&lt;/p&gt;
-=======
->>>>>>> 61b0328bfa9cd45407eefa757733e27e28f45efb
 </description>
     </item>
     
