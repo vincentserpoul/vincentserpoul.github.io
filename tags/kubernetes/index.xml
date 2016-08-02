@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kubernetes on VS tech corner</title>
+    <link>https://vincentserpoul.github.io/tags/kubernetes/</link>
+    <description>Recent content in Kubernetes on VS tech corner</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 28 Jul 2016 22:27:27 +0800</lastBuildDate>
+    <atom:link href="https://vincentserpoul.github.io/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Kubernetes Singapore Birthday Event</title>
+      <link>https://vincentserpoul.github.io/post/kubernetes-talk/</link>
+      <pubDate>Thu, 28 Jul 2016 22:27:27 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/post/kubernetes-talk/</guid>
+      <description>&lt;p&gt;On the 28th, I was invited to talk at Google Singapore for the Kubernetes birthday: (&lt;a href=&#34;http://www.meetup.com/fr-FR/GCPUGSG/events/232659329/?eventId=232659329&#34;&gt;http://www.meetup.com/fr-FR/GCPUGSG/events/232659329/?eventId=232659329&lt;/a&gt;)&lt;/p&gt;
+
+&lt;p&gt;I spoke about my experience with Kubernetes in production for one of my side projects.&lt;/p&gt;
+
+&lt;p&gt;As I like to experiment stuff, I decide to drop power point and use React Spectacle library for my presentation!&lt;/p&gt;
+
+&lt;p&gt;here is the result: &lt;a href=&#34;https://kuberneprez.surge.sh&#34;&gt;https://kuberneprez.surge.sh&lt;/a&gt;
+here is the source code: &lt;a href=&#34;https://github.com/vincentserpoul/prez-kubernetes&#34;&gt;https://github.com/vincentserpoul/prez-kubernetes&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The framework can be found here: &lt;a href=&#34;http://stack.formidable.com/spectacle/#/?_k=cyx05u&#34;&gt;http://stack.formidable.com/spectacle/#/?_k=cyx05u&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I will do it again! It was quite a good experience and I always disliked power point anyway.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
