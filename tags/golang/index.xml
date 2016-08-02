@@ -6,87 +6,13 @@
     <description>Recent content in Golang on VS tech corner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 20 Feb 2016 20:48:27 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 20 Aug 2016 08:27:27 +0800</lastBuildDate>
     <atom:link href="https://vincentserpoul.github.io/tags/golang/index.xml" rel="self" type="application/rss+xml" />
-    
-    <item>
-      <title>golang dev environment setup</title>
-      <link>https://vincentserpoul.github.io/post/golang-dev-env-setup/</link>
-      <pubDate>Sat, 20 Feb 2016 20:48:27 +0800</pubDate>
-      
-      <guid>https://vincentserpoul.github.io/post/golang-dev-env-setup/</guid>
-      <description>
-
-&lt;h3 id=&#34;golang-environment:5968a8b0c74379a526ed74fea62d73ec&#34;&gt;Golang environment&lt;/h3&gt;
-
-&lt;p&gt;install golang&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://www.wolfe.id.au/2015/03/05/using-sublime-text-for-go-development/&#34;&gt;http://www.wolfe.id.au/2015/03/05/using-sublime-text-for-go-development/&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Within &lt;a href=&#34;https://vincentserpoul.github.io/sublimetext-dev-environment&#34;&gt;sublimetext, from the package manager&lt;/a&gt;, install gosublime, install gooracle.&lt;/p&gt;
-
-&lt;p&gt;install go/tools:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;go get -u golang.org/x/tools/cmd/goimports
-go get -u golang.org/x/tools/cmd/vet
-go get -u golang.org/x/tools/cmd/oracle
-go get -u golang.org/x/tools/cmd/godoc
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;install gometalinter (&lt;a href=&#34;https://github.com/alecthomas/gometalinter&#34;&gt;https://github.com/alecthomas/gometalinter&lt;/a&gt;)&lt;/p&gt;
-
-&lt;p&gt;install interfacer (&lt;a href=&#34;https://github.com/mvdan/interfacer/&#34;&gt;https://github.com/mvdan/interfacer/&lt;/a&gt;)&lt;/p&gt;
-
-&lt;p&gt;install gosimple (&lt;a href=&#34;https://github.com/dominikh/go-simple&#34;&gt;https://github.com/dominikh/go-simple&lt;/a&gt;)&lt;/p&gt;
-
-&lt;p&gt;install gocov (&lt;a href=&#34;https://github.com/axw/gocov&#34;&gt;https://github.com/axw/gocov&lt;/a&gt;)&lt;/p&gt;
-
-&lt;p&gt;Here is the package settings I use for gosublime:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;{
-
-    // you may set specific environment variables here
-    // e.g &amp;quot;env&amp;quot;: { &amp;quot;PATH&amp;quot;: &amp;quot;$HOME/go/bin:$PATH&amp;quot; }
-    // in values, $PATH and ${PATH} are replaced with
-    // the corresponding environment(PATH) variable, if it exists.
-    &amp;quot;env&amp;quot;: {&amp;quot;GOPATH&amp;quot;: &amp;quot;/home/go&amp;quot; },
-
-    &amp;quot;fmt_cmd&amp;quot;: [&amp;quot;goimports&amp;quot;],
-    &amp;quot;ipc_timeout&amp;quot;: 5,
-
-    // enable comp-lint, this will effectively disable the live linter
-    &amp;quot;comp_lint_enabled&amp;quot;: true,
-
-    // list of commands to run
-    &amp;quot;comp_lint_commands&amp;quot;: [
-        // run `golint` on all files in the package
-        // &amp;quot;shell&amp;quot;:true is required in order to run the command through your shell (to expand `*.go`)
-        // also see: the documentation for the `shell` setting in the default settings file ctrl+dot,ctrl+4
-        {&amp;quot;cmd&amp;quot;: [&amp;quot;golint *.go&amp;quot;], &amp;quot;shell&amp;quot;: true},
-
-        // run go vet on the package
-        {&amp;quot;cmd&amp;quot;: [&amp;quot;go&amp;quot;, &amp;quot;vet&amp;quot;]},
-
-        // run `go install` on the package. GOBIN is set,
-        // so `main` packages shouldn&#39;t result in the installation of a binary
-        {&amp;quot;cmd&amp;quot;: [&amp;quot;go&amp;quot;, &amp;quot;install&amp;quot;]}
-    ],
-
-    &amp;quot;on_save&amp;quot;: [
-        // run comp-lint when you save,
-        // naturally, you can also bind this command `gs_comp_lint`
-        // to a key binding if you want
-        {&amp;quot;cmd&amp;quot;: &amp;quot;gs_comp_lint&amp;quot;}
-    ]
-}
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
     
     <item>
       <title>Ethereum dev environment</title>
       <link>https://vincentserpoul.github.io/post/ethereum-dev-environment/</link>
-      <pubDate>Thu, 20 Aug 2015 08:27:27 +0800</pubDate>
+      <pubDate>Sat, 20 Aug 2016 08:27:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/ethereum-dev-environment/</guid>
       <description>
@@ -179,6 +105,80 @@ miner.stop()
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;In the next posts, we will start talking about development of dapps.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>golang dev environment setup</title>
+      <link>https://vincentserpoul.github.io/post/golang-dev-env-setup/</link>
+      <pubDate>Sat, 20 Feb 2016 20:48:27 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/post/golang-dev-env-setup/</guid>
+      <description>
+
+&lt;h3 id=&#34;golang-environment:5968a8b0c74379a526ed74fea62d73ec&#34;&gt;Golang environment&lt;/h3&gt;
+
+&lt;p&gt;install golang&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.wolfe.id.au/2015/03/05/using-sublime-text-for-go-development/&#34;&gt;http://www.wolfe.id.au/2015/03/05/using-sublime-text-for-go-development/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Within &lt;a href=&#34;https://vincentserpoul.github.io/sublimetext-dev-environment&#34;&gt;sublimetext, from the package manager&lt;/a&gt;, install gosublime, install gooracle.&lt;/p&gt;
+
+&lt;p&gt;install go/tools:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;go get -u golang.org/x/tools/cmd/goimports
+go get -u golang.org/x/tools/cmd/vet
+go get -u golang.org/x/tools/cmd/oracle
+go get -u golang.org/x/tools/cmd/godoc
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;install gometalinter (&lt;a href=&#34;https://github.com/alecthomas/gometalinter&#34;&gt;https://github.com/alecthomas/gometalinter&lt;/a&gt;)&lt;/p&gt;
+
+&lt;p&gt;install interfacer (&lt;a href=&#34;https://github.com/mvdan/interfacer/&#34;&gt;https://github.com/mvdan/interfacer/&lt;/a&gt;)&lt;/p&gt;
+
+&lt;p&gt;install gosimple (&lt;a href=&#34;https://github.com/dominikh/go-simple&#34;&gt;https://github.com/dominikh/go-simple&lt;/a&gt;)&lt;/p&gt;
+
+&lt;p&gt;install gocov (&lt;a href=&#34;https://github.com/axw/gocov&#34;&gt;https://github.com/axw/gocov&lt;/a&gt;)&lt;/p&gt;
+
+&lt;p&gt;Here is the package settings I use for gosublime:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+
+    // you may set specific environment variables here
+    // e.g &amp;quot;env&amp;quot;: { &amp;quot;PATH&amp;quot;: &amp;quot;$HOME/go/bin:$PATH&amp;quot; }
+    // in values, $PATH and ${PATH} are replaced with
+    // the corresponding environment(PATH) variable, if it exists.
+    &amp;quot;env&amp;quot;: {&amp;quot;GOPATH&amp;quot;: &amp;quot;/home/go&amp;quot; },
+
+    &amp;quot;fmt_cmd&amp;quot;: [&amp;quot;goimports&amp;quot;],
+    &amp;quot;ipc_timeout&amp;quot;: 5,
+
+    // enable comp-lint, this will effectively disable the live linter
+    &amp;quot;comp_lint_enabled&amp;quot;: true,
+
+    // list of commands to run
+    &amp;quot;comp_lint_commands&amp;quot;: [
+        // run `golint` on all files in the package
+        // &amp;quot;shell&amp;quot;:true is required in order to run the command through your shell (to expand `*.go`)
+        // also see: the documentation for the `shell` setting in the default settings file ctrl+dot,ctrl+4
+        {&amp;quot;cmd&amp;quot;: [&amp;quot;golint *.go&amp;quot;], &amp;quot;shell&amp;quot;: true},
+
+        // run go vet on the package
+        {&amp;quot;cmd&amp;quot;: [&amp;quot;go&amp;quot;, &amp;quot;vet&amp;quot;]},
+
+        // run `go install` on the package. GOBIN is set,
+        // so `main` packages shouldn&#39;t result in the installation of a binary
+        {&amp;quot;cmd&amp;quot;: [&amp;quot;go&amp;quot;, &amp;quot;install&amp;quot;]}
+    ],
+
+    &amp;quot;on_save&amp;quot;: [
+        // run comp-lint when you save,
+        // naturally, you can also bind this command `gs_comp_lint`
+        // to a key binding if you want
+        {&amp;quot;cmd&amp;quot;: &amp;quot;gs_comp_lint&amp;quot;}
+    ]
+}
+&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
