@@ -17,7 +17,7 @@
       <guid>https://vincentserpoul.github.io/post/ethereum-dev-environment/</guid>
       <description>
 
-&lt;h2 id=&#34;part-1-setup-your-ethereum-node:083ea129beec172162d0aa0257f848bc&#34;&gt;Part 1 - Setup your ethereum node&lt;/h2&gt;
+&lt;h2 id=&#34;part-1-setup-your-ethereum-node&#34;&gt;Part 1 - Setup your ethereum node&lt;/h2&gt;
 
 &lt;p&gt;There are many ways you can setup a node to dev an Ethereum dapp.
 You can use the live network: not advisable obviously for cost and speed reasons.
@@ -27,7 +27,7 @@ You can the ethereum testrpc: easiest!&lt;/p&gt;
 
 &lt;p&gt;I will talk about the last two setup in this article.&lt;/p&gt;
 
-&lt;h3 id=&#34;using-testrpc:083ea129beec172162d0aa0257f848bc&#34;&gt;Using testrpc&lt;/h3&gt;
+&lt;h3 id=&#34;using-testrpc&#34;&gt;Using testrpc&lt;/h3&gt;
 
 &lt;p&gt;Simply install through npm (if you want it globally available, add -g after install, as usual)&lt;/p&gt;
 
@@ -39,7 +39,7 @@ You can the ethereum testrpc: easiest!&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;node_modules/ethereumjs-testrpc/bin/testrpc
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;using-geth:083ea129beec172162d0aa0257f848bc&#34;&gt;Using geth&lt;/h3&gt;
+&lt;h3 id=&#34;using-geth&#34;&gt;Using geth&lt;/h3&gt;
 
 &lt;p&gt;Download geth latest release (&lt;a href=&#34;https://github.com/ethereum/go-ethereum/releases&#34;&gt;https://github.com/ethereum/go-ethereum/releases&lt;/a&gt;)
 and extract it.&lt;/p&gt;
@@ -65,7 +65,7 @@ and extract it.&lt;/p&gt;
 ./geth init ./customGenesis.json
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;run-your-node-with-console-attached:083ea129beec172162d0aa0257f848bc&#34;&gt;Run your node with console attached&lt;/h4&gt;
+&lt;h4 id=&#34;run-your-node-with-console-attached&#34;&gt;Run your node with console attached&lt;/h4&gt;
 
 &lt;pre&gt;&lt;code&gt;./geth \
     --identity &amp;quot;gethTest&amp;quot; \
@@ -79,7 +79,7 @@ and extract it.&lt;/p&gt;
     --dev console
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;create-a-base-account:083ea129beec172162d0aa0257f848bc&#34;&gt;Create a base account&lt;/h4&gt;
+&lt;h4 id=&#34;create-a-base-account&#34;&gt;Create a base account&lt;/h4&gt;
 
 &lt;pre&gt;&lt;code&gt;&amp;gt; eth.accounts
 []
@@ -91,7 +91,7 @@ Repeat passphrase:
 [&amp;quot;0xedea6958c57fc0cd4bd63b3e7b395393dc76bfb6&amp;quot;]
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;mine-on-your-newly-created-account:083ea129beec172162d0aa0257f848bc&#34;&gt;Mine on your newly created account&lt;/h4&gt;
+&lt;h4 id=&#34;mine-on-your-newly-created-account&#34;&gt;Mine on your newly created account&lt;/h4&gt;
 
 &lt;pre&gt;&lt;code&gt;miner.setEtherbase(eth.accounts[0])
 miner.start(8)
@@ -116,13 +116,13 @@ miner.stop()
       <guid>https://vincentserpoul.github.io/post/learning-react/</guid>
       <description>
 
-&lt;h3 id=&#34;react:30bee4de84ade46b3f4515e37a96388a&#34;&gt;React&lt;/h3&gt;
+&lt;h3 id=&#34;react&#34;&gt;React&lt;/h3&gt;
 
 &lt;p&gt;Nothing beats the facebook React page:&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://facebook.github.io/react/docs/getting-started.html&#34;&gt;https://facebook.github.io/react/docs/getting-started.html&lt;/a&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;redux:30bee4de84ade46b3f4515e37a96388a&#34;&gt;Redux&lt;/h3&gt;
+&lt;h3 id=&#34;redux&#34;&gt;Redux&lt;/h3&gt;
 
 &lt;p&gt;Nothing beats the redux tutorial:&lt;/p&gt;
 
@@ -136,11 +136,11 @@ miner.stop()
 
 &lt;p&gt;&lt;a href=&#34;https://github.com/happypoulp/redux-tutorial&#34;&gt;https://github.com/happypoulp/redux-tutorial&lt;/a&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;a-great-detailed-introduction-to-your-spa-setup:30bee4de84ade46b3f4515e37a96388a&#34;&gt;A great detailed introduction to your SPA setup&lt;/h3&gt;
+&lt;h3 id=&#34;a-great-detailed-introduction-to-your-spa-setup&#34;&gt;A great detailed introduction to your SPA setup&lt;/h3&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://blog.joanboixados.com/building-a-boilerplate-for-a-koa-redux-react-application-including-webpack-mocha-and-sass/&#34;&gt;http://blog.joanboixados.com/building-a-boilerplate-for-a-koa-redux-react-application-including-webpack-mocha-and-sass/&lt;/a&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;an-advanced-spa-still-under-construction:30bee4de84ade46b3f4515e37a96388a&#34;&gt;An advanced SPA (still under construction)&lt;/h3&gt;
+&lt;h3 id=&#34;an-advanced-spa-still-under-construction&#34;&gt;An advanced SPA (still under construction)&lt;/h3&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://www.gitbook.com/book/tonyhb/redux-without-profanity/details&#34;&gt;https://www.gitbook.com/book/tonyhb/redux-without-profanity/details&lt;/a&gt;&lt;/p&gt;
 </description>
@@ -154,7 +154,7 @@ miner.stop()
       <guid>https://vincentserpoul.github.io/post/react-dev-env-setup/</guid>
       <description>
 
-&lt;h3 id=&#34;working-with-es6-7:83f0229eca70e6ad3111f657bb50d1b7&#34;&gt;Working with ES6-7&lt;/h3&gt;
+&lt;h3 id=&#34;working-with-es6-7&#34;&gt;Working with ES6-7&lt;/h3&gt;
 
 &lt;p&gt;In order to work with ECMAScript 2015 and even with future implementations of ES, you can use Babel.&lt;/p&gt;
 
@@ -172,7 +172,7 @@ miner.stop()
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;react-and-its-surrounding-libraries:83f0229eca70e6ad3111f657bb50d1b7&#34;&gt;React and its surrounding libraries&lt;/h3&gt;
+&lt;h3 id=&#34;react-and-its-surrounding-libraries&#34;&gt;React and its surrounding libraries&lt;/h3&gt;
 
 &lt;p&gt;After starting using React, I realized it was vey good and was surrounded with libraries which makes it even better: redux, immutable, react-router&amp;hellip;&lt;/p&gt;
 
@@ -180,20 +180,20 @@ miner.stop()
 
 &lt;p&gt;The most important value added of redux, as well as immutable is the separation of concern. It gives you the power of designing components independantly from eachother.&lt;/p&gt;
 
-&lt;h3 id=&#34;react-and-its-tools:83f0229eca70e6ad3111f657bb50d1b7&#34;&gt;React and its tools&lt;/h3&gt;
+&lt;h3 id=&#34;react-and-its-tools&#34;&gt;React and its tools&lt;/h3&gt;
 
 &lt;p&gt;In order to help you develop with react and also redux, you have a few tools to help you.&lt;/p&gt;
 
-&lt;h4 id=&#34;eslint-for-react:83f0229eca70e6ad3111f657bb50d1b7&#34;&gt;eslint for react&lt;/h4&gt;
+&lt;h4 id=&#34;eslint-for-react&#34;&gt;eslint for react&lt;/h4&gt;
 
 &lt;pre&gt;&lt;code&gt;npm install -g eslint-plugin-react
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;sublime-text-plugin:83f0229eca70e6ad3111f657bb50d1b7&#34;&gt;sublime text plugin&lt;/h4&gt;
+&lt;h4 id=&#34;sublime-text-plugin&#34;&gt;sublime text plugin&lt;/h4&gt;
 
 &lt;p&gt;You can install a useful plugins in react, available in the package installer: React ES6 snippets.&lt;/p&gt;
 
-&lt;h4 id=&#34;eslintrc-file-for-babel-and-react:83f0229eca70e6ad3111f657bb50d1b7&#34;&gt;.eslintrc file for babel and react&lt;/h4&gt;
+&lt;h4 id=&#34;eslintrc-file-for-babel-and-react&#34;&gt;.eslintrc file for babel and react&lt;/h4&gt;
 
 &lt;p&gt;You can use this eslintrc file as a starting point.&lt;/p&gt;
 
@@ -222,7 +222,7 @@ miner.stop()
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;chrome-tools:83f0229eca70e6ad3111f657bb50d1b7&#34;&gt;Chrome tools&lt;/h4&gt;
+&lt;h4 id=&#34;chrome-tools&#34;&gt;Chrome tools&lt;/h4&gt;
 
 &lt;p&gt;You can install react devTools in Chrome:&lt;/p&gt;
 
@@ -249,27 +249,27 @@ miner.stop()
       <guid>https://vincentserpoul.github.io/post/javascript-dev-env-setup/</guid>
       <description>
 
-&lt;h3 id=&#34;nodejs:fd4b88456c775c1279613cb81b55c1ee&#34;&gt;NodeJS&lt;/h3&gt;
+&lt;h3 id=&#34;nodejs&#34;&gt;NodeJS&lt;/h3&gt;
 
 &lt;p&gt;Go to the nodejs website and install nodejs latest stable version:&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://nodejs.org/en/download/stable/&#34;&gt;https://nodejs.org/en/download/stable/&lt;/a&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;npm:fd4b88456c775c1279613cb81b55c1ee&#34;&gt;NPM&lt;/h3&gt;
+&lt;h3 id=&#34;npm&#34;&gt;NPM&lt;/h3&gt;
 
 &lt;p&gt;Go to the npm website and follow the instructions&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://docs.npmjs.com/getting-started/installing-node&#34;&gt;https://docs.npmjs.com/getting-started/installing-node&lt;/a&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;install-nodejs-essential-packages:fd4b88456c775c1279613cb81b55c1ee&#34;&gt;Install nodejs essential packages&lt;/h3&gt;
+&lt;h3 id=&#34;install-nodejs-essential-packages&#34;&gt;Install nodejs essential packages&lt;/h3&gt;
 
 &lt;p&gt;npm install -g eslint webpack webpack-dev-server babel-eslint serve&lt;/p&gt;
 
-&lt;h3 id=&#34;install-sublime-text-essential-plugins:fd4b88456c775c1279613cb81b55c1ee&#34;&gt;Install sublime-text essential plugins&lt;/h3&gt;
+&lt;h3 id=&#34;install-sublime-text-essential-plugins&#34;&gt;Install sublime-text essential plugins&lt;/h3&gt;
 
 &lt;p&gt;With the help of the package manager, in sublime-text, install the following packages: babel, Sublime-Linter-Contrib-eslint, React ES6 snippets&lt;/p&gt;
 
-&lt;h3 id=&#34;make-sure-your-linter-is-working:fd4b88456c775c1279613cb81b55c1ee&#34;&gt;Make sure your linter is working&lt;/h3&gt;
+&lt;h3 id=&#34;make-sure-your-linter-is-working&#34;&gt;Make sure your linter is working&lt;/h3&gt;
 
 &lt;p&gt;In sublime text, open the console (view &amp;gt; show console) and check if there is any error message.&lt;/p&gt;
 
@@ -316,7 +316,7 @@ miner.stop()
       <guid>https://vincentserpoul.github.io/post/golang-dev-env-setup/</guid>
       <description>
 
-&lt;h3 id=&#34;golang-environment:5968a8b0c74379a526ed74fea62d73ec&#34;&gt;Golang environment&lt;/h3&gt;
+&lt;h3 id=&#34;golang-environment&#34;&gt;Golang environment&lt;/h3&gt;
 
 &lt;p&gt;install golang&lt;/p&gt;
 
@@ -390,31 +390,31 @@ go get -u golang.org/x/tools/cmd/godoc
       <guid>https://vincentserpoul.github.io/post/sublimetext-dev-env-setup/</guid>
       <description>
 
-&lt;h3 id=&#34;download-and-install-the-latest-sublime-text:f3532878df49fcb6e169c354b4fe59d3&#34;&gt;Download and install the latest Sublime text&lt;/h3&gt;
+&lt;h3 id=&#34;download-and-install-the-latest-sublime-text&#34;&gt;Download and install the latest Sublime text&lt;/h3&gt;
 
 &lt;p&gt;Go to the sublime text website and download Sublime text 3 for your OS.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://www.sublimetext.com/3&#34;&gt;https://www.sublimetext.com/3&lt;/a&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;download-and-install-the-sublime-text-package-manager:f3532878df49fcb6e169c354b4fe59d3&#34;&gt;Download and install the sublime text package manager&lt;/h3&gt;
+&lt;h3 id=&#34;download-and-install-the-sublime-text-package-manager&#34;&gt;Download and install the sublime text package manager&lt;/h3&gt;
 
 &lt;p&gt;Go the package control website, download and install it on your sublime text (follow the instructions on the website).&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://packagecontrol.io/installation&#34;&gt;https://packagecontrol.io/installation&lt;/a&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;download-and-install-sublime-linter:f3532878df49fcb6e169c354b4fe59d3&#34;&gt;Download and install sublime linter&lt;/h3&gt;
+&lt;h3 id=&#34;download-and-install-sublime-linter&#34;&gt;Download and install sublime linter&lt;/h3&gt;
 
 &lt;p&gt;Go to the sublime linter website, download and install it on your sublime text.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://www.sublimelinter.com/en/latest/installation.html&#34;&gt;http://www.sublimelinter.com/en/latest/installation.html&lt;/a&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;download-and-install-prettyjson:f3532878df49fcb6e169c354b4fe59d3&#34;&gt;Download and install prettyJSON&lt;/h3&gt;
+&lt;h3 id=&#34;download-and-install-prettyjson&#34;&gt;Download and install prettyJSON&lt;/h3&gt;
 
 &lt;p&gt;JSON format is pretty common these days, try this prettifier, it will save you some time when you get long string of JSON.&lt;/p&gt;
 
 &lt;p&gt;You can install it from the sublime text package manager.&lt;/p&gt;
 
-&lt;h3 id=&#34;finally:f3532878df49fcb6e169c354b4fe59d3&#34;&gt;Finally&lt;/h3&gt;
+&lt;h3 id=&#34;finally&#34;&gt;Finally&lt;/h3&gt;
 
 &lt;p&gt;You are ready to go wrestle with your favorite language!&lt;/p&gt;
 </description>
@@ -428,9 +428,9 @@ go get -u golang.org/x/tools/cmd/godoc
       <guid>https://vincentserpoul.github.io/post/git-basic-usage/</guid>
       <description>
 
-&lt;h3 id=&#34;git-basic-commands:9b7daffe836baef8e726595ca41fde03&#34;&gt;Git basic commands&lt;/h3&gt;
+&lt;h3 id=&#34;git-basic-commands&#34;&gt;Git basic commands&lt;/h3&gt;
 
-&lt;h4 id=&#34;when-you-have-a-new-repo:9b7daffe836baef8e726595ca41fde03&#34;&gt;When you have a new repo&lt;/h4&gt;
+&lt;h4 id=&#34;when-you-have-a-new-repo&#34;&gt;When you have a new repo&lt;/h4&gt;
 
 &lt;pre&gt;&lt;code&gt;    git clone git@github.com:vincentserpoul/rbac.git
 &lt;/code&gt;&lt;/pre&gt;
@@ -446,7 +446,7 @@ go get -u golang.org/x/tools/cmd/godoc
     IdentitiesOnly yes
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;when-you-have-a-new-modification-ready-for-commit:9b7daffe836baef8e726595ca41fde03&#34;&gt;When you have a new modification ready for commit&lt;/h4&gt;
+&lt;h4 id=&#34;when-you-have-a-new-modification-ready-for-commit&#34;&gt;When you have a new modification ready for commit&lt;/h4&gt;
 
 &lt;pre&gt;&lt;code&gt;git status
 &lt;/code&gt;&lt;/pre&gt;
@@ -486,7 +486,7 @@ git rebase --continue
 &lt;p&gt;You should be all good right now.
 Let&amp;rsquo;s look at our branching strategy.&lt;/p&gt;
 
-&lt;h3 id=&#34;git-common-flow:9b7daffe836baef8e726595ca41fde03&#34;&gt;Git common flow&lt;/h3&gt;
+&lt;h3 id=&#34;git-common-flow&#34;&gt;Git common flow&lt;/h3&gt;
 
 &lt;p&gt;Nothing fancy here:
 &lt;img src=&#34;http://nvie.com/img/git-model@2x.png&#34; alt=&#34;gitflow&#34; /&gt;&lt;/p&gt;

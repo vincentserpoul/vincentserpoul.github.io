@@ -17,13 +17,13 @@
       <guid>https://vincentserpoul.github.io/post/learning-react/</guid>
       <description>
 
-&lt;h3 id=&#34;react:30bee4de84ade46b3f4515e37a96388a&#34;&gt;React&lt;/h3&gt;
+&lt;h3 id=&#34;react&#34;&gt;React&lt;/h3&gt;
 
 &lt;p&gt;Nothing beats the facebook React page:&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://facebook.github.io/react/docs/getting-started.html&#34;&gt;https://facebook.github.io/react/docs/getting-started.html&lt;/a&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;redux:30bee4de84ade46b3f4515e37a96388a&#34;&gt;Redux&lt;/h3&gt;
+&lt;h3 id=&#34;redux&#34;&gt;Redux&lt;/h3&gt;
 
 &lt;p&gt;Nothing beats the redux tutorial:&lt;/p&gt;
 
@@ -37,11 +37,11 @@
 
 &lt;p&gt;&lt;a href=&#34;https://github.com/happypoulp/redux-tutorial&#34;&gt;https://github.com/happypoulp/redux-tutorial&lt;/a&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;a-great-detailed-introduction-to-your-spa-setup:30bee4de84ade46b3f4515e37a96388a&#34;&gt;A great detailed introduction to your SPA setup&lt;/h3&gt;
+&lt;h3 id=&#34;a-great-detailed-introduction-to-your-spa-setup&#34;&gt;A great detailed introduction to your SPA setup&lt;/h3&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://blog.joanboixados.com/building-a-boilerplate-for-a-koa-redux-react-application-including-webpack-mocha-and-sass/&#34;&gt;http://blog.joanboixados.com/building-a-boilerplate-for-a-koa-redux-react-application-including-webpack-mocha-and-sass/&lt;/a&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;an-advanced-spa-still-under-construction:30bee4de84ade46b3f4515e37a96388a&#34;&gt;An advanced SPA (still under construction)&lt;/h3&gt;
+&lt;h3 id=&#34;an-advanced-spa-still-under-construction&#34;&gt;An advanced SPA (still under construction)&lt;/h3&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://www.gitbook.com/book/tonyhb/redux-without-profanity/details&#34;&gt;https://www.gitbook.com/book/tonyhb/redux-without-profanity/details&lt;/a&gt;&lt;/p&gt;
 </description>

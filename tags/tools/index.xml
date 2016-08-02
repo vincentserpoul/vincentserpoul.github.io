@@ -17,7 +17,7 @@
       <guid>https://vincentserpoul.github.io/post/react-dev-env-setup/</guid>
       <description>
 
-&lt;h3 id=&#34;working-with-es6-7:83f0229eca70e6ad3111f657bb50d1b7&#34;&gt;Working with ES6-7&lt;/h3&gt;
+&lt;h3 id=&#34;working-with-es6-7&#34;&gt;Working with ES6-7&lt;/h3&gt;
 
 &lt;p&gt;In order to work with ECMAScript 2015 and even with future implementations of ES, you can use Babel.&lt;/p&gt;
 
@@ -35,7 +35,7 @@
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;react-and-its-surrounding-libraries:83f0229eca70e6ad3111f657bb50d1b7&#34;&gt;React and its surrounding libraries&lt;/h3&gt;
+&lt;h3 id=&#34;react-and-its-surrounding-libraries&#34;&gt;React and its surrounding libraries&lt;/h3&gt;
 
 &lt;p&gt;After starting using React, I realized it was vey good and was surrounded with libraries which makes it even better: redux, immutable, react-router&amp;hellip;&lt;/p&gt;
 
@@ -43,20 +43,20 @@
 
 &lt;p&gt;The most important value added of redux, as well as immutable is the separation of concern. It gives you the power of designing components independantly from eachother.&lt;/p&gt;
 
-&lt;h3 id=&#34;react-and-its-tools:83f0229eca70e6ad3111f657bb50d1b7&#34;&gt;React and its tools&lt;/h3&gt;
+&lt;h3 id=&#34;react-and-its-tools&#34;&gt;React and its tools&lt;/h3&gt;
 
 &lt;p&gt;In order to help you develop with react and also redux, you have a few tools to help you.&lt;/p&gt;
 
-&lt;h4 id=&#34;eslint-for-react:83f0229eca70e6ad3111f657bb50d1b7&#34;&gt;eslint for react&lt;/h4&gt;
+&lt;h4 id=&#34;eslint-for-react&#34;&gt;eslint for react&lt;/h4&gt;
 
 &lt;pre&gt;&lt;code&gt;npm install -g eslint-plugin-react
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;sublime-text-plugin:83f0229eca70e6ad3111f657bb50d1b7&#34;&gt;sublime text plugin&lt;/h4&gt;
+&lt;h4 id=&#34;sublime-text-plugin&#34;&gt;sublime text plugin&lt;/h4&gt;
 
 &lt;p&gt;You can install a useful plugins in react, available in the package installer: React ES6 snippets.&lt;/p&gt;
 
-&lt;h4 id=&#34;eslintrc-file-for-babel-and-react:83f0229eca70e6ad3111f657bb50d1b7&#34;&gt;.eslintrc file for babel and react&lt;/h4&gt;
+&lt;h4 id=&#34;eslintrc-file-for-babel-and-react&#34;&gt;.eslintrc file for babel and react&lt;/h4&gt;
 
 &lt;p&gt;You can use this eslintrc file as a starting point.&lt;/p&gt;
 
@@ -85,7 +85,7 @@
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;chrome-tools:83f0229eca70e6ad3111f657bb50d1b7&#34;&gt;Chrome tools&lt;/h4&gt;
+&lt;h4 id=&#34;chrome-tools&#34;&gt;Chrome tools&lt;/h4&gt;
 
 &lt;p&gt;You can install react devTools in Chrome:&lt;/p&gt;
 
@@ -112,27 +112,27 @@
       <guid>https://vincentserpoul.github.io/post/javascript-dev-env-setup/</guid>
       <description>
 
-&lt;h3 id=&#34;nodejs:fd4b88456c775c1279613cb81b55c1ee&#34;&gt;NodeJS&lt;/h3&gt;
+&lt;h3 id=&#34;nodejs&#34;&gt;NodeJS&lt;/h3&gt;
 
 &lt;p&gt;Go to the nodejs website and install nodejs latest stable version:&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://nodejs.org/en/download/stable/&#34;&gt;https://nodejs.org/en/download/stable/&lt;/a&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;npm:fd4b88456c775c1279613cb81b55c1ee&#34;&gt;NPM&lt;/h3&gt;
+&lt;h3 id=&#34;npm&#34;&gt;NPM&lt;/h3&gt;
 
 &lt;p&gt;Go to the npm website and follow the instructions&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://docs.npmjs.com/getting-started/installing-node&#34;&gt;https://docs.npmjs.com/getting-started/installing-node&lt;/a&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;install-nodejs-essential-packages:fd4b88456c775c1279613cb81b55c1ee&#34;&gt;Install nodejs essential packages&lt;/h3&gt;
+&lt;h3 id=&#34;install-nodejs-essential-packages&#34;&gt;Install nodejs essential packages&lt;/h3&gt;
 
 &lt;p&gt;npm install -g eslint webpack webpack-dev-server babel-eslint serve&lt;/p&gt;
 
-&lt;h3 id=&#34;install-sublime-text-essential-plugins:fd4b88456c775c1279613cb81b55c1ee&#34;&gt;Install sublime-text essential plugins&lt;/h3&gt;
+&lt;h3 id=&#34;install-sublime-text-essential-plugins&#34;&gt;Install sublime-text essential plugins&lt;/h3&gt;
 
 &lt;p&gt;With the help of the package manager, in sublime-text, install the following packages: babel, Sublime-Linter-Contrib-eslint, React ES6 snippets&lt;/p&gt;
 
-&lt;h3 id=&#34;make-sure-your-linter-is-working:fd4b88456c775c1279613cb81b55c1ee&#34;&gt;Make sure your linter is working&lt;/h3&gt;
+&lt;h3 id=&#34;make-sure-your-linter-is-working&#34;&gt;Make sure your linter is working&lt;/h3&gt;
 
 &lt;p&gt;In sublime text, open the console (view &amp;gt; show console) and check if there is any error message.&lt;/p&gt;
 
@@ -179,7 +179,7 @@
       <guid>https://vincentserpoul.github.io/post/golang-dev-env-setup/</guid>
       <description>
 
-&lt;h3 id=&#34;golang-environment:5968a8b0c74379a526ed74fea62d73ec&#34;&gt;Golang environment&lt;/h3&gt;
+&lt;h3 id=&#34;golang-environment&#34;&gt;Golang environment&lt;/h3&gt;
 
 &lt;p&gt;install golang&lt;/p&gt;
 
@@ -253,31 +253,31 @@ go get -u golang.org/x/tools/cmd/godoc
       <guid>https://vincentserpoul.github.io/post/sublimetext-dev-env-setup/</guid>
       <description>
 
-&lt;h3 id=&#34;download-and-install-the-latest-sublime-text:f3532878df49fcb6e169c354b4fe59d3&#34;&gt;Download and install the latest Sublime text&lt;/h3&gt;
+&lt;h3 id=&#34;download-and-install-the-latest-sublime-text&#34;&gt;Download and install the latest Sublime text&lt;/h3&gt;
 
 &lt;p&gt;Go to the sublime text website and download Sublime text 3 for your OS.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://www.sublimetext.com/3&#34;&gt;https://www.sublimetext.com/3&lt;/a&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;download-and-install-the-sublime-text-package-manager:f3532878df49fcb6e169c354b4fe59d3&#34;&gt;Download and install the sublime text package manager&lt;/h3&gt;
+&lt;h3 id=&#34;download-and-install-the-sublime-text-package-manager&#34;&gt;Download and install the sublime text package manager&lt;/h3&gt;
 
 &lt;p&gt;Go the package control website, download and install it on your sublime text (follow the instructions on the website).&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://packagecontrol.io/installation&#34;&gt;https://packagecontrol.io/installation&lt;/a&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;download-and-install-sublime-linter:f3532878df49fcb6e169c354b4fe59d3&#34;&gt;Download and install sublime linter&lt;/h3&gt;
+&lt;h3 id=&#34;download-and-install-sublime-linter&#34;&gt;Download and install sublime linter&lt;/h3&gt;
 
 &lt;p&gt;Go to the sublime linter website, download and install it on your sublime text.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://www.sublimelinter.com/en/latest/installation.html&#34;&gt;http://www.sublimelinter.com/en/latest/installation.html&lt;/a&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;download-and-install-prettyjson:f3532878df49fcb6e169c354b4fe59d3&#34;&gt;Download and install prettyJSON&lt;/h3&gt;
+&lt;h3 id=&#34;download-and-install-prettyjson&#34;&gt;Download and install prettyJSON&lt;/h3&gt;
 
 &lt;p&gt;JSON format is pretty common these days, try this prettifier, it will save you some time when you get long string of JSON.&lt;/p&gt;
 
 &lt;p&gt;You can install it from the sublime text package manager.&lt;/p&gt;
 
-&lt;h3 id=&#34;finally:f3532878df49fcb6e169c354b4fe59d3&#34;&gt;Finally&lt;/h3&gt;
+&lt;h3 id=&#34;finally&#34;&gt;Finally&lt;/h3&gt;
 
 &lt;p&gt;You are ready to go wrestle with your favorite language!&lt;/p&gt;
 </description>

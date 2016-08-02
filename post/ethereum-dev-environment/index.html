@@ -24,15 +24,16 @@
         <meta property="og:article:author" content="" />
         <meta property="og:article:published_time" content="2016-08-20T08:27:27&#43;08:00" />
     
-        <meta name="generator" content="Hugo 0.15" />
+        <meta name="generator" content="Hugo 0.16" />
         <title>Ethereum dev environment &middot; VS tech corner </title>
         <link rel="canonical" href="https://vincentserpoul.github.io/" />
         <link rel="alternate" type="application/rss+xml" title="RSS" href="">
         <link rel="stylesheet" type='text/css' href="https://vincentserpoul.github.io/css/main.css"/>
-        <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300|Montserrat:700' rel='stylesheet' type='text/css'>
+        <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300|Montserrat:700' rel='stylesheet' type='text/css'>
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
         <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
     </head>
+
 <body>
 <!--[if lt IE 7]><p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chrome/‎">install Google Chrome</a> to experience this site.</p><![endif]-->
 
@@ -52,7 +53,7 @@
     <section class="post-content">
         
 
-<h2 id="part-1-setup-your-ethereum-node:083ea129beec172162d0aa0257f848bc">Part 1 - Setup your ethereum node</h2>
+<h2 id="part-1-setup-your-ethereum-node">Part 1 - Setup your ethereum node</h2>
 
 <p>There are many ways you can setup a node to dev an Ethereum dapp.
 You can use the live network: not advisable obviously for cost and speed reasons.
@@ -62,7 +63,7 @@ You can the ethereum testrpc: easiest!</p>
 
 <p>I will talk about the last two setup in this article.</p>
 
-<h3 id="using-testrpc:083ea129beec172162d0aa0257f848bc">Using testrpc</h3>
+<h3 id="using-testrpc">Using testrpc</h3>
 
 <p>Simply install through npm (if you want it globally available, add -g after install, as usual)</p>
 
@@ -74,7 +75,7 @@ You can the ethereum testrpc: easiest!</p>
 <pre><code>node_modules/ethereumjs-testrpc/bin/testrpc
 </code></pre>
 
-<h3 id="using-geth:083ea129beec172162d0aa0257f848bc">Using geth</h3>
+<h3 id="using-geth">Using geth</h3>
 
 <p>Download geth latest release (<a href="https://github.com/ethereum/go-ethereum/releases">https://github.com/ethereum/go-ethereum/releases</a>)
 and extract it.</p>
@@ -100,7 +101,7 @@ and extract it.</p>
 ./geth init ./customGenesis.json
 </code></pre>
 
-<h4 id="run-your-node-with-console-attached:083ea129beec172162d0aa0257f848bc">Run your node with console attached</h4>
+<h4 id="run-your-node-with-console-attached">Run your node with console attached</h4>
 
 <pre><code>./geth \
     --identity &quot;gethTest&quot; \
@@ -114,7 +115,7 @@ and extract it.</p>
     --dev console
 </code></pre>
 
-<h4 id="create-a-base-account:083ea129beec172162d0aa0257f848bc">Create a base account</h4>
+<h4 id="create-a-base-account">Create a base account</h4>
 
 <pre><code>&gt; eth.accounts
 []
@@ -126,7 +127,7 @@ Repeat passphrase:
 [&quot;0xedea6958c57fc0cd4bd63b3e7b395393dc76bfb6&quot;]
 </code></pre>
 
-<h4 id="mine-on-your-newly-created-account:083ea129beec172162d0aa0257f848bc">Mine on your newly created account</h4>
+<h4 id="mine-on-your-newly-created-account">Mine on your newly created account</h4>
 
 <pre><code>miner.setEtherbase(eth.accounts[0])
 miner.start(8)
@@ -148,10 +149,10 @@ miner.stop()
     <footer class="post-footer">
         <section class="f-1">
             
-            
+
             <p class="f-post-time"><time datetime="2016-08-20T08:27:27&#43;08:00">August 20, 2016</time></p>
         </section>
-                        
+
         <section class="f-2">
             <section class="share">
                 <span>Share:
@@ -176,7 +177,6 @@ miner.stop()
             	</span>
             
         </section>
-                        
     </footer>
 </article>
 	</div>
@@ -191,7 +191,31 @@ miner.stop()
     <script type="text/javascript">
       $(".heading").fitText();
     </script>
+    
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-81802018-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
 
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    if (window.location.hostname == "vincentserpoul.github.io")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'vincentserpoul-tech-corner';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
 </body>
 </html>
