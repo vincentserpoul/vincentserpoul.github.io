@@ -17,15 +17,15 @@
 	
         <meta property="og:site_name" content="VS tech corner">
         <meta property="og:title" content="VS tech corner">
-        <meta property="og:url" content="https://vincentserpoul.github.io/post/ethereum-dev-environment/">
+        <meta property="og:url" content="https://vincentserpoul.github.io/post/ethereum-first-contract/">
         <meta property="og:description" content="">
     
         <meta property="og:type" content="article" />
         <meta property="og:article:author" content="" />
-        <meta property="og:article:published_time" content="2016-08-01T08:27:27&#43;08:00" />
+        <meta property="og:article:published_time" content="2016-08-04T13:00:00&#43;08:00" />
     
         <meta name="generator" content="Hugo 0.16" />
-        <title>Ethereum dev environment &middot; VS tech corner </title>
+        <title>Ethereum first smart contract &middot; VS tech corner </title>
         <link rel="canonical" href="https://vincentserpoul.github.io/" />
         <link rel="alternate" type="application/rss+xml" title="RSS" href="">
         <link rel="stylesheet" type='text/css' href="https://vincentserpoul.github.io/css/main.css"/>
@@ -47,61 +47,13 @@
 	<div class="container">
 		<article class="post">
 	<header class="post-header">
-        <h3 class="p-post-title">Ethereum dev environment</h3>
+        <h3 class="p-post-title">Ethereum first smart contract</h3>
     </header>
 
     <section class="post-content">
         
 
-<h2 id="part-1-setup-your-ethereum-node">Part 1 - Setup your ethereum node</h2>
-
-<p>There are many ways you can setup a node to dev an Ethereum dapp.
-You can use the live network: not advisable obviously for cost and speed reasons.
-You can use the test network: not advisable for speed reasons.
-You can use a testchain set up with Geth: easy but a bit tedious as you need to mine.
-You can the ethereum testrpc: easiest!</p>
-
-<p>I will talk about the last two setup in this article.</p>
-
-<h3 id="using-testrpc">Using testrpc</h3>
-
-<p>Simply install through npm (if you want it globally available, add -g after install, as usual)</p>
-
-<pre><code>npm install ethereumjs-testrpc
-</code></pre>
-
-<p>And then run it</p>
-
-<pre><code>node_modules/ethereumjs-testrpc/bin/testrpc
-</code></pre>
-
-<h3 id="using-geth">Using geth</h3>
-
-<p>Download geth latest release (<a href="https://github.com/ethereum/go-ethereum/releases">https://github.com/ethereum/go-ethereum/releases</a>)
-and extract it.</p>
-
-<p>Create a file customGenesis.json</p>
-
-<pre><code>{
-  &quot;nonce&quot;: &quot;0x0000000000000042&quot;,
-  &quot;timestamp&quot;: &quot;0x0&quot;,
-  &quot;parentHash&quot;: &quot;0x0000000000000000000000000000000000000000000000000000000000000000&quot;,
-  &quot;extraData&quot;: &quot;0x0&quot;,
-  &quot;gasLimit&quot;: &quot;0x8000000&quot;,
-  &quot;difficulty&quot;: &quot;0x400&quot;,
-  &quot;mixhash&quot;: &quot;0x0000000000000000000000000000000000000000000000000000000000000000&quot;,
-  &quot;coinbase&quot;: &quot;0x3333333333333333333333333333333333333333&quot;,
-  &quot;alloc&quot;: {}
-}
-</code></pre>
-
-<p>then init yout node with the genesis block above</p>
-
-<pre><code>chmod +x geth
-./geth init ./customGenesis.json
-</code></pre>
-
-<h4 id="run-your-node-with-console-attached">Run your node with console attached</h4>
+<h2 id="launch-your-geth-or-testrpc-private-instance">Launch your geth (or testrpc) private instance</h2>
 
 <pre><code>./geth \
     --identity &quot;gethTest&quot; \
@@ -115,32 +67,71 @@ and extract it.</p>
     --dev console
 </code></pre>
 
-<h4 id="create-a-base-account">Create a base account</h4>
+<h2 id="within-the-console-compile-your-contract">Within the console, compile your contract</h2>
 
-<pre><code>&gt; eth.accounts
-[]
-&gt; personal.newAccount()
-Passphrase:
-Repeat passphrase:
-&quot;0xedea6958c57fc0cd4bd63b3e7b395393dc76bfb6&quot;
-&gt; eth.accounts
-[&quot;0xedea6958c57fc0cd4bd63b3e7b395393dc76bfb6&quot;]
+<p>check this tutorial: <a href="https://www.ethereum.org/greeter">https://www.ethereum.org/greeter</a></p>
+
+<p>I had an issue when I followed the contract tutorial, my contract would not be mined after I was trying to deploy it.</p>
+
+<p>The issue was that my account was locked :/ and the greeter contract stupidly silently fails&hellip;
+Here is the modified code to see the obvious error.</p>
+
+<pre><code>var _greeting = &quot;Hello World!&quot;
+var greeterContract = web3.eth.contract(greeterCompiled.greeter.info.abiDefinition);
+
+var greeter = greeterContract.new(_greeting,{from:web3.eth.accounts[0], data: greeterCompiled.greeter.code, gas: 30000000}, function(e, contract){
+    if(!e) {
+
+      if(!contract.address) {
+        console.log(&quot;Contract transaction send: TransactionHash: &quot; + contract.transactionHash + &quot; waiting to be mined...&quot;);
+
+      } else {
+        console.log(&quot;Contract mined! Address: &quot; + contract.address);
+        console.log(contract);
+      }
+
+    } else {
+        console.log(&quot;error!&quot;);
+        console.log(e);
+    }
+})
 </code></pre>
 
-<h4 id="mine-on-your-newly-created-account">Mine on your newly created account</h4>
+<p>which returns</p>
 
-<pre><code>miner.setEtherbase(eth.accounts[0])
-miner.start(8)
+<pre><code>error!
+Error: account is locked
+</code></pre>
+
+<p>To unlock the account, simply:</p>
+
+<pre><code>personal.unlockAccount(eth.accounts[0])
+</code></pre>
+
+<p>I then encountered ANOTHER error!</p>
+
+<pre><code>error!
+Error: Exceeds block gas limit
+</code></pre>
+
+<p>I simply decreased the gas to 3000000, and finally got:</p>
+
+<pre><code>I0803 15:14:29.423492 eth/api.go:1191] Tx(0x7584a963a9c2a21e623e607826ad47ae358d056ed159b82a21793d4541148e86) created: 0x5f3425ccedeae0eb36521c4cf93ec6544dbad9bd
+Contract transaction send: TransactionHash: 0x7284a963a9c3a21e623e607826ad47ae358d056ed159b82a21793d4541148e86 waiting to be mined...
+</code></pre>
+
+<p>Then, simply mine it!</p>
+
+<pre><code>miner.start()
+...
+Contract mined! Address: 0x5d3125ccedeae0eb36521c4cf93ec6544dbad9bd
+...
 miner.stop()
 </code></pre>
 
-<p>Check if the mining worked</p>
+<p>Yeah, victory! my contract is deployed on my private ethereum node.</p>
 
-<pre><code>&gt; eth.getBalance(eth.accounts[0]).toNumber();
-55000000000000000000
-</code></pre>
-
-<p>In the next posts, we will start talking about development of dapps.</p>
+<p>Next we will simply interact with the contract.</p>
 
     </section>
 
@@ -150,21 +141,21 @@ miner.stop()
         <section class="f-1">
             
 
-            <p class="f-post-time"><time datetime="2016-08-01T08:27:27&#43;08:00">August 1, 2016</time></p>
+            <p class="f-post-time"><time datetime="2016-08-04T13:00:00&#43;08:00">August 4, 2016</time></p>
         </section>
 
         <section class="f-2">
             <section class="share">
                 <span>Share:
-                <a class="icon-twitter" href="http://twitter.com/share?text=Ethereum%20dev%20environment&url=https%3a%2f%2fvincentserpoul.github.io%2fpost%2fethereum-dev-environment%2f"
+                <a class="icon-twitter" href="http://twitter.com/share?text=Ethereum%20first%20smart%20contract&url=https%3a%2f%2fvincentserpoul.github.io%2fpost%2fethereum-first-contract%2f"
                     onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                     <i class="fa fa-twitter"></i>
                 </a>
-                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fvincentserpoul.github.io%2fpost%2fethereum-dev-environment%2f"
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fvincentserpoul.github.io%2fpost%2fethereum-first-contract%2f"
                     onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                     <i class="fa fa-facebook"></i>
                 </a>
-                <a class="icon-google-plus" href="https://plus.google.com/share?url=https%3a%2f%2fvincentserpoul.github.io%2fpost%2fethereum-dev-environment%2f"
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=https%3a%2f%2fvincentserpoul.github.io%2fpost%2fethereum-first-contract%2f"
                    onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                     <i class="fa fa-google-plus"></i>
                 </a>
@@ -173,7 +164,7 @@ miner.stop()
 
             
             	<span class="f-post-tags"><i class="fa fa-tag"></i>
-            	golang, blockchain, ethereum, geth, dev, testrpc
+            	golang, blockchain, ethereum, smart contract
             	</span>
             
         </section>
@@ -181,8 +172,8 @@ miner.stop()
     <div id="disqus_thread"></div>
 <script>
 var disqus_config = function () {
-    this.page.url = "https://vincentserpoul.github.io/post/ethereum-dev-environment/";  
-    this.page.identifier = "https://vincentserpoul.github.io/post/ethereum-dev-environment/"; 
+    this.page.url = "https://vincentserpoul.github.io/post/ethereum-first-contract/";  
+    this.page.identifier = "https://vincentserpoul.github.io/post/ethereum-first-contract/"; 
 };
 
 (function() { 
