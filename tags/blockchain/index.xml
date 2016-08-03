@@ -6,8 +6,118 @@
     <description>Recent content in Blockchain on VS tech corner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 03 Aug 2016 13:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 03 Aug 2016 20:00:00 +0800</lastBuildDate>
     <atom:link href="https://vincentserpoul.github.io/tags/blockchain/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Interacting with an Ethereum smart contracts</title>
+      <link>https://vincentserpoul.github.io/post/ethereum-interacting-with-contracts/</link>
+      <pubDate>Wed, 03 Aug 2016 20:00:00 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/post/ethereum-interacting-with-contracts/</guid>
+      <description>
+
+&lt;h2 id=&#34;check-the-address-of-the-current-deployed-contract&#34;&gt;Check the address of the current deployed contract&lt;/h2&gt;
+
+&lt;p&gt;Remember when you mined your contract, it told your its address.
+Now, reuse it!&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;eth.getCode(&amp;quot;0x5f3425ccedeae0eb36521c4cf93ec6544dbad9bd&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;test-the-contract-with-a-simple-interaction&#34;&gt;Test the contract with a simple interaction&lt;/h2&gt;
+
+&lt;p&gt;get the latest web3-light.min.js js from &lt;a href=&#34;https://github.com/ethereum/web3.js/releases&#34;&gt;https://github.com/ethereum/web3.js/releases&lt;/a&gt; and simply copy the dist/web3-light.min.js into the same folder as the following HTML file.&lt;/p&gt;
+
+&lt;p&gt;then, use this html to interact with your contract on the local node:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;!doctype&amp;gt;
+&amp;lt;html&amp;gt;
+&amp;lt;head&amp;gt;
+    &amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;https://cdnjs.cloudflare.com/ajax/libs/bignumber.js/2.4.0/bignumber.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+    &amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;./web3-light.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+    &amp;lt;script type=&amp;quot;text/javascript&amp;quot;&amp;gt;
+    var Web3 = require(&#39;web3&#39;);
+    var web3 = new Web3();
+    web3.setProvider(new web3.providers.HttpProvider(&#39;http://localhost:9012&#39;));
+    function watchBalance() {
+        var coinbase = web3.eth.coinbase;
+        var originalBalance = web3.eth.getBalance(coinbase).toNumber();
+        document.getElementById(&#39;coinbase&#39;).innerText = &#39;coinbase: &#39; + coinbase;
+        document.getElementById(&#39;original&#39;).innerText = &#39; original balance: &#39; + originalBalance + &#39;    watching...&#39;;
+        web3.eth.filter(&#39;latest&#39;).watch(function() {
+            var currentBalance = web3.eth.getBalance(coinbase).toNumber();
+            document.getElementById(&amp;quot;current&amp;quot;).innerText = &#39;current: &#39; + currentBalance;
+            document.getElementById(&amp;quot;diff&amp;quot;).innerText = &#39;diff:    &#39; + (currentBalance - originalBalance);
+        });
+    }
+    &amp;lt;/script&amp;gt;
+&amp;lt;/head&amp;gt;
+&amp;lt;body&amp;gt;
+    &amp;lt;h1&amp;gt;coinbase balance&amp;lt;/h1&amp;gt;
+    &amp;lt;button type=&amp;quot;button&amp;quot; onClick=&amp;quot;watchBalance();&amp;quot;&amp;gt;watch balance&amp;lt;/button&amp;gt;
+    &amp;lt;div&amp;gt;&amp;lt;/div&amp;gt;
+    &amp;lt;div id=&amp;quot;coinbase&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+    &amp;lt;div id=&amp;quot;original&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+    &amp;lt;div id=&amp;quot;current&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+    &amp;lt;div id=&amp;quot;diff&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+&amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;and&amp;hellip; It works, you can see the balance on the contract!&lt;/p&gt;
+
+&lt;h2 id=&#34;let-s-greet-now&#34;&gt;Let&amp;rsquo;s greet now&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;!doctype&amp;gt;
+&amp;lt;html&amp;gt;
+&amp;lt;head&amp;gt;
+    &amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;https://cdnjs.cloudflare.com/ajax/libs/bignumber.js/2.4.0/bignumber.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+    &amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;./web3-light.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+    &amp;lt;script type=&amp;quot;text/javascript&amp;quot;&amp;gt;
+        var Web3 = require(&#39;web3&#39;);
+        var web3 = new Web3();
+        web3.setProvider(new web3.providers.HttpProvider(&#39;http://localhost:9012&#39;));
+        function watchBalance() {
+            var coinbase = web3.eth.coinbase;
+            var originalBalance = web3.eth.getBalance(coinbase).toNumber();
+            document.getElementById(&#39;coinbase&#39;).innerText = &#39;coinbase: &#39; + coinbase;
+            document.getElementById(&#39;original&#39;).innerText = &#39; original balance: &#39; + originalBalance + &#39;    watching...&#39;;
+            web3.eth.filter(&#39;latest&#39;).watch(function() {
+                var currentBalance = web3.eth.getBalance(coinbase).toNumber();
+                document.getElementById(&amp;quot;current&amp;quot;).innerText = &#39;current: &#39; + currentBalance;
+                document.getElementById(&amp;quot;diff&amp;quot;).innerText = &#39;diff:    &#39; + (currentBalance - originalBalance);
+            });
+        }
+        function greet() {
+            var contractAddress = &#39;0x5d3425ccedeae0eb36521c4cf93ec6544dbad9bd&#39;;
+            var greeter = web3.eth.contract([{constant:false,inputs:[],name:&#39;kill&#39;,outputs:[],type:&#39;function&#39;},{constant:true,inputs:[],name:&#39;greet&#39;,outputs:[{name:&#39;&#39;,type:&#39;string&#39;}],type:&#39;function&#39;},{inputs:[{name:&#39;_greeting&#39;,type:&#39;string&#39;}],type:&#39;constructor&#39;}]).at(contractAddress);
+            var greetings = greeter.greet();
+            document.getElementById(&#39;greeting&#39;).innerText = greetings;
+        }
+    &amp;lt;/script&amp;gt;
+&amp;lt;/head&amp;gt;
+&amp;lt;body&amp;gt;
+    &amp;lt;h1&amp;gt;coinbase balance&amp;lt;/h1&amp;gt;
+    &amp;lt;button type=&amp;quot;button&amp;quot; onClick=&amp;quot;watchBalance();&amp;quot;&amp;gt;watch balance&amp;lt;/button&amp;gt;
+    &amp;lt;div&amp;gt;&amp;lt;/div&amp;gt;
+    &amp;lt;div id=&amp;quot;coinbase&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+    &amp;lt;div id=&amp;quot;original&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+    &amp;lt;div id=&amp;quot;current&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+    &amp;lt;div id=&amp;quot;diff&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+    &amp;lt;h1&amp;gt;greetings&amp;lt;/h1&amp;gt;
+    &amp;lt;button type=&amp;quot;button&amp;quot; onClick=&amp;quot;greet();&amp;quot;&amp;gt;greet!&amp;lt;/button&amp;gt;
+    &amp;lt;div id=&amp;quot;greeting&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+&amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And you have it! the dapp is responding!&lt;/p&gt;
+
+&lt;p&gt;caveat: when you won&amp;rsquo;t be running a test, you will need to get an http provider connected to the live blockchain. You can be sure to have one if you run your own node, I&amp;rsquo;m not sure yet if there is any open htt provider node out there.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Ethereum first smart contract</title>
@@ -94,6 +204,42 @@ miner.stop()
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Yeah, victory! my contract is deployed on my private ethereum node.&lt;/p&gt;
+
+&lt;p&gt;Keep that address and also make sure to run&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;greeterCompiled.greeter.info.abiDefinition
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;in order to get the ABI that will be used later in javascript (Application Binary Interface)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[{
+    constant: false,
+    inputs: [],
+    name: &amp;quot;kill&amp;quot;,
+    outputs: [],
+    type: &amp;quot;function&amp;quot;
+}, {
+    constant: true,
+    inputs: [],
+    name: &amp;quot;greet&amp;quot;,
+    outputs: [{
+        name: &amp;quot;&amp;quot;,
+        type: &amp;quot;string&amp;quot;
+    }],
+    type: &amp;quot;function&amp;quot;
+}, {
+    inputs: [{
+        name: &amp;quot;_greeting&amp;quot;,
+        type: &amp;quot;string&amp;quot;
+    }],
+    type: &amp;quot;constructor&amp;quot;
+}]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;when-done-kill-it&#34;&gt;When done, kill it!&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;greeter.kill.sendTransaction({from:eth.accounts[0]})
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Next we will simply interact with the contract.&lt;/p&gt;
 </description>

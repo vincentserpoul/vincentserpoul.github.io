@@ -131,6 +131,42 @@ miner.stop()
 
 <p>Yeah, victory! my contract is deployed on my private ethereum node.</p>
 
+<p>Keep that address and also make sure to run</p>
+
+<pre><code>greeterCompiled.greeter.info.abiDefinition
+</code></pre>
+
+<p>in order to get the ABI that will be used later in javascript (Application Binary Interface)</p>
+
+<pre><code>[{
+    constant: false,
+    inputs: [],
+    name: &quot;kill&quot;,
+    outputs: [],
+    type: &quot;function&quot;
+}, {
+    constant: true,
+    inputs: [],
+    name: &quot;greet&quot;,
+    outputs: [{
+        name: &quot;&quot;,
+        type: &quot;string&quot;
+    }],
+    type: &quot;function&quot;
+}, {
+    inputs: [{
+        name: &quot;_greeting&quot;,
+        type: &quot;string&quot;
+    }],
+    type: &quot;constructor&quot;
+}]
+</code></pre>
+
+<h2 id="when-done-kill-it">When done, kill it!</h2>
+
+<pre><code>greeter.kill.sendTransaction({from:eth.accounts[0]})
+</code></pre>
+
 <p>Next we will simply interact with the contract.</p>
 
     </section>
