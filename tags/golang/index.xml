@@ -46,7 +46,7 @@ and extract it.&lt;/p&gt;
 
 &lt;p&gt;Create a file customGenesis.json&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;{
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
   &amp;quot;nonce&amp;quot;: &amp;quot;0x0000000000000042&amp;quot;,
   &amp;quot;timestamp&amp;quot;: &amp;quot;0x0&amp;quot;,
   &amp;quot;parentHash&amp;quot;: &amp;quot;0x0000000000000000000000000000000000000000000000000000000000000000&amp;quot;,
@@ -61,13 +61,13 @@ and extract it.&lt;/p&gt;
 
 &lt;p&gt;then init yout node with the genesis block above&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;chmod +x geth
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;chmod +x geth
 ./geth init ./customGenesis.json
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h4 id=&#34;run-your-node-with-console-attached&#34;&gt;Run your node with console attached&lt;/h4&gt;
 
-&lt;pre&gt;&lt;code&gt;./geth \
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;./geth \
     --identity &amp;quot;gethTest&amp;quot; \
     --rpc --rpcport &amp;quot;9012&amp;quot; \
     --rpccorsdomain &amp;quot;YOUR_TEST_DOMAIN_APP_RUN_FROM&amp;quot; \
@@ -126,7 +126,7 @@ miner.stop()
 
 &lt;p&gt;install go/tools:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;go get -u golang.org/x/tools/cmd/goimports
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;go get -u golang.org/x/tools/cmd/goimports
 go get -u golang.org/x/tools/cmd/vet
 go get -u golang.org/x/tools/cmd/oracle
 go get -u golang.org/x/tools/cmd/godoc
@@ -142,7 +142,7 @@ go get -u golang.org/x/tools/cmd/godoc
 
 &lt;p&gt;Here is the package settings I use for gosublime:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;{
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
 
     // you may set specific environment variables here
     // e.g &amp;quot;env&amp;quot;: { &amp;quot;PATH&amp;quot;: &amp;quot;$HOME/go/bin:$PATH&amp;quot; }

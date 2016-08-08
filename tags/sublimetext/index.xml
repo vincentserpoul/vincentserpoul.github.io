@@ -45,7 +45,7 @@
 
 &lt;p&gt;Add a .eslintrc file, with this content:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;{
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
   &amp;quot;extends&amp;quot;: &amp;quot;airbnb&amp;quot;,
   &amp;quot;ecmaFeatures&amp;quot;: {
     &amp;quot;jsx&amp;quot;: true,
@@ -65,7 +65,7 @@
 
 &lt;p&gt;then create a simple test.js with this content:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;echo &amp;quot;test&amp;quot;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;echo &amp;quot;test&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;You should see the linter complaining, telling you something is wrong and you need to correct your javascript (check the lower grey line of sublime for the comment).&lt;/p&gt;
@@ -94,7 +94,7 @@
 
 &lt;p&gt;install go/tools:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;go get -u golang.org/x/tools/cmd/goimports
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;go get -u golang.org/x/tools/cmd/goimports
 go get -u golang.org/x/tools/cmd/vet
 go get -u golang.org/x/tools/cmd/oracle
 go get -u golang.org/x/tools/cmd/godoc
@@ -110,7 +110,7 @@ go get -u golang.org/x/tools/cmd/godoc
 
 &lt;p&gt;Here is the package settings I use for gosublime:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;{
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
 
     // you may set specific environment variables here
     // e.g &amp;quot;env&amp;quot;: { &amp;quot;PATH&amp;quot;: &amp;quot;$HOME/go/bin:$PATH&amp;quot; }

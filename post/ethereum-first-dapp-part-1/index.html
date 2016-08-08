@@ -57,12 +57,12 @@
 
 <h2 id="prepare-your-folder-for-your-dapp">Prepare your folder for your dapp</h2>
 
-<pre><code>mkdir dapp
+<pre><code class="language-shell">mkdir dapp
 </code></pre>
 
 <p>inside this folder, we&rsquo;ll create one folder for truffle, one for geth.</p>
 
-<pre><code>cd dapp
+<pre><code class="language-shell">cd dapp
 mkdir truffle geth
 </code></pre>
 
@@ -72,7 +72,7 @@ mkdir truffle geth
 
 <p>Let&rsquo;s install truffle and testrpc</p>
 
-<pre><code>npm install ethereumjs-testrpc truffle
+<pre><code class="language-shell">npm install ethereumjs-testrpc truffle
 </code></pre>
 
 <h2 id="truffle">Truffle</h2>
@@ -81,7 +81,7 @@ mkdir truffle geth
 
 <p>First, init truffle scaffolding (I don&rsquo;t like -g install XD, so bear with my node_modules folder).</p>
 
-<pre><code>node_modules/truffle/cli.js init
+<pre><code class="language-shell">node_modules/truffle/cli.js init
 </code></pre>
 
 <p>This will create different folders. You can have a look at <a href="http://truffle.readthedocs.io/">http://truffle.readthedocs.io/</a> to have more details.</p>
@@ -90,7 +90,7 @@ mkdir truffle geth
 
 <p>Let&rsquo;s launch the ethereumjs-testrpc</p>
 
-<pre><code>node_modules/ethereumjs-testrpc/bin/testrpc
+<pre><code class="language-shell">node_modules/ethereumjs-testrpc/bin/testrpc
 </code></pre>
 
 <p>You will see it will create a new chain, in memory and create 10 new accounts for you to test.</p>
@@ -112,7 +112,7 @@ Have a look here: <a href="https://github.com/ConsenSys/Tokens">https://github.c
 
 <p>Here is the simple migration script I used</p>
 
-<pre><code>module.exports = (deployer) =&gt; {
+<pre><code class="language-javascript">module.exports = (deployer) =&gt; {
   deployer.deploy(
     HumanStandardToken,
         1000000,
@@ -125,7 +125,7 @@ Have a look here: <a href="https://github.com/ConsenSys/Tokens">https://github.c
 
 <p>In order to compile and deploy your contracts in the rpc node you configured in truffle.js, you need to launch the following command:</p>
 
-<pre><code>node_modules/truffle/cli.js migrate
+<pre><code class="language-shell">node_modules/truffle/cli.js migrate
 </code></pre>
 
 <p>If your code compiles, it will create javascript objects for each of your contract in the folder build/contracts.</p>
@@ -134,7 +134,7 @@ Have a look here: <a href="https://github.com/ConsenSys/Tokens">https://github.c
 
 <p>Here is an example of tests on HumanStandardToken (ES6)</p>
 
-<pre><code>const it = require('mocha').it;
+<pre><code class="language-javascript">const it = require('mocha').it;
 const assert = require('chai').assert;
 
 contract('HumanStandardToken', (accounts) =&gt; {
@@ -174,12 +174,12 @@ I found out later that there are constant functions in solidity, which basically
 
 <p>Now you can try if everything works fine, launch testrpc</p>
 
-<pre><code>node_modules/ethereumjs-testrpc/bin/testrpc
+<pre><code class="language-shell">node_modules/ethereumjs-testrpc/bin/testrpc
 </code></pre>
 
 <p>and open a new terminal and launch the tests</p>
 
-<pre><code>node_modules/truffle/cli.js test
+<pre><code class="language-shell">node_modules/truffle/cli.js test
 </code></pre>
 
 <h2 id="creation-of-the-contracts-on-a-private-geth-or-even-morden">Creation of the contracts on a private geth or even morden</h2>
@@ -187,7 +187,7 @@ I found out later that there are constant functions in solidity, which basically
 <p>Modify your truffle.js to whichever node you want to migrate your contracts to.
 Mine is local geth, listening on port 9012, so truffle.js will become</p>
 
-<pre><code>module.exports = {
+<pre><code class="language-javascript">module.exports = {
   rpc: {
     host: 'localhost',
     port: 9012,
@@ -197,7 +197,7 @@ Mine is local geth, listening on port 9012, so truffle.js will become</p>
 
 <p>then migrate</p>
 
-<pre><code>node_modules/truffle/cli.js migrate
+<pre><code class="language-shell">node_modules/truffle/cli.js migrate
 </code></pre>
 
 <p>Et voila! if everything is ok, truffle should have created your contracts and updated the built contracts with the right contract addresses in build/contracts.</p>

@@ -85,12 +85,12 @@
 
 &lt;p&gt;To install babel&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;npm install -g babel 
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;npm install -g babel 
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Then within your javascript project, you can create a .babelrc file with the following content:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;{
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
   &amp;quot;presets&amp;quot;: [&amp;quot;es2015&amp;quot;, &amp;quot;stage-0&amp;quot;, &amp;quot;react&amp;quot;]
 }
 &lt;/code&gt;&lt;/pre&gt;
@@ -109,7 +109,7 @@
 
 &lt;h4 id=&#34;eslint-for-react&#34;&gt;eslint for react&lt;/h4&gt;
 
-&lt;pre&gt;&lt;code&gt;npm install -g eslint-plugin-react
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;npm install -g eslint-plugin-react
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h4 id=&#34;sublime-text-plugin&#34;&gt;sublime text plugin&lt;/h4&gt;
@@ -120,7 +120,7 @@
 
 &lt;p&gt;You can use this eslintrc file as a starting point.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;{
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
   &amp;quot;extends&amp;quot;: &amp;quot;airbnb&amp;quot;,
   &amp;quot;ecmaFeatures&amp;quot;: {
     &amp;quot;jsx&amp;quot;: true,
@@ -157,7 +157,7 @@
 
 &lt;p&gt;redux devTools will require you to modifiy the way you call create store:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;store = (window.devToolsExtension ? window.devToolsExtension()(createStore) : createStore)([...your content here]);
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;store = (window.devToolsExtension ? window.devToolsExtension()(createStore) : createStore)([...your content here]);
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;You will then be able to play with the different state of your app directly in chrome.&lt;/p&gt;

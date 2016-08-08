@@ -55,7 +55,7 @@
 
 <h2 id="launch-your-geth-or-testrpc-private-instance">Launch your geth (or testrpc) private instance</h2>
 
-<pre><code>./geth \
+<pre><code class="language-shell">./geth \
     --identity &quot;gethTest&quot; \
     --rpc --rpcport &quot;9012&quot; \
     --rpccorsdomain &quot;YOUR_TEST_DOMAIN_APP_RUN_FROM&quot; \
@@ -76,7 +76,7 @@
 <p>The issue was that my account was locked :/ and the greeter contract stupidly silently fails&hellip;
 Here is the modified code to see the obvious error.</p>
 
-<pre><code>var _greeting = &quot;Hello World!&quot;
+<pre><code class="language-javascript">var _greeting = &quot;Hello World!&quot;
 var greeterContract = web3.eth.contract(greeterCompiled.greeter.info.abiDefinition);
 
 var greeter = greeterContract.new(_greeting,{from:web3.eth.accounts[0], data: greeterCompiled.greeter.code, gas: 30000000}, function(e, contract){

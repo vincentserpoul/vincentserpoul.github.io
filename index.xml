@@ -35,12 +35,12 @@
 
 &lt;h2 id=&#34;prepare-your-folder-for-your-dapp&#34;&gt;Prepare your folder for your dapp&lt;/h2&gt;
 
-&lt;pre&gt;&lt;code&gt;mkdir dapp
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;mkdir dapp
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;inside this folder, we&amp;rsquo;ll create one folder for truffle, one for geth.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;cd dapp
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;cd dapp
 mkdir truffle geth
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -50,7 +50,7 @@ mkdir truffle geth
 
 &lt;p&gt;Let&amp;rsquo;s install truffle and testrpc&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;npm install ethereumjs-testrpc truffle
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;npm install ethereumjs-testrpc truffle
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;truffle&#34;&gt;Truffle&lt;/h2&gt;
@@ -59,7 +59,7 @@ mkdir truffle geth
 
 &lt;p&gt;First, init truffle scaffolding (I don&amp;rsquo;t like -g install XD, so bear with my node_modules folder).&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;node_modules/truffle/cli.js init
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;node_modules/truffle/cli.js init
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;This will create different folders. You can have a look at &lt;a href=&#34;http://truffle.readthedocs.io/&#34;&gt;http://truffle.readthedocs.io/&lt;/a&gt; to have more details.&lt;/p&gt;
@@ -68,7 +68,7 @@ mkdir truffle geth
 
 &lt;p&gt;Let&amp;rsquo;s launch the ethereumjs-testrpc&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;node_modules/ethereumjs-testrpc/bin/testrpc
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;node_modules/ethereumjs-testrpc/bin/testrpc
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;You will see it will create a new chain, in memory and create 10 new accounts for you to test.&lt;/p&gt;
@@ -90,7 +90,7 @@ Have a look here: &lt;a href=&#34;https://github.com/ConsenSys/Tokens&#34;&gt;ht
 
 &lt;p&gt;Here is the simple migration script I used&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;module.exports = (deployer) =&amp;gt; {
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;module.exports = (deployer) =&amp;gt; {
   deployer.deploy(
     HumanStandardToken,
         1000000,
@@ -103,7 +103,7 @@ Have a look here: &lt;a href=&#34;https://github.com/ConsenSys/Tokens&#34;&gt;ht
 
 &lt;p&gt;In order to compile and deploy your contracts in the rpc node you configured in truffle.js, you need to launch the following command:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;node_modules/truffle/cli.js migrate
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;node_modules/truffle/cli.js migrate
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;If your code compiles, it will create javascript objects for each of your contract in the folder build/contracts.&lt;/p&gt;
@@ -112,7 +112,7 @@ Have a look here: &lt;a href=&#34;https://github.com/ConsenSys/Tokens&#34;&gt;ht
 
 &lt;p&gt;Here is an example of tests on HumanStandardToken (ES6)&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;const it = require(&#39;mocha&#39;).it;
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;const it = require(&#39;mocha&#39;).it;
 const assert = require(&#39;chai&#39;).assert;
 
 contract(&#39;HumanStandardToken&#39;, (accounts) =&amp;gt; {
@@ -152,12 +152,12 @@ I found out later that there are constant functions in solidity, which basically
 
 &lt;p&gt;Now you can try if everything works fine, launch testrpc&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;node_modules/ethereumjs-testrpc/bin/testrpc
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;node_modules/ethereumjs-testrpc/bin/testrpc
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;and open a new terminal and launch the tests&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;node_modules/truffle/cli.js test
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;node_modules/truffle/cli.js test
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;creation-of-the-contracts-on-a-private-geth-or-even-morden&#34;&gt;Creation of the contracts on a private geth or even morden&lt;/h2&gt;
@@ -165,7 +165,7 @@ I found out later that there are constant functions in solidity, which basically
 &lt;p&gt;Modify your truffle.js to whichever node you want to migrate your contracts to.
 Mine is local geth, listening on port 9012, so truffle.js will become&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;module.exports = {
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;module.exports = {
   rpc: {
     host: &#39;localhost&#39;,
     port: 9012,
@@ -175,7 +175,7 @@ Mine is local geth, listening on port 9012, so truffle.js will become&lt;/p&gt;
 
 &lt;p&gt;then migrate&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;node_modules/truffle/cli.js migrate
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;node_modules/truffle/cli.js migrate
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Et voila! if everything is ok, truffle should have created your contracts and updated the built contracts with the right contract addresses in build/contracts.&lt;/p&gt;
@@ -206,7 +206,7 @@ Now, reuse it!&lt;/p&gt;
 
 &lt;p&gt;then, use this html to interact with your contract on the local node:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;&amp;lt;!doctype&amp;gt;
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;!doctype&amp;gt;
 &amp;lt;html&amp;gt;
 &amp;lt;head&amp;gt;
     &amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;https://cdnjs.cloudflare.com/ajax/libs/bignumber.js/2.4.0/bignumber.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
@@ -244,7 +244,7 @@ Now, reuse it!&lt;/p&gt;
 
 &lt;h2 id=&#34;let-s-greet-now&#34;&gt;Let&amp;rsquo;s greet now&lt;/h2&gt;
 
-&lt;pre&gt;&lt;code&gt;&amp;lt;!doctype&amp;gt;
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;!doctype&amp;gt;
 &amp;lt;html&amp;gt;
 &amp;lt;head&amp;gt;
     &amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;https://cdnjs.cloudflare.com/ajax/libs/bignumber.js/2.4.0/bignumber.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
@@ -303,7 +303,7 @@ Now, reuse it!&lt;/p&gt;
 
 &lt;h2 id=&#34;launch-your-geth-or-testrpc-private-instance&#34;&gt;Launch your geth (or testrpc) private instance&lt;/h2&gt;
 
-&lt;pre&gt;&lt;code&gt;./geth \
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;./geth \
     --identity &amp;quot;gethTest&amp;quot; \
     --rpc --rpcport &amp;quot;9012&amp;quot; \
     --rpccorsdomain &amp;quot;YOUR_TEST_DOMAIN_APP_RUN_FROM&amp;quot; \
@@ -324,7 +324,7 @@ Now, reuse it!&lt;/p&gt;
 &lt;p&gt;The issue was that my account was locked :/ and the greeter contract stupidly silently fails&amp;hellip;
 Here is the modified code to see the obvious error.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;var _greeting = &amp;quot;Hello World!&amp;quot;
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var _greeting = &amp;quot;Hello World!&amp;quot;
 var greeterContract = web3.eth.contract(greeterCompiled.greeter.info.abiDefinition);
 
 var greeter = greeterContract.new(_greeting,{from:web3.eth.accounts[0], data: greeterCompiled.greeter.code, gas: 30000000}, function(e, contract){
@@ -456,7 +456,7 @@ and extract it.&lt;/p&gt;
 
 &lt;p&gt;Create a file customGenesis.json&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;{
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
   &amp;quot;nonce&amp;quot;: &amp;quot;0x0000000000000042&amp;quot;,
   &amp;quot;timestamp&amp;quot;: &amp;quot;0x0&amp;quot;,
   &amp;quot;parentHash&amp;quot;: &amp;quot;0x0000000000000000000000000000000000000000000000000000000000000000&amp;quot;,
@@ -471,13 +471,13 @@ and extract it.&lt;/p&gt;
 
 &lt;p&gt;then init yout node with the genesis block above&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;chmod +x geth
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;chmod +x geth
 ./geth init ./customGenesis.json
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h4 id=&#34;run-your-node-with-console-attached&#34;&gt;Run your node with console attached&lt;/h4&gt;
 
-&lt;pre&gt;&lt;code&gt;./geth \
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;./geth \
     --identity &amp;quot;gethTest&amp;quot; \
     --rpc --rpcport &amp;quot;9012&amp;quot; \
     --rpccorsdomain &amp;quot;YOUR_TEST_DOMAIN_APP_RUN_FROM&amp;quot; \
@@ -594,12 +594,12 @@ miner.stop()
 
 &lt;p&gt;To install babel&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;npm install -g babel 
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;npm install -g babel 
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Then within your javascript project, you can create a .babelrc file with the following content:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;{
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
   &amp;quot;presets&amp;quot;: [&amp;quot;es2015&amp;quot;, &amp;quot;stage-0&amp;quot;, &amp;quot;react&amp;quot;]
 }
 &lt;/code&gt;&lt;/pre&gt;
@@ -618,7 +618,7 @@ miner.stop()
 
 &lt;h4 id=&#34;eslint-for-react&#34;&gt;eslint for react&lt;/h4&gt;
 
-&lt;pre&gt;&lt;code&gt;npm install -g eslint-plugin-react
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;npm install -g eslint-plugin-react
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h4 id=&#34;sublime-text-plugin&#34;&gt;sublime text plugin&lt;/h4&gt;
@@ -629,7 +629,7 @@ miner.stop()
 
 &lt;p&gt;You can use this eslintrc file as a starting point.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;{
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
   &amp;quot;extends&amp;quot;: &amp;quot;airbnb&amp;quot;,
   &amp;quot;ecmaFeatures&amp;quot;: {
     &amp;quot;jsx&amp;quot;: true,
@@ -666,7 +666,7 @@ miner.stop()
 
 &lt;p&gt;redux devTools will require you to modifiy the way you call create store:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;store = (window.devToolsExtension ? window.devToolsExtension()(createStore) : createStore)([...your content here]);
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;store = (window.devToolsExtension ? window.devToolsExtension()(createStore) : createStore)([...your content here]);
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;You will then be able to play with the different state of your app directly in chrome.&lt;/p&gt;
@@ -709,7 +709,7 @@ miner.stop()
 
 &lt;p&gt;Add a .eslintrc file, with this content:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;{
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
   &amp;quot;extends&amp;quot;: &amp;quot;airbnb&amp;quot;,
   &amp;quot;ecmaFeatures&amp;quot;: {
     &amp;quot;jsx&amp;quot;: true,
@@ -729,7 +729,7 @@ miner.stop()
 
 &lt;p&gt;then create a simple test.js with this content:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;echo &amp;quot;test&amp;quot;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;echo &amp;quot;test&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;You should see the linter complaining, telling you something is wrong and you need to correct your javascript (check the lower grey line of sublime for the comment).&lt;/p&gt;
@@ -758,7 +758,7 @@ miner.stop()
 
 &lt;p&gt;install go/tools:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;go get -u golang.org/x/tools/cmd/goimports
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;go get -u golang.org/x/tools/cmd/goimports
 go get -u golang.org/x/tools/cmd/vet
 go get -u golang.org/x/tools/cmd/oracle
 go get -u golang.org/x/tools/cmd/godoc
@@ -774,7 +774,7 @@ go get -u golang.org/x/tools/cmd/godoc
 
 &lt;p&gt;Here is the package settings I use for gosublime:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;{
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
 
     // you may set specific environment variables here
     // e.g &amp;quot;env&amp;quot;: { &amp;quot;PATH&amp;quot;: &amp;quot;$HOME/go/bin:$PATH&amp;quot; }
@@ -864,7 +864,7 @@ go get -u golang.org/x/tools/cmd/godoc
 
 &lt;h4 id=&#34;when-you-have-a-new-repo&#34;&gt;When you have a new repo&lt;/h4&gt;
 
-&lt;pre&gt;&lt;code&gt;    git clone git@github.com:vincentserpoul/rbac.git
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;    git clone git@github.com:vincentserpoul/rbac.git
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;https or git? the git protocal provides better security and easiness if you are using a correct key.&lt;/p&gt;
@@ -880,30 +880,30 @@ go get -u golang.org/x/tools/cmd/godoc
 
 &lt;h4 id=&#34;when-you-have-a-new-modification-ready-for-commit&#34;&gt;When you have a new modification ready for commit&lt;/h4&gt;
 
-&lt;pre&gt;&lt;code&gt;git status
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;git status
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;You will get an overview of what&amp;rsquo;s new
 If there is any new files (Untracked files), you will first need to add them:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;git add mynewfile.ext
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;git add mynewfile.ext
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Then&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;git status
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;git status
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;it will give you the list of the files you are about to commit (Changes not staged for commit).
 You can then commit all the files or the selected ones.
 Group the commits by functionalities and follow &lt;a href=&#34;http://chris.beams.io/posts/git-commit/&#34;&gt;this&lt;/a&gt; to write your commit message properly (TL;DR: use imperative for the verb - no ing - and keep it short for the subject line, 50 chars)&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;git commit -m &amp;quot;add feature A&amp;quot; -a
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;git commit -m &amp;quot;add feature A&amp;quot; -a
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Once you reached that, you will need to first sync with the remote repo&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;git fetch origin master
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;git fetch origin master
 git rebase origin/master
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -911,7 +911,7 @@ git rebase origin/master
 If there are any issues, you will have to resolve them.
 Modify the problematic file and then:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;git add problematicfile.ext
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;git add problematicfile.ext
 git rebase --continue
 &lt;/code&gt;&lt;/pre&gt;
 

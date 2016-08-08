@@ -35,12 +35,12 @@
 
 &lt;h2 id=&#34;prepare-your-folder-for-your-dapp&#34;&gt;Prepare your folder for your dapp&lt;/h2&gt;
 
-&lt;pre&gt;&lt;code&gt;mkdir dapp
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;mkdir dapp
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;inside this folder, we&amp;rsquo;ll create one folder for truffle, one for geth.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;cd dapp
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;cd dapp
 mkdir truffle geth
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -50,7 +50,7 @@ mkdir truffle geth
 
 &lt;p&gt;Let&amp;rsquo;s install truffle and testrpc&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;npm install ethereumjs-testrpc truffle
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;npm install ethereumjs-testrpc truffle
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;truffle&#34;&gt;Truffle&lt;/h2&gt;
@@ -59,7 +59,7 @@ mkdir truffle geth
 
 &lt;p&gt;First, init truffle scaffolding (I don&amp;rsquo;t like -g install XD, so bear with my node_modules folder).&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;node_modules/truffle/cli.js init
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;node_modules/truffle/cli.js init
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;This will create different folders. You can have a look at &lt;a href=&#34;http://truffle.readthedocs.io/&#34;&gt;http://truffle.readthedocs.io/&lt;/a&gt; to have more details.&lt;/p&gt;
@@ -68,7 +68,7 @@ mkdir truffle geth
 
 &lt;p&gt;Let&amp;rsquo;s launch the ethereumjs-testrpc&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;node_modules/ethereumjs-testrpc/bin/testrpc
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;node_modules/ethereumjs-testrpc/bin/testrpc
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;You will see it will create a new chain, in memory and create 10 new accounts for you to test.&lt;/p&gt;
@@ -90,7 +90,7 @@ Have a look here: &lt;a href=&#34;https://github.com/ConsenSys/Tokens&#34;&gt;ht
 
 &lt;p&gt;Here is the simple migration script I used&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;module.exports = (deployer) =&amp;gt; {
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;module.exports = (deployer) =&amp;gt; {
   deployer.deploy(
     HumanStandardToken,
         1000000,
@@ -103,7 +103,7 @@ Have a look here: &lt;a href=&#34;https://github.com/ConsenSys/Tokens&#34;&gt;ht
 
 &lt;p&gt;In order to compile and deploy your contracts in the rpc node you configured in truffle.js, you need to launch the following command:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;node_modules/truffle/cli.js migrate
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;node_modules/truffle/cli.js migrate
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;If your code compiles, it will create javascript objects for each of your contract in the folder build/contracts.&lt;/p&gt;
@@ -112,7 +112,7 @@ Have a look here: &lt;a href=&#34;https://github.com/ConsenSys/Tokens&#34;&gt;ht
 
 &lt;p&gt;Here is an example of tests on HumanStandardToken (ES6)&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;const it = require(&#39;mocha&#39;).it;
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;const it = require(&#39;mocha&#39;).it;
 const assert = require(&#39;chai&#39;).assert;
 
 contract(&#39;HumanStandardToken&#39;, (accounts) =&amp;gt; {
@@ -152,12 +152,12 @@ I found out later that there are constant functions in solidity, which basically
 
 &lt;p&gt;Now you can try if everything works fine, launch testrpc&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;node_modules/ethereumjs-testrpc/bin/testrpc
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;node_modules/ethereumjs-testrpc/bin/testrpc
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;and open a new terminal and launch the tests&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;node_modules/truffle/cli.js test
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;node_modules/truffle/cli.js test
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;creation-of-the-contracts-on-a-private-geth-or-even-morden&#34;&gt;Creation of the contracts on a private geth or even morden&lt;/h2&gt;
@@ -165,7 +165,7 @@ I found out later that there are constant functions in solidity, which basically
 &lt;p&gt;Modify your truffle.js to whichever node you want to migrate your contracts to.
 Mine is local geth, listening on port 9012, so truffle.js will become&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;module.exports = {
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;module.exports = {
   rpc: {
     host: &#39;localhost&#39;,
     port: 9012,
@@ -175,7 +175,7 @@ Mine is local geth, listening on port 9012, so truffle.js will become&lt;/p&gt;
 
 &lt;p&gt;then migrate&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;node_modules/truffle/cli.js migrate
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;node_modules/truffle/cli.js migrate
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Et voila! if everything is ok, truffle should have created your contracts and updated the built contracts with the right contract addresses in build/contracts.&lt;/p&gt;
@@ -200,12 +200,12 @@ Mine is local geth, listening on port 9012, so truffle.js will become&lt;/p&gt;
 
 &lt;p&gt;To install babel&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;npm install -g babel 
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;npm install -g babel 
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Then within your javascript project, you can create a .babelrc file with the following content:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;{
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
   &amp;quot;presets&amp;quot;: [&amp;quot;es2015&amp;quot;, &amp;quot;stage-0&amp;quot;, &amp;quot;react&amp;quot;]
 }
 &lt;/code&gt;&lt;/pre&gt;
@@ -224,7 +224,7 @@ Mine is local geth, listening on port 9012, so truffle.js will become&lt;/p&gt;
 
 &lt;h4 id=&#34;eslint-for-react&#34;&gt;eslint for react&lt;/h4&gt;
 
-&lt;pre&gt;&lt;code&gt;npm install -g eslint-plugin-react
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;npm install -g eslint-plugin-react
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h4 id=&#34;sublime-text-plugin&#34;&gt;sublime text plugin&lt;/h4&gt;
@@ -235,7 +235,7 @@ Mine is local geth, listening on port 9012, so truffle.js will become&lt;/p&gt;
 
 &lt;p&gt;You can use this eslintrc file as a starting point.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;{
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
   &amp;quot;extends&amp;quot;: &amp;quot;airbnb&amp;quot;,
   &amp;quot;ecmaFeatures&amp;quot;: {
     &amp;quot;jsx&amp;quot;: true,
@@ -272,7 +272,7 @@ Mine is local geth, listening on port 9012, so truffle.js will become&lt;/p&gt;
 
 &lt;p&gt;redux devTools will require you to modifiy the way you call create store:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;store = (window.devToolsExtension ? window.devToolsExtension()(createStore) : createStore)([...your content here]);
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;store = (window.devToolsExtension ? window.devToolsExtension()(createStore) : createStore)([...your content here]);
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;You will then be able to play with the different state of your app directly in chrome.&lt;/p&gt;
@@ -315,7 +315,7 @@ Mine is local geth, listening on port 9012, so truffle.js will become&lt;/p&gt;
 
 &lt;p&gt;Add a .eslintrc file, with this content:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;{
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
   &amp;quot;extends&amp;quot;: &amp;quot;airbnb&amp;quot;,
   &amp;quot;ecmaFeatures&amp;quot;: {
     &amp;quot;jsx&amp;quot;: true,
@@ -335,7 +335,7 @@ Mine is local geth, listening on port 9012, so truffle.js will become&lt;/p&gt;
 
 &lt;p&gt;then create a simple test.js with this content:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;echo &amp;quot;test&amp;quot;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;echo &amp;quot;test&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;You should see the linter complaining, telling you something is wrong and you need to correct your javascript (check the lower grey line of sublime for the comment).&lt;/p&gt;
@@ -364,7 +364,7 @@ Mine is local geth, listening on port 9012, so truffle.js will become&lt;/p&gt;
 
 &lt;p&gt;install go/tools:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;go get -u golang.org/x/tools/cmd/goimports
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;go get -u golang.org/x/tools/cmd/goimports
 go get -u golang.org/x/tools/cmd/vet
 go get -u golang.org/x/tools/cmd/oracle
 go get -u golang.org/x/tools/cmd/godoc
@@ -380,7 +380,7 @@ go get -u golang.org/x/tools/cmd/godoc
 
 &lt;p&gt;Here is the package settings I use for gosublime:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;{
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
 
     // you may set specific environment variables here
     // e.g &amp;quot;env&amp;quot;: { &amp;quot;PATH&amp;quot;: &amp;quot;$HOME/go/bin:$PATH&amp;quot; }

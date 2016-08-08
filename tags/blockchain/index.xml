@@ -31,7 +31,7 @@ Now, reuse it!&lt;/p&gt;
 
 &lt;p&gt;then, use this html to interact with your contract on the local node:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;&amp;lt;!doctype&amp;gt;
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;!doctype&amp;gt;
 &amp;lt;html&amp;gt;
 &amp;lt;head&amp;gt;
     &amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;https://cdnjs.cloudflare.com/ajax/libs/bignumber.js/2.4.0/bignumber.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
@@ -69,7 +69,7 @@ Now, reuse it!&lt;/p&gt;
 
 &lt;h2 id=&#34;let-s-greet-now&#34;&gt;Let&amp;rsquo;s greet now&lt;/h2&gt;
 
-&lt;pre&gt;&lt;code&gt;&amp;lt;!doctype&amp;gt;
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;!doctype&amp;gt;
 &amp;lt;html&amp;gt;
 &amp;lt;head&amp;gt;
     &amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;https://cdnjs.cloudflare.com/ajax/libs/bignumber.js/2.4.0/bignumber.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
@@ -128,7 +128,7 @@ Now, reuse it!&lt;/p&gt;
 
 &lt;h2 id=&#34;launch-your-geth-or-testrpc-private-instance&#34;&gt;Launch your geth (or testrpc) private instance&lt;/h2&gt;
 
-&lt;pre&gt;&lt;code&gt;./geth \
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;./geth \
     --identity &amp;quot;gethTest&amp;quot; \
     --rpc --rpcport &amp;quot;9012&amp;quot; \
     --rpccorsdomain &amp;quot;YOUR_TEST_DOMAIN_APP_RUN_FROM&amp;quot; \
@@ -149,7 +149,7 @@ Now, reuse it!&lt;/p&gt;
 &lt;p&gt;The issue was that my account was locked :/ and the greeter contract stupidly silently fails&amp;hellip;
 Here is the modified code to see the obvious error.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;var _greeting = &amp;quot;Hello World!&amp;quot;
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var _greeting = &amp;quot;Hello World!&amp;quot;
 var greeterContract = web3.eth.contract(greeterCompiled.greeter.info.abiDefinition);
 
 var greeter = greeterContract.new(_greeting,{from:web3.eth.accounts[0], data: greeterCompiled.greeter.code, gas: 30000000}, function(e, contract){
@@ -281,7 +281,7 @@ and extract it.&lt;/p&gt;
 
 &lt;p&gt;Create a file customGenesis.json&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;{
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
   &amp;quot;nonce&amp;quot;: &amp;quot;0x0000000000000042&amp;quot;,
   &amp;quot;timestamp&amp;quot;: &amp;quot;0x0&amp;quot;,
   &amp;quot;parentHash&amp;quot;: &amp;quot;0x0000000000000000000000000000000000000000000000000000000000000000&amp;quot;,
@@ -296,13 +296,13 @@ and extract it.&lt;/p&gt;
 
 &lt;p&gt;then init yout node with the genesis block above&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;chmod +x geth
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;chmod +x geth
 ./geth init ./customGenesis.json
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h4 id=&#34;run-your-node-with-console-attached&#34;&gt;Run your node with console attached&lt;/h4&gt;
 
-&lt;pre&gt;&lt;code&gt;./geth \
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;./geth \
     --identity &amp;quot;gethTest&amp;quot; \
     --rpc --rpcport &amp;quot;9012&amp;quot; \
     --rpccorsdomain &amp;quot;YOUR_TEST_DOMAIN_APP_RUN_FROM&amp;quot; \

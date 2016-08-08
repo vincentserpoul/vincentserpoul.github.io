@@ -61,12 +61,12 @@
 
 <p>To install babel</p>
 
-<pre><code>npm install -g babel 
+<pre><code class="language-shell">npm install -g babel 
 </code></pre>
 
 <p>Then within your javascript project, you can create a .babelrc file with the following content:</p>
 
-<pre><code>{
+<pre><code class="language-json">{
   &quot;presets&quot;: [&quot;es2015&quot;, &quot;stage-0&quot;, &quot;react&quot;]
 }
 </code></pre>
@@ -85,7 +85,7 @@
 
 <h4 id="eslint-for-react">eslint for react</h4>
 
-<pre><code>npm install -g eslint-plugin-react
+<pre><code class="language-shell">npm install -g eslint-plugin-react
 </code></pre>
 
 <h4 id="sublime-text-plugin">sublime text plugin</h4>
@@ -96,7 +96,7 @@
 
 <p>You can use this eslintrc file as a starting point.</p>
 
-<pre><code>{
+<pre><code class="language-json">{
   &quot;extends&quot;: &quot;airbnb&quot;,
   &quot;ecmaFeatures&quot;: {
     &quot;jsx&quot;: true,
@@ -133,7 +133,7 @@
 
 <p>redux devTools will require you to modifiy the way you call create store:</p>
 
-<pre><code>store = (window.devToolsExtension ? window.devToolsExtension()(createStore) : createStore)([...your content here]);
+<pre><code class="language-javascript">store = (window.devToolsExtension ? window.devToolsExtension()(createStore) : createStore)([...your content here]);
 </code></pre>
 
 <p>You will then be able to play with the different state of your app directly in chrome.</p>
