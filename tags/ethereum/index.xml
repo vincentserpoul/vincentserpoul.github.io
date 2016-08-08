@@ -88,6 +88,19 @@ Have a look here: &lt;a href=&#34;https://github.com/ConsenSys/Tokens&#34;&gt;ht
 
 &lt;h2 id=&#34;migrate&#34;&gt;Migrate&lt;/h2&gt;
 
+&lt;p&gt;Here is the simple migration script I used&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;module.exports = (deployer) =&amp;gt; {
+  deployer.deploy(
+    HumanStandardToken,
+        1000000,
+        &#39;mold&#39;,
+        &#39;0&#39;,
+        &#39;M&#39;
+  );
+};
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;p&gt;In order to compile and deploy your contracts in the rpc node you configured in truffle.js, you need to launch the following command:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;node_modules/truffle/cli.js migrate
@@ -103,28 +116,28 @@ Have a look here: &lt;a href=&#34;https://github.com/ConsenSys/Tokens&#34;&gt;ht
 const assert = require(&#39;chai&#39;).assert;
 
 contract(&#39;HumanStandardToken&#39;, (accounts) =&amp;gt; {
-  it(&#39;should put 1000000 rians in the first account&#39;, () =&amp;gt; {
-    const rians = HumanStandardToken.deployed();
+  it(&#39;should put 1000000 molds in the first account&#39;, () =&amp;gt; {
+    const molds = HumanStandardToken.deployed();
     const initSupply = 1000000;
 
-    return rians.balanceOf(accounts[0])
+    return molds.balanceOf(accounts[0])
       .then(balance =&amp;gt; assert.equal(
           balance.valueOf(), initSupply,
-          `${initSupply} rians weren&#39;t in the first account`
+          `${initSupply} molds weren&#39;t in the first account`
         )
       );
   });
 
-  it(&#39;should transfer rians to another user&#39;, () =&amp;gt; {
-    const rians = HumanStandardToken.deployed();
+  it(&#39;should transfer molds to another user&#39;, () =&amp;gt; {
+    const molds = HumanStandardToken.deployed();
 
-    return rians.transfer(accounts[1], 100, { from: accounts[0] })
+    return molds.transfer(accounts[1], 100, { from: accounts[0] })
       .then(
-        () =&amp;gt; rians.balanceOf(accounts[1])
+        () =&amp;gt; molds.balanceOf(accounts[1])
       )
       .then(balance =&amp;gt; assert.equal(
           balance.valueOf(), 100,
-          `${accounts[1]} didn&#39;t was not transfered 100 rians but ${balance.valueOf()}`
+          `${accounts[1]} didn&#39;t was not transfered 100 molds but ${balance.valueOf()}`
         )
       );
   });

@@ -110,6 +110,19 @@ Have a look here: <a href="https://github.com/ConsenSys/Tokens">https://github.c
 
 <h2 id="migrate">Migrate</h2>
 
+<p>Here is the simple migration script I used</p>
+
+<pre><code>module.exports = (deployer) =&gt; {
+  deployer.deploy(
+    HumanStandardToken,
+        1000000,
+        'mold',
+        '0',
+        'M'
+  );
+};
+</code></pre>
+
 <p>In order to compile and deploy your contracts in the rpc node you configured in truffle.js, you need to launch the following command:</p>
 
 <pre><code>node_modules/truffle/cli.js migrate
@@ -125,28 +138,28 @@ Have a look here: <a href="https://github.com/ConsenSys/Tokens">https://github.c
 const assert = require('chai').assert;
 
 contract('HumanStandardToken', (accounts) =&gt; {
-  it('should put 1000000 rians in the first account', () =&gt; {
-    const rians = HumanStandardToken.deployed();
+  it('should put 1000000 molds in the first account', () =&gt; {
+    const molds = HumanStandardToken.deployed();
     const initSupply = 1000000;
 
-    return rians.balanceOf(accounts[0])
+    return molds.balanceOf(accounts[0])
       .then(balance =&gt; assert.equal(
           balance.valueOf(), initSupply,
-          `${initSupply} rians weren't in the first account`
+          `${initSupply} molds weren't in the first account`
         )
       );
   });
 
-  it('should transfer rians to another user', () =&gt; {
-    const rians = HumanStandardToken.deployed();
+  it('should transfer molds to another user', () =&gt; {
+    const molds = HumanStandardToken.deployed();
 
-    return rians.transfer(accounts[1], 100, { from: accounts[0] })
+    return molds.transfer(accounts[1], 100, { from: accounts[0] })
       .then(
-        () =&gt; rians.balanceOf(accounts[1])
+        () =&gt; molds.balanceOf(accounts[1])
       )
       .then(balance =&gt; assert.equal(
           balance.valueOf(), 100,
-          `${accounts[1]} didn't was not transfered 100 rians but ${balance.valueOf()}`
+          `${accounts[1]} didn't was not transfered 100 molds but ${balance.valueOf()}`
         )
       );
   });
