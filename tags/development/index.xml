@@ -138,6 +138,38 @@ There are two types of actions on the Ethereum blockchain. Action which change t
 In truffle, you call the latter with a &amp;ldquo;call&amp;rdquo; on the contract object, whereas the former doesn&amp;rsquo;t need it&amp;hellip; Confusing, isn&amp;rsquo;t it?
 I found out later that there are constant functions in solidity, which basically mean functions that don&amp;rsquo;t change the contract state. When you specify these functions in you contract definition as &amp;ldquo;constant&amp;rdquo;, then, truffle doesn&amp;rsquo;t need the call&amp;hellip; Problem solved, everything now looks uniform.&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;p&gt;Now you can try if everything works fine, launch testrpc&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;node_modules/ethereumjs-testrpc/bin/testrpc
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;and open a new terminal and launch the tests&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;node_modules/truffle/cli.js test
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;creation-of-the-contracts-on-a-private-geth-or-even-morden&#34;&gt;Creation of the contracts on a private geth or even morden&lt;/h2&gt;
+
+&lt;p&gt;Modify your truffle.js to whichever node you want to migrate your contracts to.
+Mine is local geth, listening on port 9012, so truffle.js will become&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;module.exports = {
+  rpc: {
+    host: &#39;localhost&#39;,
+    port: 9012,
+  },
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;then migrate&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;node_modules/truffle/cli.js migrate
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Et voila! if everything is ok, truffle should have created your contracts and updated the built contracts with the right contract addresses in build/contracts.&lt;/p&gt;
+
+&lt;p&gt;Now, let&amp;rsquo;s play with these contracts on geth! See you on part 2.&lt;/p&gt;
 </description>
     </item>
     
