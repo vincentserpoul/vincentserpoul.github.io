@@ -144,13 +144,11 @@ contract(&#39;HumanStandardToken&#39;, (accounts) =&amp;gt; {
 });
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;ul&gt;
-&lt;li&gt;/ ! \ *
+&lt;p&gt;** / ! \ **
 I was stuck for hours because of the way contract functions can be called.
 There are two types of actions on the Ethereum blockchain. Action which change the contract states (like transfer funds for example), and the one which don&amp;rsquo;t (like get balance, for example).
 In truffle, you call the latter with a &amp;ldquo;call&amp;rdquo; on the contract object, whereas the former doesn&amp;rsquo;t need it&amp;hellip; Confusing, isn&amp;rsquo;t it?
-I found out later that there are constant functions in solidity, which basically mean functions that don&amp;rsquo;t change the contract state. When you specify these functions in you contract definition as &amp;ldquo;constant&amp;rdquo;, then, truffle doesn&amp;rsquo;t need the call&amp;hellip; Problem solved, everything now looks uniform.&lt;/li&gt;
-&lt;/ul&gt;
+I found out later that there are constant functions in solidity, which basically mean functions that don&amp;rsquo;t change the contract state. When you specify these functions in you contract definition as &amp;ldquo;constant&amp;rdquo;, then, truffle doesn&amp;rsquo;t need the call&amp;hellip; Problem solved, everything now looks uniform.&lt;/p&gt;
 
 &lt;p&gt;Now you can try if everything works fine, launch testrpc&lt;/p&gt;
 
