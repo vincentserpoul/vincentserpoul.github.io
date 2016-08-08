@@ -6,8 +6,140 @@
     <description>Recent content on VS tech corner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 03 Aug 2016 20:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 10 Aug 2016 15:00:27 +0800</lastBuildDate>
     <atom:link href="https://vincentserpoul.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Ethereum first dapp - part 2</title>
+      <link>https://vincentserpoul.github.io/post/ethereum-first-dapp-part-2/</link>
+      <pubDate>Wed, 10 Aug 2016 15:00:27 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/post/ethereum-first-dapp-part-2/</guid>
+      <description>
+
+&lt;h1 id=&#34;frontend&#34;&gt;Frontend&lt;/h1&gt;
+
+&lt;h2 id=&#34;prepare-your-folder-for-your-dapp&#34;&gt;Prepare your folder for your dapp&lt;/h2&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Ethereum first dapp - part 1</title>
+      <link>https://vincentserpoul.github.io/post/ethereum-first-dapp-part-1/</link>
+      <pubDate>Mon, 08 Aug 2016 15:00:27 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/post/ethereum-first-dapp-part-1/</guid>
+      <description>
+
+&lt;h1 id=&#34;contracts&#34;&gt;Contracts&lt;/h1&gt;
+
+&lt;h2 id=&#34;prepare-your-folder-for-your-dapp&#34;&gt;Prepare your folder for your dapp&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;mkdir dapp
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;inside this folder, we&amp;rsquo;ll create one folder for truffle, one for geth.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd dapp
+mkdir truffle geth
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;inside the geth folder, simply put the customGenesis block you can find in the ethereum-dev-environment blog post.&lt;/p&gt;
+
+&lt;p&gt;We are going to use two Ethereum clients, one for tests and devs, testrpc and one for a more real interaction, geth.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s install truffle and testrpc&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;npm install ethereumjs-testrpc truffle
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;truffle&#34;&gt;Truffle&lt;/h2&gt;
+
+&lt;p&gt;Truffle is a-m-a-z-i-n-g for contract development. It will allow you to unit test the contracts and compile them into usable javascript objects usable in web3! Just what we needed!&lt;/p&gt;
+
+&lt;p&gt;First, init truffle scaffolding (I don&amp;rsquo;t like -g install XD, so bear with my node_modules folder).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;node_modules/truffle/cli.js init
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will create different folders. You can have a look at &lt;a href=&#34;http://truffle.readthedocs.io/&#34;&gt;http://truffle.readthedocs.io/&lt;/a&gt; to have more details.&lt;/p&gt;
+
+&lt;h2 id=&#34;testrpc&#34;&gt;Testrpc&lt;/h2&gt;
+
+&lt;p&gt;Let&amp;rsquo;s launch the ethereumjs-testrpc&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;node_modules/ethereumjs-testrpc/bin/testrpc
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You will see it will create a new chain, in memory and create 10 new accounts for you to test.&lt;/p&gt;
+
+&lt;h2 id=&#34;standard-token-contracts&#34;&gt;Standard token contracts&lt;/h2&gt;
+
+&lt;p&gt;Don&amp;rsquo;t try to reinvent the wheel, Consensys has given standard contracts to issue your own token.
+Have a look here: &lt;a href=&#34;https://github.com/ConsenSys/Tokens&#34;&gt;https://github.com/ConsenSys/Tokens&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Just copy to your contract folder:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Tokens/Token_Contracts/contracts/HumanStandardToken.sol&lt;/li&gt;
+&lt;li&gt;Tokens/Token_Contracts/contracts/StandardToken.sol&lt;/li&gt;
+&lt;li&gt;Tokens/Token_Contracts/contracts/Token.sol&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;migrate&#34;&gt;Migrate&lt;/h2&gt;
+
+&lt;p&gt;In order to compile and deploy your contracts in the rpc node you configured in truffle.js, you need to launch the following command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;node_modules/truffle/cli.js migrate
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If your code compiles, it will create javascript objects for each of your contract in the folder build/contracts.&lt;/p&gt;
+
+&lt;h2 id=&#34;testing&#34;&gt;Testing&lt;/h2&gt;
+
+&lt;p&gt;Here is an example of tests on HumanStandardToken (ES6)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;const it = require(&#39;mocha&#39;).it;
+const assert = require(&#39;chai&#39;).assert;
+
+contract(&#39;HumanStandardToken&#39;, (accounts) =&amp;gt; {
+  it(&#39;should put 1000000 rians in the first account&#39;, () =&amp;gt; {
+    const rians = HumanStandardToken.deployed();
+    const initSupply = 1000000;
+
+    return rians.balanceOf(accounts[0])
+      .then(balance =&amp;gt; assert.equal(
+          balance.valueOf(), initSupply,
+          `${initSupply} rians weren&#39;t in the first account`
+        )
+      );
+  });
+
+  it(&#39;should transfer rians to another user&#39;, () =&amp;gt; {
+    const rians = HumanStandardToken.deployed();
+
+    return rians.transfer(accounts[1], 100, { from: accounts[0] })
+      .then(
+        () =&amp;gt; rians.balanceOf(accounts[1])
+      )
+      .then(balance =&amp;gt; assert.equal(
+          balance.valueOf(), 100,
+          `${accounts[1]} didn&#39;t was not transfered 100 rians but ${balance.valueOf()}`
+        )
+      );
+  });
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;/ ! \ *
+I was stuck for hours because of the way contract functions can be called.
+There are two types of actions on the Ethereum blockchain. Action which change the contract states (like transfer funds for example), and the one which don&amp;rsquo;t (like get balance, for example).
+In truffle, you call the latter with a &amp;ldquo;call&amp;rdquo; on the contract object, whereas the former doesn&amp;rsquo;t need it&amp;hellip; Confusing, isn&amp;rsquo;t it?
+I found out later that there are constant functions in solidity, which basically mean functions that don&amp;rsquo;t change the contract state. When you specify these functions in you contract definition as &amp;ldquo;constant&amp;rdquo;, then, truffle doesn&amp;rsquo;t need the call&amp;hellip; Problem solved, everything now looks uniform.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Interacting with an Ethereum smart contract</title>
