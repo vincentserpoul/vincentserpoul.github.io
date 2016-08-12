@@ -51,7 +51,11 @@
     </header>
 
     <section class="post-content">
-        <p>In order to have a setup close to what the DAPP would be, we will use (metamask) [<a href="http://www.metamask.io">http://www.metamask.io</a>] as a light wallet (there are other choices).</p>
+        
+
+<h2 id="setting-up-a-light-wallet">setting up a light wallet</h2>
+
+<p>In order to have a setup close to what the DAPP would be, we will use (metamask) [<a href="http://www.metamask.io">http://www.metamask.io</a>] as a light wallet (there are other choices).</p>
 
 <p>Metamask allows you to connect to a custom node.</p>
 
@@ -78,6 +82,14 @@ If everthing is fine, metamasks should indicate it&rsquo;s connected.</p>
 </code></pre>
 
 <p>if you look at the list of accounts in your local node, you should see now the newly imported account.</p>
+
+<h2 id="give-me-ether">give me ether!</h2>
+
+<p>Now, simply transfer some Ether to the newly imported account
+In geth, for example:</p>
+
+<pre><code>eth.sendTransaction({from: '0xfffffff', to: '0xddddddd', value: web3.toWei(1000, &quot;ether&quot;)})
+</code></pre>
 
     </section>
 

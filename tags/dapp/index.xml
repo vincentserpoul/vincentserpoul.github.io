@@ -15,7 +15,11 @@
       <pubDate>Fri, 12 Aug 2016 12:00:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/ethereum-first-dapp-part-3/</guid>
-      <description>&lt;p&gt;In order to have a setup close to what the DAPP would be, we will use (metamask) [&lt;a href=&#34;http://www.metamask.io&#34;&gt;http://www.metamask.io&lt;/a&gt;] as a light wallet (there are other choices).&lt;/p&gt;
+      <description>
+
+&lt;h2 id=&#34;setting-up-a-light-wallet&#34;&gt;setting up a light wallet&lt;/h2&gt;
+
+&lt;p&gt;In order to have a setup close to what the DAPP would be, we will use (metamask) [&lt;a href=&#34;http://www.metamask.io&#34;&gt;http://www.metamask.io&lt;/a&gt;] as a light wallet (there are other choices).&lt;/p&gt;
 
 &lt;p&gt;Metamask allows you to connect to a custom node.&lt;/p&gt;
 
@@ -42,6 +46,14 @@ If everthing is fine, metamasks should indicate it&amp;rsquo;s connected.&lt;/p&
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;if you look at the list of accounts in your local node, you should see now the newly imported account.&lt;/p&gt;
+
+&lt;h2 id=&#34;give-me-ether&#34;&gt;give me ether!&lt;/h2&gt;
+
+&lt;p&gt;Now, simply transfer some Ether to the newly imported account
+In geth, for example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;eth.sendTransaction({from: &#39;0xfffffff&#39;, to: &#39;0xddddddd&#39;, value: web3.toWei(1000, &amp;quot;ether&amp;quot;)})
+&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
@@ -83,7 +95,16 @@ export function ethConnect(web3Provider) {
 
 &lt;h3 id=&#34;reducers&#34;&gt;reducers&lt;/h3&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;import { fromJS } from &#39;immutable&#39;;
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;/*
+ *
+ * EthConnect reducer
+ *
+ */
+
+// eslint exception for web3
+/* global web3:true */
+
+import { fromJS } from &#39;immutable&#39;;
 import Web3 from &#39;web3&#39;;
 import { ETH_CONNECT } from &#39;./constants&#39;;
 
@@ -102,9 +123,17 @@ function ethConnectReducer(state = initialState, action) {
 }
 
 const web3Connect = (web3Provider) =&amp;gt; {
-  const web3 = new Web3(new Web3.providers.HttpProvider(web3Provider));
-  if (web3.isConnected()) {
-    return web3;
+  let web3Connection;
+
+  // If mist or metamask or else is already injected there as a provider
+  if (typeof web3 !== &#39;undefined&#39;) {
+    web3Connection = new Web3(web3.currentProvider);
+  } else {
+    web3Connection = new Web3(new Web3.providers.HttpProvider(web3Provider));
+  }
+
+  if (web3Connection.isConnected()) {
+    return web3Connection;
   }
 
   return false;
@@ -112,6 +141,7 @@ const web3Connect = (web3Provider) =&amp;gt; {
 
 
 export default ethConnectReducer;
+
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;selectors&#34;&gt;selectors&lt;/h3&gt;

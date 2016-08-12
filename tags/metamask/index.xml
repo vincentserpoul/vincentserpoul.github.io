@@ -15,7 +15,11 @@
       <pubDate>Fri, 12 Aug 2016 12:00:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/ethereum-first-dapp-part-3/</guid>
-      <description>&lt;p&gt;In order to have a setup close to what the DAPP would be, we will use (metamask) [&lt;a href=&#34;http://www.metamask.io&#34;&gt;http://www.metamask.io&lt;/a&gt;] as a light wallet (there are other choices).&lt;/p&gt;
+      <description>
+
+&lt;h2 id=&#34;setting-up-a-light-wallet&#34;&gt;setting up a light wallet&lt;/h2&gt;
+
+&lt;p&gt;In order to have a setup close to what the DAPP would be, we will use (metamask) [&lt;a href=&#34;http://www.metamask.io&#34;&gt;http://www.metamask.io&lt;/a&gt;] as a light wallet (there are other choices).&lt;/p&gt;
 
 &lt;p&gt;Metamask allows you to connect to a custom node.&lt;/p&gt;
 
@@ -42,6 +46,14 @@ If everthing is fine, metamasks should indicate it&amp;rsquo;s connected.&lt;/p&
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;if you look at the list of accounts in your local node, you should see now the newly imported account.&lt;/p&gt;
+
+&lt;h2 id=&#34;give-me-ether&#34;&gt;give me ether!&lt;/h2&gt;
+
+&lt;p&gt;Now, simply transfer some Ether to the newly imported account
+In geth, for example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;eth.sendTransaction({from: &#39;0xfffffff&#39;, to: &#39;0xddddddd&#39;, value: web3.toWei(1000, &amp;quot;ether&amp;quot;)})
+&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
