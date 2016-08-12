@@ -6,8 +6,44 @@
     <description>Recent content in Dapp on VS tech corner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 10 Aug 2016 15:00:27 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 12 Aug 2016 12:00:27 +0800</lastBuildDate>
     <atom:link href="https://vincentserpoul.github.io/tags/dapp/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Ethereum first dapp - part 3</title>
+      <link>https://vincentserpoul.github.io/post/ethereum-first-dapp-part-3/</link>
+      <pubDate>Fri, 12 Aug 2016 12:00:27 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/post/ethereum-first-dapp-part-3/</guid>
+      <description>&lt;p&gt;In order to have a setup close to what the DAPP would be, we will use (metamask) [&lt;a href=&#34;http://www.metamask.io&#34;&gt;http://www.metamask.io&lt;/a&gt;] as a light wallet (there are other choices).&lt;/p&gt;
+
+&lt;p&gt;Metamask allows you to connect to a custom node.&lt;/p&gt;
+
+&lt;p&gt;We will then connect to our node, &lt;a href=&#34;http://localhost:9012&#34;&gt;http://localhost:9012&lt;/a&gt;
+If everthing is fine, metamasks should indicate it&amp;rsquo;s connected.&lt;/p&gt;
+
+&lt;p&gt;Then, we can import the metamask account to our local node by simply specifying the datadir we have setup the node data.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s imagine metamask give us:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;0xcddddd76a763de6e9ac19e7ec8f71ed77d61eebc0a93068fc9f2a544462db7d2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;as the key.&lt;/p&gt;
+
+&lt;p&gt;Then let&amp;rsquo;s just copy this, without thw 0x inside a separate file.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;echo &amp;quot;cddddd76a763de6e9ac19e7ec8f71ed77d61eebc0a93068fc9f2a544462db7d2&amp;quot; &amp;gt;&amp;gt; pvkey.txt
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;and then import it in our local chain&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;geth --datadir &amp;quot;./testChain&amp;quot; account import ./pvkey.txt
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;if you look at the list of accounts in your local node, you should see now the newly imported account.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Ethereum first dapp - part 2</title>
@@ -20,6 +56,162 @@
 &lt;h1 id=&#34;frontend&#34;&gt;Frontend&lt;/h1&gt;
 
 &lt;h2 id=&#34;prepare-your-folder-for-your-dapp&#34;&gt;Prepare your folder for your dapp&lt;/h2&gt;
+
+&lt;p&gt;I will be using &lt;a href=&#34;https://github.com/mxstbr/react-boilerplate&#34;&gt;https://github.com/mxstbr/react-boilerplate&lt;/a&gt; as it&amp;rsquo;s quite nice and I&amp;rsquo;ve been playing with React for a bit now.&lt;/p&gt;
+
+&lt;p&gt;I will not go into the details of setting this up, it&amp;rsquo;s a totally different topic.
+If you are not familiar with it, it&amp;rsquo;s probably a waste of time for you to read.&lt;/p&gt;
+
+&lt;h2 id=&#34;example-web3-component-with-react&#34;&gt;Example web3 component with React&lt;/h2&gt;
+
+&lt;p&gt;This boilerplate uses immutable, redux and redux-sagas in order to deal with data.
+We will use this to connect/dialog with our local node.&lt;/p&gt;
+
+&lt;h3 id=&#34;actions&#34;&gt;Actions&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;export const ETH_CONNECT = &#39;app/EthConnect/ETH_CONNECT&#39;;
+
+export function ethConnect(web3Provider) {
+  return {
+    type: ETH_CONNECT,
+    web3Provider,
+  };
+}
+
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;reducers&#34;&gt;reducers&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;import { fromJS } from &#39;immutable&#39;;
+import Web3 from &#39;web3&#39;;
+import { ETH_CONNECT } from &#39;./constants&#39;;
+
+const initialState = fromJS({
+  web3Connection: false,
+});
+
+function ethConnectReducer(state = initialState, action) {
+  switch (action.type) {
+    case ETH_CONNECT:
+      return state
+        .set(&#39;web3Connection&#39;, web3Connect(action.web3Provider));
+    default:
+      return state;
+  }
+}
+
+const web3Connect = (web3Provider) =&amp;gt; {
+  const web3 = new Web3(new Web3.providers.HttpProvider(web3Provider));
+  if (web3.isConnected()) {
+    return web3;
+  }
+
+  return false;
+};
+
+
+export default ethConnectReducer;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;selectors&#34;&gt;selectors&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;import { createSelector } from &#39;reselect&#39;;
+
+/**
+ * Direct selector to the ethConnect state domain
+ */
+const selectEthConnectDomain = () =&amp;gt; state =&amp;gt; state.get(&#39;ethConnect&#39;);
+
+/**
+ * Other specific selectors
+ */
+
+
+/**
+ * Default selector used by EthConnect
+ */
+
+const selectEthConnect = () =&amp;gt; createSelector(
+  selectEthConnectDomain(),
+  (substate) =&amp;gt; substate.toJS(),
+);
+
+const selectEthConnectWeb3Connection = () =&amp;gt; createSelector(
+  selectEthConnectDomain(),
+  (substate) =&amp;gt; substate.get(&#39;web3Connection&#39;)
+);
+
+const selectEthConnectIsConnected = () =&amp;gt; createSelector(
+  selectEthConnectDomain(),
+  (substate) =&amp;gt; {
+    if (substate.get(&#39;web3Connection&#39;) === false) {
+      return false;
+    }
+    return true;
+  }
+);
+
+export default selectEthConnect;
+export {
+  selectEthConnectDomain,
+  selectEthConnectWeb3Connection,
+  selectEthConnectIsConnected,
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;component-itself&#34;&gt;component itself&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;/*
+ *
+ * EthConnect
+ *
+ */
+
+import React from &#39;react&#39;;
+import { connect } from &#39;react-redux&#39;;
+import { createStructuredSelector } from &#39;reselect&#39;;
+import { ethConnect } from &#39;./actions&#39;;
+import { selectEthConnectIsConnected } from &#39;./selectors&#39;;
+import ConnectionStatus from &#39;components/ConnectionStatus&#39;;
+
+export class EthConnect extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  // That&#39;s when we connect, each time the component is mounted
+  componentWillMount() {
+    this.props.connect(this.props.web3Provider);
+  }
+
+  render() {
+    return (
+      &amp;lt;ConnectionStatus isConnected={this.props.isConnected} /&amp;gt;
+    );
+  }
+}
+
+EthConnect.propTypes = {
+  loading: React.PropTypes.bool,
+  web3Provider: React.PropTypes.string.isRequired,
+  connect: React.PropTypes.func.isRequired,
+  isConnected: React.PropTypes.bool,
+};
+
+const mapStateToProps = createStructuredSelector({
+  isConnected: selectEthConnectIsConnected(),
+});
+
+function mapDispatchToProps(dispatch) {
+  return {
+    connect: (web3Provider) =&amp;gt; dispatch(ethConnect(web3Provider)),
+    dispatch,
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EthConnect);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And there we go! Our app is up and running and connect to the local node.&lt;/p&gt;
+
+&lt;p&gt;In the next step, we will see how to play with this app with more complex interactions, contract functions.&lt;/p&gt;
 </description>
     </item>
     

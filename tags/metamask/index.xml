@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Metamask on VS tech corner</title>
+    <link>https://vincentserpoul.github.io/tags/metamask/</link>
+    <description>Recent content in Metamask on VS tech corner</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 12 Aug 2016 12:00:27 +0800</lastBuildDate>
+    <atom:link href="https://vincentserpoul.github.io/tags/metamask/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Ethereum first dapp - part 3</title>
+      <link>https://vincentserpoul.github.io/post/ethereum-first-dapp-part-3/</link>
+      <pubDate>Fri, 12 Aug 2016 12:00:27 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/post/ethereum-first-dapp-part-3/</guid>
+      <description>&lt;p&gt;In order to have a setup close to what the DAPP would be, we will use (metamask) [&lt;a href=&#34;http://www.metamask.io&#34;&gt;http://www.metamask.io&lt;/a&gt;] as a light wallet (there are other choices).&lt;/p&gt;
+
+&lt;p&gt;Metamask allows you to connect to a custom node.&lt;/p&gt;
+
+&lt;p&gt;We will then connect to our node, &lt;a href=&#34;http://localhost:9012&#34;&gt;http://localhost:9012&lt;/a&gt;
+If everthing is fine, metamasks should indicate it&amp;rsquo;s connected.&lt;/p&gt;
+
+&lt;p&gt;Then, we can import the metamask account to our local node by simply specifying the datadir we have setup the node data.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s imagine metamask give us:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;0xcddddd76a763de6e9ac19e7ec8f71ed77d61eebc0a93068fc9f2a544462db7d2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;as the key.&lt;/p&gt;
+
+&lt;p&gt;Then let&amp;rsquo;s just copy this, without thw 0x inside a separate file.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;echo &amp;quot;cddddd76a763de6e9ac19e7ec8f71ed77d61eebc0a93068fc9f2a544462db7d2&amp;quot; &amp;gt;&amp;gt; pvkey.txt
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;and then import it in our local chain&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;geth --datadir &amp;quot;./testChain&amp;quot; account import ./pvkey.txt
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;if you look at the list of accounts in your local node, you should see now the newly imported account.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
