@@ -22,7 +22,7 @@
 &lt;p&gt;Here are my takeaways and opinionated summary:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Use RPC for service to service communications: &lt;a href=&#34;http://www.grpc.io/&#34;&gt;gRPC&lt;/a&gt;seems to be a good way of tacling it&lt;/li&gt;
+&lt;li&gt;Use RPC for service to service communications: &lt;a href=&#34;http://www.grpc.io/&#34;&gt;gRPC&lt;/a&gt; seems to be a good way of tackling it&lt;/li&gt;
 &lt;li&gt;Use many repositories&lt;/li&gt;
 &lt;li&gt;Profiling should be unified: flamegraph seems to be universal (Go profiling is great too)&lt;/li&gt;
 &lt;li&gt;Premature optimization is bad but performance monitoring is crucial!&lt;/li&gt;
