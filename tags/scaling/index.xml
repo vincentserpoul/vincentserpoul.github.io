@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Scaling on VS tech corner</title>
+    <link>https://vincentserpoul.github.io/tags/scaling/</link>
+    <description>Recent content in Scaling on VS tech corner</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 30 Sep 2016 12:06:01 +0800</lastBuildDate>
+    <atom:link href="https://vincentserpoul.github.io/tags/scaling/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Summary of UBER lessons on scaling microservices</title>
+      <link>https://vincentserpoul.github.io/post/on-microservices-and-scaling/</link>
+      <pubDate>Fri, 30 Sep 2016 12:06:01 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/post/on-microservices-and-scaling/</guid>
+      <description>&lt;p&gt;I just watched that amazing videos from Matt Ranney&lt;/p&gt;
+
+&lt;iframe width=&#34;560&#34; height=&#34;315&#34; src=&#34;https://www.youtube.com/embed/kb-m2fasdDY&#34; frameborder=&#34;0&#34; allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;p&gt;Here are my takeaways and opinionated summary:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Use RPC for service to service communications: &lt;a href=&#34;http://www.grpc.io/&#34;&gt;gRPC&lt;/a&gt;seems to be a good way of tacling it&lt;/li&gt;
+&lt;li&gt;Use many repositories&lt;/li&gt;
+&lt;li&gt;Profiling should be unified: flamegraph seems to be universal (Go profiling is great too)&lt;/li&gt;
+&lt;li&gt;Premature optimization is bad but performance monitoring is crucial!&lt;/li&gt;
+&lt;li&gt;Trace requests, keep context within all logs&lt;/li&gt;
+&lt;li&gt;Log a lot, but only on a portion of your production architecture as logging can have a big cost&lt;/li&gt;
+&lt;li&gt;Do load test in production all the time&lt;/li&gt;
+&lt;li&gt;Systematically shut down services randomly (chaos monkey like)&lt;/li&gt;
+&lt;li&gt;Use available aas (as a service) as much as possible&lt;/li&gt;
+&lt;li&gt;Politics definition: when the property Company &amp;gt; Team &amp;gt; Self is violated&lt;/li&gt;
+&lt;li&gt;Everything is a tradeoffs&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

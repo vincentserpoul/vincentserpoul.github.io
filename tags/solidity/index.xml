@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Solidity on VS tech corner</title>
+    <link>https://vincentserpoul.github.io/tags/solidity/</link>
+    <description>Recent content in Solidity on VS tech corner</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 16 Sep 2016 13:26:00 +0800</lastBuildDate>
+    <atom:link href="https://vincentserpoul.github.io/tags/solidity/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Takeaways from Solidity</title>
+      <link>https://vincentserpoul.github.io/post/ethereum-solidity/</link>
+      <pubDate>Fri, 16 Sep 2016 13:26:00 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/post/ethereum-solidity/</guid>
+      <description>
+
+&lt;h2 id=&#34;public-constant-call-sendtransaction&#34;&gt;public, constant, call, sendTransaction&lt;/h2&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
