@@ -60,10 +60,11 @@
 <ul>
 <li>Use RPC for service to service communications: <a href="http://www.grpc.io/">gRPC</a> seems to be a good way of tackling it</li>
 <li>Use many repositories</li>
-<li>Profiling should be unified: flamegraph seems to be universal (Go profiling is great too)</li>
+<li>Profiling should be unified: flamegraphs seem to be a good solution (Go profiling is great too)</li>
 <li>Premature optimization is bad but performance monitoring is crucial!</li>
 <li>Trace requests, keep context within all logs</li>
-<li>Log a lot, but only on a portion of your production architecture as logging can have a big cost</li>
+<li>Log a lot, but only on a portion of your production architecture as logging can have a big cost.</li>
+<li>Log consistenly across all services</li>
 <li>Do load test in production all the time</li>
 <li>Systematically shut down services randomly (chaos monkey like)</li>
 <li>Use available aas (as a service) as much as possible</li>
