@@ -22,7 +22,7 @@
     
         <meta property="og:type" content="website" />
     
-        <meta name="generator" content="Hugo 0.16" />
+        <meta name="generator" content="Hugo 0.18-DEV" />
         <title>VS tech corner &middot; VS tech corner </title>
         <link rel="canonical" href="https://vincentserpoul.github.io/" />
         <link rel="alternate" type="application/rss+xml" title="RSS" href="https://vincentserpoul.github.io/index.xml">
@@ -51,7 +51,9 @@
     </header>
 
     <section class="post-excerpt">
-        <p>The contract contract Trigger { function () { throw; } address owner; function Trigger() { owner = msg.sender; } event TriggerEvt(address _sender, uint _trigger); function trigger(uint _trigger) { TriggerEvt(msg.sender, _trigger); } function getOwner() constant returns (address) { return owner; } } This is a very simple contract that we will take as an example. Getting the right tools for binding A good starting point is this wiki. You will need to follow the install procedure of go-ethereum.</p>
+        <p>The contract contract Trigger { function () { throw; } address owner; function Trigger() { owner = msg.sender; } event TriggerEvt(address _sender, uint _trigger); function trigger(uint _trigger) { TriggerEvt(msg.sender, _trigger); } function getOwner() constant returns (address) { return owner; } }  This is a very simple contract that we will take as an example.
+Getting the right tools for binding A good starting point is this wiki.
+You will need to follow the install procedure of go-ethereum.</p>
     </section>
 
     <footer class="post-footer">
@@ -72,7 +74,9 @@
     </header>
 
     <section class="post-excerpt">
-        <p>I just watched that amazing videos from Matt Ranney Here are my takeaways and opinionated summary: Use RPC for service to service communications: gRPC seems to be a good way of tackling it Use many repositories Profiling should be unified: flamegraphs seem to be a good solution (Go profiling is great too) Premature optimization is bad but performance monitoring is crucial! Trace requests, keep context within all logs Log a lot, but only on a portion of your production architecture as logging can have a big cost.</p>
+        <p>I just watched that amazing videos from Matt Ranney
+ Here are my takeaways and opinionated summary:
+ Use RPC for service to service communications: gRPC seems to be a good way of tackling it Use many repositories Profiling should be unified: flamegraphs seem to be a good solution (Go profiling is great too) Premature optimization is bad but performance monitoring is crucial! Trace requests, keep context within all logs Log a lot, but only on a portion of your production architecture as logging can have a big cost.</p>
     </section>
 
     <footer class="post-footer">
@@ -114,7 +118,10 @@
     </header>
 
     <section class="post-excerpt">
-        <p>setting up a light wallet In order to have a setup close to what the DAPP would be, we will use (metamask) [http://www.metamask.io] as a light wallet (there are other choices). Metamask allows you to connect to a custom node. We will then connect to our node, http://localhost:9012 If everthing is fine, metamasks should indicate it&rsquo;s connected. Then, we can import the metamask account to our local node by simply specifying the datadir we have setup the node data.</p>
+        <p>setting up a light wallet In order to have a setup close to what the DAPP would be, we will use (metamask) [http://www.metamask.io] as a light wallet (there are other choices).
+Metamask allows you to connect to a custom node.
+We will then connect to our node, http://localhost:9012 If everthing is fine, metamasks should indicate it&rsquo;s connected.
+Then, we can import the metamask account to our local node by simply specifying the datadir we have setup the node data.</p>
     </section>
 
     <footer class="post-footer">
@@ -135,7 +142,9 @@
     </header>
 
     <section class="post-excerpt">
-        <p>Frontend Prepare your folder for your dapp I will be using https://github.com/mxstbr/react-boilerplate as it&rsquo;s quite nice and I&rsquo;ve been playing with React for a bit now. I will not go into the details of setting this up, it&rsquo;s a totally different topic. If you are not familiar with it, it&rsquo;s probably a waste of time for you to read. Example web3 component with React This boilerplate uses immutable, redux and redux-sagas in order to deal with data.</p>
+        <p>Frontend Prepare your folder for your dapp I will be using https://github.com/mxstbr/react-boilerplate as it&rsquo;s quite nice and I&rsquo;ve been playing with React for a bit now.
+I will not go into the details of setting this up, it&rsquo;s a totally different topic. If you are not familiar with it, it&rsquo;s probably a waste of time for you to read.
+Example web3 component with React This boilerplate uses immutable, redux and redux-sagas in order to deal with data.</p>
     </section>
 
     <footer class="post-footer">
@@ -156,7 +165,10 @@
     </header>
 
     <section class="post-excerpt">
-        <p>Contracts Prepare your folder for your dapp mkdir dapp inside this folder, we&rsquo;ll create one folder for truffle, one for geth. cd dapp mkdir truffle geth inside the geth folder, simply put the customGenesis block you can find in the ethereum-dev-environment blog post. We are going to use two Ethereum clients, one for tests and devs, testrpc and one for a more real interaction, geth. Let&rsquo;s install truffle and testrpc npm install ethereumjs-testrpc truffle Truffle Truffle is a-m-a-z-i-n-g for contract development.</p>
+        <p>Contracts Prepare your folder for your dapp mkdir dapp  inside this folder, we&rsquo;ll create one folder for truffle, one for geth.
+cd dapp mkdir truffle geth  inside the geth folder, simply put the customGenesis block you can find in the ethereum-dev-environment blog post.
+We are going to use two Ethereum clients, one for tests and devs, testrpc and one for a more real interaction, geth.
+Let&rsquo;s install truffle and testrpc</p>
     </section>
 
     <footer class="post-footer">
@@ -177,7 +189,10 @@
     </header>
 
     <section class="post-excerpt">
-        <p>Check the address of the current deployed contract Remember when you mined your contract, it told your its address. Now, reuse it! eth.getCode(&quot;0x5f3425ccedeae0eb36521c4cf93ec6544dbad9bd&quot;) Test the contract with a simple interaction get the latest web3-light.min.js js from https://github.com/ethereum/web3.js/releases and simply copy the dist/web3-light.min.js into the same folder as the following HTML file. then, use this html to interact with your contract on the local node: &lt;!doctype&gt; &lt;html&gt; &lt;head&gt; &lt;script type=&quot;text/javascript&quot; src=&quot;https://cdnjs.cloudflare.com/ajax/libs/bignumber.js/2.4.0/bignumber.min.js&quot;&gt;&lt;/script&gt; &lt;script type=&quot;text/javascript&quot; src=&quot;./web3-light.min.js&quot;&gt;&lt;/script&gt; &lt;script type=&quot;text/javascript&quot;&gt; var Web3 = require('web3'); var web3 = new Web3(); web3.setProvider(new web3.providers.HttpProvider('http://localhost:9012')); function watchBalance() { var coinbase = web3.eth.coinbase; var originalBalance = web3.eth.getBalance(coinbase).toNumber(); document.getElementById('coinbase').innerText = 'coinbase: ' + coinbase; document.getElementById('original').innerText = ' original balance: ' + originalBalance + ' watching...'; web3.eth.filter('latest').watch(function() { var currentBalance = web3.eth.getBalance(coinbase).toNumber(); document.getElementById(&quot;current&quot;).innerText = 'current: ' + currentBalance; document.getElementById(&quot;diff&quot;).innerText = 'diff: ' + (currentBalance - originalBalance); }); } &lt;/script&gt; &lt;/head&gt; &lt;body&gt; &lt;h1&gt;coinbase balance&lt;/h1&gt; &lt;button type=&quot;button&quot; onClick=&quot;watchBalance();&quot;&gt;watch balance&lt;/button&gt; &lt;div&gt;&lt;/div&gt; &lt;div id=&quot;coinbase&quot;&gt;&lt;/div&gt; &lt;div id=&quot;original&quot;&gt;&lt;/div&gt; &lt;div id=&quot;current&quot;&gt;&lt;/div&gt; &lt;div id=&quot;diff&quot;&gt;&lt;/div&gt; &lt;/body&gt; &lt;/html&gt; and&hellip; It works, you can see the balance on the contract!</p>
+        <p>Check the address of the current deployed contract Remember when you mined your contract, it told your its address. Now, reuse it!
+eth.getCode(&quot;0x5f3425ccedeae0eb36521c4cf93ec6544dbad9bd&quot;)  Test the contract with a simple interaction get the latest web3-light.min.js js from https://github.com/ethereum/web3.js/releases and simply copy the dist/web3-light.min.js into the same folder as the following HTML file.
+then, use this html to interact with your contract on the local node:
+&lt;!doctype&gt; &lt;html&gt; &lt;head&gt; &lt;script type=&quot;text/javascript&quot; src=&quot;https://cdnjs.</p>
     </section>
 
     <footer class="post-footer">
@@ -198,7 +213,8 @@
     </header>
 
     <section class="post-excerpt">
-        <p>Launch your geth (or testrpc) private instance ./geth \ --identity &quot;gethTest&quot; \ --rpc --rpcport &quot;9012&quot; \ --rpccorsdomain &quot;YOUR_TEST_DOMAIN_APP_RUN_FROM&quot; \ --datadir &quot;./testChain&quot; \ --port &quot;30303&quot; \ --nodiscover \ --rpcapi &quot;db,eth,net,web3&quot; \ --networkid 1999 \ --dev console Within the console, compile your contract check this tutorial: https://www.ethereum.org/greeter I had an issue when I followed the contract tutorial, my contract would not be mined after I was trying to deploy it. The issue was that my account was locked :/ and the greeter contract stupidly silently fails&hellip; Here is the modified code to see the obvious error.</p>
+        <p>Launch your geth (or testrpc) private instance ./geth \ --identity &quot;gethTest&quot; \ --rpc --rpcport &quot;9012&quot; \ --rpccorsdomain &quot;YOUR_TEST_DOMAIN_APP_RUN_FROM&quot; \ --datadir &quot;./testChain&quot; \ --port &quot;30303&quot; \ --nodiscover \ --rpcapi &quot;db,eth,net,web3&quot; \ --networkid 1999 \ --dev console  Within the console, compile your contract check this tutorial: https://www.ethereum.org/greeter
+I had an issue when I followed the contract tutorial, my contract would not be mined after I was trying to deploy it.</p>
     </section>
 
     <footer class="post-footer">
@@ -240,7 +256,13 @@
     </header>
 
     <section class="post-excerpt">
-        <p>On the 28th, I was invited to talk at Google Singapore for the Kubernetes birthday http://www.meetup.com/fr-FR/GCPUGSG/events/232659329/?eventId=232659329 I spoke about my experience with Kubernetes in production for one of my side projects. As I like to experiment stuff, I decide to drop power point and use React Spectacle library for my presentation! here is the result: https://kuberneprez.surge.sh here is the source code: https://github.com/vincentserpoul/prez-kubernetes The framework can be found here: http://stack.formidable.com/spectacle/#/?_k=cyx05u I will do it again!</p>
+        <p>On the 28th, I was invited to talk at Google Singapore for the Kubernetes birthday http://www.meetup.com/fr-FR/GCPUGSG/events/232659329/?eventId=232659329
+I spoke about my experience with Kubernetes in production for one of my side projects.
+As I like to experiment stuff, I decide to drop power point and use React Spectacle library for my presentation!
+here is the result: https://kuberneprez.surge.sh
+here is the source code: https://github.com/vincentserpoul/prez-kubernetes
+The framework can be found here: http://stack.formidable.com/spectacle/#/?_k=cyx05u
+I will do it again!</p>
     </section>
 
     <footer class="post-footer">

@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>VS tech corner</title>
-    <link>https://vincentserpoul.github.io/</link>
+    <link>https://vincentserpoul.github.io/index.xml</link>
     <description>Recent content on VS tech corner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>

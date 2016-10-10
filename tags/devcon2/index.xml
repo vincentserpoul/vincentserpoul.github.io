@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Devcon2 on VS tech corner</title>
-    <link>https://vincentserpoul.github.io/tags/devcon2/</link>
-    <description>Recent content in Devcon2 on VS tech corner</description>
+    <title>VS tech corner</title>
+    <link>https://vincentserpoul.github.io/tags/devcon2/index.xml</link>
+    <description>Recent content on VS tech corner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 16 Sep 2016 13:44:00 +0800</lastBuildDate>
     <atom:link href="https://vincentserpoul.github.io/tags/devcon2/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
