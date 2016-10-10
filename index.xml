@@ -47,9 +47,9 @@
 
 &lt;h2 id=&#34;getting-the-right-tools-for-binding&#34;&gt;Getting the right tools for binding&lt;/h2&gt;
 
-&lt;p&gt;A good starting point is this (wiki)[&lt;a href=&#34;https://github.com/ethereum/go-ethereum/wiki/Native-DApps:-Go-bindings-to-Ethereum-contracts&#34;&gt;https://github.com/ethereum/go-ethereum/wiki/Native-DApps:-Go-bindings-to-Ethereum-contracts&lt;/a&gt;]&lt;/p&gt;
+&lt;p&gt;A good starting point is this &lt;a href=&#34;https://github.com/ethereum/go-ethereum/wiki/Native-DApps:-Go-bindings-to-Ethereum-contracts&#34;&gt;wiki&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;You will need to follow the install procedure of (go-ethereum)[&lt;a href=&#34;https://github.com/ethereum/go-ethereum&#34;&gt;https://github.com/ethereum/go-ethereum&lt;/a&gt;].&lt;/p&gt;
+&lt;p&gt;You will need to follow the install procedure of &lt;a href=&#34;https://github.com/ethereum/go-ethereum&#34;&gt;go-ethereum&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Once done, you should have the abigen executable available on your command line.&lt;/p&gt;
 
@@ -58,7 +58,7 @@
 &lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;abigen --sol contracts/Trigger.sol --pkg main --out trigger.go
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;If everything is fine, you should now have a file named Trigger.go&lt;/p&gt;
+&lt;p&gt;If everything is fine, you should now have a file named trigger.go&lt;/p&gt;
 
 &lt;h2 id=&#34;using-the-generated-file-from-main&#34;&gt;Using the generated file from main&lt;/h2&gt;
 
@@ -129,7 +129,7 @@ owner address: 0xf2759b4a699dae4fdc3383a0d7a92cfc246315cd
 &lt;h2 id=&#34;existing-issues&#34;&gt;Existing issues&lt;/h2&gt;
 
 &lt;p&gt;We have still not talked about listening to events.
-There are also still issues as soon as the contract imports other contracts: abigen doesn&amp;rsquo;t allow you to do it.&lt;/p&gt;
+There are also still issues as soon as the contract imports other contracts, I will finish the writing once these are done.&lt;/p&gt;
 </description>
     </item>
     
