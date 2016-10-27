@@ -9,6 +9,336 @@
     <atom:link href="https://vincentserpoul.github.io/tags/ethereum/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Ethereum react dapps</title>
+      <link>https://vincentserpoul.github.io/post/ethereum-react-dapps/</link>
+      <pubDate>Thu, 27 Oct 2016 13:34:00 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/post/ethereum-react-dapps/</guid>
+      <description>
+
+&lt;p&gt;I finished my first dapp with (react-boilerplate)[&lt;a href=&#34;https://github.com/mxstbr/&#34;&gt;https://github.com/mxstbr/&lt;/a&gt;] this week and here are the few things I learnt.
+I won&amp;rsquo;t get into the redux, redux-saga details, I let you play with the amazing boilerplate.&lt;/p&gt;
+
+&lt;h2 id=&#34;interacting-with-constant-functions&#34;&gt;Interacting with constant functions&lt;/h2&gt;
+
+&lt;p&gt;Let&amp;rsquo;s use the typical balanceOf function of the EIP20 contracts:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-solidity&#34;&gt;    function balanceOf(address _owner) constant returns (uint256 balance) {
+        return balances[_owner];
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here are the sagas (redux-sagas) I used to interact:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;import { take, call, put, cancel, select, fork } from &#39;redux-saga/effects&#39;;
+import {
+  BALANCE_OF_GET,
+} from &#39;./constants&#39;;
+import { LOCATION_CHANGE } from &#39;react-router-redux&#39;;
+
+import {
+  balanceOfSuccess,
+  balanceOfFailure,
+} from &#39;./actions&#39;;
+
+import { selectEthConnectWeb3Connection } from &#39;containers/EthConnect/selectors&#39;;
+
+import HumanStandardToken from &#39;contracts/HumanStandardToken.sol.js&#39;;
+
+function* balanceOfGet(ethAddress) {
+  const web3Connection = yield select(selectEthConnectWeb3Connection());
+
+  HumanStandardToken.setProvider(web3Connection.currentProvider);
+  const token = HumanStandardToken.deployed();
+
+  const balancePromise = yield call(token.balanceOf, ethAddress);
+
+  // We return an object in a specific format, see utils/request.js for more information
+  if (balancePromise.err === undefined || balancePromise.err === null) {
+    yield put(balanceOfSuccess(ethAddress, balancePromise.valueOf()));
+  } else {
+    console.log(balancePromise.err.response); // eslint-disable-line no-console
+    yield put(balanceOfFailure(ethAddress, balancePromise.err.response));
+  }
+}
+
+/**
+ * Watches for BALANCE_OF_GET action and calls handler
+ */
+export function* balanceOfWatcher() {
+  while (true) { // eslint-disable-line no-constant-condition
+    const { ethAddress } = yield take(BALANCE_OF_GET);
+    // use fork and not call to be sure to fork all
+    yield fork(balanceOfGet, ethAddress);
+  }
+}
+
+
+/**
+ * Root saga manages watcher lifecycle
+ */
+export function* balanceOfSaga() {
+  // Fork watcher so we can continue execution
+  const watcher = yield fork(balanceOfWatcher);
+
+  // Suspend execution until location changes
+  yield take(LOCATION_CHANGE);
+  yield cancel(watcher);
+}
+
+// All sagas to be loaded
+export default [
+  balanceOfSaga,
+];
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then, simply implement the right reducers, actions and you are done! you can easily get the balance in your UI.&lt;/p&gt;
+
+&lt;h2 id=&#34;interacting-with-functions-that-needs-transactions&#34;&gt;Interacting with functions that needs transactions&lt;/h2&gt;
+
+&lt;p&gt;Let&amp;rsquo;s use the same EIP20 contract again:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-solidity&#34;&gt;    event Approval(address indexed _owner, address indexed _spender, uint256 _value);
+
+    function approve(address _spender, uint256 _value) returns (bool success) {
+        allowed[msg.sender][_spender] = _value;
+        Approval(msg.sender, _spender, _value);
+        return true;
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;import { take, call, put, select, cancel, fork } from &#39;redux-saga/effects&#39;;
+import {
+  GIVEMETOKEN_LAUNCH,
+} from &#39;./constants&#39;;
+import { LOCATION_CHANGE } from &#39;react-router-redux&#39;;
+
+import {
+  givemetokensSuccess,
+  givemetokensFailure,
+} from &#39;./actions&#39;;
+
+import {
+  balanceOfGet,
+} from &#39;containers/Token/actions&#39;;
+
+import { selectEthConnectWeb3Connection } from &#39;containers/EthConnect/selectors&#39;;
+// import { selectRianEthAddress } from &#39;./selectors&#39;;
+
+import HumanStandardToken from &#39;contracts/HumanStandardToken.sol.js&#39;;
+
+function* givemetokens(ethAddress) {
+  const web3Connection = yield select(selectEthConnectWeb3Connection());
+  HumanStandardToken.setProvider(web3Connection.currentProvider);
+  const tokens = HumanStandardToken.deployed();
+
+  const tokensOwner = yield call(tokens.getOwner.call);
+
+  try {
+    yield call(tokens.approve, ethAddress, 100, { from: tokensOwner, gas: 200000 });
+  } catch (e) {
+    console.log(e); // eslint-disable-line no-console
+    yield put(givemetokensFailure(ethAddress));
+    return;
+  }
+
+  const approvedAmt = yield call(tokens.allowance.call, tokensOwner, ethAddress);
+  console.log(`approved amount: ${approvedAmt}`);
+
+  try {
+    yield call(tokens.transferFrom, tokensOwner, ethAddress, 100, { from: ethAddress, gas: 200000 });
+  } catch (e) {
+    console.log(e); // eslint-disable-line no-console
+    yield put(givemetokensFailure(ethAddress));
+  }
+
+  yield put(givemetokensSuccess(ethAddress, true));
+  yield put(balanceOfGet(ethAddress));
+}
+
+/**
+ * Watches for SIMPLEINSURANCE_givemetokens_LAUNCH action and calls handler
+ */
+export function* givemetokensWatcher() {
+  while (true) { // eslint-disable-line no-constant-condition
+    const { ethAddress } = yield take(GIVEMETOKEN_LAUNCH);
+    yield call(givemetokens, ethAddress);
+  }
+}
+
+
+/**
+ * Root saga manages watcher lifecycle
+ */
+export function* givemetokensSaga() {
+  // Fork watcher so we can continue execution
+  const watcher = yield fork(givemetokensWatcher);
+
+  // Suspend execution until location changes
+  yield take(LOCATION_CHANGE);
+  yield cancel(watcher);
+}
+
+// All sagas to be loaded
+export default [
+  givemetokensSaga,
+];
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;At that point, you only know that the transaction has gone through, you don&amp;rsquo;t really know what happened. That&amp;rsquo;s when you need to listen to the event of your contracts.&lt;/p&gt;
+
+&lt;h2 id=&#34;listening-to-events&#34;&gt;Listening to events&lt;/h2&gt;
+
+&lt;p&gt;Same example as above, we will listen to the Approval event.
+We need to create a eventChannel, as the event is coming from &lt;em&gt;outside&lt;/em&gt; this time, it won&amp;rsquo;t be generated by our own UI.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;const ethEvent = () =&amp;gt; eventChannel((emitter) =&amp;gt; {
+  const tokensApproval = tokens.Approval({ fromBlock: &#39;latest&#39; });
+  tokensApproval.watch((error, results) =&amp;gt; {
+    const eventType = &#39;approve&#39;;
+    const eventTime = new Date().toISOString();
+    const eventEthAddress = results.args._owner;
+    let eventDescription;
+    if (error) {
+      console.log(`Approval error ${error}`); // eslint-disable-line no-console
+      eventDescription = `ERROR - ${results.args._owner.substring(0,6)} allowed ${results.args._spender.substring(0,6)} to spend ${results.args._value}Ʉ on his behalf`;
+    } else {
+      eventDescription = `${results.args._owner.substring(0,6)} allowed ${results.args._spender.substring(0,6)} to spend ${results.args._value}Ʉ on his behalf`;
+    }
+
+    emitter({ eventEthAddress, eventType, eventTime, eventDescription });
+  });
+
+  return () =&amp;gt; {
+    tokensApproval.stopWatching();
+  };
+});
+
+function* handleEthEvent(event) {
+  switch (event.eventType) {
+    case &#39;approve&#39;:
+      yield put(ethEventListenerReceiveAction(event.eventEthAddress, event.eventType, event.eventTime, event.eventDescription));
+      break;
+    default:
+      console.log(event); // eslint-disable-line no-console
+  }
+}
+
+export function* ethEventListenerSaga() {
+  yield put(ethEventListenerCreateAction());
+
+  const chan = yield call(ethEvent);
+  try {
+    while (true) {
+      const event = yield take(chan);
+      yield call(handleEthEvent, event);
+    }
+  } finally {
+    if (yield cancelled()) {
+      chan.close();
+      console.log(&#39;listening cancelled&#39;);
+    }
+  }
+} 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And here you go! You can now listen to the stream of events.&lt;/p&gt;
+
+&lt;h2 id=&#34;getting-a-list-of-events&#34;&gt;Getting a list of events&lt;/h2&gt;
+
+&lt;p&gt;In Ethereum, you can get the list of past events, it can kind of act like a kind of storage for the history of your contracts (I won&amp;rsquo;t go into details for this, but some node might not keep the whole history).&lt;/p&gt;
+
+&lt;p&gt;How to get the history of events on the contract?&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;import { take, call, put, cancel, fork } from &#39;redux-saga/effects&#39;;
+import {
+  APPROVAL_HISTORY_GET,
+} from &#39;./constants&#39;;
+import { LOCATION_CHANGE } from &#39;react-router-redux&#39;;
+import { web3Connect } from &#39;utils/web3.js&#39;;
+import {
+  receiveApprovalHistory,
+} from &#39;./actions&#39;;
+import {
+  balanceOfGet,
+} from &#39;containers/Token/actions&#39;;
+import HumanStandardToken from &#39;contracts/HumanStandardToken.sol.js&#39;;
+
+function* getApprovalHistory(ethAddress) {
+  const web3Connection = web3Connect();
+
+  HumanStandardToken.setProvider(web3Connection.currentProvider);
+  const tokens = HumanStandardToken.deployed();
+
+  const approvalHistory = [];
+  // Getting the list of events from block 0 to latest block, with a filter on _owner as it is an indexed field
+  const tokensApproval = tokens.Approval({ _owner: ethAddress }, { fromBlock: &#39;0&#39;, toBlock: &#39;latest&#39; });
+
+  const getApprovalLogPromise = yield call(eventGetPromisified, tokensApproval);
+
+  if (getApprovalLogPromise.err === null || getApprovalLogPromise.err === undefined) {
+    for (const results of getApprovalLogPromise) {
+      approvalHistory.push({
+        trigger: results.args._trigger,
+        measurement: results.args._measurement.valueOf(),
+        premium: results.args._amount.valueOf(),
+        refundedAmount: results.args._refundAmount.valueOf(),
+        settled: results.args._timeEnded.valueOf(),
+        refunded: results.args._due.valueOf(),
+      });
+    }
+  } else {
+    console.log(getApprovalLogPromise.err);
+  }
+
+  yield put(receiveApprovalHistory(ethAddress, approvalHistory));
+}
+
+// Event promisifier to turn the nasty web3 callback to a promise ES6 form
+const eventGetPromisified = (event) =&amp;gt; new Promise((resolve, reject) =&amp;gt; {
+  event.get((error, logs) =&amp;gt; {
+    if (error) {
+      reject(error);
+    } else {
+      resolve(logs);
+    }
+  });
+});
+
+/**
+ * Watches for APPROVAL_HISTORY_GET action and calls handler
+ */
+export function* getApprovalHistoryWatcher() {
+  while (true) { // eslint-disable-line no-constant-condition
+    const { ethAddress } = yield take(APPROVAL_HISTORY_GET);
+    yield fork(getApprovalHistory, ethAddress);
+  }
+}
+
+/**
+ * Root saga manages watcher lifecycle
+ */
+export function* approvalHistorySaga() {
+  // Fork watcher so we can continue execution
+  const getApprovalHistoryW = yield fork(getApprovalHistoryWatcher);
+
+  // Suspend execution until location changes
+  yield take(LOCATION_CHANGE);
+  yield cancel(getApprovalHistoryW);
+}
+
+// All sagas to be loaded
+export default [
+  approvalHistorySaga,
+];
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Et voila!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Ethereum contracts and Golang</title>
       <link>https://vincentserpoul.github.io/post/binding-ethereum-golang/</link>
       <pubDate>Mon, 10 Oct 2016 12:54:00 +0800</pubDate>
@@ -487,7 +817,7 @@ contract(&#39;HumanStandardToken&#39;, (accounts) =&amp;gt; {
   it(&#39;should transfer molds to another user&#39;, () =&amp;gt; {
     const molds = HumanStandardToken.deployed();
 
-    return molds.transfer(accounts[1], 100, { from: accounts[0] })
+    return molds.transfer(accounts[1], 100, { from: accounts[0], gas: 400000 })
       .then(
         () =&amp;gt; molds.balanceOf(accounts[1])
       )
@@ -497,6 +827,23 @@ contract(&#39;HumanStandardToken&#39;, (accounts) =&amp;gt; {
         )
       );
   });
+
+  it(&#39;should emit a transfer event when there is a transfer&#39;, (done) =&amp;gt; {
+    const transferredAmt = 1;
+
+    const transferWatcher = molds.Transfer({ fromBlock: &#39;latest&#39; },
+      (error, results) =&amp;gt; {
+        assert.equal(
+          results.args._value.valueOf(), transferredAmt,
+          `transfer event amount not equal to ${transferredAmt}`
+        );
+        transferWatcher.stopWatching();
+        done();
+      });
+
+    // trigger the event
+    molds.transfer(accounts[1], transferredAmt, { from: accounts[0], gas: 400000 });
+  });  
 });
 &lt;/code&gt;&lt;/pre&gt;
 

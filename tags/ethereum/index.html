@@ -46,6 +46,30 @@
 	
 		<article class="li post">
     <header class="post-header">
+        <h3 class="post-title"><a href="https://vincentserpoul.github.io/post/ethereum-react-dapps/">Ethereum react dapps</a></h3>
+        <p class="post-time"><time datetime="2016-10-27T13:34:00&#43;08:00">October 27, 2016</time></p>
+    </header>
+
+    <section class="post-excerpt">
+        <p>I finished my first dapp with (react-boilerplate)[https://github.com/mxstbr/] this week and here are the few things I learnt. I won&rsquo;t get into the redux, redux-saga details, I let you play with the amazing boilerplate.
+Interacting with constant functions Let&rsquo;s use the typical balanceOf function of the EIP20 contracts:
+function balanceOf(address _owner) constant returns (uint256 balance) { return balances[_owner]; }  Here are the sagas (redux-sagas) I used to interact:
+import { take, call, put, cancel, select, fork } from 'redux-saga/effects'; import { BALANCE_OF_GET, } from '.</p>
+    </section>
+
+    <footer class="post-footer">
+        <span>
+            
+            
+            	&nbsp;&nbsp;<i class="fa fa-tag"></i>
+            	react, blockchain, ethereum, dev, dapps
+            
+        </span>
+    </footer>
+</article>
+	
+		<article class="li post">
+    <header class="post-header">
         <h3 class="post-title"><a href="https://vincentserpoul.github.io/post/binding-ethereum-golang/">Ethereum contracts and Golang</a></h3>
         <p class="post-time"><time datetime="2016-10-10T12:54:00&#43;08:00">October 10, 2016</time></p>
     </header>

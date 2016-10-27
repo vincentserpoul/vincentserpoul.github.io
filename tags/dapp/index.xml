@@ -352,7 +352,7 @@ contract(&#39;HumanStandardToken&#39;, (accounts) =&amp;gt; {
   it(&#39;should transfer molds to another user&#39;, () =&amp;gt; {
     const molds = HumanStandardToken.deployed();
 
-    return molds.transfer(accounts[1], 100, { from: accounts[0] })
+    return molds.transfer(accounts[1], 100, { from: accounts[0], gas: 400000 })
       .then(
         () =&amp;gt; molds.balanceOf(accounts[1])
       )
@@ -362,6 +362,23 @@ contract(&#39;HumanStandardToken&#39;, (accounts) =&amp;gt; {
         )
       );
   });
+
+  it(&#39;should emit a transfer event when there is a transfer&#39;, (done) =&amp;gt; {
+    const transferredAmt = 1;
+
+    const transferWatcher = molds.Transfer({ fromBlock: &#39;latest&#39; },
+      (error, results) =&amp;gt; {
+        assert.equal(
+          results.args._value.valueOf(), transferredAmt,
+          `transfer event amount not equal to ${transferredAmt}`
+        );
+        transferWatcher.stopWatching();
+        done();
+      });
+
+    // trigger the event
+    molds.transfer(accounts[1], transferredAmt, { from: accounts[0], gas: 400000 });
+  });  
 });
 &lt;/code&gt;&lt;/pre&gt;
 

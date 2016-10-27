@@ -46,6 +46,30 @@
 	
 		<article class="li post">
     <header class="post-header">
+        <h3 class="post-title"><a href="https://vincentserpoul.github.io/post/ethereum-react-dapps/">Ethereum react dapps</a></h3>
+        <p class="post-time"><time datetime="2016-10-27T13:34:00&#43;08:00">October 27, 2016</time></p>
+    </header>
+
+    <section class="post-excerpt">
+        <p>I finished my first dapp with (react-boilerplate)[https://github.com/mxstbr/] this week and here are the few things I learnt. I won&rsquo;t get into the redux, redux-saga details, I let you play with the amazing boilerplate.
+Interacting with constant functions Let&rsquo;s use the typical balanceOf function of the EIP20 contracts:
+function balanceOf(address _owner) constant returns (uint256 balance) { return balances[_owner]; }  Here are the sagas (redux-sagas) I used to interact:
+import { take, call, put, cancel, select, fork } from 'redux-saga/effects'; import { BALANCE_OF_GET, } from '.</p>
+    </section>
+
+    <footer class="post-footer">
+        <span>
+            
+            
+            	&nbsp;&nbsp;<i class="fa fa-tag"></i>
+            	react, blockchain, ethereum, dev, dapps
+            
+        </span>
+    </footer>
+</article>
+	
+		<article class="li post">
+    <header class="post-header">
         <h3 class="post-title"><a href="https://vincentserpoul.github.io/post/binding-ethereum-golang/">Ethereum contracts and Golang</a></h3>
         <p class="post-time"><time datetime="2016-10-10T12:54:00&#43;08:00">October 10, 2016</time></p>
     </header>
@@ -244,33 +268,6 @@ I had an issue when I followed the contract tutorial, my contract would not be m
             
             	&nbsp;&nbsp;<i class="fa fa-tag"></i>
             	golang, blockchain, ethereum, geth, dev, testrpc
-            
-        </span>
-    </footer>
-</article>
-	
-		<article class="li post">
-    <header class="post-header">
-        <h3 class="post-title"><a href="https://vincentserpoul.github.io/post/kubernetes-talk/">Kubernetes Singapore Birthday Event</a></h3>
-        <p class="post-time"><time datetime="2016-07-28T22:27:27&#43;08:00">July 28, 2016</time></p>
-    </header>
-
-    <section class="post-excerpt">
-        <p>On the 28th, I was invited to talk at Google Singapore for the Kubernetes birthday http://www.meetup.com/fr-FR/GCPUGSG/events/232659329/?eventId=232659329
-I spoke about my experience with Kubernetes in production for one of my side projects.
-As I like to experiment stuff, I decide to drop power point and use React Spectacle library for my presentation!
-here is the result: https://kuberneprez.surge.sh
-here is the source code: https://github.com/vincentserpoul/prez-kubernetes
-The framework can be found here: http://stack.formidable.com/spectacle/#/?_k=cyx05u
-I will do it again!</p>
-    </section>
-
-    <footer class="post-footer">
-        <span>
-            
-            
-            	&nbsp;&nbsp;<i class="fa fa-tag"></i>
-            	kubernetes, google, birthday, containers, react, spectacle, talk
             
         </span>
     </footer>

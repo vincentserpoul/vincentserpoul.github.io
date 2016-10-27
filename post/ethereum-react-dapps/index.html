@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" prefix="og: http://ogp.me/ns#" xmlns:og="http://ogp.me/ns#"><!--<![endif]-->
+
+    <head>
+                <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="Ethereum contracts and dapps">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="author" content="">
+        <meta name="keywords" content="awesome, definitely">
+	
+        <meta property="og:site_name" content="VS tech corner">
+        <meta property="og:title" content="VS tech corner">
+        <meta property="og:url" content="https://vincentserpoul.github.io/post/ethereum-react-dapps/">
+        <meta property="og:description" content="">
+    
+        <meta property="og:type" content="article" />
+        <meta property="og:article:author" content="" />
+        <meta property="og:article:published_time" content="2016-10-27T13:34:00&#43;08:00" />
+    
+        <meta name="generator" content="Hugo 0.18-DEV" />
+        <title>Ethereum react dapps &middot; VS tech corner </title>
+        <link rel="canonical" href="https://vincentserpoul.github.io/" />
+        <link rel="alternate" type="application/rss+xml" title="RSS" href="">
+        <link rel="stylesheet" type='text/css' href="https://vincentserpoul.github.io/css/main.css"/>
+        <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300|Montserrat:700' rel='stylesheet' type='text/css'>
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+        <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    </head>
+
+<body>
+<!--[if lt IE 7]><p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chrome/‎">install Google Chrome</a> to experience this site.</p><![endif]-->
+
+    <header id="site-header">
+        <div class="container">
+            <a href="https://vincentserpoul.github.io/" alt="VS tech corner"><h1 class="blog-title heading">VS tech corner</h1></a>
+            <p class="blog-description"></p>
+        </div>
+    </header>
+<main class="content" role="main">
+	<div class="container">
+		<article class="post">
+	<header class="post-header">
+        <h3 class="p-post-title">Ethereum react dapps</h3>
+    </header>
+
+    <section class="post-content">
+        
+
+<p>I finished my first dapp with (react-boilerplate)[<a href="https://github.com/mxstbr/">https://github.com/mxstbr/</a>] this week and here are the few things I learnt.
+I won&rsquo;t get into the redux, redux-saga details, I let you play with the amazing boilerplate.</p>
+
+<h2 id="interacting-with-constant-functions">Interacting with constant functions</h2>
+
+<p>Let&rsquo;s use the typical balanceOf function of the EIP20 contracts:</p>
+
+<pre><code class="language-solidity">    function balanceOf(address _owner) constant returns (uint256 balance) {
+        return balances[_owner];
+    }
+</code></pre>
+
+<p>Here are the sagas (redux-sagas) I used to interact:</p>
+
+<pre><code class="language-javascript">import { take, call, put, cancel, select, fork } from 'redux-saga/effects';
+import {
+  BALANCE_OF_GET,
+} from './constants';
+import { LOCATION_CHANGE } from 'react-router-redux';
+
+import {
+  balanceOfSuccess,
+  balanceOfFailure,
+} from './actions';
+
+import { selectEthConnectWeb3Connection } from 'containers/EthConnect/selectors';
+
+import HumanStandardToken from 'contracts/HumanStandardToken.sol.js';
+
+function* balanceOfGet(ethAddress) {
+  const web3Connection = yield select(selectEthConnectWeb3Connection());
+
+  HumanStandardToken.setProvider(web3Connection.currentProvider);
+  const token = HumanStandardToken.deployed();
+
+  const balancePromise = yield call(token.balanceOf, ethAddress);
+
+  // We return an object in a specific format, see utils/request.js for more information
+  if (balancePromise.err === undefined || balancePromise.err === null) {
+    yield put(balanceOfSuccess(ethAddress, balancePromise.valueOf()));
+  } else {
+    console.log(balancePromise.err.response); // eslint-disable-line no-console
+    yield put(balanceOfFailure(ethAddress, balancePromise.err.response));
+  }
+}
+
+/**
+ * Watches for BALANCE_OF_GET action and calls handler
+ */
+export function* balanceOfWatcher() {
+  while (true) { // eslint-disable-line no-constant-condition
+    const { ethAddress } = yield take(BALANCE_OF_GET);
+    // use fork and not call to be sure to fork all
+    yield fork(balanceOfGet, ethAddress);
+  }
+}
+
+
+/**
+ * Root saga manages watcher lifecycle
+ */
+export function* balanceOfSaga() {
+  // Fork watcher so we can continue execution
+  const watcher = yield fork(balanceOfWatcher);
+
+  // Suspend execution until location changes
+  yield take(LOCATION_CHANGE);
+  yield cancel(watcher);
+}
+
+// All sagas to be loaded
+export default [
+  balanceOfSaga,
+];
+
+</code></pre>
+
+<p>Then, simply implement the right reducers, actions and you are done! you can easily get the balance in your UI.</p>
+
+<h2 id="interacting-with-functions-that-needs-transactions">Interacting with functions that needs transactions</h2>
+
+<p>Let&rsquo;s use the same EIP20 contract again:</p>
+
+<pre><code class="language-solidity">    event Approval(address indexed _owner, address indexed _spender, uint256 _value);
+
+    function approve(address _spender, uint256 _value) returns (bool success) {
+        allowed[msg.sender][_spender] = _value;
+        Approval(msg.sender, _spender, _value);
+        return true;
+    }
+</code></pre>
+
+<pre><code class="language-javascript">import { take, call, put, select, cancel, fork } from 'redux-saga/effects';
+import {
+  GIVEMETOKEN_LAUNCH,
+} from './constants';
+import { LOCATION_CHANGE } from 'react-router-redux';
+
+import {
+  givemetokensSuccess,
+  givemetokensFailure,
+} from './actions';
+
+import {
+  balanceOfGet,
+} from 'containers/Token/actions';
+
+import { selectEthConnectWeb3Connection } from 'containers/EthConnect/selectors';
+// import { selectRianEthAddress } from './selectors';
+
+import HumanStandardToken from 'contracts/HumanStandardToken.sol.js';
+
+function* givemetokens(ethAddress) {
+  const web3Connection = yield select(selectEthConnectWeb3Connection());
+  HumanStandardToken.setProvider(web3Connection.currentProvider);
+  const tokens = HumanStandardToken.deployed();
+
+  const tokensOwner = yield call(tokens.getOwner.call);
+
+  try {
+    yield call(tokens.approve, ethAddress, 100, { from: tokensOwner, gas: 200000 });
+  } catch (e) {
+    console.log(e); // eslint-disable-line no-console
+    yield put(givemetokensFailure(ethAddress));
+    return;
+  }
+
+  const approvedAmt = yield call(tokens.allowance.call, tokensOwner, ethAddress);
+  console.log(`approved amount: ${approvedAmt}`);
+
+  try {
+    yield call(tokens.transferFrom, tokensOwner, ethAddress, 100, { from: ethAddress, gas: 200000 });
+  } catch (e) {
+    console.log(e); // eslint-disable-line no-console
+    yield put(givemetokensFailure(ethAddress));
+  }
+
+  yield put(givemetokensSuccess(ethAddress, true));
+  yield put(balanceOfGet(ethAddress));
+}
+
+/**
+ * Watches for SIMPLEINSURANCE_givemetokens_LAUNCH action and calls handler
+ */
+export function* givemetokensWatcher() {
+  while (true) { // eslint-disable-line no-constant-condition
+    const { ethAddress } = yield take(GIVEMETOKEN_LAUNCH);
+    yield call(givemetokens, ethAddress);
+  }
+}
+
+
+/**
+ * Root saga manages watcher lifecycle
+ */
+export function* givemetokensSaga() {
+  // Fork watcher so we can continue execution
+  const watcher = yield fork(givemetokensWatcher);
+
+  // Suspend execution until location changes
+  yield take(LOCATION_CHANGE);
+  yield cancel(watcher);
+}
+
+// All sagas to be loaded
+export default [
+  givemetokensSaga,
+];
+</code></pre>
+
+<p>At that point, you only know that the transaction has gone through, you don&rsquo;t really know what happened. That&rsquo;s when you need to listen to the event of your contracts.</p>
+
+<h2 id="listening-to-events">Listening to events</h2>
+
+<p>Same example as above, we will listen to the Approval event.
+We need to create a eventChannel, as the event is coming from <em>outside</em> this time, it won&rsquo;t be generated by our own UI.</p>
+
+<pre><code class="language-javascript">const ethEvent = () =&gt; eventChannel((emitter) =&gt; {
+  const tokensApproval = tokens.Approval({ fromBlock: 'latest' });
+  tokensApproval.watch((error, results) =&gt; {
+    const eventType = 'approve';
+    const eventTime = new Date().toISOString();
+    const eventEthAddress = results.args._owner;
+    let eventDescription;
+    if (error) {
+      console.log(`Approval error ${error}`); // eslint-disable-line no-console
+      eventDescription = `ERROR - ${results.args._owner.substring(0,6)} allowed ${results.args._spender.substring(0,6)} to spend ${results.args._value}Ʉ on his behalf`;
+    } else {
+      eventDescription = `${results.args._owner.substring(0,6)} allowed ${results.args._spender.substring(0,6)} to spend ${results.args._value}Ʉ on his behalf`;
+    }
+
+    emitter({ eventEthAddress, eventType, eventTime, eventDescription });
+  });
+
+  return () =&gt; {
+    tokensApproval.stopWatching();
+  };
+});
+
+function* handleEthEvent(event) {
+  switch (event.eventType) {
+    case 'approve':
+      yield put(ethEventListenerReceiveAction(event.eventEthAddress, event.eventType, event.eventTime, event.eventDescription));
+      break;
+    default:
+      console.log(event); // eslint-disable-line no-console
+  }
+}
+
+export function* ethEventListenerSaga() {
+  yield put(ethEventListenerCreateAction());
+
+  const chan = yield call(ethEvent);
+  try {
+    while (true) {
+      const event = yield take(chan);
+      yield call(handleEthEvent, event);
+    }
+  } finally {
+    if (yield cancelled()) {
+      chan.close();
+      console.log('listening cancelled');
+    }
+  }
+} 
+</code></pre>
+
+<p>And here you go! You can now listen to the stream of events.</p>
+
+<h2 id="getting-a-list-of-events">Getting a list of events</h2>
+
+<p>In Ethereum, you can get the list of past events, it can kind of act like a kind of storage for the history of your contracts (I won&rsquo;t go into details for this, but some node might not keep the whole history).</p>
+
+<p>How to get the history of events on the contract?</p>
+
+<pre><code class="language-javascript">import { take, call, put, cancel, fork } from 'redux-saga/effects';
+import {
+  APPROVAL_HISTORY_GET,
+} from './constants';
+import { LOCATION_CHANGE } from 'react-router-redux';
+import { web3Connect } from 'utils/web3.js';
+import {
+  receiveApprovalHistory,
+} from './actions';
+import {
+  balanceOfGet,
+} from 'containers/Token/actions';
+import HumanStandardToken from 'contracts/HumanStandardToken.sol.js';
+
+function* getApprovalHistory(ethAddress) {
+  const web3Connection = web3Connect();
+
+  HumanStandardToken.setProvider(web3Connection.currentProvider);
+  const tokens = HumanStandardToken.deployed();
+
+  const approvalHistory = [];
+  // Getting the list of events from block 0 to latest block, with a filter on _owner as it is an indexed field
+  const tokensApproval = tokens.Approval({ _owner: ethAddress }, { fromBlock: '0', toBlock: 'latest' });
+
+  const getApprovalLogPromise = yield call(eventGetPromisified, tokensApproval);
+
+  if (getApprovalLogPromise.err === null || getApprovalLogPromise.err === undefined) {
+    for (const results of getApprovalLogPromise) {
+      approvalHistory.push({
+        trigger: results.args._trigger,
+        measurement: results.args._measurement.valueOf(),
+        premium: results.args._amount.valueOf(),
+        refundedAmount: results.args._refundAmount.valueOf(),
+        settled: results.args._timeEnded.valueOf(),
+        refunded: results.args._due.valueOf(),
+      });
+    }
+  } else {
+    console.log(getApprovalLogPromise.err);
+  }
+
+  yield put(receiveApprovalHistory(ethAddress, approvalHistory));
+}
+
+// Event promisifier to turn the nasty web3 callback to a promise ES6 form
+const eventGetPromisified = (event) =&gt; new Promise((resolve, reject) =&gt; {
+  event.get((error, logs) =&gt; {
+    if (error) {
+      reject(error);
+    } else {
+      resolve(logs);
+    }
+  });
+});
+
+/**
+ * Watches for APPROVAL_HISTORY_GET action and calls handler
+ */
+export function* getApprovalHistoryWatcher() {
+  while (true) { // eslint-disable-line no-constant-condition
+    const { ethAddress } = yield take(APPROVAL_HISTORY_GET);
+    yield fork(getApprovalHistory, ethAddress);
+  }
+}
+
+/**
+ * Root saga manages watcher lifecycle
+ */
+export function* approvalHistorySaga() {
+  // Fork watcher so we can continue execution
+  const getApprovalHistoryW = yield fork(getApprovalHistoryWatcher);
+
+  // Suspend execution until location changes
+  yield take(LOCATION_CHANGE);
+  yield cancel(getApprovalHistoryW);
+}
+
+// All sagas to be loaded
+export default [
+  approvalHistorySaga,
+];
+</code></pre>
+
+<p>Et voila!</p>
+
+    </section>
+
+    <hr>
+
+    <footer class="post-footer">
+        <section class="f-1">
+            
+
+            <p class="f-post-time"><time datetime="2016-10-27T13:34:00&#43;08:00">October 27, 2016</time></p>
+        </section>
+
+        <section class="f-2">
+            <section class="share">
+                <span>Share:
+                <a class="icon-twitter" href="http://twitter.com/share?text=Ethereum%20react%20dapps&url=https%3a%2f%2fvincentserpoul.github.io%2fpost%2fethereum-react-dapps%2f"
+                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="fa fa-twitter"></i>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fvincentserpoul.github.io%2fpost%2fethereum-react-dapps%2f"
+                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="fa fa-facebook"></i>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=https%3a%2f%2fvincentserpoul.github.io%2fpost%2fethereum-react-dapps%2f"
+                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="fa fa-google-plus"></i>
+                </a>
+                </span>
+            </section>
+
+            
+            	<span class="f-post-tags"><i class="fa fa-tag"></i>
+            	react, blockchain, ethereum, dev, dapps
+            	</span>
+            
+        </section>
+    </footer>
+
+    <div id="disqus_thread"></div>
+<script>
+var disqus_config = function () {
+    this.page.url = "https://vincentserpoul.github.io/post/ethereum-react-dapps/";  
+    this.page.identifier = "https://vincentserpoul.github.io/post/ethereum-react-dapps/"; 
+};
+
+(function() { 
+    var d = document, s = d.createElement('script');
+    s.src = '//vincentserpoul-tech-corner.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</article>
+	</div>
+</main>
+    <footer id="site-footer">
+        <div class="container">
+            <a href="https://vincentserpoul.github.io/index.xml" title="Get the RSS feed"><span class="tooltip"><i class="fa fa-rss"></i></span></a>
+        </div>
+    </footer>
+
+    <script type="text/javascript" src="https://vincentserpoul.github.io/js/fittext.js"></script>
+    <script type="text/javascript">
+      $(".heading").fitText();
+    </script>
+
+    
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-81802018-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+</body>
+</html>
