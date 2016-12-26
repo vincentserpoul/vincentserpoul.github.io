@@ -2,8 +2,8 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://vincentserpoul.github.io/</loc>
-    <lastmod>2016-10-27T13:34:00+08:00</lastmod>
+    <loc>https://vincentserpoul.github.io/post/golang-playwithsql-oracle/</loc>
+    <lastmod>2016-12-27T00:44:00+08:00</lastmod>
   </url>
   
   <url>
@@ -94,6 +94,257 @@
   <url>
     <loc>https://vincentserpoul.github.io/about/</loc>
     <lastmod>2015-01-09T14:46:46+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/tags/beginner/</loc>
+    <lastmod>2015-02-20T08:27:27+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/tags/birthday/</loc>
+    <lastmod>2016-07-28T22:27:27+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/tags/blockchain/</loc>
+    <lastmod>2016-10-27T13:34:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/tags/commands/</loc>
+    <lastmod>2015-02-20T08:27:27+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/tags/conference/</loc>
+    <lastmod>2016-09-16T13:44:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/tags/containers/</loc>
+    <lastmod>2016-07-28T22:27:27+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/tags/dapp/</loc>
+    <lastmod>2016-08-12T12:00:27+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/tags/dapps/</loc>
+    <lastmod>2016-10-27T13:34:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/tags/dev/</loc>
+    <lastmod>2016-10-27T13:34:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/tags/devcon2/</loc>
+    <lastmod>2016-09-16T13:44:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/tags/development/</loc>
+    <lastmod>2016-08-12T12:00:27+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/tags/environment/</loc>
+    <lastmod>2016-04-11T20:48:27+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/tags/ethereum/</loc>
+    <lastmod>2016-10-27T13:34:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/tags/geth/</loc>
+    <lastmod>2016-08-01T08:27:27+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/tags/git/</loc>
+    <lastmod>2015-02-20T08:27:27+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/tags/golang/</loc>
+    <lastmod>2016-12-27T00:44:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/tags/google/</loc>
+    <lastmod>2016-07-28T22:27:27+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/tags/javascript/</loc>
+    <lastmod>2016-08-03T20:00:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/tags/kubernetes/</loc>
+    <lastmod>2016-07-28T22:27:27+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/tags/linux/</loc>
+    <lastmod>2016-12-27T00:44:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/tags/metamask/</loc>
+    <lastmod>2016-08-12T12:00:27+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/tags/microservices/</loc>
+    <lastmod>2016-09-30T12:06:01+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/tags/oracle/</loc>
+    <lastmod>2016-12-27T00:44:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/post/</loc>
+    <lastmod>2016-12-27T00:44:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/tags/react/</loc>
+    <lastmod>2016-10-27T13:34:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/tags/redux/</loc>
+    <lastmod>2016-04-12T12:22:20+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/tags/scaling/</loc>
+    <lastmod>2016-09-30T12:06:01+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/tags/setup/</loc>
+    <lastmod>2016-04-11T20:48:27+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/tags/smart-contract/</loc>
+    <lastmod>2016-08-03T20:00:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/tags/spa/</loc>
+    <lastmod>2016-04-12T12:22:20+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/tags/spectacle/</loc>
+    <lastmod>2016-07-28T22:27:27+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/tags/sql/</loc>
+    <lastmod>2016-12-27T00:44:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/tags/sublimetext/</loc>
+    <lastmod>2016-03-10T20:48:27+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/tags/talk/</loc>
+    <lastmod>2016-07-28T22:27:27+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/tags/testrpc/</loc>
+    <lastmod>2016-10-10T12:54:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/tags/tools/</loc>
+    <lastmod>2016-04-11T20:48:27+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/tags/uber/</loc>
+    <lastmod>2016-09-30T12:06:01+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/</loc>
+    <lastmod>2016-12-27T00:44:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/tags/versioning/</loc>
+    <lastmod>2015-02-20T08:27:27+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/tags/web3/</loc>
+    <lastmod>2016-08-03T20:00:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/tags/webpack/</loc>
+    <lastmod>2016-04-12T12:22:20+08:00</lastmod>
+    <priority>0</priority>
   </url>
   
 </urlset>

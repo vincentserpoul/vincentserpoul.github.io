@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" prefix="og: http://ogp.me/ns#" xmlns:og="http://ogp.me/ns#"><!--<![endif]-->
+
+    <head>
+                <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="How to use Oracle in golang">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="author" content="">
+        <meta name="keywords" content="awesome, definitely">
+	
+        <meta property="og:site_name" content="VS tech corner">
+        <meta property="og:title" content="VS tech corner">
+        <meta property="og:url" content="https://vincentserpoul.github.io/post/golang-playwithsql-oracle/">
+        <meta property="og:description" content="">
+    
+        <meta property="og:type" content="article" />
+        <meta property="og:article:author" content="" />
+        <meta property="og:article:published_time" content="2016-12-27T00:44:00&#43;08:00" />
+    
+        <meta name="generator" content="Hugo 0.19-DEV" />
+        <title>Golang and Oracle &middot; VS tech corner </title>
+        <link rel="canonical" href="https://vincentserpoul.github.io/" />
+        <link rel="alternate" type="application/rss+xml" title="RSS" href="">
+        <link rel="stylesheet" type='text/css' href="https://vincentserpoul.github.io/css/main.css"/>
+        <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300|Montserrat:700' rel='stylesheet' type='text/css'>
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+        <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    </head>
+
+<body>
+<!--[if lt IE 7]><p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chrome/‎">install Google Chrome</a> to experience this site.</p><![endif]-->
+
+    <header id="site-header">
+        <div class="container">
+            <a href="https://vincentserpoul.github.io/" alt="VS tech corner"><h1 class="blog-title heading">VS tech corner</h1></a>
+            <p class="blog-description"></p>
+        </div>
+    </header>
+<main class="content" role="main">
+	<div class="container">
+		<article class="post">
+	<header class="post-header">
+        <h3 class="p-post-title">Golang and Oracle</h3>
+    </header>
+
+    <section class="post-content">
+        
+
+<h2 id="which-library">Which library</h2>
+
+<p>To this day, the most up to date library seems to be <a href="https://github.com/rana/ora">rana/ora</a></p>
+
+<h2 id="how-to-install-linux">How to install (linux)</h2>
+
+<p>Download <a href="http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html">Oracle Instant Client for linux x64</a>: both packages Basic and SDK
+Unzip each of them in the same folder /opt/oracle</p>
+
+<pre><code class="language-powershell">mkdir -p /opt/oracle
+cd /opt/oracle
+unzip ~/Downloads/instantclient-basic-linux.x64-12.1.0.2.0.zip
+unzip ~/Downloads/instantclient-sdk-linux.x64-12.1.0.2.0.zip
+cd /opt/oracle/instantclient_12_1
+</code></pre>
+
+<p>Follow the instructions from Oracle:</p>
+
+<pre><code class="language-powershell">ln -s libclntsh.so.12.1 libclntsh.so
+ln -s libocci.so.12.1 libocci.so
+</code></pre>
+
+<p>Add the necessary env variables and paths:</p>
+
+<pre><code class="language-powershell"># Oracle
+export LD_LIBRARY_PATH=/opt/oracle/instantclient_12_1:/opt/oracle/instantclient_12_1/sdk/include
+export PKG_CONFIG_PATH=/opt/oracle
+export PATH=/opt/oracle/instantclient_12_1:$PATH
+export ORACLE_HOME=/opt/oracle/instantclient_12_1:/opt/oracle/instantclient_12_1/sdk/include
+</code></pre>
+
+<p>copy from the go package ./contrib/oci8.pc to /opt/oracle and modify its content to:</p>
+
+<pre><code>version=12.1
+
+includedir=/opt/oracle/instantclient_12_1/sdk/include
+libdir=/opt/oracle/instantclient_12_1
+
+Name: oci8
+Description: Oracle database engine
+Version: ${version}
+Libs: -L${libdir} -lclntsh
+Libs.private:
+Cflags: -I${includedir}
+</code></pre>
+
+<p>then simply</p>
+
+<pre><code class="language-powershell">go install ./...
+</code></pre>
+
+<p>You should be all good!</p>
+
+    </section>
+
+    <hr>
+
+    <footer class="post-footer">
+        <section class="f-1">
+            
+
+            <p class="f-post-time"><time datetime="2016-12-27T00:44:00&#43;08:00">December 27, 2016</time></p>
+        </section>
+
+        <section class="f-2">
+            <section class="share">
+                <span>Share:
+                <a class="icon-twitter" href="http://twitter.com/share?text=Golang%20and%20Oracle&url=https%3a%2f%2fvincentserpoul.github.io%2fpost%2fgolang-playwithsql-oracle%2f"
+                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="fa fa-twitter"></i>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fvincentserpoul.github.io%2fpost%2fgolang-playwithsql-oracle%2f"
+                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="fa fa-facebook"></i>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=https%3a%2f%2fvincentserpoul.github.io%2fpost%2fgolang-playwithsql-oracle%2f"
+                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="fa fa-google-plus"></i>
+                </a>
+                </span>
+            </section>
+
+            
+            	<span class="f-post-tags"><i class="fa fa-tag"></i>
+            	golang, oracle, linux, sql
+            	</span>
+            
+        </section>
+    </footer>
+
+    <div id="disqus_thread"></div>
+<script>
+var disqus_config = function () {
+    this.page.url = "https://vincentserpoul.github.io/post/golang-playwithsql-oracle/";  
+    this.page.identifier = "https://vincentserpoul.github.io/post/golang-playwithsql-oracle/"; 
+};
+
+(function() { 
+    var d = document, s = d.createElement('script');
+    s.src = '//vincentserpoul-tech-corner.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</article>
+	</div>
+</main>
+    <footer id="site-footer">
+        <div class="container">
+            <a href="https://vincentserpoul.github.io/index.xml" title="Get the RSS feed"><span class="tooltip"><i class="fa fa-rss"></i></span></a>
+        </div>
+    </footer>
+
+    <script type="text/javascript" src="https://vincentserpoul.github.io/js/fittext.js"></script>
+    <script type="text/javascript">
+      $(".heading").fitText();
+    </script>
+
+    
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-81802018-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+</body>
+</html>

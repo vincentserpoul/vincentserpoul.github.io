@@ -6,8 +6,71 @@
     <description>Recent content on VS tech corner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 27 Oct 2016 13:34:00 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 27 Dec 2016 00:44:00 +0800</lastBuildDate>
     <atom:link href="https://vincentserpoul.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Golang and Oracle</title>
+      <link>https://vincentserpoul.github.io/post/golang-playwithsql-oracle/</link>
+      <pubDate>Tue, 27 Dec 2016 00:44:00 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/post/golang-playwithsql-oracle/</guid>
+      <description>
+
+&lt;h2 id=&#34;which-library&#34;&gt;Which library&lt;/h2&gt;
+
+&lt;p&gt;To this day, the most up to date library seems to be &lt;a href=&#34;https://github.com/rana/ora&#34;&gt;rana/ora&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;how-to-install-linux&#34;&gt;How to install (linux)&lt;/h2&gt;
+
+&lt;p&gt;Download &lt;a href=&#34;http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html&#34;&gt;Oracle Instant Client for linux x64&lt;/a&gt;: both packages Basic and SDK
+Unzip each of them in the same folder /opt/oracle&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-powershell&#34;&gt;mkdir -p /opt/oracle
+cd /opt/oracle
+unzip ~/Downloads/instantclient-basic-linux.x64-12.1.0.2.0.zip
+unzip ~/Downloads/instantclient-sdk-linux.x64-12.1.0.2.0.zip
+cd /opt/oracle/instantclient_12_1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Follow the instructions from Oracle:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-powershell&#34;&gt;ln -s libclntsh.so.12.1 libclntsh.so
+ln -s libocci.so.12.1 libocci.so
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Add the necessary env variables and paths:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-powershell&#34;&gt;# Oracle
+export LD_LIBRARY_PATH=/opt/oracle/instantclient_12_1:/opt/oracle/instantclient_12_1/sdk/include
+export PKG_CONFIG_PATH=/opt/oracle
+export PATH=/opt/oracle/instantclient_12_1:$PATH
+export ORACLE_HOME=/opt/oracle/instantclient_12_1:/opt/oracle/instantclient_12_1/sdk/include
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;copy from the go package ./contrib/oci8.pc to /opt/oracle and modify its content to:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;version=12.1
+
+includedir=/opt/oracle/instantclient_12_1/sdk/include
+libdir=/opt/oracle/instantclient_12_1
+
+Name: oci8
+Description: Oracle database engine
+Version: ${version}
+Libs: -L${libdir} -lclntsh
+Libs.private:
+Cflags: -I${includedir}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;then simply&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-powershell&#34;&gt;go install ./...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You should be all good!&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Ethereum react dapps</title>
@@ -1470,80 +1533,6 @@ miner.stop()
 &lt;p&gt;If you don&amp;rsquo;t see anything, check the console again.&lt;/p&gt;
 
 &lt;p&gt;Last resort, if things are still not working, you can go there and troubleshoot: &lt;a href=&#34;http://www.sublimelinter.com/en/latest/troubleshooting.html&#34;&gt;http://www.sublimelinter.com/en/latest/troubleshooting.html&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>golang dev environment setup</title>
-      <link>https://vincentserpoul.github.io/post/golang-dev-env-setup/</link>
-      <pubDate>Sat, 20 Feb 2016 20:48:27 +0800</pubDate>
-      
-      <guid>https://vincentserpoul.github.io/post/golang-dev-env-setup/</guid>
-      <description>
-
-&lt;h3 id=&#34;golang-environment&#34;&gt;Golang environment&lt;/h3&gt;
-
-&lt;p&gt;install golang&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://www.wolfe.id.au/2015/03/05/using-sublime-text-for-go-development/&#34;&gt;http://www.wolfe.id.au/2015/03/05/using-sublime-text-for-go-development/&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Within &lt;a href=&#34;https://vincentserpoul.github.io/sublimetext-dev-environment&#34;&gt;sublimetext, from the package manager&lt;/a&gt;, install gosublime, install gooracle.&lt;/p&gt;
-
-&lt;p&gt;install go/tools:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;go get -u golang.org/x/tools/cmd/goimports
-go get -u golang.org/x/tools/cmd/vet
-go get -u golang.org/x/tools/cmd/oracle
-go get -u golang.org/x/tools/cmd/godoc
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;install gometalinter (&lt;a href=&#34;https://github.com/alecthomas/gometalinter&#34;&gt;https://github.com/alecthomas/gometalinter&lt;/a&gt;)&lt;/p&gt;
-
-&lt;p&gt;install interfacer (&lt;a href=&#34;https://github.com/mvdan/interfacer/&#34;&gt;https://github.com/mvdan/interfacer/&lt;/a&gt;)&lt;/p&gt;
-
-&lt;p&gt;install gosimple (&lt;a href=&#34;https://github.com/dominikh/go-simple&#34;&gt;https://github.com/dominikh/go-simple&lt;/a&gt;)&lt;/p&gt;
-
-&lt;p&gt;install gocov (&lt;a href=&#34;https://github.com/axw/gocov&#34;&gt;https://github.com/axw/gocov&lt;/a&gt;)&lt;/p&gt;
-
-&lt;p&gt;Here is the package settings I use for gosublime:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
-
-    // you may set specific environment variables here
-    // e.g &amp;quot;env&amp;quot;: { &amp;quot;PATH&amp;quot;: &amp;quot;$HOME/go/bin:$PATH&amp;quot; }
-    // in values, $PATH and ${PATH} are replaced with
-    // the corresponding environment(PATH) variable, if it exists.
-    &amp;quot;env&amp;quot;: {&amp;quot;GOPATH&amp;quot;: &amp;quot;/home/go&amp;quot; },
-
-    &amp;quot;fmt_cmd&amp;quot;: [&amp;quot;goimports&amp;quot;],
-    &amp;quot;ipc_timeout&amp;quot;: 5,
-
-    // enable comp-lint, this will effectively disable the live linter
-    &amp;quot;comp_lint_enabled&amp;quot;: true,
-
-    // list of commands to run
-    &amp;quot;comp_lint_commands&amp;quot;: [
-        // run `golint` on all files in the package
-        // &amp;quot;shell&amp;quot;:true is required in order to run the command through your shell (to expand `*.go`)
-        // also see: the documentation for the `shell` setting in the default settings file ctrl+dot,ctrl+4
-        {&amp;quot;cmd&amp;quot;: [&amp;quot;golint *.go&amp;quot;], &amp;quot;shell&amp;quot;: true},
-
-        // run go vet on the package
-        {&amp;quot;cmd&amp;quot;: [&amp;quot;go&amp;quot;, &amp;quot;vet&amp;quot;]},
-
-        // run `go install` on the package. GOBIN is set,
-        // so `main` packages shouldn&#39;t result in the installation of a binary
-        {&amp;quot;cmd&amp;quot;: [&amp;quot;go&amp;quot;, &amp;quot;install&amp;quot;]}
-    ],
-
-    &amp;quot;on_save&amp;quot;: [
-        // run comp-lint when you save,
-        // naturally, you can also bind this command `gs_comp_lint`
-        // to a key binding if you want
-        {&amp;quot;cmd&amp;quot;: &amp;quot;gs_comp_lint&amp;quot;}
-    ]
-}
-&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     

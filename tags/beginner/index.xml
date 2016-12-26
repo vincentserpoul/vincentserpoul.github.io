@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>VS tech corner</title>
+    <title>Beginner on VS tech corner</title>
     <link>https://vincentserpoul.github.io/tags/beginner/index.xml</link>
-    <description>Recent content on VS tech corner</description>
+    <description>Recent content in Beginner on VS tech corner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <atom:link href="https://vincentserpoul.github.io/tags/beginner/index.xml" rel="self" type="application/rss+xml" />

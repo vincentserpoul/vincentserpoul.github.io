@@ -22,7 +22,7 @@
     
         <meta property="og:type" content="website" />
     
-        <meta name="generator" content="Hugo 0.18-DEV" />
+        <meta name="generator" content="Hugo 0.19-DEV" />
         <title>Posts &middot; VS tech corner </title>
         <link rel="canonical" href="https://vincentserpoul.github.io/" />
         <link rel="alternate" type="application/rss+xml" title="RSS" href="https://vincentserpoul.github.io/post/index.xml">
@@ -43,6 +43,30 @@
     </header>
 <main class="content" role="main">
 	<div class="container">
+	
+		<article class="li post">
+    <header class="post-header">
+        <h3 class="post-title"><a href="https://vincentserpoul.github.io/post/golang-playwithsql-oracle/">Golang and Oracle</a></h3>
+        <p class="post-time"><time datetime="2016-12-27T00:44:00&#43;08:00">December 27, 2016</time></p>
+    </header>
+
+    <section class="post-excerpt">
+        <p>Which library To this day, the most up to date library seems to be rana/ora
+How to install (linux) Download Oracle Instant Client for linux x64: both packages Basic and SDK Unzip each of them in the same folder /opt/oracle
+mkdir -p /opt/oracle cd /opt/oracle unzip ~/Downloads/instantclient-basic-linux.x64-12.1.0.2.0.zip unzip ~/Downloads/instantclient-sdk-linux.x64-12.1.0.2.0.zip cd /opt/oracle/instantclient_12_1  Follow the instructions from Oracle:
+ln -s libclntsh.so.12.1 libclntsh.so ln -s libocci.so.12.1 libocci.so  Add the necessary env variables and paths:</p>
+    </section>
+
+    <footer class="post-footer">
+        <span>
+            
+            
+            	&nbsp;&nbsp;<i class="fa fa-tag"></i>
+            	golang, oracle, linux, sql
+            
+        </span>
+    </footer>
+</article>
 	
 		<article class="li post">
     <header class="post-header">
@@ -247,27 +271,6 @@ I had an issue when I followed the contract tutorial, my contract would not be m
             
             	&nbsp;&nbsp;<i class="fa fa-tag"></i>
             	blockchain, ethereum, smart contract
-            
-        </span>
-    </footer>
-</article>
-	
-		<article class="li post">
-    <header class="post-header">
-        <h3 class="post-title"><a href="https://vincentserpoul.github.io/post/ethereum-dev-environment/">Ethereum dev environment</a></h3>
-        <p class="post-time"><time datetime="2016-08-01T08:27:27&#43;08:00">August 1, 2016</time></p>
-    </header>
-
-    <section class="post-excerpt">
-        <p>Part 1 - Setup your ethereum node There are many ways you can setup a node to dev an Ethereum dapp. You can use the live network: not advisable obviously for cost and speed reasons. You can use the test network: not advisable for speed reasons. You can use a testchain set up with Geth: easy but a bit tedious as you need to mine. You can the ethereum testrpc: easiest!</p>
-    </section>
-
-    <footer class="post-footer">
-        <span>
-            
-            
-            	&nbsp;&nbsp;<i class="fa fa-tag"></i>
-            	golang, blockchain, ethereum, geth, dev, testrpc
             
         </span>
     </footer>
