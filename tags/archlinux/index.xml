@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Archlinux on VS tech corner</title>
+    <link>https://vincentserpoul.github.io/tags/archlinux/index.xml</link>
+    <description>Recent content in Archlinux on VS tech corner</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="https://vincentserpoul.github.io/tags/archlinux/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Bluetooth activation at startup on arch linux</title>
+      <link>https://vincentserpoul.github.io/post/archlinux-bluetooth/</link>
+      <pubDate>Mon, 03 Apr 2017 16:22:00 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/post/archlinux-bluetooth/</guid>
+      <description>
+
+&lt;h2 id=&#34;why&#34;&gt;Why?&lt;/h2&gt;
+
+&lt;p&gt;You might not have reach that point yet but bluez has been deprecating hciconfig and other tools.
+In bluez 5.44, &lt;a href=&#34;https://bugs.archlinux.org/task/53110&#34;&gt;it&amp;rsquo;s not there anymore&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;what-is-the-problem&#34;&gt;What is the problem?&lt;/h2&gt;
+
+&lt;p&gt;All hciconfig udev rules to activate bluetooth at startup won&amp;rsquo;t work anymore.
+Most forum posts solving bluetooth issues are now outdated.
+Once I updated to bluez 5.44, my service leveraging hciconfig to activate bluetooth at startup didn&amp;rsquo;t work anymore!&lt;/p&gt;
+
+&lt;h2 id=&#34;what-is-the-solution&#34;&gt;What is the solution?&lt;/h2&gt;
+
+&lt;p&gt;It&amp;rsquo;s now actually documented in the &lt;a href=&#34;https://wiki.archlinux.org/index.php/bluetooth&#34;&gt;archwiki&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Alternatively and instead of the custom service and udev rule, you can simply use the new AutoEnable feature introduced in BlueZ 5.35 by uncommenting  [Policy] and AutoEnable=true lines in /etc/bluetooth/main.conf.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Just uncomment and go, you don&amp;rsquo;t need the service to activate bluetooth anymore, enjoy!&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

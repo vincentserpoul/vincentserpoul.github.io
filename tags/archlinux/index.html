@@ -17,15 +17,15 @@
 	
         <meta property="og:site_name" content="VS tech corner">
         <meta property="og:title" content="VS tech corner">
-        <meta property="og:url" content="https://vincentserpoul.github.io/tags/versioning/">
+        <meta property="og:url" content="https://vincentserpoul.github.io/tags/archlinux/">
         <meta property="og:description" content="">
     
         <meta property="og:type" content="website" />
     
         <meta name="generator" content="Hugo 0.20-DEV" />
-        <title>Versioning &middot; VS tech corner </title>
+        <title>Archlinux &middot; VS tech corner </title>
         <link rel="canonical" href="https://vincentserpoul.github.io/" />
-        <link rel="alternate" type="application/rss+xml" title="RSS" href="https://vincentserpoul.github.io/tags/versioning/index.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS" href="https://vincentserpoul.github.io/tags/archlinux/index.xml">
         <link rel="stylesheet" type='text/css' href="https://vincentserpoul.github.io/css/main.css"/>
         <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300|Montserrat:700' rel='stylesheet' type='text/css'>
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
@@ -46,14 +46,14 @@
 	
 		<article class="li post">
     <header class="post-header">
-        <h3 class="post-title"><a href="https://vincentserpoul.github.io/post/git-basic-usage/">GIT basic usage</a></h3>
-        <p class="post-time"><time datetime="2015-02-20T08:27:27&#43;08:00">February 20, 2015</time></p>
+        <h3 class="post-title"><a href="https://vincentserpoul.github.io/post/archlinux-bluetooth/">Bluetooth activation at startup on arch linux</a></h3>
+        <p class="post-time"><time datetime="2017-04-03T16:22:00&#43;08:00">April 3, 2017</time></p>
     </header>
 
     <section class="post-excerpt">
-        <p>Git basic commands When you have a new repo git clone git@github.com:vincentserpoul/rbac.git  https or git? the git protocal provides better security and easiness if you are using a correct key.
-If you use the git protocol, you can easily associate your private key in the ~/.ssh/config file with the following:
-Host github Hostname github.com User vincentserpoul IdentityFile ~/.ssh/myprivatekey IdentitiesOnly yes  When you have a new modification ready for commit git status  You will get an overview of what&rsquo;s new If there is any new files (Untracked files), you will first need to add them:</p>
+        <p>Why? You might not have reach that point yet but bluez has been deprecating hciconfig and other tools. In bluez 5.44, it&rsquo;s not there anymore.
+What is the problem? All hciconfig udev rules to activate bluetooth at startup won&rsquo;t work anymore. Most forum posts solving bluetooth issues are now outdated. Once I updated to bluez 5.44, my service leveraging hciconfig to activate bluetooth at startup didn&rsquo;t work anymore!
+What is the solution?</p>
     </section>
 
     <footer class="post-footer">
@@ -61,7 +61,7 @@ Host github Hostname github.com User vincentserpoul IdentityFile ~/.ssh/myprivat
             
             
             	&nbsp;&nbsp;<i class="fa fa-tag"></i>
-            	git, versioning, beginner, commands
+            	archlinux, bluetooth
             
         </span>
     </footer>
