@@ -24,7 +24,7 @@
         <meta property="og:article:author" content="" />
         <meta property="og:article:published_time" content="2016-12-27T00:44:00&#43;08:00" />
     
-        <meta name="generator" content="Hugo 0.20-DEV" />
+        <meta name="generator" content="Hugo 0.19" />
         <title>Golang and Oracle &middot; VS tech corner </title>
         <link rel="canonical" href="https://vincentserpoul.github.io/" />
         <link rel="alternate" type="application/rss+xml" title="RSS" href="">
@@ -64,26 +64,26 @@ Unzip each of them in the same folder /opt/oracle</p>
 
 <pre><code class="language-powershell">mkdir -p /opt/oracle
 cd /opt/oracle
-unzip ~/Downloads/instantclient-basic-linux.x64-12.1.0.2.0.zip
-unzip ~/Downloads/instantclient-sdk-linux.x64-12.1.0.2.0.zip
+unzip ~/Downloads/instantclient-basiclite-linux.x64-12.2.0.1.0.zip
+unzip ~/Downloads/instantclient-sdk-linux.x64-12.2.0.1.0.zip
 cd /opt/oracle/instantclient_12_1
 </code></pre>
 
 <p>Add the necessary env variables and paths:</p>
 
 <pre><code class="language-powershell"># Oracle
-export LD_LIBRARY_PATH=/opt/oracle/instantclient_12_1:/opt/oracle/instantclient_12_1/sdk/include
+export LD_LIBRARY_PATH=/opt/oracle/instantclient_12_2:/opt/oracle/instantclient_12_2/sdk/include
 export PKG_CONFIG_PATH=/opt/oracle
-export PATH=/opt/oracle/instantclient_12_1:$PATH
-export ORACLE_HOME=/opt/oracle/instantclient_12_1:/opt/oracle/instantclient_12_1/sdk/include
+export PATH=/opt/oracle/instantclient_12_2:$PATH
+export ORACLE_HOME=/opt/oracle/instantclient_12_2:/opt/oracle/instantclient_12_2/sdk/include
 </code></pre>
 
-<p>copy from the go package ./contrib/oci8.pc to /opt/oracle and modify its content to:</p>
+<p>copy from the <a href="https://github.com/rana/ora/tree/v4/contrib">go package ./contrib/oci8.pc</a> to /opt/oracle and modify its content to:</p>
 
-<pre><code>version=12.1
+<pre><code>version=12.2
 
-includedir=/opt/oracle/instantclient_12_1/sdk/include
-libdir=/opt/oracle/instantclient_12_1
+includedir=/opt/oracle/instantclient_12_2/sdk/include
+libdir=/opt/oracle/instantclient_12_2
 
 Name: oci8
 Description: Oracle database engine
@@ -97,16 +97,16 @@ Cflags: -I${includedir}
 
 <p>Follow the instructions from Oracle:</p>
 
-<pre><code class="language-powershell">ln -s libclntsh.so.12.1 libclntsh.so
-ln -s libocci.so.12.1 libocci.so
+<pre><code class="language-powershell">ln -s /opt/oracle/instantclient_12_2/libclntsh.so.12.1 /opt/oracle/instantclient_12_2/libclntsh.so
+ln -s /opt/oracle/instantclient_12_2/libocci.so.12.1 /opt/oracle/instantclient_12_2/libocci.so
 </code></pre>
 
 <h2 id="on-macosx">On macosx</h2>
 
 <p>Follow the instructions from Oracle:</p>
 
-<pre><code class="language-powershell">ln -s libclntsh.dylib.12.1 libclntsh.dylib
-ln -s libocci.dylib.12.1 libocci.dylib
+<pre><code class="language-powershell">ln -s /opt/oracle/instantclient_12_2/libclntsh.dylib.12.1 /opt/oracle/instantclient_12_2/libclntsh.dylib
+ln -s /opt/oracle/instantclient_12_2/libocci.dylib.12.1 /opt/oracle/instantclient_12_2/libocci.dylib
 </code></pre>
 
 <p>One more step is necessary for macosx.</p>
@@ -118,8 +118,7 @@ ln -s libocci.dylib.12.1 libocci.dylib
 
 <h2 id="install-the-package">Install the package</h2>
 
-<pre><code class="language-powershell">cd $GOPATH/src/gopkg.in/rana/ora.v3
-go install ./...
+<pre><code class="language-powershell">go get -u cd gopkg.in/rana/ora.v4
 </code></pre>
 
 <p>You should be all good!</p>

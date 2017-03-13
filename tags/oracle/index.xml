@@ -27,26 +27,26 @@ Unzip each of them in the same folder /opt/oracle&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-powershell&#34;&gt;mkdir -p /opt/oracle
 cd /opt/oracle
-unzip ~/Downloads/instantclient-basic-linux.x64-12.1.0.2.0.zip
-unzip ~/Downloads/instantclient-sdk-linux.x64-12.1.0.2.0.zip
+unzip ~/Downloads/instantclient-basiclite-linux.x64-12.2.0.1.0.zip
+unzip ~/Downloads/instantclient-sdk-linux.x64-12.2.0.1.0.zip
 cd /opt/oracle/instantclient_12_1
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Add the necessary env variables and paths:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-powershell&#34;&gt;# Oracle
-export LD_LIBRARY_PATH=/opt/oracle/instantclient_12_1:/opt/oracle/instantclient_12_1/sdk/include
+export LD_LIBRARY_PATH=/opt/oracle/instantclient_12_2:/opt/oracle/instantclient_12_2/sdk/include
 export PKG_CONFIG_PATH=/opt/oracle
-export PATH=/opt/oracle/instantclient_12_1:$PATH
-export ORACLE_HOME=/opt/oracle/instantclient_12_1:/opt/oracle/instantclient_12_1/sdk/include
+export PATH=/opt/oracle/instantclient_12_2:$PATH
+export ORACLE_HOME=/opt/oracle/instantclient_12_2:/opt/oracle/instantclient_12_2/sdk/include
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;copy from the go package ./contrib/oci8.pc to /opt/oracle and modify its content to:&lt;/p&gt;
+&lt;p&gt;copy from the &lt;a href=&#34;https://github.com/rana/ora/tree/v4/contrib&#34;&gt;go package ./contrib/oci8.pc&lt;/a&gt; to /opt/oracle and modify its content to:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;version=12.1
+&lt;pre&gt;&lt;code&gt;version=12.2
 
-includedir=/opt/oracle/instantclient_12_1/sdk/include
-libdir=/opt/oracle/instantclient_12_1
+includedir=/opt/oracle/instantclient_12_2/sdk/include
+libdir=/opt/oracle/instantclient_12_2
 
 Name: oci8
 Description: Oracle database engine
@@ -60,16 +60,16 @@ Cflags: -I${includedir}
 
 &lt;p&gt;Follow the instructions from Oracle:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-powershell&#34;&gt;ln -s libclntsh.so.12.1 libclntsh.so
-ln -s libocci.so.12.1 libocci.so
+&lt;pre&gt;&lt;code class=&#34;language-powershell&#34;&gt;ln -s /opt/oracle/instantclient_12_2/libclntsh.so.12.1 /opt/oracle/instantclient_12_2/libclntsh.so
+ln -s /opt/oracle/instantclient_12_2/libocci.so.12.1 /opt/oracle/instantclient_12_2/libocci.so
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;on-macosx&#34;&gt;On macosx&lt;/h2&gt;
 
 &lt;p&gt;Follow the instructions from Oracle:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-powershell&#34;&gt;ln -s libclntsh.dylib.12.1 libclntsh.dylib
-ln -s libocci.dylib.12.1 libocci.dylib
+&lt;pre&gt;&lt;code class=&#34;language-powershell&#34;&gt;ln -s /opt/oracle/instantclient_12_2/libclntsh.dylib.12.1 /opt/oracle/instantclient_12_2/libclntsh.dylib
+ln -s /opt/oracle/instantclient_12_2/libocci.dylib.12.1 /opt/oracle/instantclient_12_2/libocci.dylib
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;One more step is necessary for macosx.&lt;/p&gt;
@@ -81,8 +81,7 @@ ln -s libocci.dylib.12.1 libocci.dylib
 
 &lt;h2 id=&#34;install-the-package&#34;&gt;Install the package&lt;/h2&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-powershell&#34;&gt;cd $GOPATH/src/gopkg.in/rana/ora.v3
-go install ./...
+&lt;pre&gt;&lt;code class=&#34;language-powershell&#34;&gt;go get -u cd gopkg.in/rana/ora.v4
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;You should be all good!&lt;/p&gt;
