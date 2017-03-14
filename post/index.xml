@@ -74,10 +74,12 @@ export ORACLE_HOME=/opt/oracle/instantclient_12_2:/opt/oracle/instantclient_12_2
 
 &lt;p&gt;copy from the &lt;a href=&#34;https://github.com/rana/ora/tree/v4/contrib&#34;&gt;go package ./contrib/oci8.pc&lt;/a&gt; to /opt/oracle and modify its content to:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;version=12.2
+&lt;pre&gt;&lt;code&gt;prefix=/opt/oracle/instant_client_12_2
+version=12.2
+build=client64
 
-includedir=/opt/oracle/instantclient_12_2/sdk/include
-libdir=/opt/oracle/instantclient_12_2
+libdir=${prefix}/lib
+includedir=${prefix}/sdk/include
 
 Name: oci8
 Description: Oracle database engine
@@ -89,7 +91,7 @@ Cflags: -I${includedir}
 
 &lt;h2 id=&#34;on-linux&#34;&gt;On linux&lt;/h2&gt;
 
-&lt;p&gt;Follow the instructions from Oracle:&lt;/p&gt;
+&lt;p&gt;Follow the &lt;a href=&#34;http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html#ic_x64_inst&#34;&gt;instructions&lt;/a&gt; from Oracle:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-powershell&#34;&gt;ln -s /opt/oracle/instantclient_12_2/libclntsh.so.12.1 /opt/oracle/instantclient_12_2/libclntsh.so
 ln -s /opt/oracle/instantclient_12_2/libocci.so.12.1 /opt/oracle/instantclient_12_2/libocci.so
