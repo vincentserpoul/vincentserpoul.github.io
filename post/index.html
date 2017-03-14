@@ -77,7 +77,7 @@ What is the solution?</p>
         <p>Which library To this day, the most up to date library seems to be rana/ora
 How to install (linux &amp; macosx) Download Oracle Instant Client for linux x64: both packages Basic and SDK Unzip each of them in the same folder /opt/oracle
 mkdir -p /opt/oracle cd /opt/oracle unzip ~/Downloads/instantclient-basiclite-linux.x64-12.2.0.1.0.zip unzip ~/Downloads/instantclient-sdk-linux.x64-12.2.0.1.0.zip cd /opt/oracle/instantclient_12_1  Add the necessary env variables and paths:
-# Oracle export LD_LIBRARY_PATH=/opt/oracle/instantclient_12_2:/opt/oracle/instantclient_12_2/sdk/include export PKG_CONFIG_PATH=/opt/oracle export PATH=/opt/oracle/instantclient_12_2:$PATH export ORACLE_HOME=/opt/oracle/instantclient_12_2:/opt/oracle/instantclient_12_2/sdk/include  copy from the go package .</p>
+# Oracle export LD_LIBRARY_PATH=/opt/oracle/instantclient_12_2:$LD_LIBRARY_PATH export PKG_CONFIG_PATH=/opt/oracle export ORACLE_HOME=$LD_LIBRARY_PATH  copy from the go package .</p>
     </section>
 
     <footer class="post-footer">

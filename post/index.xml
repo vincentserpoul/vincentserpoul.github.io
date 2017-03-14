@@ -66,19 +66,18 @@ cd /opt/oracle/instantclient_12_1
 &lt;p&gt;Add the necessary env variables and paths:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-powershell&#34;&gt;# Oracle
-export LD_LIBRARY_PATH=/opt/oracle/instantclient_12_2:/opt/oracle/instantclient_12_2/sdk/include
+export LD_LIBRARY_PATH=/opt/oracle/instantclient_12_2:$LD_LIBRARY_PATH
 export PKG_CONFIG_PATH=/opt/oracle
-export PATH=/opt/oracle/instantclient_12_2:$PATH
-export ORACLE_HOME=/opt/oracle/instantclient_12_2:/opt/oracle/instantclient_12_2/sdk/include
+export ORACLE_HOME=$LD_LIBRARY_PATH
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;copy from the &lt;a href=&#34;https://github.com/rana/ora/tree/v4/contrib&#34;&gt;go package ./contrib/oci8.pc&lt;/a&gt; to /opt/oracle and modify its content to:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;prefix=/opt/oracle/instant_client_12_2
+&lt;pre&gt;&lt;code&gt;prefix=/opt/oracle/instantclient_12_2
 version=12.2
 build=client64
 
-libdir=${prefix}/lib
+libdir=${prefix}
 includedir=${prefix}/sdk/include
 
 Name: oci8
