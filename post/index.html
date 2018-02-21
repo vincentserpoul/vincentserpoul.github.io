@@ -1,313 +1,56 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]><html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--><html class="no-js" prefix="og: http://ogp.me/ns#" xmlns:og="http://ogp.me/ns#"><!--<![endif]-->
-
-    <head>
-                <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
-        <meta name="mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <meta name="author" content="">
-        <meta name="keywords" content="awesome, definitely">
-	
-        <meta property="og:site_name" content="VS tech corner">
-        <meta property="og:title" content="VS tech corner">
-        <meta property="og:url" content="https://vincentserpoul.github.io/post/">
-        <meta property="og:description" content="">
-    
-        <meta property="og:type" content="website" />
-    
-        <meta name="generator" content="Hugo 0.19" />
-        <title>Posts &middot; VS tech corner </title>
-        <link rel="canonical" href="https://vincentserpoul.github.io/" />
-        <link rel="alternate" type="application/rss+xml" title="RSS" href="https://vincentserpoul.github.io/post/index.xml">
-        <link rel="stylesheet" type='text/css' href="https://vincentserpoul.github.io/css/main.css"/>
-        <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300|Montserrat:700' rel='stylesheet' type='text/css'>
-        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-        <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-    </head>
-
-<body>
-<!--[if lt IE 7]><p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chrome/‎">install Google Chrome</a> to experience this site.</p><![endif]-->
-
-    <header id="site-header">
-        <div class="container">
-            <a href="https://vincentserpoul.github.io/" alt="VS tech corner"><h1 class="blog-title heading">VS tech corner</h1></a>
-            <p class="blog-description"></p>
-        </div>
-    </header>
-<main class="content" role="main">
-	<div class="container">
-	
-		<article class="li post">
-    <header class="post-header">
-        <h3 class="post-title"><a href="https://vincentserpoul.github.io/post/archlinux-bluetooth/">Bluetooth activation at startup on arch linux</a></h3>
-        <p class="post-time"><time datetime="2017-04-03T16:22:00&#43;08:00">April 3, 2017</time></p>
+<article class="post">
+	<header class="post-header">
+        <h3 class="p-post-title">Posts</h3>
     </header>
 
-    <section class="post-excerpt">
-        <p>Why? You might not have reach that point yet but bluez has been deprecating hciconfig and other tools. In bluez 5.44, it&rsquo;s not there anymore.
-What is the problem? All hciconfig udev rules to activate bluetooth at startup won&rsquo;t work anymore. Most forum posts solving bluetooth issues are now outdated. Once I updated to bluez 5.44, my service leveraging hciconfig to activate bluetooth at startup didn&rsquo;t work anymore!
-What is the solution?</p>
+    <section class="post-content">
+        
     </section>
 
-    <footer class="post-footer">
-        <span>
-            
-            
-            	&nbsp;&nbsp;<i class="fa fa-tag"></i>
-            	archlinux, bluetooth
-            
-        </span>
-    </footer>
-</article>
-	
-		<article class="li post">
-    <header class="post-header">
-        <h3 class="post-title"><a href="https://vincentserpoul.github.io/post/golang-playwithsql-oracle/">Golang and Oracle</a></h3>
-        <p class="post-time"><time datetime="2016-12-27T00:44:00&#43;08:00">December 27, 2016</time></p>
-    </header>
-
-    <section class="post-excerpt">
-        <p>Which library To this day, the most up to date library seems to be rana/ora
-How to install (linux &amp; macosx) Download Oracle Instant Client for linux x64: both packages Basic and SDK Unzip each of them in the same folder /opt/oracle
-mkdir -p /opt/oracle cd /opt/oracle unzip ~/Downloads/instantclient-basiclite-linux.x64-12.2.0.1.0.zip unzip ~/Downloads/instantclient-sdk-linux.x64-12.2.0.1.0.zip cd /opt/oracle/instantclient_12_1  Add the necessary env variables and paths:
-# Oracle export LD_LIBRARY_PATH=/opt/oracle/instantclient_12_2:$LD_LIBRARY_PATH export PKG_CONFIG_PATH=/opt/oracle export ORACLE_HOME=$LD_LIBRARY_PATH  copy from the go package .</p>
-    </section>
+    <hr>
 
     <footer class="post-footer">
-        <span>
+        <section class="f-1">
             
-            
-            	&nbsp;&nbsp;<i class="fa fa-tag"></i>
-            	golang, oracle, linux, macosx, sql
-            
-        </span>
-    </footer>
-</article>
-	
-		<article class="li post">
-    <header class="post-header">
-        <h3 class="post-title"><a href="https://vincentserpoul.github.io/post/ethereum-react-dapps/">Ethereum react dapps</a></h3>
-        <p class="post-time"><time datetime="2016-10-27T13:34:00&#43;08:00">October 27, 2016</time></p>
-    </header>
 
-    <section class="post-excerpt">
-        <p>I finished my first dapp with (react-boilerplate)[https://github.com/mxstbr/] this week and here are the few things I learnt. I won&rsquo;t get into the redux, redux-saga details, I let you play with the amazing boilerplate.
-Interacting with constant functions Let&rsquo;s use the typical balanceOf function of the EIP20 contracts:
-function balanceOf(address _owner) constant returns (uint256 balance) { return balances[_owner]; }  Here are the sagas (redux-sagas) I used to interact:
-import { take, call, put, cancel, select, fork } from 'redux-saga/effects'; import { BALANCE_OF_GET, } from '.</p>
-    </section>
+            <p class="f-post-time"><time datetime="2017-04-03T16:22:00&#43;08:00">April 3, 2017</time></p>
+        </section>
 
-    <footer class="post-footer">
-        <span>
-            
-            
-            	&nbsp;&nbsp;<i class="fa fa-tag"></i>
-            	react, blockchain, ethereum, dev, dapps
-            
-        </span>
-    </footer>
-</article>
-	
-		<article class="li post">
-    <header class="post-header">
-        <h3 class="post-title"><a href="https://vincentserpoul.github.io/post/binding-ethereum-golang/">Ethereum contracts and Golang</a></h3>
-        <p class="post-time"><time datetime="2016-10-10T12:54:00&#43;08:00">October 10, 2016</time></p>
-    </header>
+        <section class="f-2">
+            <section class="share">
+                <span>Share:
+                <a class="icon-twitter" href="http://twitter.com/share?text=Posts&url=https%3a%2f%2fvincentserpoul.github.io%2fpost%2f"
+                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="fa fa-twitter"></i>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fvincentserpoul.github.io%2fpost%2f"
+                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="fa fa-facebook"></i>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=https%3a%2f%2fvincentserpoul.github.io%2fpost%2f"
+                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="fa fa-google-plus"></i>
+                </a>
+                </span>
+            </section>
 
-    <section class="post-excerpt">
-        <p>The contract contract Trigger { function () { throw; } address owner; function Trigger() { owner = msg.sender; } event TriggerEvt(address _sender, uint _trigger); function trigger(uint _trigger) { TriggerEvt(msg.sender, _trigger); } function getOwner() constant returns (address) { return owner; } }  This is a very simple contract that we will take as an example.
-Getting the right tools for binding A good starting point is this wiki.
-You will need to follow the install procedure of go-ethereum.</p>
-    </section>
-
-    <footer class="post-footer">
-        <span>
             
-            
-            	&nbsp;&nbsp;<i class="fa fa-tag"></i>
-            	golang, blockchain, ethereum, dev, testrpc
-            
-        </span>
-    </footer>
-</article>
-	
-		<article class="li post">
-    <header class="post-header">
-        <h3 class="post-title"><a href="https://vincentserpoul.github.io/post/on-microservices-and-scaling/">Summary of UBER lessons on scaling microservices</a></h3>
-        <p class="post-time"><time datetime="2016-09-30T12:06:01&#43;08:00">September 30, 2016</time></p>
-    </header>
-
-    <section class="post-excerpt">
-        <p>I just watched that amazing videos from Matt Ranney
- Here are my takeaways and opinionated summary:
- Use RPC for service to service communications: gRPC seems to be a good way of tackling it Use many repositories Profiling should be unified: flamegraphs seem to be a good solution (Go profiling is great too) Premature optimization is bad but performance monitoring is crucial! Trace requests, keep context within all logs Log a lot, but only on a portion of your production architecture as logging can have a big cost.</p>
-    </section>
-
-    <footer class="post-footer">
-        <span>
-            
-            
-            	&nbsp;&nbsp;<i class="fa fa-tag"></i>
-            	scaling, microservices, uber
-            
-        </span>
-    </footer>
-</article>
-	
-		<article class="li post">
-    <header class="post-header">
-        <h3 class="post-title"><a href="https://vincentserpoul.github.io/post/ethereum-solidity/">Blockchain week in Shanghai!</a></h3>
-        <p class="post-time"><time datetime="2016-09-16T13:44:00&#43;08:00">September 16, 2016</time></p>
-    </header>
-
-    <section class="post-excerpt">
-        <p>I participated to the devcon2 and blockchain summit last week. Here is my summary!</p>
-    </section>
-
-    <footer class="post-footer">
-        <span>
-            
-            
-            	&nbsp;&nbsp;<i class="fa fa-tag"></i>
-            	ethereum, blockchain, conference, devcon2
-            
-        </span>
-    </footer>
-</article>
-	
-		<article class="li post">
-    <header class="post-header">
-        <h3 class="post-title"><a href="https://vincentserpoul.github.io/post/ethereum-first-dapp-part-3/">Ethereum first dapp - part 3</a></h3>
-        <p class="post-time"><time datetime="2016-08-12T12:00:27&#43;08:00">August 12, 2016</time></p>
-    </header>
-
-    <section class="post-excerpt">
-        <p>setting up a light wallet In order to have a setup close to what the DAPP would be, we will use (metamask) [http://www.metamask.io] as a light wallet (there are other choices).
-Metamask allows you to connect to a custom node.
-We will then connect to our node, http://localhost:9012 If everthing is fine, metamasks should indicate it&rsquo;s connected.
-Then, we can import the metamask account to our local node by simply specifying the datadir we have setup the node data.</p>
-    </section>
-
-    <footer class="post-footer">
-        <span>
-            
-            
-            	&nbsp;&nbsp;<i class="fa fa-tag"></i>
-            	ethereum, dapp, development, metamask
-            
-        </span>
-    </footer>
-</article>
-	
-		<article class="li post">
-    <header class="post-header">
-        <h3 class="post-title"><a href="https://vincentserpoul.github.io/post/ethereum-first-dapp-part-2/">Ethereum first dapp - part 2</a></h3>
-        <p class="post-time"><time datetime="2016-08-10T15:00:27&#43;08:00">August 10, 2016</time></p>
-    </header>
-
-    <section class="post-excerpt">
-        <p>Frontend Prepare your folder for your dapp I will be using https://github.com/mxstbr/react-boilerplate as it&rsquo;s quite nice and I&rsquo;ve been playing with React for a bit now.
-I will not go into the details of setting this up, it&rsquo;s a totally different topic. If you are not familiar with it, it&rsquo;s probably a waste of time for you to read.
-Example web3 component with React This boilerplate uses immutable, redux and redux-sagas in order to deal with data.</p>
-    </section>
-
-    <footer class="post-footer">
-        <span>
-            
-            
-            	&nbsp;&nbsp;<i class="fa fa-tag"></i>
-            	ethereum, dapp, development
-            
-        </span>
-    </footer>
-</article>
-	
-		<article class="li post">
-    <header class="post-header">
-        <h3 class="post-title"><a href="https://vincentserpoul.github.io/post/ethereum-first-dapp-part-1/">Ethereum first dapp - part 1</a></h3>
-        <p class="post-time"><time datetime="2016-08-08T15:00:27&#43;08:00">August 8, 2016</time></p>
-    </header>
-
-    <section class="post-excerpt">
-        <p>Contracts Prepare your folder for your dapp mkdir dapp  inside this folder, we&rsquo;ll create one folder for truffle, one for geth.
-cd dapp mkdir truffle geth  inside the geth folder, simply put the customGenesis block you can find in the ethereum-dev-environment blog post.
-We are going to use two Ethereum clients, one for tests and devs, testrpc and one for a more real interaction, geth.
-Let&rsquo;s install truffle and testrpc</p>
-    </section>
-
-    <footer class="post-footer">
-        <span>
-            
-            
-            	&nbsp;&nbsp;<i class="fa fa-tag"></i>
-            	ethereum, dapp, development
-            
-        </span>
-    </footer>
-</article>
-	
-		<article class="li post">
-    <header class="post-header">
-        <h3 class="post-title"><a href="https://vincentserpoul.github.io/post/ethereum-interacting-with-contracts/">Interacting with an Ethereum smart contract</a></h3>
-        <p class="post-time"><time datetime="2016-08-03T20:00:00&#43;08:00">August 3, 2016</time></p>
-    </header>
-
-    <section class="post-excerpt">
-        <p>Check the address of the current deployed contract Remember when you mined your contract, it told your its address. Now, reuse it!
-eth.getCode(&quot;0x5f3425ccedeae0eb36521c4cf93ec6544dbad9bd&quot;)  Test the contract with a simple interaction get the latest web3-light.min.js js from https://github.com/ethereum/web3.js/releases and simply copy the dist/web3-light.min.js into the same folder as the following HTML file.
-then, use this html to interact with your contract on the local node:
-&lt;!doctype&gt; &lt;html&gt; &lt;head&gt; &lt;script type=&quot;text/javascript&quot; src=&quot;https://cdnjs.</p>
-    </section>
-
-    <footer class="post-footer">
-        <span>
-            
-            
-            	&nbsp;&nbsp;<i class="fa fa-tag"></i>
-            	blockchain, ethereum, smart contract, javascript, web3, dapp
-            
-        </span>
-    </footer>
-</article>
-	
-	
-<nav role="pagination" class="pagination">
-  
-	<span class="post-list-pagination-item post-list-pagination-item-current">Page 1 of 2</span>
-
-  <a href="/post/page/2/" class="older-posts">
-    &nbsp;Older&nbsp;<i class="fa fa-angle-double-right"></i>
-  </a>
-
-</nav>
-
-	</div>
-</main>
-    <footer id="site-footer">
-        <div class="container">
-            <a href="https://vincentserpoul.github.io/index.xml" title="Get the RSS feed"><span class="tooltip"><i class="fa fa-rss"></i></span></a>
-        </div>
+        </section>
     </footer>
 
-    <script type="text/javascript" src="https://vincentserpoul.github.io/js/fittext.js"></script>
-    <script type="text/javascript">
-      $(".heading").fitText();
-    </script>
-
-    
+    <div id="disqus_thread"></div>
 <script>
-window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-ga('create', 'UA-81802018-1', 'auto');
-ga('send', 'pageview');
-</script>
-<script async src='//www.google-analytics.com/analytics.js'></script>
+var disqus_config = function () {
+    this.page.url = "https://vincentserpoul.github.io/post/";  
+    this.page.identifier = "https://vincentserpoul.github.io/post/"; 
+};
 
-</body>
-</html>
+(function() { 
+    var d = document, s = d.createElement('script');
+    s.src = '//vincentserpoul-tech-corner.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</article>

@@ -2,11 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Smart Contract on VS tech corner</title>
-    <link>https://vincentserpoul.github.io/tags/smart-contract/index.xml</link>
+    <link>https://vincentserpoul.github.io/tags/smart-contract/</link>
     <description>Recent content in Smart Contract on VS tech corner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="https://vincentserpoul.github.io/tags/smart-contract/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 03 Aug 2016 20:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://vincentserpoul.github.io/tags/smart-contract/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Interacting with an Ethereum smart contract</title>
@@ -14,107 +17,10 @@
       <pubDate>Wed, 03 Aug 2016 20:00:00 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/ethereum-interacting-with-contracts/</guid>
-      <description>
-
-&lt;h2 id=&#34;check-the-address-of-the-current-deployed-contract&#34;&gt;Check the address of the current deployed contract&lt;/h2&gt;
-
-&lt;p&gt;Remember when you mined your contract, it told your its address.
-Now, reuse it!&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;eth.getCode(&amp;quot;0x5f3425ccedeae0eb36521c4cf93ec6544dbad9bd&amp;quot;)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;test-the-contract-with-a-simple-interaction&#34;&gt;Test the contract with a simple interaction&lt;/h2&gt;
-
-&lt;p&gt;get the latest web3-light.min.js js from &lt;a href=&#34;https://github.com/ethereum/web3.js/releases&#34;&gt;https://github.com/ethereum/web3.js/releases&lt;/a&gt; and simply copy the dist/web3-light.min.js into the same folder as the following HTML file.&lt;/p&gt;
-
-&lt;p&gt;then, use this html to interact with your contract on the local node:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;!doctype&amp;gt;
-&amp;lt;html&amp;gt;
-&amp;lt;head&amp;gt;
-    &amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;https://cdnjs.cloudflare.com/ajax/libs/bignumber.js/2.4.0/bignumber.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-    &amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;./web3-light.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-    &amp;lt;script type=&amp;quot;text/javascript&amp;quot;&amp;gt;
-    var Web3 = require(&#39;web3&#39;);
-    var web3 = new Web3();
-    web3.setProvider(new web3.providers.HttpProvider(&#39;http://localhost:9012&#39;));
-    function watchBalance() {
-        var coinbase = web3.eth.coinbase;
-        var originalBalance = web3.eth.getBalance(coinbase).toNumber();
-        document.getElementById(&#39;coinbase&#39;).innerText = &#39;coinbase: &#39; + coinbase;
-        document.getElementById(&#39;original&#39;).innerText = &#39; original balance: &#39; + originalBalance + &#39;    watching...&#39;;
-        web3.eth.filter(&#39;latest&#39;).watch(function() {
-            var currentBalance = web3.eth.getBalance(coinbase).toNumber();
-            document.getElementById(&amp;quot;current&amp;quot;).innerText = &#39;current: &#39; + currentBalance;
-            document.getElementById(&amp;quot;diff&amp;quot;).innerText = &#39;diff:    &#39; + (currentBalance - originalBalance);
-        });
-    }
-    &amp;lt;/script&amp;gt;
-&amp;lt;/head&amp;gt;
-&amp;lt;body&amp;gt;
-    &amp;lt;h1&amp;gt;coinbase balance&amp;lt;/h1&amp;gt;
-    &amp;lt;button type=&amp;quot;button&amp;quot; onClick=&amp;quot;watchBalance();&amp;quot;&amp;gt;watch balance&amp;lt;/button&amp;gt;
-    &amp;lt;div&amp;gt;&amp;lt;/div&amp;gt;
-    &amp;lt;div id=&amp;quot;coinbase&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
-    &amp;lt;div id=&amp;quot;original&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
-    &amp;lt;div id=&amp;quot;current&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
-    &amp;lt;div id=&amp;quot;diff&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
-&amp;lt;/body&amp;gt;
-&amp;lt;/html&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;and&amp;hellip; It works, you can see the balance on the contract!&lt;/p&gt;
-
-&lt;h2 id=&#34;let-s-greet-now&#34;&gt;Let&amp;rsquo;s greet now&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;!doctype&amp;gt;
-&amp;lt;html&amp;gt;
-&amp;lt;head&amp;gt;
-    &amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;https://cdnjs.cloudflare.com/ajax/libs/bignumber.js/2.4.0/bignumber.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-    &amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;./web3-light.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-    &amp;lt;script type=&amp;quot;text/javascript&amp;quot;&amp;gt;
-        var Web3 = require(&#39;web3&#39;);
-        var web3 = new Web3();
-        web3.setProvider(new web3.providers.HttpProvider(&#39;http://localhost:9012&#39;));
-        function watchBalance() {
-            var coinbase = web3.eth.coinbase;
-            var originalBalance = web3.eth.getBalance(coinbase).toNumber();
-            document.getElementById(&#39;coinbase&#39;).innerText = &#39;coinbase: &#39; + coinbase;
-            document.getElementById(&#39;original&#39;).innerText = &#39; original balance: &#39; + originalBalance + &#39;    watching...&#39;;
-            web3.eth.filter(&#39;latest&#39;).watch(function() {
-                var currentBalance = web3.eth.getBalance(coinbase).toNumber();
-                document.getElementById(&amp;quot;current&amp;quot;).innerText = &#39;current: &#39; + currentBalance;
-                document.getElementById(&amp;quot;diff&amp;quot;).innerText = &#39;diff:    &#39; + (currentBalance - originalBalance);
-            });
-        }
-        function greet() {
-            var contractAddress = &#39;0x5d3425ccedeae0eb36521c4cf93ec6544dbad9bd&#39;;
-            var greeter = web3.eth.contract([{constant:false,inputs:[],name:&#39;kill&#39;,outputs:[],type:&#39;function&#39;},{constant:true,inputs:[],name:&#39;greet&#39;,outputs:[{name:&#39;&#39;,type:&#39;string&#39;}],type:&#39;function&#39;},{inputs:[{name:&#39;_greeting&#39;,type:&#39;string&#39;}],type:&#39;constructor&#39;}]).at(contractAddress);
-            var greetings = greeter.greet();
-            document.getElementById(&#39;greeting&#39;).innerText = greetings;
-        }
-    &amp;lt;/script&amp;gt;
-&amp;lt;/head&amp;gt;
-&amp;lt;body&amp;gt;
-    &amp;lt;h1&amp;gt;coinbase balance&amp;lt;/h1&amp;gt;
-    &amp;lt;button type=&amp;quot;button&amp;quot; onClick=&amp;quot;watchBalance();&amp;quot;&amp;gt;watch balance&amp;lt;/button&amp;gt;
-    &amp;lt;div&amp;gt;&amp;lt;/div&amp;gt;
-    &amp;lt;div id=&amp;quot;coinbase&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
-    &amp;lt;div id=&amp;quot;original&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
-    &amp;lt;div id=&amp;quot;current&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
-    &amp;lt;div id=&amp;quot;diff&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
-    &amp;lt;h1&amp;gt;greetings&amp;lt;/h1&amp;gt;
-    &amp;lt;button type=&amp;quot;button&amp;quot; onClick=&amp;quot;greet();&amp;quot;&amp;gt;greet!&amp;lt;/button&amp;gt;
-    &amp;lt;div id=&amp;quot;greeting&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
-&amp;lt;/body&amp;gt;
-&amp;lt;/html&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And you have it! the dapp is responding!&lt;/p&gt;
-
-&lt;p&gt;caveat: when you won&amp;rsquo;t be running a test, you will need to get an http provider connected to the live blockchain. You can be sure to have one if you run your own node, I&amp;rsquo;m not sure yet if there is any open htt provider node out there.&lt;/p&gt;
-</description>
+      <description>Check the address of the current deployed contract Remember when you mined your contract, it told your its address. Now, reuse it!
+eth.getCode(&amp;quot;0x5f3425ccedeae0eb36521c4cf93ec6544dbad9bd&amp;quot;)  Test the contract with a simple interaction get the latest web3-light.min.js js from https://github.com/ethereum/web3.js/releases and simply copy the dist/web3-light.min.js into the same folder as the following HTML file.
+then, use this html to interact with your contract on the local node:
+&amp;lt;!doctype&amp;gt; &amp;lt;html&amp;gt; &amp;lt;head&amp;gt; &amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;https://cdnjs.</description>
     </item>
     
     <item>
@@ -123,124 +29,8 @@ Now, reuse it!&lt;/p&gt;
       <pubDate>Wed, 03 Aug 2016 13:00:00 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/ethereum-first-contract/</guid>
-      <description>
-
-&lt;h2 id=&#34;launch-your-geth-or-testrpc-private-instance&#34;&gt;Launch your geth (or testrpc) private instance&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;./geth \
-    --identity &amp;quot;gethTest&amp;quot; \
-    --rpc --rpcport &amp;quot;9012&amp;quot; \
-    --rpccorsdomain &amp;quot;YOUR_TEST_DOMAIN_APP_RUN_FROM&amp;quot; \
-    --datadir &amp;quot;./testChain&amp;quot; \
-    --port &amp;quot;30303&amp;quot; \
-    --nodiscover \
-    --rpcapi &amp;quot;db,eth,net,web3&amp;quot; \
-    --networkid 1999 \
-    --dev console
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;within-the-console-compile-your-contract&#34;&gt;Within the console, compile your contract&lt;/h2&gt;
-
-&lt;p&gt;check this tutorial: &lt;a href=&#34;https://www.ethereum.org/greeter&#34;&gt;https://www.ethereum.org/greeter&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;I had an issue when I followed the contract tutorial, my contract would not be mined after I was trying to deploy it.&lt;/p&gt;
-
-&lt;p&gt;The issue was that my account was locked :/ and the greeter contract stupidly silently fails&amp;hellip;
-Here is the modified code to see the obvious error.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var _greeting = &amp;quot;Hello World!&amp;quot;
-var greeterContract = web3.eth.contract(greeterCompiled.greeter.info.abiDefinition);
-
-var greeter = greeterContract.new(_greeting,{from:web3.eth.accounts[0], data: greeterCompiled.greeter.code, gas: 30000000}, function(e, contract){
-    if(!e) {
-
-      if(!contract.address) {
-        console.log(&amp;quot;Contract transaction send: TransactionHash: &amp;quot; + contract.transactionHash + &amp;quot; waiting to be mined...&amp;quot;);
-
-      } else {
-        console.log(&amp;quot;Contract mined! Address: &amp;quot; + contract.address);
-        console.log(contract);
-      }
-
-    } else {
-        console.log(&amp;quot;error!&amp;quot;);
-        console.log(e);
-    }
-})
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;which returns&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;error!
-Error: account is locked
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;To unlock the account, simply:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;personal.unlockAccount(eth.accounts[0])
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;I then encountered ANOTHER error!&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;error!
-Error: Exceeds block gas limit
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;I simply decreased the gas to 3000000, and finally got:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;I0803 15:14:29.423492 eth/api.go:1191] Tx(0x7584a963a9c2a21e623e607826ad47ae358d056ed159b82a21793d4541148e86) created: 0x5f3425ccedeae0eb36521c4cf93ec6544dbad9bd
-Contract transaction send: TransactionHash: 0x7284a963a9c3a21e623e607826ad47ae358d056ed159b82a21793d4541148e86 waiting to be mined...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Then, simply mine it!&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;miner.start()
-...
-Contract mined! Address: 0x5d3125ccedeae0eb36521c4cf93ec6544dbad9bd
-...
-miner.stop()
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Yeah, victory! my contract is deployed on my private ethereum node.&lt;/p&gt;
-
-&lt;p&gt;Keep that address and also make sure to run&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;greeterCompiled.greeter.info.abiDefinition
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;in order to get the ABI that will be used later in javascript (Application Binary Interface)&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[{
-    constant: false,
-    inputs: [],
-    name: &amp;quot;kill&amp;quot;,
-    outputs: [],
-    type: &amp;quot;function&amp;quot;
-}, {
-    constant: true,
-    inputs: [],
-    name: &amp;quot;greet&amp;quot;,
-    outputs: [{
-        name: &amp;quot;&amp;quot;,
-        type: &amp;quot;string&amp;quot;
-    }],
-    type: &amp;quot;function&amp;quot;
-}, {
-    inputs: [{
-        name: &amp;quot;_greeting&amp;quot;,
-        type: &amp;quot;string&amp;quot;
-    }],
-    type: &amp;quot;constructor&amp;quot;
-}]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;when-done-kill-it&#34;&gt;When done, kill it!&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;greeter.kill.sendTransaction({from:eth.accounts[0]})
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Next we will simply interact with the contract.&lt;/p&gt;
-</description>
+      <description>Launch your geth (or testrpc) private instance ./geth \ --identity &amp;quot;gethTest&amp;quot; \ --rpc --rpcport &amp;quot;9012&amp;quot; \ --rpccorsdomain &amp;quot;YOUR_TEST_DOMAIN_APP_RUN_FROM&amp;quot; \ --datadir &amp;quot;./testChain&amp;quot; \ --port &amp;quot;30303&amp;quot; \ --nodiscover \ --rpcapi &amp;quot;db,eth,net,web3&amp;quot; \ --networkid 1999 \ --dev console  Within the console, compile your contract check this tutorial: https://www.ethereum.org/greeter
+I had an issue when I followed the contract tutorial, my contract would not be mined after I was trying to deploy it.</description>
     </item>
     
   </channel>

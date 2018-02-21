@@ -2,11 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Development on VS tech corner</title>
-    <link>https://vincentserpoul.github.io/tags/development/index.xml</link>
+    <link>https://vincentserpoul.github.io/tags/development/</link>
     <description>Recent content in Development on VS tech corner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="https://vincentserpoul.github.io/tags/development/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 12 Aug 2016 12:00:27 +0800</lastBuildDate>
+    
+	<atom:link href="https://vincentserpoul.github.io/tags/development/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Ethereum first dapp - part 3</title>
@@ -14,46 +17,10 @@
       <pubDate>Fri, 12 Aug 2016 12:00:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/ethereum-first-dapp-part-3/</guid>
-      <description>
-
-&lt;h2 id=&#34;setting-up-a-light-wallet&#34;&gt;setting up a light wallet&lt;/h2&gt;
-
-&lt;p&gt;In order to have a setup close to what the DAPP would be, we will use (metamask) [&lt;a href=&#34;http://www.metamask.io&#34;&gt;http://www.metamask.io&lt;/a&gt;] as a light wallet (there are other choices).&lt;/p&gt;
-
-&lt;p&gt;Metamask allows you to connect to a custom node.&lt;/p&gt;
-
-&lt;p&gt;We will then connect to our node, &lt;a href=&#34;http://localhost:9012&#34;&gt;http://localhost:9012&lt;/a&gt;
-If everthing is fine, metamasks should indicate it&amp;rsquo;s connected.&lt;/p&gt;
-
-&lt;p&gt;Then, we can import the metamask account to our local node by simply specifying the datadir we have setup the node data.&lt;/p&gt;
-
-&lt;p&gt;Let&amp;rsquo;s imagine metamask give us:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;0xcddddd76a763de6e9ac19e7ec8f71ed77d61eebc0a93068fc9f2a544462db7d2
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;as the key.&lt;/p&gt;
-
-&lt;p&gt;Then let&amp;rsquo;s just copy this, without thw 0x inside a separate file.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;echo &amp;quot;cddddd76a763de6e9ac19e7ec8f71ed77d61eebc0a93068fc9f2a544462db7d2&amp;quot; &amp;gt;&amp;gt; pvkey.txt
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;and then import it in our local chain&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;geth --datadir &amp;quot;./testChain&amp;quot; account import ./pvkey.txt
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;if you look at the list of accounts in your local node, you should see now the newly imported account.&lt;/p&gt;
-
-&lt;h2 id=&#34;give-me-ether&#34;&gt;give me ether!&lt;/h2&gt;
-
-&lt;p&gt;Now, simply transfer some Ether to the newly imported account
-In geth, for example:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;eth.sendTransaction({from: &#39;0xfffffff&#39;, to: &#39;0xddddddd&#39;, value: web3.toWei(1000, &amp;quot;ether&amp;quot;)})
-&lt;/code&gt;&lt;/pre&gt;
-</description>
+      <description>setting up a light wallet In order to have a setup close to what the DAPP would be, we will use (metamask) [http://www.metamask.io] as a light wallet (there are other choices).
+Metamask allows you to connect to a custom node.
+We will then connect to our node, http://localhost:9012 If everthing is fine, metamasks should indicate it&amp;rsquo;s connected.
+Then, we can import the metamask account to our local node by simply specifying the datadir we have setup the node data.</description>
     </item>
     
     <item>
@@ -62,186 +29,9 @@ In geth, for example:&lt;/p&gt;
       <pubDate>Wed, 10 Aug 2016 15:00:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/ethereum-first-dapp-part-2/</guid>
-      <description>
-
-&lt;h1 id=&#34;frontend&#34;&gt;Frontend&lt;/h1&gt;
-
-&lt;h2 id=&#34;prepare-your-folder-for-your-dapp&#34;&gt;Prepare your folder for your dapp&lt;/h2&gt;
-
-&lt;p&gt;I will be using &lt;a href=&#34;https://github.com/mxstbr/react-boilerplate&#34;&gt;https://github.com/mxstbr/react-boilerplate&lt;/a&gt; as it&amp;rsquo;s quite nice and I&amp;rsquo;ve been playing with React for a bit now.&lt;/p&gt;
-
-&lt;p&gt;I will not go into the details of setting this up, it&amp;rsquo;s a totally different topic.
-If you are not familiar with it, it&amp;rsquo;s probably a waste of time for you to read.&lt;/p&gt;
-
-&lt;h2 id=&#34;example-web3-component-with-react&#34;&gt;Example web3 component with React&lt;/h2&gt;
-
-&lt;p&gt;This boilerplate uses immutable, redux and redux-sagas in order to deal with data.
-We will use this to connect/dialog with our local node.&lt;/p&gt;
-
-&lt;h3 id=&#34;actions&#34;&gt;Actions&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;export const ETH_CONNECT = &#39;app/EthConnect/ETH_CONNECT&#39;;
-
-export function ethConnect(web3Provider) {
-  return {
-    type: ETH_CONNECT,
-    web3Provider,
-  };
-}
-
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;reducers&#34;&gt;reducers&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;/*
- *
- * EthConnect reducer
- *
- */
-
-// eslint exception for web3
-/* global web3:true */
-
-import { fromJS } from &#39;immutable&#39;;
-import Web3 from &#39;web3&#39;;
-import { ETH_CONNECT } from &#39;./constants&#39;;
-
-const initialState = fromJS({
-  web3Connection: false,
-});
-
-function ethConnectReducer(state = initialState, action) {
-  switch (action.type) {
-    case ETH_CONNECT:
-      return state
-        .set(&#39;web3Connection&#39;, web3Connect(action.web3Provider));
-    default:
-      return state;
-  }
-}
-
-const web3Connect = (web3Provider) =&amp;gt; {
-  let web3Connection;
-
-  // If mist or metamask or else is already injected there as a provider
-  if (typeof web3 !== &#39;undefined&#39;) {
-    web3Connection = new Web3(web3.currentProvider);
-  } else {
-    web3Connection = new Web3(new Web3.providers.HttpProvider(web3Provider));
-  }
-
-  if (web3Connection.isConnected()) {
-    return web3Connection;
-  }
-
-  return false;
-};
-
-
-export default ethConnectReducer;
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;selectors&#34;&gt;selectors&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;import { createSelector } from &#39;reselect&#39;;
-
-/**
- * Direct selector to the ethConnect state domain
- */
-const selectEthConnectDomain = () =&amp;gt; state =&amp;gt; state.get(&#39;ethConnect&#39;);
-
-/**
- * Other specific selectors
- */
-
-
-/**
- * Default selector used by EthConnect
- */
-
-const selectEthConnect = () =&amp;gt; createSelector(
-  selectEthConnectDomain(),
-  (substate) =&amp;gt; substate.toJS(),
-);
-
-const selectEthConnectWeb3Connection = () =&amp;gt; createSelector(
-  selectEthConnectDomain(),
-  (substate) =&amp;gt; substate.get(&#39;web3Connection&#39;)
-);
-
-const selectEthConnectIsConnected = () =&amp;gt; createSelector(
-  selectEthConnectDomain(),
-  (substate) =&amp;gt; {
-    if (substate.get(&#39;web3Connection&#39;) === false) {
-      return false;
-    }
-    return true;
-  }
-);
-
-export default selectEthConnect;
-export {
-  selectEthConnectDomain,
-  selectEthConnectWeb3Connection,
-  selectEthConnectIsConnected,
-};
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;component-itself&#34;&gt;component itself&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;/*
- *
- * EthConnect
- *
- */
-
-import React from &#39;react&#39;;
-import { connect } from &#39;react-redux&#39;;
-import { createStructuredSelector } from &#39;reselect&#39;;
-import { ethConnect } from &#39;./actions&#39;;
-import { selectEthConnectIsConnected } from &#39;./selectors&#39;;
-import ConnectionStatus from &#39;components/ConnectionStatus&#39;;
-
-export class EthConnect extends React.Component { // eslint-disable-line react/prefer-stateless-function
-  // That&#39;s when we connect, each time the component is mounted
-  componentWillMount() {
-    this.props.connect(this.props.web3Provider);
-  }
-
-  render() {
-    return (
-      &amp;lt;ConnectionStatus isConnected={this.props.isConnected} /&amp;gt;
-    );
-  }
-}
-
-EthConnect.propTypes = {
-  loading: React.PropTypes.bool,
-  web3Provider: React.PropTypes.string.isRequired,
-  connect: React.PropTypes.func.isRequired,
-  isConnected: React.PropTypes.bool,
-};
-
-const mapStateToProps = createStructuredSelector({
-  isConnected: selectEthConnectIsConnected(),
-});
-
-function mapDispatchToProps(dispatch) {
-  return {
-    connect: (web3Provider) =&amp;gt; dispatch(ethConnect(web3Provider)),
-    dispatch,
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(EthConnect);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And there we go! Our app is up and running and connect to the local node.&lt;/p&gt;
-
-&lt;p&gt;In the next step, we will see how to play with this app with more complex interactions, contract functions.&lt;/p&gt;
-</description>
+      <description>Frontend Prepare your folder for your dapp I will be using https://github.com/mxstbr/react-boilerplate as it&amp;rsquo;s quite nice and I&amp;rsquo;ve been playing with React for a bit now.
+I will not go into the details of setting this up, it&amp;rsquo;s a totally different topic. If you are not familiar with it, it&amp;rsquo;s probably a waste of time for you to read.
+Example web3 component with React This boilerplate uses immutable, redux and redux-sagas in order to deal with data.</description>
     </item>
     
     <item>
@@ -250,176 +40,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(EthConnect);
       <pubDate>Mon, 08 Aug 2016 15:00:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/ethereum-first-dapp-part-1/</guid>
-      <description>
-
-&lt;h1 id=&#34;contracts&#34;&gt;Contracts&lt;/h1&gt;
-
-&lt;h2 id=&#34;prepare-your-folder-for-your-dapp&#34;&gt;Prepare your folder for your dapp&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;mkdir dapp
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;inside this folder, we&amp;rsquo;ll create one folder for truffle, one for geth.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;cd dapp
-mkdir truffle geth
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;inside the geth folder, simply put the customGenesis block you can find in the ethereum-dev-environment blog post.&lt;/p&gt;
-
-&lt;p&gt;We are going to use two Ethereum clients, one for tests and devs, testrpc and one for a more real interaction, geth.&lt;/p&gt;
-
-&lt;p&gt;Let&amp;rsquo;s install truffle and testrpc&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;npm install ethereumjs-testrpc truffle
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;truffle&#34;&gt;Truffle&lt;/h2&gt;
-
-&lt;p&gt;Truffle is a-m-a-z-i-n-g for contract development. It will allow you to unit test the contracts and compile them into usable javascript objects usable in web3! Just what we needed!&lt;/p&gt;
-
-&lt;p&gt;First, init truffle scaffolding (I don&amp;rsquo;t like -g install XD, so bear with my node_modules folder).&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;node_modules/truffle/cli.js init
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This will create different folders. You can have a look at &lt;a href=&#34;http://truffle.readthedocs.io/&#34;&gt;http://truffle.readthedocs.io/&lt;/a&gt; to have more details.&lt;/p&gt;
-
-&lt;h2 id=&#34;testrpc&#34;&gt;Testrpc&lt;/h2&gt;
-
-&lt;p&gt;Let&amp;rsquo;s launch the ethereumjs-testrpc&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;node_modules/ethereumjs-testrpc/bin/testrpc
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;You will see it will create a new chain, in memory and create 10 new accounts for you to test.&lt;/p&gt;
-
-&lt;h2 id=&#34;standard-token-contracts&#34;&gt;Standard token contracts&lt;/h2&gt;
-
-&lt;p&gt;Don&amp;rsquo;t try to reinvent the wheel, Consensys has given standard contracts to issue your own token.
-Have a look here: &lt;a href=&#34;https://github.com/ConsenSys/Tokens&#34;&gt;https://github.com/ConsenSys/Tokens&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Just copy to your contract folder:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Tokens/Token_Contracts/contracts/HumanStandardToken.sol&lt;/li&gt;
-&lt;li&gt;Tokens/Token_Contracts/contracts/StandardToken.sol&lt;/li&gt;
-&lt;li&gt;Tokens/Token_Contracts/contracts/Token.sol&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;migrate&#34;&gt;Migrate&lt;/h2&gt;
-
-&lt;p&gt;Here is the simple migration script I used&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;module.exports = (deployer) =&amp;gt; {
-  deployer.deploy(
-    HumanStandardToken,
-        1000000,
-        &#39;mold&#39;,
-        &#39;0&#39;,
-        &#39;M&#39;
-  );
-};
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;In order to compile and deploy your contracts in the rpc node you configured in truffle.js, you need to launch the following command:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;node_modules/truffle/cli.js migrate
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;If your code compiles, it will create javascript objects for each of your contract in the folder build/contracts.&lt;/p&gt;
-
-&lt;h2 id=&#34;testing&#34;&gt;Testing&lt;/h2&gt;
-
-&lt;p&gt;Here is an example of tests on HumanStandardToken (ES6)&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;const it = require(&#39;mocha&#39;).it;
-const assert = require(&#39;chai&#39;).assert;
-
-contract(&#39;HumanStandardToken&#39;, (accounts) =&amp;gt; {
-  it(&#39;should put 1000000 molds in the first account&#39;, () =&amp;gt; {
-    const molds = HumanStandardToken.deployed();
-    const initSupply = 1000000;
-
-    return molds.balanceOf(accounts[0])
-      .then(balance =&amp;gt; assert.equal(
-          balance.valueOf(), initSupply,
-          `${initSupply} molds weren&#39;t in the first account`
-        )
-      );
-  });
-
-  it(&#39;should transfer molds to another user&#39;, () =&amp;gt; {
-    const molds = HumanStandardToken.deployed();
-
-    return molds.transfer(accounts[1], 100, { from: accounts[0], gas: 400000 })
-      .then(
-        () =&amp;gt; molds.balanceOf(accounts[1])
-      )
-      .then(balance =&amp;gt; assert.equal(
-          balance.valueOf(), 100,
-          `${accounts[1]} didn&#39;t was not transfered 100 molds but ${balance.valueOf()}`
-        )
-      );
-  });
-
-  it(&#39;should emit a transfer event when there is a transfer&#39;, (done) =&amp;gt; {
-    const transferredAmt = 1;
-
-    const transferWatcher = molds.Transfer({ fromBlock: &#39;latest&#39; },
-      (error, results) =&amp;gt; {
-        assert.equal(
-          results.args._value.valueOf(), transferredAmt,
-          `transfer event amount not equal to ${transferredAmt}`
-        );
-        transferWatcher.stopWatching();
-        done();
-      });
-
-    // trigger the event
-    molds.transfer(accounts[1], transferredAmt, { from: accounts[0], gas: 400000 });
-  });  
-});
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;** / ! \ **
-I was stuck for hours because of the way contract functions can be called.
-There are two types of actions on the Ethereum blockchain. Action which change the contract states (like transfer funds for example), and the one which don&amp;rsquo;t (like get balance, for example).
-In truffle, you call the latter with a &amp;ldquo;call&amp;rdquo; on the contract object, whereas the former doesn&amp;rsquo;t need it&amp;hellip; Confusing, isn&amp;rsquo;t it?
-I found out later that there are constant functions in solidity, which basically mean functions that don&amp;rsquo;t change the contract state. When you specify these functions in you contract definition as &amp;ldquo;constant&amp;rdquo;, then, truffle doesn&amp;rsquo;t need the call&amp;hellip; Problem solved, everything now looks uniform.&lt;/p&gt;
-
-&lt;p&gt;Now you can try if everything works fine, launch testrpc&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;node_modules/ethereumjs-testrpc/bin/testrpc
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;and open a new terminal and launch the tests&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;node_modules/truffle/cli.js test
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;creation-of-the-contracts-on-a-private-geth-or-even-morden&#34;&gt;Creation of the contracts on a private geth or even morden&lt;/h2&gt;
-
-&lt;p&gt;Modify your truffle.js to whichever node you want to migrate your contracts to.
-Mine is local geth, listening on port 9012, so truffle.js will become&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;module.exports = {
-  rpc: {
-    host: &#39;localhost&#39;,
-    port: 9012,
-  },
-};
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;then migrate&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;node_modules/truffle/cli.js migrate
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Et voila! if everything is ok, truffle should have created your contracts and updated the built contracts with the right contract addresses in build/contracts.&lt;/p&gt;
-
-&lt;p&gt;Now, let&amp;rsquo;s play with these contracts on geth! See you on part 2.&lt;/p&gt;
-</description>
+      <description>Contracts Prepare your folder for your dapp mkdir dapp  inside this folder, we&amp;rsquo;ll create one folder for truffle, one for geth.
+cd dapp mkdir truffle geth  inside the geth folder, simply put the customGenesis block you can find in the ethereum-dev-environment blog post.
+We are going to use two Ethereum clients, one for tests and devs, testrpc and one for a more real interaction, geth.
+Let&amp;rsquo;s install truffle and testrpc</description>
     </item>
     
     <item>
@@ -428,93 +52,11 @@ Mine is local geth, listening on port 9012, so truffle.js will become&lt;/p&gt;
       <pubDate>Mon, 11 Apr 2016 20:48:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/react-dev-env-setup/</guid>
-      <description>
-
-&lt;h3 id=&#34;working-with-es6-7&#34;&gt;Working with ES6-7&lt;/h3&gt;
-
-&lt;p&gt;In order to work with ECMAScript 2015 and even with future implementations of ES, you can use Babel.&lt;/p&gt;
-
-&lt;p&gt;Babel is a transpiler, it will convert your ES6-7 to plain ES5 javascript that most browsers (&amp;gt;ie9 most probably) will understand.&lt;/p&gt;
-
-&lt;p&gt;To install babel&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;npm install -g babel 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Then within your javascript project, you can create a .babelrc file with the following content:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
-  &amp;quot;presets&amp;quot;: [&amp;quot;es2015&amp;quot;, &amp;quot;stage-0&amp;quot;, &amp;quot;react&amp;quot;]
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;react-and-its-surrounding-libraries&#34;&gt;React and its surrounding libraries&lt;/h3&gt;
-
-&lt;p&gt;After starting using React, I realized it was vey good and was surrounded with libraries which makes it even better: redux, immutable, react-router&amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;I usually try to use these three, for most of the projects I&amp;rsquo;m working on. Sometimes, it feels way too over engineered, but still, once you understand their use, it&amp;rsquo;s pretty straightforward and logical to implement them.&lt;/p&gt;
-
-&lt;p&gt;The most important value added of redux, as well as immutable is the separation of concern. It gives you the power of designing components independantly from eachother.&lt;/p&gt;
-
-&lt;h3 id=&#34;react-and-its-tools&#34;&gt;React and its tools&lt;/h3&gt;
-
-&lt;p&gt;In order to help you develop with react and also redux, you have a few tools to help you.&lt;/p&gt;
-
-&lt;h4 id=&#34;eslint-for-react&#34;&gt;eslint for react&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;npm install -g eslint-plugin-react
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;sublime-text-plugin&#34;&gt;sublime text plugin&lt;/h4&gt;
-
-&lt;p&gt;You can install a useful plugins in react, available in the package installer: React ES6 snippets.&lt;/p&gt;
-
-&lt;h4 id=&#34;eslintrc-file-for-babel-and-react&#34;&gt;.eslintrc file for babel and react&lt;/h4&gt;
-
-&lt;p&gt;You can use this eslintrc file as a starting point.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
-  &amp;quot;extends&amp;quot;: &amp;quot;airbnb&amp;quot;,
-  &amp;quot;ecmaFeatures&amp;quot;: {
-    &amp;quot;jsx&amp;quot;: true,
-    &amp;quot;modules&amp;quot;: true
-  },
-  &amp;quot;env&amp;quot;: {
-    &amp;quot;browser&amp;quot;: true,
-    &amp;quot;node&amp;quot;: true
-  },
-  &amp;quot;parser&amp;quot;: &amp;quot;babel-eslint&amp;quot;,
-  &amp;quot;rules&amp;quot;: {
-    &amp;quot;quotes&amp;quot;: [2, &amp;quot;single&amp;quot;],
-    &amp;quot;strict&amp;quot;: [2, &amp;quot;never&amp;quot;],
-    &amp;quot;react/jsx-uses-react&amp;quot;: 2,
-    &amp;quot;react/jsx-uses-vars&amp;quot;: 2,
-    &amp;quot;react/react-in-jsx-scope&amp;quot;: 2,
-    &amp;quot;no-console&amp;quot;: 0
-  },
-  &amp;quot;plugins&amp;quot;: [
-    &amp;quot;react&amp;quot;
-  ]
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;chrome-tools&#34;&gt;Chrome tools&lt;/h4&gt;
-
-&lt;p&gt;You can install react devTools in Chrome:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi&#34;&gt;https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;You can also install redux devTools in chrome too:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd&#34;&gt;https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;redux devTools will require you to modifiy the way you call create store:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;store = (window.devToolsExtension ? window.devToolsExtension()(createStore) : createStore)([...your content here]);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;You will then be able to play with the different state of your app directly in chrome.&lt;/p&gt;
-</description>
+      <description>Working with ES6-7 In order to work with ECMAScript 2015 and even with future implementations of ES, you can use Babel.
+Babel is a transpiler, it will convert your ES6-7 to plain ES5 javascript that most browsers (&amp;gt;ie9 most probably) will understand.
+To install babel
+npm install -g babel  Then within your javascript project, you can create a .babelrc file with the following content:
+{ &amp;quot;presets&amp;quot;: [&amp;quot;es2015&amp;quot;, &amp;quot;stage-0&amp;quot;, &amp;quot;react&amp;quot;] }  React and its surrounding libraries After starting using React, I realized it was vey good and was surrounded with libraries which makes it even better: redux, immutable, react-router&amp;hellip;</description>
     </item>
     
     <item>
@@ -523,65 +65,13 @@ Mine is local geth, listening on port 9012, so truffle.js will become&lt;/p&gt;
       <pubDate>Thu, 10 Mar 2016 20:48:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/javascript-dev-env-setup/</guid>
-      <description>
-
-&lt;h3 id=&#34;nodejs&#34;&gt;NodeJS&lt;/h3&gt;
-
-&lt;p&gt;Go to the nodejs website and install nodejs latest stable version:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://nodejs.org/en/download/stable/&#34;&gt;https://nodejs.org/en/download/stable/&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;npm&#34;&gt;NPM&lt;/h3&gt;
-
-&lt;p&gt;Go to the npm website and follow the instructions&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://docs.npmjs.com/getting-started/installing-node&#34;&gt;https://docs.npmjs.com/getting-started/installing-node&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;install-nodejs-essential-packages&#34;&gt;Install nodejs essential packages&lt;/h3&gt;
-
-&lt;p&gt;npm install -g eslint webpack webpack-dev-server babel-eslint serve&lt;/p&gt;
-
-&lt;h3 id=&#34;install-sublime-text-essential-plugins&#34;&gt;Install sublime-text essential plugins&lt;/h3&gt;
-
-&lt;p&gt;With the help of the package manager, in sublime-text, install the following packages: babel, Sublime-Linter-Contrib-eslint, React ES6 snippets&lt;/p&gt;
-
-&lt;h3 id=&#34;make-sure-your-linter-is-working&#34;&gt;Make sure your linter is working&lt;/h3&gt;
-
-&lt;p&gt;In sublime text, open the console (view &amp;gt; show console) and check if there is any error message.&lt;/p&gt;
-
-&lt;p&gt;Alright, let&amp;rsquo;s check if everything is fine. Let&amp;rsquo;s create a test project in a new folder.&lt;/p&gt;
-
-&lt;p&gt;Add a .eslintrc file, with this content:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
-  &amp;quot;extends&amp;quot;: &amp;quot;airbnb&amp;quot;,
-  &amp;quot;ecmaFeatures&amp;quot;: {
-    &amp;quot;jsx&amp;quot;: true,
-    &amp;quot;modules&amp;quot;: true
-  },
-  &amp;quot;env&amp;quot;: {
-    &amp;quot;browser&amp;quot;: true,
-    &amp;quot;node&amp;quot;: true
-  },
-  &amp;quot;parser&amp;quot;: &amp;quot;babel-eslint&amp;quot;,
-  &amp;quot;rules&amp;quot;: {
-    &amp;quot;quotes&amp;quot;: [2, &amp;quot;single&amp;quot;],
-    &amp;quot;strict&amp;quot;: [2, &amp;quot;never&amp;quot;]
-  }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;then create a simple test.js with this content:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;echo &amp;quot;test&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;You should see the linter complaining, telling you something is wrong and you need to correct your javascript (check the lower grey line of sublime for the comment).&lt;/p&gt;
-
-&lt;p&gt;If you don&amp;rsquo;t see anything, check the console again.&lt;/p&gt;
-
-&lt;p&gt;Last resort, if things are still not working, you can go there and troubleshoot: &lt;a href=&#34;http://www.sublimelinter.com/en/latest/troubleshooting.html&#34;&gt;http://www.sublimelinter.com/en/latest/troubleshooting.html&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>NodeJS Go to the nodejs website and install nodejs latest stable version:
+https://nodejs.org/en/download/stable/
+NPM Go to the npm website and follow the instructions
+https://docs.npmjs.com/getting-started/installing-node
+Install nodejs essential packages npm install -g eslint webpack webpack-dev-server babel-eslint serve
+Install sublime-text essential plugins With the help of the package manager, in sublime-text, install the following packages: babel, Sublime-Linter-Contrib-eslint, React ES6 snippets
+Make sure your linter is working In sublime text, open the console (view &amp;gt; show console) and check if there is any error message.</description>
     </item>
     
     <item>
@@ -590,72 +80,16 @@ Mine is local geth, listening on port 9012, so truffle.js will become&lt;/p&gt;
       <pubDate>Sat, 20 Feb 2016 20:48:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/golang-dev-env-setup/</guid>
-      <description>
-
-&lt;h3 id=&#34;golang-environment&#34;&gt;Golang environment&lt;/h3&gt;
-
-&lt;p&gt;install golang&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://www.wolfe.id.au/2015/03/05/using-sublime-text-for-go-development/&#34;&gt;http://www.wolfe.id.au/2015/03/05/using-sublime-text-for-go-development/&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Within &lt;a href=&#34;https://vincentserpoul.github.io/sublimetext-dev-environment&#34;&gt;sublimetext, from the package manager&lt;/a&gt;, install gosublime, install gooracle.&lt;/p&gt;
-
-&lt;p&gt;install go/tools:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;go get -u golang.org/x/tools/cmd/goimports
-go get -u golang.org/x/tools/cmd/vet
-go get -u golang.org/x/tools/cmd/oracle
-go get -u golang.org/x/tools/cmd/godoc
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;install gometalinter (&lt;a href=&#34;https://github.com/alecthomas/gometalinter&#34;&gt;https://github.com/alecthomas/gometalinter&lt;/a&gt;)&lt;/p&gt;
-
-&lt;p&gt;install interfacer (&lt;a href=&#34;https://github.com/mvdan/interfacer/&#34;&gt;https://github.com/mvdan/interfacer/&lt;/a&gt;)&lt;/p&gt;
-
-&lt;p&gt;install gosimple (&lt;a href=&#34;https://github.com/dominikh/go-simple&#34;&gt;https://github.com/dominikh/go-simple&lt;/a&gt;)&lt;/p&gt;
-
-&lt;p&gt;install gocov (&lt;a href=&#34;https://github.com/axw/gocov&#34;&gt;https://github.com/axw/gocov&lt;/a&gt;)&lt;/p&gt;
-
-&lt;p&gt;Here is the package settings I use for gosublime:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
-
-    // you may set specific environment variables here
-    // e.g &amp;quot;env&amp;quot;: { &amp;quot;PATH&amp;quot;: &amp;quot;$HOME/go/bin:$PATH&amp;quot; }
-    // in values, $PATH and ${PATH} are replaced with
-    // the corresponding environment(PATH) variable, if it exists.
-    &amp;quot;env&amp;quot;: {&amp;quot;GOPATH&amp;quot;: &amp;quot;/home/go&amp;quot; },
-
-    &amp;quot;fmt_cmd&amp;quot;: [&amp;quot;goimports&amp;quot;],
-    &amp;quot;ipc_timeout&amp;quot;: 5,
-
-    // enable comp-lint, this will effectively disable the live linter
-    &amp;quot;comp_lint_enabled&amp;quot;: true,
-
-    // list of commands to run
-    &amp;quot;comp_lint_commands&amp;quot;: [
-        // run `golint` on all files in the package
-        // &amp;quot;shell&amp;quot;:true is required in order to run the command through your shell (to expand `*.go`)
-        // also see: the documentation for the `shell` setting in the default settings file ctrl+dot,ctrl+4
-        {&amp;quot;cmd&amp;quot;: [&amp;quot;golint *.go&amp;quot;], &amp;quot;shell&amp;quot;: true},
-
-        // run go vet on the package
-        {&amp;quot;cmd&amp;quot;: [&amp;quot;go&amp;quot;, &amp;quot;vet&amp;quot;]},
-
-        // run `go install` on the package. GOBIN is set,
-        // so `main` packages shouldn&#39;t result in the installation of a binary
-        {&amp;quot;cmd&amp;quot;: [&amp;quot;go&amp;quot;, &amp;quot;install&amp;quot;]}
-    ],
-
-    &amp;quot;on_save&amp;quot;: [
-        // run comp-lint when you save,
-        // naturally, you can also bind this command `gs_comp_lint`
-        // to a key binding if you want
-        {&amp;quot;cmd&amp;quot;: &amp;quot;gs_comp_lint&amp;quot;}
-    ]
-}
-&lt;/code&gt;&lt;/pre&gt;
-</description>
+      <description>Golang environment install golang
+http://www.wolfe.id.au/2015/03/05/using-sublime-text-for-go-development/
+Within sublimetext, from the package manager, install gosublime, install gooracle.
+install go/tools:
+go get -u golang.org/x/tools/cmd/goimports go get -u golang.org/x/tools/cmd/vet go get -u golang.org/x/tools/cmd/oracle go get -u golang.org/x/tools/cmd/godoc  install gometalinter (https://github.com/alecthomas/gometalinter)
+install interfacer (https://github.com/mvdan/interfacer/)
+install gosimple (https://github.com/dominikh/go-simple)
+install gocov (https://github.com/axw/gocov)
+Here is the package settings I use for gosublime:
+{ // you may set specific environment variables here // e.g &amp;quot;env&amp;quot;: { &amp;quot;PATH&amp;quot;: &amp;quot;$HOME/go/bin:$PATH&amp;quot; } // in values, $PATH and ${PATH} are replaced with // the corresponding environment(PATH) variable, if it exists.</description>
     </item>
     
     <item>
@@ -664,36 +98,11 @@ go get -u golang.org/x/tools/cmd/godoc
       <pubDate>Wed, 10 Feb 2016 20:48:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/sublimetext-dev-env-setup/</guid>
-      <description>
-
-&lt;h3 id=&#34;download-and-install-the-latest-sublime-text&#34;&gt;Download and install the latest Sublime text&lt;/h3&gt;
-
-&lt;p&gt;Go to the sublime text website and download Sublime text 3 for your OS.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://www.sublimetext.com/3&#34;&gt;https://www.sublimetext.com/3&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;download-and-install-the-sublime-text-package-manager&#34;&gt;Download and install the sublime text package manager&lt;/h3&gt;
-
-&lt;p&gt;Go the package control website, download and install it on your sublime text (follow the instructions on the website).&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://packagecontrol.io/installation&#34;&gt;https://packagecontrol.io/installation&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;download-and-install-sublime-linter&#34;&gt;Download and install sublime linter&lt;/h3&gt;
-
-&lt;p&gt;Go to the sublime linter website, download and install it on your sublime text.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://www.sublimelinter.com/en/latest/installation.html&#34;&gt;http://www.sublimelinter.com/en/latest/installation.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;download-and-install-prettyjson&#34;&gt;Download and install prettyJSON&lt;/h3&gt;
-
-&lt;p&gt;JSON format is pretty common these days, try this prettifier, it will save you some time when you get long string of JSON.&lt;/p&gt;
-
-&lt;p&gt;You can install it from the sublime text package manager.&lt;/p&gt;
-
-&lt;h3 id=&#34;finally&#34;&gt;Finally&lt;/h3&gt;
-
-&lt;p&gt;You are ready to go wrestle with your favorite language!&lt;/p&gt;
-</description>
+      <description>Download and install the latest Sublime text Go to the sublime text website and download Sublime text 3 for your OS.
+https://www.sublimetext.com/3
+Download and install the sublime text package manager Go the package control website, download and install it on your sublime text (follow the instructions on the website).
+https://packagecontrol.io/installation
+Download and install sublime linter Go to the sublime linter website, download and install it on your sublime text.</description>
     </item>
     
   </channel>

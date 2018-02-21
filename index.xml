@@ -2,12 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>VS tech corner</title>
-    <link>https://vincentserpoul.github.io/index.xml</link>
+    <link>https://vincentserpoul.github.io/</link>
     <description>Recent content on VS tech corner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 03 Apr 2017 16:22:00 +0800</lastBuildDate>
-    <atom:link href="https://vincentserpoul.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="https://vincentserpoul.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Bluetooth activation at startup on arch linux</title>
@@ -15,28 +17,9 @@
       <pubDate>Mon, 03 Apr 2017 16:22:00 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/archlinux-bluetooth/</guid>
-      <description>
-
-&lt;h2 id=&#34;why&#34;&gt;Why?&lt;/h2&gt;
-
-&lt;p&gt;You might not have reach that point yet but bluez has been deprecating hciconfig and other tools.
-In bluez 5.44, &lt;a href=&#34;https://bugs.archlinux.org/task/53110&#34;&gt;it&amp;rsquo;s not there anymore&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2 id=&#34;what-is-the-problem&#34;&gt;What is the problem?&lt;/h2&gt;
-
-&lt;p&gt;All hciconfig udev rules to activate bluetooth at startup won&amp;rsquo;t work anymore.
-Most forum posts solving bluetooth issues are now outdated.
-Once I updated to bluez 5.44, my service leveraging hciconfig to activate bluetooth at startup didn&amp;rsquo;t work anymore!&lt;/p&gt;
-
-&lt;h2 id=&#34;what-is-the-solution&#34;&gt;What is the solution?&lt;/h2&gt;
-
-&lt;p&gt;It&amp;rsquo;s now actually documented in the &lt;a href=&#34;https://wiki.archlinux.org/index.php/bluetooth&#34;&gt;archwiki&lt;/a&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Alternatively and instead of the custom service and udev rule, you can simply use the new AutoEnable feature introduced in BlueZ 5.35 by uncommenting  [Policy] and AutoEnable=true lines in /etc/bluetooth/main.conf.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Just uncomment and go, you don&amp;rsquo;t need the service to activate bluetooth anymore, enjoy!&lt;/p&gt;
-</description>
+      <description>Why? You might not have reach that point yet but bluez has been deprecating hciconfig and other tools. In bluez 5.44, it&amp;rsquo;s not there anymore.
+What is the problem? All hciconfig udev rules to activate bluetooth at startup won&amp;rsquo;t work anymore. Most forum posts solving bluetooth issues are now outdated. Once I updated to bluez 5.44, my service leveraging hciconfig to activate bluetooth at startup didn&amp;rsquo;t work anymore!
+What is the solution?</description>
     </item>
     
     <item>
@@ -45,79 +28,10 @@ Once I updated to bluez 5.44, my service leveraging hciconfig to activate blueto
       <pubDate>Tue, 27 Dec 2016 00:44:00 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/golang-playwithsql-oracle/</guid>
-      <description>
-
-&lt;h2 id=&#34;which-library&#34;&gt;Which library&lt;/h2&gt;
-
-&lt;p&gt;To this day, the most up to date library seems to be &lt;a href=&#34;https://github.com/rana/ora&#34;&gt;rana/ora&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;how-to-install-linux-macosx&#34;&gt;How to install (linux &amp;amp; macosx)&lt;/h2&gt;
-
-&lt;p&gt;Download &lt;a href=&#34;http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html&#34;&gt;Oracle Instant Client for linux x64&lt;/a&gt;: both packages Basic and SDK
-Unzip each of them in the same folder /opt/oracle&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-powershell&#34;&gt;mkdir -p /opt/oracle
-cd /opt/oracle
-unzip ~/Downloads/instantclient-basiclite-linux.x64-12.2.0.1.0.zip
-unzip ~/Downloads/instantclient-sdk-linux.x64-12.2.0.1.0.zip
-cd /opt/oracle/instantclient_12_1
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Add the necessary env variables and paths:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-powershell&#34;&gt;# Oracle
-export LD_LIBRARY_PATH=/opt/oracle/instantclient_12_2:$LD_LIBRARY_PATH
-export PKG_CONFIG_PATH=/opt/oracle
-export ORACLE_HOME=$LD_LIBRARY_PATH
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;copy from the &lt;a href=&#34;https://github.com/rana/ora/tree/v4/contrib&#34;&gt;go package ./contrib/oci8.pc&lt;/a&gt; to /opt/oracle and modify its content to:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;prefix=/opt/oracle/instantclient_12_2
-version=12.2
-build=client64
-
-libdir=${prefix}
-includedir=${prefix}/sdk/include
-
-Name: oci8
-Description: Oracle database engine
-Version: ${version}
-Libs: -L${libdir} -lclntsh
-Libs.private:
-Cflags: -I${includedir}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;on-linux&#34;&gt;On linux&lt;/h2&gt;
-
-&lt;p&gt;Follow the &lt;a href=&#34;http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html#ic_x64_inst&#34;&gt;instructions&lt;/a&gt; from Oracle:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-powershell&#34;&gt;ln -s /opt/oracle/instantclient_12_2/libclntsh.so.12.1 /opt/oracle/instantclient_12_2/libclntsh.so
-ln -s /opt/oracle/instantclient_12_2/libocci.so.12.1 /opt/oracle/instantclient_12_2/libocci.so
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;on-macosx&#34;&gt;On macosx&lt;/h2&gt;
-
-&lt;p&gt;Follow the instructions from Oracle:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-powershell&#34;&gt;ln -s /opt/oracle/instantclient_12_2/libclntsh.dylib.12.1 /opt/oracle/instantclient_12_2/libclntsh.dylib
-ln -s /opt/oracle/instantclient_12_2/libocci.dylib.12.1 /opt/oracle/instantclient_12_2/libocci.dylib
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;One more step is necessary for macosx.&lt;/p&gt;
-
-&lt;p&gt;You have to add your machine name in your /etc/hosts for the 127.0.0.1&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;127.0.0.1 localhost YOURMACHINENAME
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;install-the-package&#34;&gt;Install the package&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-powershell&#34;&gt;go get -u cd gopkg.in/rana/ora.v4
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;You should be all good!&lt;/p&gt;
-</description>
+      <description>Which library To this day, the most up to date library seems to be rana/ora
+How to install (linux &amp;amp; macosx) Download Oracle Instant Client for linux x64: both packages Basic and SDK Unzip each of them in the same folder /opt/oracle
+mkdir -p /opt/oracle cd /opt/oracle unzip ~/Downloads/instantclient-basiclite-linux.x64-12.2.0.1.0.zip unzip ~/Downloads/instantclient-sdk-linux.x64-12.2.0.1.0.zip cd /opt/oracle/instantclient_12_1  Add the necessary env variables and paths:
+# Oracle export LD_LIBRARY_PATH=/opt/oracle/instantclient_12_2:$LD_LIBRARY_PATH export PKG_CONFIG_PATH=/opt/oracle export ORACLE_HOME=$LD_LIBRARY_PATH  copy from the go package .</description>
     </item>
     
     <item>
@@ -126,328 +40,10 @@ ln -s /opt/oracle/instantclient_12_2/libocci.dylib.12.1 /opt/oracle/instantclien
       <pubDate>Thu, 27 Oct 2016 13:34:00 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/ethereum-react-dapps/</guid>
-      <description>
-
-&lt;p&gt;I finished my first dapp with (react-boilerplate)[&lt;a href=&#34;https://github.com/mxstbr/&#34;&gt;https://github.com/mxstbr/&lt;/a&gt;] this week and here are the few things I learnt.
-I won&amp;rsquo;t get into the redux, redux-saga details, I let you play with the amazing boilerplate.&lt;/p&gt;
-
-&lt;h2 id=&#34;interacting-with-constant-functions&#34;&gt;Interacting with constant functions&lt;/h2&gt;
-
-&lt;p&gt;Let&amp;rsquo;s use the typical balanceOf function of the EIP20 contracts:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-solidity&#34;&gt;    function balanceOf(address _owner) constant returns (uint256 balance) {
-        return balances[_owner];
-    }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Here are the sagas (redux-sagas) I used to interact:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;import { take, call, put, cancel, select, fork } from &#39;redux-saga/effects&#39;;
-import {
-  BALANCE_OF_GET,
-} from &#39;./constants&#39;;
-import { LOCATION_CHANGE } from &#39;react-router-redux&#39;;
-
-import {
-  balanceOfSuccess,
-  balanceOfFailure,
-} from &#39;./actions&#39;;
-
-import { selectEthConnectWeb3Connection } from &#39;containers/EthConnect/selectors&#39;;
-
-import HumanStandardToken from &#39;contracts/HumanStandardToken.sol.js&#39;;
-
-function* balanceOfGet(ethAddress) {
-  const web3Connection = yield select(selectEthConnectWeb3Connection());
-
-  HumanStandardToken.setProvider(web3Connection.currentProvider);
-  const token = HumanStandardToken.deployed();
-
-  const balancePromise = yield call(token.balanceOf, ethAddress);
-
-  // We return an object in a specific format, see utils/request.js for more information
-  if (balancePromise.err === undefined || balancePromise.err === null) {
-    yield put(balanceOfSuccess(ethAddress, balancePromise.valueOf()));
-  } else {
-    console.log(balancePromise.err.response); // eslint-disable-line no-console
-    yield put(balanceOfFailure(ethAddress, balancePromise.err.response));
-  }
-}
-
-/**
- * Watches for BALANCE_OF_GET action and calls handler
- */
-export function* balanceOfWatcher() {
-  while (true) { // eslint-disable-line no-constant-condition
-    const { ethAddress } = yield take(BALANCE_OF_GET);
-    // use fork and not call to be sure to fork all
-    yield fork(balanceOfGet, ethAddress);
-  }
-}
-
-
-/**
- * Root saga manages watcher lifecycle
- */
-export function* balanceOfSaga() {
-  // Fork watcher so we can continue execution
-  const watcher = yield fork(balanceOfWatcher);
-
-  // Suspend execution until location changes
-  yield take(LOCATION_CHANGE);
-  yield cancel(watcher);
-}
-
-// All sagas to be loaded
-export default [
-  balanceOfSaga,
-];
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Then, simply implement the right reducers, actions and you are done! you can easily get the balance in your UI.&lt;/p&gt;
-
-&lt;h2 id=&#34;interacting-with-functions-that-needs-transactions&#34;&gt;Interacting with functions that needs transactions&lt;/h2&gt;
-
-&lt;p&gt;Let&amp;rsquo;s use the same EIP20 contract again:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-solidity&#34;&gt;    event Approval(address indexed _owner, address indexed _spender, uint256 _value);
-
-    function approve(address _spender, uint256 _value) returns (bool success) {
-        allowed[msg.sender][_spender] = _value;
-        Approval(msg.sender, _spender, _value);
-        return true;
-    }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;import { take, call, put, select, cancel, fork } from &#39;redux-saga/effects&#39;;
-import {
-  GIVEMETOKEN_LAUNCH,
-} from &#39;./constants&#39;;
-import { LOCATION_CHANGE } from &#39;react-router-redux&#39;;
-
-import {
-  givemetokensSuccess,
-  givemetokensFailure,
-} from &#39;./actions&#39;;
-
-import {
-  balanceOfGet,
-} from &#39;containers/Token/actions&#39;;
-
-import { selectEthConnectWeb3Connection } from &#39;containers/EthConnect/selectors&#39;;
-// import { selectRianEthAddress } from &#39;./selectors&#39;;
-
-import HumanStandardToken from &#39;contracts/HumanStandardToken.sol.js&#39;;
-
-function* givemetokens(ethAddress) {
-  const web3Connection = yield select(selectEthConnectWeb3Connection());
-  HumanStandardToken.setProvider(web3Connection.currentProvider);
-  const tokens = HumanStandardToken.deployed();
-
-  const tokensOwner = yield call(tokens.getOwner.call);
-
-  try {
-    yield call(tokens.approve, ethAddress, 100, { from: tokensOwner, gas: 200000 });
-  } catch (e) {
-    console.log(e); // eslint-disable-line no-console
-    yield put(givemetokensFailure(ethAddress));
-    return;
-  }
-
-  const approvedAmt = yield call(tokens.allowance.call, tokensOwner, ethAddress);
-  console.log(`approved amount: ${approvedAmt}`);
-
-  try {
-    yield call(tokens.transferFrom, tokensOwner, ethAddress, 100, { from: ethAddress, gas: 200000 });
-  } catch (e) {
-    console.log(e); // eslint-disable-line no-console
-    yield put(givemetokensFailure(ethAddress));
-  }
-
-  yield put(givemetokensSuccess(ethAddress, true));
-  yield put(balanceOfGet(ethAddress));
-}
-
-/**
- * Watches for SIMPLEINSURANCE_givemetokens_LAUNCH action and calls handler
- */
-export function* givemetokensWatcher() {
-  while (true) { // eslint-disable-line no-constant-condition
-    const { ethAddress } = yield take(GIVEMETOKEN_LAUNCH);
-    yield call(givemetokens, ethAddress);
-  }
-}
-
-
-/**
- * Root saga manages watcher lifecycle
- */
-export function* givemetokensSaga() {
-  // Fork watcher so we can continue execution
-  const watcher = yield fork(givemetokensWatcher);
-
-  // Suspend execution until location changes
-  yield take(LOCATION_CHANGE);
-  yield cancel(watcher);
-}
-
-// All sagas to be loaded
-export default [
-  givemetokensSaga,
-];
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;At that point, you only know that the transaction has gone through, you don&amp;rsquo;t really know what happened. That&amp;rsquo;s when you need to listen to the event of your contracts.&lt;/p&gt;
-
-&lt;h2 id=&#34;listening-to-events&#34;&gt;Listening to events&lt;/h2&gt;
-
-&lt;p&gt;Same example as above, we will listen to the Approval event.
-We need to create a eventChannel, as the event is coming from &lt;em&gt;outside&lt;/em&gt; this time, it won&amp;rsquo;t be generated by our own UI.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;const ethEvent = () =&amp;gt; eventChannel((emitter) =&amp;gt; {
-  const tokensApproval = tokens.Approval({ fromBlock: &#39;latest&#39; });
-  tokensApproval.watch((error, results) =&amp;gt; {
-    const eventType = &#39;approve&#39;;
-    const eventTime = new Date().toISOString();
-    const eventEthAddress = results.args._owner;
-    let eventDescription;
-    if (error) {
-      console.log(`Approval error ${error}`); // eslint-disable-line no-console
-      eventDescription = `ERROR - ${results.args._owner.substring(0,6)} allowed ${results.args._spender.substring(0,6)} to spend ${results.args._value}Ʉ on his behalf`;
-    } else {
-      eventDescription = `${results.args._owner.substring(0,6)} allowed ${results.args._spender.substring(0,6)} to spend ${results.args._value}Ʉ on his behalf`;
-    }
-
-    emitter({ eventEthAddress, eventType, eventTime, eventDescription });
-  });
-
-  return () =&amp;gt; {
-    tokensApproval.stopWatching();
-  };
-});
-
-function* handleEthEvent(event) {
-  switch (event.eventType) {
-    case &#39;approve&#39;:
-      yield put(ethEventListenerReceiveAction(event.eventEthAddress, event.eventType, event.eventTime, event.eventDescription));
-      break;
-    default:
-      console.log(event); // eslint-disable-line no-console
-  }
-}
-
-export function* ethEventListenerSaga() {
-  yield put(ethEventListenerCreateAction());
-
-  const chan = yield call(ethEvent);
-  try {
-    while (true) {
-      const event = yield take(chan);
-      yield call(handleEthEvent, event);
-    }
-  } finally {
-    if (yield cancelled()) {
-      chan.close();
-      console.log(&#39;listening cancelled&#39;);
-    }
-  }
-} 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And here you go! You can now listen to the stream of events.&lt;/p&gt;
-
-&lt;h2 id=&#34;getting-a-list-of-events&#34;&gt;Getting a list of events&lt;/h2&gt;
-
-&lt;p&gt;In Ethereum, you can get the list of past events, it can kind of act like a kind of storage for the history of your contracts (I won&amp;rsquo;t go into details for this, but some node might not keep the whole history).&lt;/p&gt;
-
-&lt;p&gt;How to get the history of events on the contract?&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;import { take, call, put, cancel, fork } from &#39;redux-saga/effects&#39;;
-import {
-  APPROVAL_HISTORY_GET,
-} from &#39;./constants&#39;;
-import { LOCATION_CHANGE } from &#39;react-router-redux&#39;;
-import { web3Connect } from &#39;utils/web3.js&#39;;
-import {
-  receiveApprovalHistory,
-} from &#39;./actions&#39;;
-import {
-  balanceOfGet,
-} from &#39;containers/Token/actions&#39;;
-import HumanStandardToken from &#39;contracts/HumanStandardToken.sol.js&#39;;
-
-function* getApprovalHistory(ethAddress) {
-  const web3Connection = web3Connect();
-
-  HumanStandardToken.setProvider(web3Connection.currentProvider);
-  const tokens = HumanStandardToken.deployed();
-
-  const approvalHistory = [];
-  // Getting the list of events from block 0 to latest block, with a filter on _owner as it is an indexed field
-  const tokensApproval = tokens.Approval({ _owner: ethAddress }, { fromBlock: &#39;0&#39;, toBlock: &#39;latest&#39; });
-
-  const getApprovalLogPromise = yield call(eventGetPromisified, tokensApproval);
-
-  if (getApprovalLogPromise.err === null || getApprovalLogPromise.err === undefined) {
-    for (const results of getApprovalLogPromise) {
-      approvalHistory.push({
-        trigger: results.args._trigger,
-        measurement: results.args._measurement.valueOf(),
-        premium: results.args._amount.valueOf(),
-        refundedAmount: results.args._refundAmount.valueOf(),
-        settled: results.args._timeEnded.valueOf(),
-        refunded: results.args._due.valueOf(),
-      });
-    }
-  } else {
-    console.log(getApprovalLogPromise.err);
-  }
-
-  yield put(receiveApprovalHistory(ethAddress, approvalHistory));
-}
-
-// Event promisifier to turn the nasty web3 callback to a promise ES6 form
-const eventGetPromisified = (event) =&amp;gt; new Promise((resolve, reject) =&amp;gt; {
-  event.get((error, logs) =&amp;gt; {
-    if (error) {
-      reject(error);
-    } else {
-      resolve(logs);
-    }
-  });
-});
-
-/**
- * Watches for APPROVAL_HISTORY_GET action and calls handler
- */
-export function* getApprovalHistoryWatcher() {
-  while (true) { // eslint-disable-line no-constant-condition
-    const { ethAddress } = yield take(APPROVAL_HISTORY_GET);
-    yield fork(getApprovalHistory, ethAddress);
-  }
-}
-
-/**
- * Root saga manages watcher lifecycle
- */
-export function* approvalHistorySaga() {
-  // Fork watcher so we can continue execution
-  const getApprovalHistoryW = yield fork(getApprovalHistoryWatcher);
-
-  // Suspend execution until location changes
-  yield take(LOCATION_CHANGE);
-  yield cancel(getApprovalHistoryW);
-}
-
-// All sagas to be loaded
-export default [
-  approvalHistorySaga,
-];
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Et voila!&lt;/p&gt;
-</description>
+      <description>I finished my first dapp with (react-boilerplate)[https://github.com/mxstbr/] this week and here are the few things I learnt. I won&amp;rsquo;t get into the redux, redux-saga details, I let you play with the amazing boilerplate.
+Interacting with constant functions Let&amp;rsquo;s use the typical balanceOf function of the EIP20 contracts:
+function balanceOf(address _owner) constant returns (uint256 balance) { return balances[_owner]; }  Here are the sagas (redux-sagas) I used to interact:
+import { take, call, put, cancel, select, fork } from &#39;redux-saga/effects&#39;; import { BALANCE_OF_GET, } from &#39;.</description>
     </item>
     
     <item>
@@ -456,122 +52,9 @@ export default [
       <pubDate>Mon, 10 Oct 2016 12:54:00 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/binding-ethereum-golang/</guid>
-      <description>
-
-&lt;h2 id=&#34;the-contract&#34;&gt;The contract&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-solidity&#34;&gt;contract Trigger {
-  function () {
-      throw;
-  }
-
-  address owner;
-
-  function Trigger() {
-      owner = msg.sender;
-  }
-
-  event TriggerEvt(address _sender, uint _trigger);
-
-  function trigger(uint _trigger) {
-      TriggerEvt(msg.sender, _trigger);
-  }
-
-  function getOwner() constant returns (address) {
-    return owner;
-  }
-
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This is a very simple contract that we will take as an example.&lt;/p&gt;
-
-&lt;h2 id=&#34;getting-the-right-tools-for-binding&#34;&gt;Getting the right tools for binding&lt;/h2&gt;
-
-&lt;p&gt;A good starting point is this &lt;a href=&#34;https://github.com/ethereum/go-ethereum/wiki/Native-DApps:-Go-bindings-to-Ethereum-contracts&#34;&gt;wiki&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;You will need to follow the install procedure of &lt;a href=&#34;https://github.com/ethereum/go-ethereum&#34;&gt;go-ethereum&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Once done, you should have the abigen executable available on your command line.&lt;/p&gt;
-
-&lt;h2 id=&#34;automatically-generating-the-go-file&#34;&gt;Automatically generating the go file&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;abigen --sol contracts/Trigger.sol --pkg main --out trigger.go
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;If everything is fine, you should now have a file named trigger.go&lt;/p&gt;
-
-&lt;h2 id=&#34;using-the-generated-file-from-main&#34;&gt;Using the generated file from main&lt;/h2&gt;
-
-&lt;p&gt;You first need to have a node running (parity, geth, testrpc&amp;hellip;). We will assume it&amp;rsquo;s listening on port 9012.
-You then need to deploy your contract and write down the deployment address (you can use truffle or simple deploy your contract manually or use the following code with a working key pair).&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;package main
-
-import (
-  &amp;quot;fmt&amp;quot;
-  &amp;quot;log&amp;quot;
-  &amp;quot;strings&amp;quot;
-  &amp;quot;time&amp;quot;
-
-  &amp;quot;github.com/ethereum/go-ethereum/accounts/abi/bind&amp;quot;
-  &amp;quot;github.com/ethereum/go-ethereum/accounts/abi/bind/backends&amp;quot;
-  &amp;quot;github.com/ethereum/go-ethereum/rpc&amp;quot;
-)
-
-func main() {
-  // Create an IPC based RPC connection to a remote node
-  conn, err := rpc.NewHTTPClient(&amp;quot;http://localhost:9012&amp;quot;)
-  if err != nil {
-    log.Fatalf(&amp;quot;Failed to connect to the Ethereum client: %v&amp;quot;, err)
-  }
-
-  // IF YOU WANT TO DEPLOY YOURSELF
-  // this is the json found in your geth chain/keystore folder
-  key := `{&amp;quot;address&amp;quot;:&amp;quot;f2759b4a699dae4fdc3383a0d7a92cfc246315cd&amp;quot;,&amp;quot;crypto&amp;quot;:{&amp;quot;cipher&amp;quot;:&amp;quot;aes-128-ctr&amp;quot;,&amp;quot;ciphertext&amp;quot;:&amp;quot;a96fe235356c7ebe6520d2fa1dcc0fd67199cb490fb18c39ffabbb6880a6b3d6&amp;quot;,&amp;quot;cipherparams&amp;quot;:{&amp;quot;iv&amp;quot;:&amp;quot;47182104a4811f8da09c0bafc3743e2a&amp;quot;},&amp;quot;kdf&amp;quot;:&amp;quot;scrypt&amp;quot;,&amp;quot;kdfparams&amp;quot;:{&amp;quot;dklen&amp;quot;:32,&amp;quot;n&amp;quot;:262144,&amp;quot;p&amp;quot;:1,&amp;quot;r&amp;quot;:8,&amp;quot;salt&amp;quot;:&amp;quot;81c82f97edb0ee1036e63d1de57b7851271273971803e60a5cbb011e85baa251&amp;quot;},&amp;quot;mac&amp;quot;:&amp;quot;09f107c9af8efcb932354d939beb7b2c0cebcfd70362d68905de554304a7cfff&amp;quot;},&amp;quot;id&amp;quot;:&amp;quot;eb7ed04f-e996-4bda-893b-28dc6ac24626&amp;quot;,&amp;quot;version&amp;quot;:3}`
-  auth, err := bind.NewTransactor(strings.NewReader(key), &amp;quot;1234567890&amp;quot;)
-  if err != nil {
-    log.Fatalf(&amp;quot;Failed to create authorized transactor: %v&amp;quot;, err)
-  }
-  // Deploy a new awesome contract for the binding demo
-  triggerAddr, _, trigger, err := DeployTrigger(auth, backends.NewRPCBackend(conn))
-  if err != nil {
-    log.Fatalf(&amp;quot;Failed to deploy new trigger contract: %v&amp;quot;, err)
-  }
-  // Don&#39;t even wait, check its presence in the local pending state
-  time.Sleep(5 * time.Second) // Allow it to be processed by the local node :P
-  // END IF YOU WANT TO DEPLOY YOURSELF
-
-  // IF YOU HAVE ALREADY DEPLOYED IT
-  // deployedTriggerAddr := &amp;quot;0xe2359b4a699dae4fdc3383a0d7a92cfc246315ce&amp;quot;
-  deployedTriggerAddr := triggerAddr
-  trigger, err = NewTrigger(deployedTriggerAddr, backends.NewRPCBackend(conn))
-  if err != nil {
-    log.Fatalf(&amp;quot;Failed to instantiate a trigger contract: %v&amp;quot;, err)
-  }
-  // END IF YOU HAVE ALREADY DEPLOYED IT
-
-  owner, err := trigger.GetOwner(nil)
-  if err != nil {
-    log.Fatalf(&amp;quot;Failed to retrieve token name: %v&amp;quot;, err)
-  }
-  fmt.Printf(&amp;quot;owner address: 0x%x\n&amp;quot;, owner)
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;then, just run it&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;go run *.go
-owner address: 0xf2759b4a699dae4fdc3383a0d7a92cfc246315cd
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Et voila!&lt;/p&gt;
-
-&lt;h2 id=&#34;existing-issues&#34;&gt;Existing issues&lt;/h2&gt;
-
-&lt;p&gt;We have still not talked about listening to events.
-There are also still issues as soon as the contract imports other contracts, I will finish the writing once these are done.&lt;/p&gt;
-</description>
+      <description>The contract contract Trigger { function () { throw; } address owner; function Trigger() { owner = msg.sender; } event TriggerEvt(address _sender, uint _trigger); function trigger(uint _trigger) { TriggerEvt(msg.sender, _trigger); } function getOwner() constant returns (address) { return owner; } }  This is a very simple contract that we will take as an example.
+Getting the right tools for binding A good starting point is this wiki.
+You will need to follow the install procedure of go-ethereum.</description>
     </item>
     
     <item>
@@ -580,27 +63,9 @@ There are also still issues as soon as the contract imports other contracts, I w
       <pubDate>Fri, 30 Sep 2016 12:06:01 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/on-microservices-and-scaling/</guid>
-      <description>&lt;p&gt;I just watched that amazing videos from Matt Ranney&lt;/p&gt;
-
-&lt;iframe width=&#34;560&#34; height=&#34;315&#34; src=&#34;https://www.youtube.com/embed/kb-m2fasdDY&#34; frameborder=&#34;0&#34; allowfullscreen&gt;&lt;/iframe&gt;
-
-&lt;p&gt;Here are my takeaways and opinionated summary:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Use RPC for service to service communications: &lt;a href=&#34;http://www.grpc.io/&#34;&gt;gRPC&lt;/a&gt; seems to be a good way of tackling it&lt;/li&gt;
-&lt;li&gt;Use many repositories&lt;/li&gt;
-&lt;li&gt;Profiling should be unified: flamegraphs seem to be a good solution (Go profiling is great too)&lt;/li&gt;
-&lt;li&gt;Premature optimization is bad but performance monitoring is crucial!&lt;/li&gt;
-&lt;li&gt;Trace requests, keep context within all logs&lt;/li&gt;
-&lt;li&gt;Log a lot, but only on a portion of your production architecture as logging can have a big cost.&lt;/li&gt;
-&lt;li&gt;Log consistenly across all services&lt;/li&gt;
-&lt;li&gt;Do load test in production all the time&lt;/li&gt;
-&lt;li&gt;Systematically shut down services randomly (chaos monkey like)&lt;/li&gt;
-&lt;li&gt;Use available aas (as a service) as much as possible&lt;/li&gt;
-&lt;li&gt;Politics definition: when the property Company &amp;gt; Team &amp;gt; Self is violated&lt;/li&gt;
-&lt;li&gt;Everything is a tradeoffs&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>I just watched that amazing videos from Matt Ranney
+ Here are my takeaways and opinionated summary:
+ Use RPC for service to service communications: gRPC seems to be a good way of tackling it Use many repositories Profiling should be unified: flamegraphs seem to be a good solution (Go profiling is great too) Premature optimization is bad but performance monitoring is crucial! Trace requests, keep context within all logs Log a lot, but only on a portion of your production architecture as logging can have a big cost.</description>
     </item>
     
     <item>
@@ -609,9 +74,7 @@ There are also still issues as soon as the contract imports other contracts, I w
       <pubDate>Fri, 16 Sep 2016 13:44:00 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/ethereum-solidity/</guid>
-      <description>&lt;p&gt;I participated to the devcon2 and blockchain summit last week.
- &lt;a href=&#34;https://medium.com/innovateforward/blockchain-week-in-shanghai-8b38454eaeeb#.d4cnfj72z&#34;&gt;Here&lt;/a&gt; is my summary!&lt;/p&gt;
-</description>
+      <description>I participated to the devcon2 and blockchain summit last week. Here is my summary!</description>
     </item>
     
     <item>
@@ -620,46 +83,10 @@ There are also still issues as soon as the contract imports other contracts, I w
       <pubDate>Fri, 12 Aug 2016 12:00:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/ethereum-first-dapp-part-3/</guid>
-      <description>
-
-&lt;h2 id=&#34;setting-up-a-light-wallet&#34;&gt;setting up a light wallet&lt;/h2&gt;
-
-&lt;p&gt;In order to have a setup close to what the DAPP would be, we will use (metamask) [&lt;a href=&#34;http://www.metamask.io&#34;&gt;http://www.metamask.io&lt;/a&gt;] as a light wallet (there are other choices).&lt;/p&gt;
-
-&lt;p&gt;Metamask allows you to connect to a custom node.&lt;/p&gt;
-
-&lt;p&gt;We will then connect to our node, &lt;a href=&#34;http://localhost:9012&#34;&gt;http://localhost:9012&lt;/a&gt;
-If everthing is fine, metamasks should indicate it&amp;rsquo;s connected.&lt;/p&gt;
-
-&lt;p&gt;Then, we can import the metamask account to our local node by simply specifying the datadir we have setup the node data.&lt;/p&gt;
-
-&lt;p&gt;Let&amp;rsquo;s imagine metamask give us:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;0xcddddd76a763de6e9ac19e7ec8f71ed77d61eebc0a93068fc9f2a544462db7d2
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;as the key.&lt;/p&gt;
-
-&lt;p&gt;Then let&amp;rsquo;s just copy this, without thw 0x inside a separate file.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;echo &amp;quot;cddddd76a763de6e9ac19e7ec8f71ed77d61eebc0a93068fc9f2a544462db7d2&amp;quot; &amp;gt;&amp;gt; pvkey.txt
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;and then import it in our local chain&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;geth --datadir &amp;quot;./testChain&amp;quot; account import ./pvkey.txt
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;if you look at the list of accounts in your local node, you should see now the newly imported account.&lt;/p&gt;
-
-&lt;h2 id=&#34;give-me-ether&#34;&gt;give me ether!&lt;/h2&gt;
-
-&lt;p&gt;Now, simply transfer some Ether to the newly imported account
-In geth, for example:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;eth.sendTransaction({from: &#39;0xfffffff&#39;, to: &#39;0xddddddd&#39;, value: web3.toWei(1000, &amp;quot;ether&amp;quot;)})
-&lt;/code&gt;&lt;/pre&gt;
-</description>
+      <description>setting up a light wallet In order to have a setup close to what the DAPP would be, we will use (metamask) [http://www.metamask.io] as a light wallet (there are other choices).
+Metamask allows you to connect to a custom node.
+We will then connect to our node, http://localhost:9012 If everthing is fine, metamasks should indicate it&amp;rsquo;s connected.
+Then, we can import the metamask account to our local node by simply specifying the datadir we have setup the node data.</description>
     </item>
     
     <item>
@@ -668,186 +95,9 @@ In geth, for example:&lt;/p&gt;
       <pubDate>Wed, 10 Aug 2016 15:00:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/ethereum-first-dapp-part-2/</guid>
-      <description>
-
-&lt;h1 id=&#34;frontend&#34;&gt;Frontend&lt;/h1&gt;
-
-&lt;h2 id=&#34;prepare-your-folder-for-your-dapp&#34;&gt;Prepare your folder for your dapp&lt;/h2&gt;
-
-&lt;p&gt;I will be using &lt;a href=&#34;https://github.com/mxstbr/react-boilerplate&#34;&gt;https://github.com/mxstbr/react-boilerplate&lt;/a&gt; as it&amp;rsquo;s quite nice and I&amp;rsquo;ve been playing with React for a bit now.&lt;/p&gt;
-
-&lt;p&gt;I will not go into the details of setting this up, it&amp;rsquo;s a totally different topic.
-If you are not familiar with it, it&amp;rsquo;s probably a waste of time for you to read.&lt;/p&gt;
-
-&lt;h2 id=&#34;example-web3-component-with-react&#34;&gt;Example web3 component with React&lt;/h2&gt;
-
-&lt;p&gt;This boilerplate uses immutable, redux and redux-sagas in order to deal with data.
-We will use this to connect/dialog with our local node.&lt;/p&gt;
-
-&lt;h3 id=&#34;actions&#34;&gt;Actions&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;export const ETH_CONNECT = &#39;app/EthConnect/ETH_CONNECT&#39;;
-
-export function ethConnect(web3Provider) {
-  return {
-    type: ETH_CONNECT,
-    web3Provider,
-  };
-}
-
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;reducers&#34;&gt;reducers&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;/*
- *
- * EthConnect reducer
- *
- */
-
-// eslint exception for web3
-/* global web3:true */
-
-import { fromJS } from &#39;immutable&#39;;
-import Web3 from &#39;web3&#39;;
-import { ETH_CONNECT } from &#39;./constants&#39;;
-
-const initialState = fromJS({
-  web3Connection: false,
-});
-
-function ethConnectReducer(state = initialState, action) {
-  switch (action.type) {
-    case ETH_CONNECT:
-      return state
-        .set(&#39;web3Connection&#39;, web3Connect(action.web3Provider));
-    default:
-      return state;
-  }
-}
-
-const web3Connect = (web3Provider) =&amp;gt; {
-  let web3Connection;
-
-  // If mist or metamask or else is already injected there as a provider
-  if (typeof web3 !== &#39;undefined&#39;) {
-    web3Connection = new Web3(web3.currentProvider);
-  } else {
-    web3Connection = new Web3(new Web3.providers.HttpProvider(web3Provider));
-  }
-
-  if (web3Connection.isConnected()) {
-    return web3Connection;
-  }
-
-  return false;
-};
-
-
-export default ethConnectReducer;
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;selectors&#34;&gt;selectors&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;import { createSelector } from &#39;reselect&#39;;
-
-/**
- * Direct selector to the ethConnect state domain
- */
-const selectEthConnectDomain = () =&amp;gt; state =&amp;gt; state.get(&#39;ethConnect&#39;);
-
-/**
- * Other specific selectors
- */
-
-
-/**
- * Default selector used by EthConnect
- */
-
-const selectEthConnect = () =&amp;gt; createSelector(
-  selectEthConnectDomain(),
-  (substate) =&amp;gt; substate.toJS(),
-);
-
-const selectEthConnectWeb3Connection = () =&amp;gt; createSelector(
-  selectEthConnectDomain(),
-  (substate) =&amp;gt; substate.get(&#39;web3Connection&#39;)
-);
-
-const selectEthConnectIsConnected = () =&amp;gt; createSelector(
-  selectEthConnectDomain(),
-  (substate) =&amp;gt; {
-    if (substate.get(&#39;web3Connection&#39;) === false) {
-      return false;
-    }
-    return true;
-  }
-);
-
-export default selectEthConnect;
-export {
-  selectEthConnectDomain,
-  selectEthConnectWeb3Connection,
-  selectEthConnectIsConnected,
-};
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;component-itself&#34;&gt;component itself&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;/*
- *
- * EthConnect
- *
- */
-
-import React from &#39;react&#39;;
-import { connect } from &#39;react-redux&#39;;
-import { createStructuredSelector } from &#39;reselect&#39;;
-import { ethConnect } from &#39;./actions&#39;;
-import { selectEthConnectIsConnected } from &#39;./selectors&#39;;
-import ConnectionStatus from &#39;components/ConnectionStatus&#39;;
-
-export class EthConnect extends React.Component { // eslint-disable-line react/prefer-stateless-function
-  // That&#39;s when we connect, each time the component is mounted
-  componentWillMount() {
-    this.props.connect(this.props.web3Provider);
-  }
-
-  render() {
-    return (
-      &amp;lt;ConnectionStatus isConnected={this.props.isConnected} /&amp;gt;
-    );
-  }
-}
-
-EthConnect.propTypes = {
-  loading: React.PropTypes.bool,
-  web3Provider: React.PropTypes.string.isRequired,
-  connect: React.PropTypes.func.isRequired,
-  isConnected: React.PropTypes.bool,
-};
-
-const mapStateToProps = createStructuredSelector({
-  isConnected: selectEthConnectIsConnected(),
-});
-
-function mapDispatchToProps(dispatch) {
-  return {
-    connect: (web3Provider) =&amp;gt; dispatch(ethConnect(web3Provider)),
-    dispatch,
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(EthConnect);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And there we go! Our app is up and running and connect to the local node.&lt;/p&gt;
-
-&lt;p&gt;In the next step, we will see how to play with this app with more complex interactions, contract functions.&lt;/p&gt;
-</description>
+      <description>Frontend Prepare your folder for your dapp I will be using https://github.com/mxstbr/react-boilerplate as it&amp;rsquo;s quite nice and I&amp;rsquo;ve been playing with React for a bit now.
+I will not go into the details of setting this up, it&amp;rsquo;s a totally different topic. If you are not familiar with it, it&amp;rsquo;s probably a waste of time for you to read.
+Example web3 component with React This boilerplate uses immutable, redux and redux-sagas in order to deal with data.</description>
     </item>
     
     <item>
@@ -856,176 +106,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(EthConnect);
       <pubDate>Mon, 08 Aug 2016 15:00:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/ethereum-first-dapp-part-1/</guid>
-      <description>
-
-&lt;h1 id=&#34;contracts&#34;&gt;Contracts&lt;/h1&gt;
-
-&lt;h2 id=&#34;prepare-your-folder-for-your-dapp&#34;&gt;Prepare your folder for your dapp&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;mkdir dapp
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;inside this folder, we&amp;rsquo;ll create one folder for truffle, one for geth.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;cd dapp
-mkdir truffle geth
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;inside the geth folder, simply put the customGenesis block you can find in the ethereum-dev-environment blog post.&lt;/p&gt;
-
-&lt;p&gt;We are going to use two Ethereum clients, one for tests and devs, testrpc and one for a more real interaction, geth.&lt;/p&gt;
-
-&lt;p&gt;Let&amp;rsquo;s install truffle and testrpc&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;npm install ethereumjs-testrpc truffle
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;truffle&#34;&gt;Truffle&lt;/h2&gt;
-
-&lt;p&gt;Truffle is a-m-a-z-i-n-g for contract development. It will allow you to unit test the contracts and compile them into usable javascript objects usable in web3! Just what we needed!&lt;/p&gt;
-
-&lt;p&gt;First, init truffle scaffolding (I don&amp;rsquo;t like -g install XD, so bear with my node_modules folder).&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;node_modules/truffle/cli.js init
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This will create different folders. You can have a look at &lt;a href=&#34;http://truffle.readthedocs.io/&#34;&gt;http://truffle.readthedocs.io/&lt;/a&gt; to have more details.&lt;/p&gt;
-
-&lt;h2 id=&#34;testrpc&#34;&gt;Testrpc&lt;/h2&gt;
-
-&lt;p&gt;Let&amp;rsquo;s launch the ethereumjs-testrpc&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;node_modules/ethereumjs-testrpc/bin/testrpc
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;You will see it will create a new chain, in memory and create 10 new accounts for you to test.&lt;/p&gt;
-
-&lt;h2 id=&#34;standard-token-contracts&#34;&gt;Standard token contracts&lt;/h2&gt;
-
-&lt;p&gt;Don&amp;rsquo;t try to reinvent the wheel, Consensys has given standard contracts to issue your own token.
-Have a look here: &lt;a href=&#34;https://github.com/ConsenSys/Tokens&#34;&gt;https://github.com/ConsenSys/Tokens&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Just copy to your contract folder:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Tokens/Token_Contracts/contracts/HumanStandardToken.sol&lt;/li&gt;
-&lt;li&gt;Tokens/Token_Contracts/contracts/StandardToken.sol&lt;/li&gt;
-&lt;li&gt;Tokens/Token_Contracts/contracts/Token.sol&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;migrate&#34;&gt;Migrate&lt;/h2&gt;
-
-&lt;p&gt;Here is the simple migration script I used&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;module.exports = (deployer) =&amp;gt; {
-  deployer.deploy(
-    HumanStandardToken,
-        1000000,
-        &#39;mold&#39;,
-        &#39;0&#39;,
-        &#39;M&#39;
-  );
-};
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;In order to compile and deploy your contracts in the rpc node you configured in truffle.js, you need to launch the following command:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;node_modules/truffle/cli.js migrate
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;If your code compiles, it will create javascript objects for each of your contract in the folder build/contracts.&lt;/p&gt;
-
-&lt;h2 id=&#34;testing&#34;&gt;Testing&lt;/h2&gt;
-
-&lt;p&gt;Here is an example of tests on HumanStandardToken (ES6)&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;const it = require(&#39;mocha&#39;).it;
-const assert = require(&#39;chai&#39;).assert;
-
-contract(&#39;HumanStandardToken&#39;, (accounts) =&amp;gt; {
-  it(&#39;should put 1000000 molds in the first account&#39;, () =&amp;gt; {
-    const molds = HumanStandardToken.deployed();
-    const initSupply = 1000000;
-
-    return molds.balanceOf(accounts[0])
-      .then(balance =&amp;gt; assert.equal(
-          balance.valueOf(), initSupply,
-          `${initSupply} molds weren&#39;t in the first account`
-        )
-      );
-  });
-
-  it(&#39;should transfer molds to another user&#39;, () =&amp;gt; {
-    const molds = HumanStandardToken.deployed();
-
-    return molds.transfer(accounts[1], 100, { from: accounts[0], gas: 400000 })
-      .then(
-        () =&amp;gt; molds.balanceOf(accounts[1])
-      )
-      .then(balance =&amp;gt; assert.equal(
-          balance.valueOf(), 100,
-          `${accounts[1]} didn&#39;t was not transfered 100 molds but ${balance.valueOf()}`
-        )
-      );
-  });
-
-  it(&#39;should emit a transfer event when there is a transfer&#39;, (done) =&amp;gt; {
-    const transferredAmt = 1;
-
-    const transferWatcher = molds.Transfer({ fromBlock: &#39;latest&#39; },
-      (error, results) =&amp;gt; {
-        assert.equal(
-          results.args._value.valueOf(), transferredAmt,
-          `transfer event amount not equal to ${transferredAmt}`
-        );
-        transferWatcher.stopWatching();
-        done();
-      });
-
-    // trigger the event
-    molds.transfer(accounts[1], transferredAmt, { from: accounts[0], gas: 400000 });
-  });  
-});
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;** / ! \ **
-I was stuck for hours because of the way contract functions can be called.
-There are two types of actions on the Ethereum blockchain. Action which change the contract states (like transfer funds for example), and the one which don&amp;rsquo;t (like get balance, for example).
-In truffle, you call the latter with a &amp;ldquo;call&amp;rdquo; on the contract object, whereas the former doesn&amp;rsquo;t need it&amp;hellip; Confusing, isn&amp;rsquo;t it?
-I found out later that there are constant functions in solidity, which basically mean functions that don&amp;rsquo;t change the contract state. When you specify these functions in you contract definition as &amp;ldquo;constant&amp;rdquo;, then, truffle doesn&amp;rsquo;t need the call&amp;hellip; Problem solved, everything now looks uniform.&lt;/p&gt;
-
-&lt;p&gt;Now you can try if everything works fine, launch testrpc&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;node_modules/ethereumjs-testrpc/bin/testrpc
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;and open a new terminal and launch the tests&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;node_modules/truffle/cli.js test
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;creation-of-the-contracts-on-a-private-geth-or-even-morden&#34;&gt;Creation of the contracts on a private geth or even morden&lt;/h2&gt;
-
-&lt;p&gt;Modify your truffle.js to whichever node you want to migrate your contracts to.
-Mine is local geth, listening on port 9012, so truffle.js will become&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;module.exports = {
-  rpc: {
-    host: &#39;localhost&#39;,
-    port: 9012,
-  },
-};
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;then migrate&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;node_modules/truffle/cli.js migrate
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Et voila! if everything is ok, truffle should have created your contracts and updated the built contracts with the right contract addresses in build/contracts.&lt;/p&gt;
-
-&lt;p&gt;Now, let&amp;rsquo;s play with these contracts on geth! See you on part 2.&lt;/p&gt;
-</description>
+      <description>Contracts Prepare your folder for your dapp mkdir dapp  inside this folder, we&amp;rsquo;ll create one folder for truffle, one for geth.
+cd dapp mkdir truffle geth  inside the geth folder, simply put the customGenesis block you can find in the ethereum-dev-environment blog post.
+We are going to use two Ethereum clients, one for tests and devs, testrpc and one for a more real interaction, geth.
+Let&amp;rsquo;s install truffle and testrpc</description>
     </item>
     
     <item>
@@ -1034,107 +118,10 @@ Mine is local geth, listening on port 9012, so truffle.js will become&lt;/p&gt;
       <pubDate>Wed, 03 Aug 2016 20:00:00 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/ethereum-interacting-with-contracts/</guid>
-      <description>
-
-&lt;h2 id=&#34;check-the-address-of-the-current-deployed-contract&#34;&gt;Check the address of the current deployed contract&lt;/h2&gt;
-
-&lt;p&gt;Remember when you mined your contract, it told your its address.
-Now, reuse it!&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;eth.getCode(&amp;quot;0x5f3425ccedeae0eb36521c4cf93ec6544dbad9bd&amp;quot;)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;test-the-contract-with-a-simple-interaction&#34;&gt;Test the contract with a simple interaction&lt;/h2&gt;
-
-&lt;p&gt;get the latest web3-light.min.js js from &lt;a href=&#34;https://github.com/ethereum/web3.js/releases&#34;&gt;https://github.com/ethereum/web3.js/releases&lt;/a&gt; and simply copy the dist/web3-light.min.js into the same folder as the following HTML file.&lt;/p&gt;
-
-&lt;p&gt;then, use this html to interact with your contract on the local node:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;!doctype&amp;gt;
-&amp;lt;html&amp;gt;
-&amp;lt;head&amp;gt;
-    &amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;https://cdnjs.cloudflare.com/ajax/libs/bignumber.js/2.4.0/bignumber.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-    &amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;./web3-light.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-    &amp;lt;script type=&amp;quot;text/javascript&amp;quot;&amp;gt;
-    var Web3 = require(&#39;web3&#39;);
-    var web3 = new Web3();
-    web3.setProvider(new web3.providers.HttpProvider(&#39;http://localhost:9012&#39;));
-    function watchBalance() {
-        var coinbase = web3.eth.coinbase;
-        var originalBalance = web3.eth.getBalance(coinbase).toNumber();
-        document.getElementById(&#39;coinbase&#39;).innerText = &#39;coinbase: &#39; + coinbase;
-        document.getElementById(&#39;original&#39;).innerText = &#39; original balance: &#39; + originalBalance + &#39;    watching...&#39;;
-        web3.eth.filter(&#39;latest&#39;).watch(function() {
-            var currentBalance = web3.eth.getBalance(coinbase).toNumber();
-            document.getElementById(&amp;quot;current&amp;quot;).innerText = &#39;current: &#39; + currentBalance;
-            document.getElementById(&amp;quot;diff&amp;quot;).innerText = &#39;diff:    &#39; + (currentBalance - originalBalance);
-        });
-    }
-    &amp;lt;/script&amp;gt;
-&amp;lt;/head&amp;gt;
-&amp;lt;body&amp;gt;
-    &amp;lt;h1&amp;gt;coinbase balance&amp;lt;/h1&amp;gt;
-    &amp;lt;button type=&amp;quot;button&amp;quot; onClick=&amp;quot;watchBalance();&amp;quot;&amp;gt;watch balance&amp;lt;/button&amp;gt;
-    &amp;lt;div&amp;gt;&amp;lt;/div&amp;gt;
-    &amp;lt;div id=&amp;quot;coinbase&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
-    &amp;lt;div id=&amp;quot;original&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
-    &amp;lt;div id=&amp;quot;current&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
-    &amp;lt;div id=&amp;quot;diff&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
-&amp;lt;/body&amp;gt;
-&amp;lt;/html&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;and&amp;hellip; It works, you can see the balance on the contract!&lt;/p&gt;
-
-&lt;h2 id=&#34;let-s-greet-now&#34;&gt;Let&amp;rsquo;s greet now&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;!doctype&amp;gt;
-&amp;lt;html&amp;gt;
-&amp;lt;head&amp;gt;
-    &amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;https://cdnjs.cloudflare.com/ajax/libs/bignumber.js/2.4.0/bignumber.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-    &amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;./web3-light.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-    &amp;lt;script type=&amp;quot;text/javascript&amp;quot;&amp;gt;
-        var Web3 = require(&#39;web3&#39;);
-        var web3 = new Web3();
-        web3.setProvider(new web3.providers.HttpProvider(&#39;http://localhost:9012&#39;));
-        function watchBalance() {
-            var coinbase = web3.eth.coinbase;
-            var originalBalance = web3.eth.getBalance(coinbase).toNumber();
-            document.getElementById(&#39;coinbase&#39;).innerText = &#39;coinbase: &#39; + coinbase;
-            document.getElementById(&#39;original&#39;).innerText = &#39; original balance: &#39; + originalBalance + &#39;    watching...&#39;;
-            web3.eth.filter(&#39;latest&#39;).watch(function() {
-                var currentBalance = web3.eth.getBalance(coinbase).toNumber();
-                document.getElementById(&amp;quot;current&amp;quot;).innerText = &#39;current: &#39; + currentBalance;
-                document.getElementById(&amp;quot;diff&amp;quot;).innerText = &#39;diff:    &#39; + (currentBalance - originalBalance);
-            });
-        }
-        function greet() {
-            var contractAddress = &#39;0x5d3425ccedeae0eb36521c4cf93ec6544dbad9bd&#39;;
-            var greeter = web3.eth.contract([{constant:false,inputs:[],name:&#39;kill&#39;,outputs:[],type:&#39;function&#39;},{constant:true,inputs:[],name:&#39;greet&#39;,outputs:[{name:&#39;&#39;,type:&#39;string&#39;}],type:&#39;function&#39;},{inputs:[{name:&#39;_greeting&#39;,type:&#39;string&#39;}],type:&#39;constructor&#39;}]).at(contractAddress);
-            var greetings = greeter.greet();
-            document.getElementById(&#39;greeting&#39;).innerText = greetings;
-        }
-    &amp;lt;/script&amp;gt;
-&amp;lt;/head&amp;gt;
-&amp;lt;body&amp;gt;
-    &amp;lt;h1&amp;gt;coinbase balance&amp;lt;/h1&amp;gt;
-    &amp;lt;button type=&amp;quot;button&amp;quot; onClick=&amp;quot;watchBalance();&amp;quot;&amp;gt;watch balance&amp;lt;/button&amp;gt;
-    &amp;lt;div&amp;gt;&amp;lt;/div&amp;gt;
-    &amp;lt;div id=&amp;quot;coinbase&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
-    &amp;lt;div id=&amp;quot;original&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
-    &amp;lt;div id=&amp;quot;current&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
-    &amp;lt;div id=&amp;quot;diff&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
-    &amp;lt;h1&amp;gt;greetings&amp;lt;/h1&amp;gt;
-    &amp;lt;button type=&amp;quot;button&amp;quot; onClick=&amp;quot;greet();&amp;quot;&amp;gt;greet!&amp;lt;/button&amp;gt;
-    &amp;lt;div id=&amp;quot;greeting&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
-&amp;lt;/body&amp;gt;
-&amp;lt;/html&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And you have it! the dapp is responding!&lt;/p&gt;
-
-&lt;p&gt;caveat: when you won&amp;rsquo;t be running a test, you will need to get an http provider connected to the live blockchain. You can be sure to have one if you run your own node, I&amp;rsquo;m not sure yet if there is any open htt provider node out there.&lt;/p&gt;
-</description>
+      <description>Check the address of the current deployed contract Remember when you mined your contract, it told your its address. Now, reuse it!
+eth.getCode(&amp;quot;0x5f3425ccedeae0eb36521c4cf93ec6544dbad9bd&amp;quot;)  Test the contract with a simple interaction get the latest web3-light.min.js js from https://github.com/ethereum/web3.js/releases and simply copy the dist/web3-light.min.js into the same folder as the following HTML file.
+then, use this html to interact with your contract on the local node:
+&amp;lt;!doctype&amp;gt; &amp;lt;html&amp;gt; &amp;lt;head&amp;gt; &amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;https://cdnjs.</description>
     </item>
     
     <item>
@@ -1143,124 +130,8 @@ Now, reuse it!&lt;/p&gt;
       <pubDate>Wed, 03 Aug 2016 13:00:00 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/ethereum-first-contract/</guid>
-      <description>
-
-&lt;h2 id=&#34;launch-your-geth-or-testrpc-private-instance&#34;&gt;Launch your geth (or testrpc) private instance&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;./geth \
-    --identity &amp;quot;gethTest&amp;quot; \
-    --rpc --rpcport &amp;quot;9012&amp;quot; \
-    --rpccorsdomain &amp;quot;YOUR_TEST_DOMAIN_APP_RUN_FROM&amp;quot; \
-    --datadir &amp;quot;./testChain&amp;quot; \
-    --port &amp;quot;30303&amp;quot; \
-    --nodiscover \
-    --rpcapi &amp;quot;db,eth,net,web3&amp;quot; \
-    --networkid 1999 \
-    --dev console
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;within-the-console-compile-your-contract&#34;&gt;Within the console, compile your contract&lt;/h2&gt;
-
-&lt;p&gt;check this tutorial: &lt;a href=&#34;https://www.ethereum.org/greeter&#34;&gt;https://www.ethereum.org/greeter&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;I had an issue when I followed the contract tutorial, my contract would not be mined after I was trying to deploy it.&lt;/p&gt;
-
-&lt;p&gt;The issue was that my account was locked :/ and the greeter contract stupidly silently fails&amp;hellip;
-Here is the modified code to see the obvious error.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var _greeting = &amp;quot;Hello World!&amp;quot;
-var greeterContract = web3.eth.contract(greeterCompiled.greeter.info.abiDefinition);
-
-var greeter = greeterContract.new(_greeting,{from:web3.eth.accounts[0], data: greeterCompiled.greeter.code, gas: 30000000}, function(e, contract){
-    if(!e) {
-
-      if(!contract.address) {
-        console.log(&amp;quot;Contract transaction send: TransactionHash: &amp;quot; + contract.transactionHash + &amp;quot; waiting to be mined...&amp;quot;);
-
-      } else {
-        console.log(&amp;quot;Contract mined! Address: &amp;quot; + contract.address);
-        console.log(contract);
-      }
-
-    } else {
-        console.log(&amp;quot;error!&amp;quot;);
-        console.log(e);
-    }
-})
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;which returns&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;error!
-Error: account is locked
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;To unlock the account, simply:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;personal.unlockAccount(eth.accounts[0])
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;I then encountered ANOTHER error!&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;error!
-Error: Exceeds block gas limit
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;I simply decreased the gas to 3000000, and finally got:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;I0803 15:14:29.423492 eth/api.go:1191] Tx(0x7584a963a9c2a21e623e607826ad47ae358d056ed159b82a21793d4541148e86) created: 0x5f3425ccedeae0eb36521c4cf93ec6544dbad9bd
-Contract transaction send: TransactionHash: 0x7284a963a9c3a21e623e607826ad47ae358d056ed159b82a21793d4541148e86 waiting to be mined...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Then, simply mine it!&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;miner.start()
-...
-Contract mined! Address: 0x5d3125ccedeae0eb36521c4cf93ec6544dbad9bd
-...
-miner.stop()
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Yeah, victory! my contract is deployed on my private ethereum node.&lt;/p&gt;
-
-&lt;p&gt;Keep that address and also make sure to run&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;greeterCompiled.greeter.info.abiDefinition
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;in order to get the ABI that will be used later in javascript (Application Binary Interface)&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[{
-    constant: false,
-    inputs: [],
-    name: &amp;quot;kill&amp;quot;,
-    outputs: [],
-    type: &amp;quot;function&amp;quot;
-}, {
-    constant: true,
-    inputs: [],
-    name: &amp;quot;greet&amp;quot;,
-    outputs: [{
-        name: &amp;quot;&amp;quot;,
-        type: &amp;quot;string&amp;quot;
-    }],
-    type: &amp;quot;function&amp;quot;
-}, {
-    inputs: [{
-        name: &amp;quot;_greeting&amp;quot;,
-        type: &amp;quot;string&amp;quot;
-    }],
-    type: &amp;quot;constructor&amp;quot;
-}]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;when-done-kill-it&#34;&gt;When done, kill it!&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;greeter.kill.sendTransaction({from:eth.accounts[0]})
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Next we will simply interact with the contract.&lt;/p&gt;
-</description>
+      <description>Launch your geth (or testrpc) private instance ./geth \ --identity &amp;quot;gethTest&amp;quot; \ --rpc --rpcport &amp;quot;9012&amp;quot; \ --rpccorsdomain &amp;quot;YOUR_TEST_DOMAIN_APP_RUN_FROM&amp;quot; \ --datadir &amp;quot;./testChain&amp;quot; \ --port &amp;quot;30303&amp;quot; \ --nodiscover \ --rpcapi &amp;quot;db,eth,net,web3&amp;quot; \ --networkid 1999 \ --dev console  Within the console, compile your contract check this tutorial: https://www.ethereum.org/greeter
+I had an issue when I followed the contract tutorial, my contract would not be mined after I was trying to deploy it.</description>
     </item>
     
     <item>
@@ -1269,97 +140,7 @@ miner.stop()
       <pubDate>Mon, 01 Aug 2016 08:27:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/ethereum-dev-environment/</guid>
-      <description>
-
-&lt;h2 id=&#34;part-1-setup-your-ethereum-node&#34;&gt;Part 1 - Setup your ethereum node&lt;/h2&gt;
-
-&lt;p&gt;There are many ways you can setup a node to dev an Ethereum dapp.
-You can use the live network: not advisable obviously for cost and speed reasons.
-You can use the test network: not advisable for speed reasons.
-You can use a testchain set up with Geth: easy but a bit tedious as you need to mine.
-You can the ethereum testrpc: easiest!&lt;/p&gt;
-
-&lt;p&gt;I will talk about the last two setup in this article.&lt;/p&gt;
-
-&lt;h3 id=&#34;using-testrpc&#34;&gt;Using testrpc&lt;/h3&gt;
-
-&lt;p&gt;Simply install through npm (if you want it globally available, add -g after install, as usual)&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;npm install ethereumjs-testrpc
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And then run it&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;node_modules/ethereumjs-testrpc/bin/testrpc
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;using-geth&#34;&gt;Using geth&lt;/h3&gt;
-
-&lt;p&gt;Download geth latest release (&lt;a href=&#34;https://github.com/ethereum/go-ethereum/releases&#34;&gt;https://github.com/ethereum/go-ethereum/releases&lt;/a&gt;)
-and extract it.&lt;/p&gt;
-
-&lt;p&gt;Create a file customGenesis.json&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
-  &amp;quot;nonce&amp;quot;: &amp;quot;0x0000000000000042&amp;quot;,
-  &amp;quot;timestamp&amp;quot;: &amp;quot;0x0&amp;quot;,
-  &amp;quot;parentHash&amp;quot;: &amp;quot;0x0000000000000000000000000000000000000000000000000000000000000000&amp;quot;,
-  &amp;quot;extraData&amp;quot;: &amp;quot;0x0&amp;quot;,
-  &amp;quot;gasLimit&amp;quot;: &amp;quot;0x8000000&amp;quot;,
-  &amp;quot;difficulty&amp;quot;: &amp;quot;0x400&amp;quot;,
-  &amp;quot;mixhash&amp;quot;: &amp;quot;0x0000000000000000000000000000000000000000000000000000000000000000&amp;quot;,
-  &amp;quot;coinbase&amp;quot;: &amp;quot;0x3333333333333333333333333333333333333333&amp;quot;,
-  &amp;quot;alloc&amp;quot;: {}
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;then init yout node with the genesis block above&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;chmod +x geth
-./geth init ./customGenesis.json
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;run-your-node-with-console-attached&#34;&gt;Run your node with console attached&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;./geth \
-    --identity &amp;quot;gethTest&amp;quot; \
-    --rpc --rpcport &amp;quot;9012&amp;quot; \
-    --rpccorsdomain &amp;quot;YOUR_TEST_DOMAIN_APP_RUN_FROM&amp;quot; \
-    --datadir &amp;quot;./testChain&amp;quot; \
-    --port &amp;quot;30303&amp;quot; \
-    --nodiscover \
-    --rpcapi &amp;quot;db,eth,net,web3&amp;quot; \
-    --networkid 1999 \
-    --dev console
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;create-a-base-account&#34;&gt;Create a base account&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;gt; eth.accounts
-[]
-&amp;gt; personal.newAccount()
-Passphrase:
-Repeat passphrase:
-&amp;quot;0xedea6958c57fc0cd4bd63b3e7b395393dc76bfb6&amp;quot;
-&amp;gt; eth.accounts
-[&amp;quot;0xedea6958c57fc0cd4bd63b3e7b395393dc76bfb6&amp;quot;]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;mine-on-your-newly-created-account&#34;&gt;Mine on your newly created account&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;miner.setEtherbase(eth.accounts[0])
-miner.start(8)
-miner.stop()
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Check if the mining worked&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;gt; eth.getBalance(eth.accounts[0]).toNumber();
-55000000000000000000
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;In the next posts, we will start talking about development of dapps.&lt;/p&gt;
-</description>
+      <description>Part 1 - Setup your ethereum node There are many ways you can setup a node to dev an Ethereum dapp. You can use the live network: not advisable obviously for cost and speed reasons. You can use the test network: not advisable for speed reasons. You can use a testchain set up with Geth: easy but a bit tedious as you need to mine. You can the ethereum testrpc: easiest!</description>
     </item>
     
     <item>
@@ -1368,20 +149,13 @@ miner.stop()
       <pubDate>Thu, 28 Jul 2016 22:27:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/kubernetes-talk/</guid>
-      <description>&lt;p&gt;On the 28th, I was invited to talk at Google Singapore for the Kubernetes birthday &lt;a href=&#34;http://www.meetup.com/fr-FR/GCPUGSG/events/232659329/?eventId=232659329&#34;&gt;http://www.meetup.com/fr-FR/GCPUGSG/events/232659329/?eventId=232659329&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;I spoke about my experience with Kubernetes in production for one of my side projects.&lt;/p&gt;
-
-&lt;p&gt;As I like to experiment stuff, I decide to drop power point and use React Spectacle library for my presentation!&lt;/p&gt;
-
-&lt;p&gt;here is the result: &lt;a href=&#34;https://kuberneprez.surge.sh&#34;&gt;https://kuberneprez.surge.sh&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;here is the source code: &lt;a href=&#34;https://github.com/vincentserpoul/prez-kubernetes&#34;&gt;https://github.com/vincentserpoul/prez-kubernetes&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;The framework can be found here: &lt;a href=&#34;http://stack.formidable.com/spectacle/#/?_k=cyx05u&#34;&gt;http://stack.formidable.com/spectacle/#/?_k=cyx05u&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;I will do it again! It was quite a good experience and I always disliked power point anyway.&lt;/p&gt;
-</description>
+      <description>On the 28th, I was invited to talk at Google Singapore for the Kubernetes birthday http://www.meetup.com/fr-FR/GCPUGSG/events/232659329/?eventId=232659329
+I spoke about my experience with Kubernetes in production for one of my side projects.
+As I like to experiment stuff, I decide to drop power point and use React Spectacle library for my presentation!
+here is the result: https://kuberneprez.surge.sh
+here is the source code: https://github.com/vincentserpoul/prez-kubernetes
+The framework can be found here: http://stack.formidable.com/spectacle/#/?_k=cyx05u
+I will do it again!</description>
     </item>
     
     <item>
@@ -1390,36 +164,16 @@ miner.stop()
       <pubDate>Tue, 12 Apr 2016 12:22:20 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/learning-react/</guid>
-      <description>
-
-&lt;h3 id=&#34;react&#34;&gt;React&lt;/h3&gt;
-
-&lt;p&gt;Nothing beats the facebook React page:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://facebook.github.io/react/docs/getting-started.html&#34;&gt;https://facebook.github.io/react/docs/getting-started.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;redux&#34;&gt;Redux&lt;/h3&gt;
-
-&lt;p&gt;Nothing beats the redux tutorial:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://redux.js.org/&#34;&gt;http://redux.js.org/&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;And also available on egghead, by Dan Abramov himself:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://egghead.io/series/getting-started-with-redux&#34;&gt;https://egghead.io/series/getting-started-with-redux&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;A list of tutorials:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/happypoulp/redux-tutorial&#34;&gt;https://github.com/happypoulp/redux-tutorial&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;a-great-detailed-introduction-to-your-spa-setup&#34;&gt;A great detailed introduction to your SPA setup&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://blog.joanboixados.com/building-a-boilerplate-for-a-koa-redux-react-application-including-webpack-mocha-and-sass/&#34;&gt;http://blog.joanboixados.com/building-a-boilerplate-for-a-koa-redux-react-application-including-webpack-mocha-and-sass/&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;an-advanced-spa-still-under-construction&#34;&gt;An advanced SPA (still under construction)&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://www.gitbook.com/book/tonyhb/redux-without-profanity/details&#34;&gt;https://www.gitbook.com/book/tonyhb/redux-without-profanity/details&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>React Nothing beats the facebook React page:
+https://facebook.github.io/react/docs/getting-started.html
+Redux Nothing beats the redux tutorial:
+http://redux.js.org/
+And also available on egghead, by Dan Abramov himself:
+https://egghead.io/series/getting-started-with-redux
+A list of tutorials:
+https://github.com/happypoulp/redux-tutorial
+A great detailed introduction to your SPA setup http://blog.joanboixados.com/building-a-boilerplate-for-a-koa-redux-react-application-including-webpack-mocha-and-sass/
+An advanced SPA (still under construction) https://www.gitbook.com/book/tonyhb/redux-without-profanity/details</description>
     </item>
     
     <item>
@@ -1428,93 +182,77 @@ miner.stop()
       <pubDate>Mon, 11 Apr 2016 20:48:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/react-dev-env-setup/</guid>
-      <description>
-
-&lt;h3 id=&#34;working-with-es6-7&#34;&gt;Working with ES6-7&lt;/h3&gt;
-
-&lt;p&gt;In order to work with ECMAScript 2015 and even with future implementations of ES, you can use Babel.&lt;/p&gt;
-
-&lt;p&gt;Babel is a transpiler, it will convert your ES6-7 to plain ES5 javascript that most browsers (&amp;gt;ie9 most probably) will understand.&lt;/p&gt;
-
-&lt;p&gt;To install babel&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;npm install -g babel 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Then within your javascript project, you can create a .babelrc file with the following content:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
-  &amp;quot;presets&amp;quot;: [&amp;quot;es2015&amp;quot;, &amp;quot;stage-0&amp;quot;, &amp;quot;react&amp;quot;]
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;react-and-its-surrounding-libraries&#34;&gt;React and its surrounding libraries&lt;/h3&gt;
-
-&lt;p&gt;After starting using React, I realized it was vey good and was surrounded with libraries which makes it even better: redux, immutable, react-router&amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;I usually try to use these three, for most of the projects I&amp;rsquo;m working on. Sometimes, it feels way too over engineered, but still, once you understand their use, it&amp;rsquo;s pretty straightforward and logical to implement them.&lt;/p&gt;
-
-&lt;p&gt;The most important value added of redux, as well as immutable is the separation of concern. It gives you the power of designing components independantly from eachother.&lt;/p&gt;
-
-&lt;h3 id=&#34;react-and-its-tools&#34;&gt;React and its tools&lt;/h3&gt;
-
-&lt;p&gt;In order to help you develop with react and also redux, you have a few tools to help you.&lt;/p&gt;
-
-&lt;h4 id=&#34;eslint-for-react&#34;&gt;eslint for react&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;npm install -g eslint-plugin-react
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;sublime-text-plugin&#34;&gt;sublime text plugin&lt;/h4&gt;
-
-&lt;p&gt;You can install a useful plugins in react, available in the package installer: React ES6 snippets.&lt;/p&gt;
-
-&lt;h4 id=&#34;eslintrc-file-for-babel-and-react&#34;&gt;.eslintrc file for babel and react&lt;/h4&gt;
-
-&lt;p&gt;You can use this eslintrc file as a starting point.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
-  &amp;quot;extends&amp;quot;: &amp;quot;airbnb&amp;quot;,
-  &amp;quot;ecmaFeatures&amp;quot;: {
-    &amp;quot;jsx&amp;quot;: true,
-    &amp;quot;modules&amp;quot;: true
-  },
-  &amp;quot;env&amp;quot;: {
-    &amp;quot;browser&amp;quot;: true,
-    &amp;quot;node&amp;quot;: true
-  },
-  &amp;quot;parser&amp;quot;: &amp;quot;babel-eslint&amp;quot;,
-  &amp;quot;rules&amp;quot;: {
-    &amp;quot;quotes&amp;quot;: [2, &amp;quot;single&amp;quot;],
-    &amp;quot;strict&amp;quot;: [2, &amp;quot;never&amp;quot;],
-    &amp;quot;react/jsx-uses-react&amp;quot;: 2,
-    &amp;quot;react/jsx-uses-vars&amp;quot;: 2,
-    &amp;quot;react/react-in-jsx-scope&amp;quot;: 2,
-    &amp;quot;no-console&amp;quot;: 0
-  },
-  &amp;quot;plugins&amp;quot;: [
-    &amp;quot;react&amp;quot;
-  ]
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;chrome-tools&#34;&gt;Chrome tools&lt;/h4&gt;
-
-&lt;p&gt;You can install react devTools in Chrome:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi&#34;&gt;https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;You can also install redux devTools in chrome too:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd&#34;&gt;https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;redux devTools will require you to modifiy the way you call create store:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;store = (window.devToolsExtension ? window.devToolsExtension()(createStore) : createStore)([...your content here]);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;You will then be able to play with the different state of your app directly in chrome.&lt;/p&gt;
-</description>
+      <description>Working with ES6-7 In order to work with ECMAScript 2015 and even with future implementations of ES, you can use Babel.
+Babel is a transpiler, it will convert your ES6-7 to plain ES5 javascript that most browsers (&amp;gt;ie9 most probably) will understand.
+To install babel
+npm install -g babel  Then within your javascript project, you can create a .babelrc file with the following content:
+{ &amp;quot;presets&amp;quot;: [&amp;quot;es2015&amp;quot;, &amp;quot;stage-0&amp;quot;, &amp;quot;react&amp;quot;] }  React and its surrounding libraries After starting using React, I realized it was vey good and was surrounded with libraries which makes it even better: redux, immutable, react-router&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>javascript dev environment setup</title>
+      <link>https://vincentserpoul.github.io/post/javascript-dev-env-setup/</link>
+      <pubDate>Thu, 10 Mar 2016 20:48:27 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/post/javascript-dev-env-setup/</guid>
+      <description>NodeJS Go to the nodejs website and install nodejs latest stable version:
+https://nodejs.org/en/download/stable/
+NPM Go to the npm website and follow the instructions
+https://docs.npmjs.com/getting-started/installing-node
+Install nodejs essential packages npm install -g eslint webpack webpack-dev-server babel-eslint serve
+Install sublime-text essential plugins With the help of the package manager, in sublime-text, install the following packages: babel, Sublime-Linter-Contrib-eslint, React ES6 snippets
+Make sure your linter is working In sublime text, open the console (view &amp;gt; show console) and check if there is any error message.</description>
+    </item>
+    
+    <item>
+      <title>golang dev environment setup</title>
+      <link>https://vincentserpoul.github.io/post/golang-dev-env-setup/</link>
+      <pubDate>Sat, 20 Feb 2016 20:48:27 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/post/golang-dev-env-setup/</guid>
+      <description>Golang environment install golang
+http://www.wolfe.id.au/2015/03/05/using-sublime-text-for-go-development/
+Within sublimetext, from the package manager, install gosublime, install gooracle.
+install go/tools:
+go get -u golang.org/x/tools/cmd/goimports go get -u golang.org/x/tools/cmd/vet go get -u golang.org/x/tools/cmd/oracle go get -u golang.org/x/tools/cmd/godoc  install gometalinter (https://github.com/alecthomas/gometalinter)
+install interfacer (https://github.com/mvdan/interfacer/)
+install gosimple (https://github.com/dominikh/go-simple)
+install gocov (https://github.com/axw/gocov)
+Here is the package settings I use for gosublime:
+{ // you may set specific environment variables here // e.g &amp;quot;env&amp;quot;: { &amp;quot;PATH&amp;quot;: &amp;quot;$HOME/go/bin:$PATH&amp;quot; } // in values, $PATH and ${PATH} are replaced with // the corresponding environment(PATH) variable, if it exists.</description>
+    </item>
+    
+    <item>
+      <title>Sublime text setup with essential tools</title>
+      <link>https://vincentserpoul.github.io/post/sublimetext-dev-env-setup/</link>
+      <pubDate>Wed, 10 Feb 2016 20:48:27 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/post/sublimetext-dev-env-setup/</guid>
+      <description>Download and install the latest Sublime text Go to the sublime text website and download Sublime text 3 for your OS.
+https://www.sublimetext.com/3
+Download and install the sublime text package manager Go the package control website, download and install it on your sublime text (follow the instructions on the website).
+https://packagecontrol.io/installation
+Download and install sublime linter Go to the sublime linter website, download and install it on your sublime text.</description>
+    </item>
+    
+    <item>
+      <title>GIT basic usage</title>
+      <link>https://vincentserpoul.github.io/post/git-basic-usage/</link>
+      <pubDate>Fri, 20 Feb 2015 08:27:27 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/post/git-basic-usage/</guid>
+      <description>Git basic commands When you have a new repo git clone git@github.com:vincentserpoul/rbac.git  https or git? the git protocal provides better security and easiness if you are using a correct key.
+If you use the git protocol, you can easily associate your private key in the ~/.ssh/config file with the following:
+Host github Hostname github.com User vincentserpoul IdentityFile ~/.ssh/myprivatekey IdentitiesOnly yes  When you have a new modification ready for commit git status  You will get an overview of what&amp;rsquo;s new If there is any new files (Untracked files), you will first need to add them:</description>
+    </item>
+    
+    <item>
+      <title>about</title>
+      <link>https://vincentserpoul.github.io/about/</link>
+      <pubDate>Fri, 09 Jan 2015 14:46:46 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/about/</guid>
+      <description>Try out for Hugo!</description>
     </item>
     
   </channel>

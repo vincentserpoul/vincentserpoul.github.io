@@ -2,11 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>React on VS tech corner</title>
-    <link>https://vincentserpoul.github.io/tags/react/index.xml</link>
+    <link>https://vincentserpoul.github.io/tags/react/</link>
     <description>Recent content in React on VS tech corner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="https://vincentserpoul.github.io/tags/react/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 27 Oct 2016 13:34:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://vincentserpoul.github.io/tags/react/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Ethereum react dapps</title>
@@ -14,328 +17,10 @@
       <pubDate>Thu, 27 Oct 2016 13:34:00 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/ethereum-react-dapps/</guid>
-      <description>
-
-&lt;p&gt;I finished my first dapp with (react-boilerplate)[&lt;a href=&#34;https://github.com/mxstbr/&#34;&gt;https://github.com/mxstbr/&lt;/a&gt;] this week and here are the few things I learnt.
-I won&amp;rsquo;t get into the redux, redux-saga details, I let you play with the amazing boilerplate.&lt;/p&gt;
-
-&lt;h2 id=&#34;interacting-with-constant-functions&#34;&gt;Interacting with constant functions&lt;/h2&gt;
-
-&lt;p&gt;Let&amp;rsquo;s use the typical balanceOf function of the EIP20 contracts:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-solidity&#34;&gt;    function balanceOf(address _owner) constant returns (uint256 balance) {
-        return balances[_owner];
-    }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Here are the sagas (redux-sagas) I used to interact:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;import { take, call, put, cancel, select, fork } from &#39;redux-saga/effects&#39;;
-import {
-  BALANCE_OF_GET,
-} from &#39;./constants&#39;;
-import { LOCATION_CHANGE } from &#39;react-router-redux&#39;;
-
-import {
-  balanceOfSuccess,
-  balanceOfFailure,
-} from &#39;./actions&#39;;
-
-import { selectEthConnectWeb3Connection } from &#39;containers/EthConnect/selectors&#39;;
-
-import HumanStandardToken from &#39;contracts/HumanStandardToken.sol.js&#39;;
-
-function* balanceOfGet(ethAddress) {
-  const web3Connection = yield select(selectEthConnectWeb3Connection());
-
-  HumanStandardToken.setProvider(web3Connection.currentProvider);
-  const token = HumanStandardToken.deployed();
-
-  const balancePromise = yield call(token.balanceOf, ethAddress);
-
-  // We return an object in a specific format, see utils/request.js for more information
-  if (balancePromise.err === undefined || balancePromise.err === null) {
-    yield put(balanceOfSuccess(ethAddress, balancePromise.valueOf()));
-  } else {
-    console.log(balancePromise.err.response); // eslint-disable-line no-console
-    yield put(balanceOfFailure(ethAddress, balancePromise.err.response));
-  }
-}
-
-/**
- * Watches for BALANCE_OF_GET action and calls handler
- */
-export function* balanceOfWatcher() {
-  while (true) { // eslint-disable-line no-constant-condition
-    const { ethAddress } = yield take(BALANCE_OF_GET);
-    // use fork and not call to be sure to fork all
-    yield fork(balanceOfGet, ethAddress);
-  }
-}
-
-
-/**
- * Root saga manages watcher lifecycle
- */
-export function* balanceOfSaga() {
-  // Fork watcher so we can continue execution
-  const watcher = yield fork(balanceOfWatcher);
-
-  // Suspend execution until location changes
-  yield take(LOCATION_CHANGE);
-  yield cancel(watcher);
-}
-
-// All sagas to be loaded
-export default [
-  balanceOfSaga,
-];
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Then, simply implement the right reducers, actions and you are done! you can easily get the balance in your UI.&lt;/p&gt;
-
-&lt;h2 id=&#34;interacting-with-functions-that-needs-transactions&#34;&gt;Interacting with functions that needs transactions&lt;/h2&gt;
-
-&lt;p&gt;Let&amp;rsquo;s use the same EIP20 contract again:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-solidity&#34;&gt;    event Approval(address indexed _owner, address indexed _spender, uint256 _value);
-
-    function approve(address _spender, uint256 _value) returns (bool success) {
-        allowed[msg.sender][_spender] = _value;
-        Approval(msg.sender, _spender, _value);
-        return true;
-    }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;import { take, call, put, select, cancel, fork } from &#39;redux-saga/effects&#39;;
-import {
-  GIVEMETOKEN_LAUNCH,
-} from &#39;./constants&#39;;
-import { LOCATION_CHANGE } from &#39;react-router-redux&#39;;
-
-import {
-  givemetokensSuccess,
-  givemetokensFailure,
-} from &#39;./actions&#39;;
-
-import {
-  balanceOfGet,
-} from &#39;containers/Token/actions&#39;;
-
-import { selectEthConnectWeb3Connection } from &#39;containers/EthConnect/selectors&#39;;
-// import { selectRianEthAddress } from &#39;./selectors&#39;;
-
-import HumanStandardToken from &#39;contracts/HumanStandardToken.sol.js&#39;;
-
-function* givemetokens(ethAddress) {
-  const web3Connection = yield select(selectEthConnectWeb3Connection());
-  HumanStandardToken.setProvider(web3Connection.currentProvider);
-  const tokens = HumanStandardToken.deployed();
-
-  const tokensOwner = yield call(tokens.getOwner.call);
-
-  try {
-    yield call(tokens.approve, ethAddress, 100, { from: tokensOwner, gas: 200000 });
-  } catch (e) {
-    console.log(e); // eslint-disable-line no-console
-    yield put(givemetokensFailure(ethAddress));
-    return;
-  }
-
-  const approvedAmt = yield call(tokens.allowance.call, tokensOwner, ethAddress);
-  console.log(`approved amount: ${approvedAmt}`);
-
-  try {
-    yield call(tokens.transferFrom, tokensOwner, ethAddress, 100, { from: ethAddress, gas: 200000 });
-  } catch (e) {
-    console.log(e); // eslint-disable-line no-console
-    yield put(givemetokensFailure(ethAddress));
-  }
-
-  yield put(givemetokensSuccess(ethAddress, true));
-  yield put(balanceOfGet(ethAddress));
-}
-
-/**
- * Watches for SIMPLEINSURANCE_givemetokens_LAUNCH action and calls handler
- */
-export function* givemetokensWatcher() {
-  while (true) { // eslint-disable-line no-constant-condition
-    const { ethAddress } = yield take(GIVEMETOKEN_LAUNCH);
-    yield call(givemetokens, ethAddress);
-  }
-}
-
-
-/**
- * Root saga manages watcher lifecycle
- */
-export function* givemetokensSaga() {
-  // Fork watcher so we can continue execution
-  const watcher = yield fork(givemetokensWatcher);
-
-  // Suspend execution until location changes
-  yield take(LOCATION_CHANGE);
-  yield cancel(watcher);
-}
-
-// All sagas to be loaded
-export default [
-  givemetokensSaga,
-];
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;At that point, you only know that the transaction has gone through, you don&amp;rsquo;t really know what happened. That&amp;rsquo;s when you need to listen to the event of your contracts.&lt;/p&gt;
-
-&lt;h2 id=&#34;listening-to-events&#34;&gt;Listening to events&lt;/h2&gt;
-
-&lt;p&gt;Same example as above, we will listen to the Approval event.
-We need to create a eventChannel, as the event is coming from &lt;em&gt;outside&lt;/em&gt; this time, it won&amp;rsquo;t be generated by our own UI.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;const ethEvent = () =&amp;gt; eventChannel((emitter) =&amp;gt; {
-  const tokensApproval = tokens.Approval({ fromBlock: &#39;latest&#39; });
-  tokensApproval.watch((error, results) =&amp;gt; {
-    const eventType = &#39;approve&#39;;
-    const eventTime = new Date().toISOString();
-    const eventEthAddress = results.args._owner;
-    let eventDescription;
-    if (error) {
-      console.log(`Approval error ${error}`); // eslint-disable-line no-console
-      eventDescription = `ERROR - ${results.args._owner.substring(0,6)} allowed ${results.args._spender.substring(0,6)} to spend ${results.args._value}Ʉ on his behalf`;
-    } else {
-      eventDescription = `${results.args._owner.substring(0,6)} allowed ${results.args._spender.substring(0,6)} to spend ${results.args._value}Ʉ on his behalf`;
-    }
-
-    emitter({ eventEthAddress, eventType, eventTime, eventDescription });
-  });
-
-  return () =&amp;gt; {
-    tokensApproval.stopWatching();
-  };
-});
-
-function* handleEthEvent(event) {
-  switch (event.eventType) {
-    case &#39;approve&#39;:
-      yield put(ethEventListenerReceiveAction(event.eventEthAddress, event.eventType, event.eventTime, event.eventDescription));
-      break;
-    default:
-      console.log(event); // eslint-disable-line no-console
-  }
-}
-
-export function* ethEventListenerSaga() {
-  yield put(ethEventListenerCreateAction());
-
-  const chan = yield call(ethEvent);
-  try {
-    while (true) {
-      const event = yield take(chan);
-      yield call(handleEthEvent, event);
-    }
-  } finally {
-    if (yield cancelled()) {
-      chan.close();
-      console.log(&#39;listening cancelled&#39;);
-    }
-  }
-} 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And here you go! You can now listen to the stream of events.&lt;/p&gt;
-
-&lt;h2 id=&#34;getting-a-list-of-events&#34;&gt;Getting a list of events&lt;/h2&gt;
-
-&lt;p&gt;In Ethereum, you can get the list of past events, it can kind of act like a kind of storage for the history of your contracts (I won&amp;rsquo;t go into details for this, but some node might not keep the whole history).&lt;/p&gt;
-
-&lt;p&gt;How to get the history of events on the contract?&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;import { take, call, put, cancel, fork } from &#39;redux-saga/effects&#39;;
-import {
-  APPROVAL_HISTORY_GET,
-} from &#39;./constants&#39;;
-import { LOCATION_CHANGE } from &#39;react-router-redux&#39;;
-import { web3Connect } from &#39;utils/web3.js&#39;;
-import {
-  receiveApprovalHistory,
-} from &#39;./actions&#39;;
-import {
-  balanceOfGet,
-} from &#39;containers/Token/actions&#39;;
-import HumanStandardToken from &#39;contracts/HumanStandardToken.sol.js&#39;;
-
-function* getApprovalHistory(ethAddress) {
-  const web3Connection = web3Connect();
-
-  HumanStandardToken.setProvider(web3Connection.currentProvider);
-  const tokens = HumanStandardToken.deployed();
-
-  const approvalHistory = [];
-  // Getting the list of events from block 0 to latest block, with a filter on _owner as it is an indexed field
-  const tokensApproval = tokens.Approval({ _owner: ethAddress }, { fromBlock: &#39;0&#39;, toBlock: &#39;latest&#39; });
-
-  const getApprovalLogPromise = yield call(eventGetPromisified, tokensApproval);
-
-  if (getApprovalLogPromise.err === null || getApprovalLogPromise.err === undefined) {
-    for (const results of getApprovalLogPromise) {
-      approvalHistory.push({
-        trigger: results.args._trigger,
-        measurement: results.args._measurement.valueOf(),
-        premium: results.args._amount.valueOf(),
-        refundedAmount: results.args._refundAmount.valueOf(),
-        settled: results.args._timeEnded.valueOf(),
-        refunded: results.args._due.valueOf(),
-      });
-    }
-  } else {
-    console.log(getApprovalLogPromise.err);
-  }
-
-  yield put(receiveApprovalHistory(ethAddress, approvalHistory));
-}
-
-// Event promisifier to turn the nasty web3 callback to a promise ES6 form
-const eventGetPromisified = (event) =&amp;gt; new Promise((resolve, reject) =&amp;gt; {
-  event.get((error, logs) =&amp;gt; {
-    if (error) {
-      reject(error);
-    } else {
-      resolve(logs);
-    }
-  });
-});
-
-/**
- * Watches for APPROVAL_HISTORY_GET action and calls handler
- */
-export function* getApprovalHistoryWatcher() {
-  while (true) { // eslint-disable-line no-constant-condition
-    const { ethAddress } = yield take(APPROVAL_HISTORY_GET);
-    yield fork(getApprovalHistory, ethAddress);
-  }
-}
-
-/**
- * Root saga manages watcher lifecycle
- */
-export function* approvalHistorySaga() {
-  // Fork watcher so we can continue execution
-  const getApprovalHistoryW = yield fork(getApprovalHistoryWatcher);
-
-  // Suspend execution until location changes
-  yield take(LOCATION_CHANGE);
-  yield cancel(getApprovalHistoryW);
-}
-
-// All sagas to be loaded
-export default [
-  approvalHistorySaga,
-];
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Et voila!&lt;/p&gt;
-</description>
+      <description>I finished my first dapp with (react-boilerplate)[https://github.com/mxstbr/] this week and here are the few things I learnt. I won&amp;rsquo;t get into the redux, redux-saga details, I let you play with the amazing boilerplate.
+Interacting with constant functions Let&amp;rsquo;s use the typical balanceOf function of the EIP20 contracts:
+function balanceOf(address _owner) constant returns (uint256 balance) { return balances[_owner]; }  Here are the sagas (redux-sagas) I used to interact:
+import { take, call, put, cancel, select, fork } from &#39;redux-saga/effects&#39;; import { BALANCE_OF_GET, } from &#39;.</description>
     </item>
     
     <item>
@@ -344,20 +29,13 @@ export default [
       <pubDate>Thu, 28 Jul 2016 22:27:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/kubernetes-talk/</guid>
-      <description>&lt;p&gt;On the 28th, I was invited to talk at Google Singapore for the Kubernetes birthday &lt;a href=&#34;http://www.meetup.com/fr-FR/GCPUGSG/events/232659329/?eventId=232659329&#34;&gt;http://www.meetup.com/fr-FR/GCPUGSG/events/232659329/?eventId=232659329&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;I spoke about my experience with Kubernetes in production for one of my side projects.&lt;/p&gt;
-
-&lt;p&gt;As I like to experiment stuff, I decide to drop power point and use React Spectacle library for my presentation!&lt;/p&gt;
-
-&lt;p&gt;here is the result: &lt;a href=&#34;https://kuberneprez.surge.sh&#34;&gt;https://kuberneprez.surge.sh&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;here is the source code: &lt;a href=&#34;https://github.com/vincentserpoul/prez-kubernetes&#34;&gt;https://github.com/vincentserpoul/prez-kubernetes&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;The framework can be found here: &lt;a href=&#34;http://stack.formidable.com/spectacle/#/?_k=cyx05u&#34;&gt;http://stack.formidable.com/spectacle/#/?_k=cyx05u&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;I will do it again! It was quite a good experience and I always disliked power point anyway.&lt;/p&gt;
-</description>
+      <description>On the 28th, I was invited to talk at Google Singapore for the Kubernetes birthday http://www.meetup.com/fr-FR/GCPUGSG/events/232659329/?eventId=232659329
+I spoke about my experience with Kubernetes in production for one of my side projects.
+As I like to experiment stuff, I decide to drop power point and use React Spectacle library for my presentation!
+here is the result: https://kuberneprez.surge.sh
+here is the source code: https://github.com/vincentserpoul/prez-kubernetes
+The framework can be found here: http://stack.formidable.com/spectacle/#/?_k=cyx05u
+I will do it again!</description>
     </item>
     
     <item>
@@ -366,36 +44,16 @@ export default [
       <pubDate>Tue, 12 Apr 2016 12:22:20 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/learning-react/</guid>
-      <description>
-
-&lt;h3 id=&#34;react&#34;&gt;React&lt;/h3&gt;
-
-&lt;p&gt;Nothing beats the facebook React page:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://facebook.github.io/react/docs/getting-started.html&#34;&gt;https://facebook.github.io/react/docs/getting-started.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;redux&#34;&gt;Redux&lt;/h3&gt;
-
-&lt;p&gt;Nothing beats the redux tutorial:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://redux.js.org/&#34;&gt;http://redux.js.org/&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;And also available on egghead, by Dan Abramov himself:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://egghead.io/series/getting-started-with-redux&#34;&gt;https://egghead.io/series/getting-started-with-redux&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;A list of tutorials:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/happypoulp/redux-tutorial&#34;&gt;https://github.com/happypoulp/redux-tutorial&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;a-great-detailed-introduction-to-your-spa-setup&#34;&gt;A great detailed introduction to your SPA setup&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://blog.joanboixados.com/building-a-boilerplate-for-a-koa-redux-react-application-including-webpack-mocha-and-sass/&#34;&gt;http://blog.joanboixados.com/building-a-boilerplate-for-a-koa-redux-react-application-including-webpack-mocha-and-sass/&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;an-advanced-spa-still-under-construction&#34;&gt;An advanced SPA (still under construction)&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://www.gitbook.com/book/tonyhb/redux-without-profanity/details&#34;&gt;https://www.gitbook.com/book/tonyhb/redux-without-profanity/details&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>React Nothing beats the facebook React page:
+https://facebook.github.io/react/docs/getting-started.html
+Redux Nothing beats the redux tutorial:
+http://redux.js.org/
+And also available on egghead, by Dan Abramov himself:
+https://egghead.io/series/getting-started-with-redux
+A list of tutorials:
+https://github.com/happypoulp/redux-tutorial
+A great detailed introduction to your SPA setup http://blog.joanboixados.com/building-a-boilerplate-for-a-koa-redux-react-application-including-webpack-mocha-and-sass/
+An advanced SPA (still under construction) https://www.gitbook.com/book/tonyhb/redux-without-profanity/details</description>
     </item>
     
     <item>
@@ -404,93 +62,11 @@ export default [
       <pubDate>Mon, 11 Apr 2016 20:48:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/react-dev-env-setup/</guid>
-      <description>
-
-&lt;h3 id=&#34;working-with-es6-7&#34;&gt;Working with ES6-7&lt;/h3&gt;
-
-&lt;p&gt;In order to work with ECMAScript 2015 and even with future implementations of ES, you can use Babel.&lt;/p&gt;
-
-&lt;p&gt;Babel is a transpiler, it will convert your ES6-7 to plain ES5 javascript that most browsers (&amp;gt;ie9 most probably) will understand.&lt;/p&gt;
-
-&lt;p&gt;To install babel&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;npm install -g babel 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Then within your javascript project, you can create a .babelrc file with the following content:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
-  &amp;quot;presets&amp;quot;: [&amp;quot;es2015&amp;quot;, &amp;quot;stage-0&amp;quot;, &amp;quot;react&amp;quot;]
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;react-and-its-surrounding-libraries&#34;&gt;React and its surrounding libraries&lt;/h3&gt;
-
-&lt;p&gt;After starting using React, I realized it was vey good and was surrounded with libraries which makes it even better: redux, immutable, react-router&amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;I usually try to use these three, for most of the projects I&amp;rsquo;m working on. Sometimes, it feels way too over engineered, but still, once you understand their use, it&amp;rsquo;s pretty straightforward and logical to implement them.&lt;/p&gt;
-
-&lt;p&gt;The most important value added of redux, as well as immutable is the separation of concern. It gives you the power of designing components independantly from eachother.&lt;/p&gt;
-
-&lt;h3 id=&#34;react-and-its-tools&#34;&gt;React and its tools&lt;/h3&gt;
-
-&lt;p&gt;In order to help you develop with react and also redux, you have a few tools to help you.&lt;/p&gt;
-
-&lt;h4 id=&#34;eslint-for-react&#34;&gt;eslint for react&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;npm install -g eslint-plugin-react
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;sublime-text-plugin&#34;&gt;sublime text plugin&lt;/h4&gt;
-
-&lt;p&gt;You can install a useful plugins in react, available in the package installer: React ES6 snippets.&lt;/p&gt;
-
-&lt;h4 id=&#34;eslintrc-file-for-babel-and-react&#34;&gt;.eslintrc file for babel and react&lt;/h4&gt;
-
-&lt;p&gt;You can use this eslintrc file as a starting point.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
-  &amp;quot;extends&amp;quot;: &amp;quot;airbnb&amp;quot;,
-  &amp;quot;ecmaFeatures&amp;quot;: {
-    &amp;quot;jsx&amp;quot;: true,
-    &amp;quot;modules&amp;quot;: true
-  },
-  &amp;quot;env&amp;quot;: {
-    &amp;quot;browser&amp;quot;: true,
-    &amp;quot;node&amp;quot;: true
-  },
-  &amp;quot;parser&amp;quot;: &amp;quot;babel-eslint&amp;quot;,
-  &amp;quot;rules&amp;quot;: {
-    &amp;quot;quotes&amp;quot;: [2, &amp;quot;single&amp;quot;],
-    &amp;quot;strict&amp;quot;: [2, &amp;quot;never&amp;quot;],
-    &amp;quot;react/jsx-uses-react&amp;quot;: 2,
-    &amp;quot;react/jsx-uses-vars&amp;quot;: 2,
-    &amp;quot;react/react-in-jsx-scope&amp;quot;: 2,
-    &amp;quot;no-console&amp;quot;: 0
-  },
-  &amp;quot;plugins&amp;quot;: [
-    &amp;quot;react&amp;quot;
-  ]
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;chrome-tools&#34;&gt;Chrome tools&lt;/h4&gt;
-
-&lt;p&gt;You can install react devTools in Chrome:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi&#34;&gt;https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;You can also install redux devTools in chrome too:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd&#34;&gt;https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;redux devTools will require you to modifiy the way you call create store:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;store = (window.devToolsExtension ? window.devToolsExtension()(createStore) : createStore)([...your content here]);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;You will then be able to play with the different state of your app directly in chrome.&lt;/p&gt;
-</description>
+      <description>Working with ES6-7 In order to work with ECMAScript 2015 and even with future implementations of ES, you can use Babel.
+Babel is a transpiler, it will convert your ES6-7 to plain ES5 javascript that most browsers (&amp;gt;ie9 most probably) will understand.
+To install babel
+npm install -g babel  Then within your javascript project, you can create a .babelrc file with the following content:
+{ &amp;quot;presets&amp;quot;: [&amp;quot;es2015&amp;quot;, &amp;quot;stage-0&amp;quot;, &amp;quot;react&amp;quot;] }  React and its surrounding libraries After starting using React, I realized it was vey good and was surrounded with libraries which makes it even better: redux, immutable, react-router&amp;hellip;</description>
     </item>
     
   </channel>

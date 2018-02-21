@@ -2,11 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Testrpc on VS tech corner</title>
-    <link>https://vincentserpoul.github.io/tags/testrpc/index.xml</link>
+    <link>https://vincentserpoul.github.io/tags/testrpc/</link>
     <description>Recent content in Testrpc on VS tech corner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="https://vincentserpoul.github.io/tags/testrpc/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 10 Oct 2016 12:54:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://vincentserpoul.github.io/tags/testrpc/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Ethereum contracts and Golang</title>
@@ -14,122 +17,9 @@
       <pubDate>Mon, 10 Oct 2016 12:54:00 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/binding-ethereum-golang/</guid>
-      <description>
-
-&lt;h2 id=&#34;the-contract&#34;&gt;The contract&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-solidity&#34;&gt;contract Trigger {
-  function () {
-      throw;
-  }
-
-  address owner;
-
-  function Trigger() {
-      owner = msg.sender;
-  }
-
-  event TriggerEvt(address _sender, uint _trigger);
-
-  function trigger(uint _trigger) {
-      TriggerEvt(msg.sender, _trigger);
-  }
-
-  function getOwner() constant returns (address) {
-    return owner;
-  }
-
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This is a very simple contract that we will take as an example.&lt;/p&gt;
-
-&lt;h2 id=&#34;getting-the-right-tools-for-binding&#34;&gt;Getting the right tools for binding&lt;/h2&gt;
-
-&lt;p&gt;A good starting point is this &lt;a href=&#34;https://github.com/ethereum/go-ethereum/wiki/Native-DApps:-Go-bindings-to-Ethereum-contracts&#34;&gt;wiki&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;You will need to follow the install procedure of &lt;a href=&#34;https://github.com/ethereum/go-ethereum&#34;&gt;go-ethereum&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Once done, you should have the abigen executable available on your command line.&lt;/p&gt;
-
-&lt;h2 id=&#34;automatically-generating-the-go-file&#34;&gt;Automatically generating the go file&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;abigen --sol contracts/Trigger.sol --pkg main --out trigger.go
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;If everything is fine, you should now have a file named trigger.go&lt;/p&gt;
-
-&lt;h2 id=&#34;using-the-generated-file-from-main&#34;&gt;Using the generated file from main&lt;/h2&gt;
-
-&lt;p&gt;You first need to have a node running (parity, geth, testrpc&amp;hellip;). We will assume it&amp;rsquo;s listening on port 9012.
-You then need to deploy your contract and write down the deployment address (you can use truffle or simple deploy your contract manually or use the following code with a working key pair).&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;package main
-
-import (
-  &amp;quot;fmt&amp;quot;
-  &amp;quot;log&amp;quot;
-  &amp;quot;strings&amp;quot;
-  &amp;quot;time&amp;quot;
-
-  &amp;quot;github.com/ethereum/go-ethereum/accounts/abi/bind&amp;quot;
-  &amp;quot;github.com/ethereum/go-ethereum/accounts/abi/bind/backends&amp;quot;
-  &amp;quot;github.com/ethereum/go-ethereum/rpc&amp;quot;
-)
-
-func main() {
-  // Create an IPC based RPC connection to a remote node
-  conn, err := rpc.NewHTTPClient(&amp;quot;http://localhost:9012&amp;quot;)
-  if err != nil {
-    log.Fatalf(&amp;quot;Failed to connect to the Ethereum client: %v&amp;quot;, err)
-  }
-
-  // IF YOU WANT TO DEPLOY YOURSELF
-  // this is the json found in your geth chain/keystore folder
-  key := `{&amp;quot;address&amp;quot;:&amp;quot;f2759b4a699dae4fdc3383a0d7a92cfc246315cd&amp;quot;,&amp;quot;crypto&amp;quot;:{&amp;quot;cipher&amp;quot;:&amp;quot;aes-128-ctr&amp;quot;,&amp;quot;ciphertext&amp;quot;:&amp;quot;a96fe235356c7ebe6520d2fa1dcc0fd67199cb490fb18c39ffabbb6880a6b3d6&amp;quot;,&amp;quot;cipherparams&amp;quot;:{&amp;quot;iv&amp;quot;:&amp;quot;47182104a4811f8da09c0bafc3743e2a&amp;quot;},&amp;quot;kdf&amp;quot;:&amp;quot;scrypt&amp;quot;,&amp;quot;kdfparams&amp;quot;:{&amp;quot;dklen&amp;quot;:32,&amp;quot;n&amp;quot;:262144,&amp;quot;p&amp;quot;:1,&amp;quot;r&amp;quot;:8,&amp;quot;salt&amp;quot;:&amp;quot;81c82f97edb0ee1036e63d1de57b7851271273971803e60a5cbb011e85baa251&amp;quot;},&amp;quot;mac&amp;quot;:&amp;quot;09f107c9af8efcb932354d939beb7b2c0cebcfd70362d68905de554304a7cfff&amp;quot;},&amp;quot;id&amp;quot;:&amp;quot;eb7ed04f-e996-4bda-893b-28dc6ac24626&amp;quot;,&amp;quot;version&amp;quot;:3}`
-  auth, err := bind.NewTransactor(strings.NewReader(key), &amp;quot;1234567890&amp;quot;)
-  if err != nil {
-    log.Fatalf(&amp;quot;Failed to create authorized transactor: %v&amp;quot;, err)
-  }
-  // Deploy a new awesome contract for the binding demo
-  triggerAddr, _, trigger, err := DeployTrigger(auth, backends.NewRPCBackend(conn))
-  if err != nil {
-    log.Fatalf(&amp;quot;Failed to deploy new trigger contract: %v&amp;quot;, err)
-  }
-  // Don&#39;t even wait, check its presence in the local pending state
-  time.Sleep(5 * time.Second) // Allow it to be processed by the local node :P
-  // END IF YOU WANT TO DEPLOY YOURSELF
-
-  // IF YOU HAVE ALREADY DEPLOYED IT
-  // deployedTriggerAddr := &amp;quot;0xe2359b4a699dae4fdc3383a0d7a92cfc246315ce&amp;quot;
-  deployedTriggerAddr := triggerAddr
-  trigger, err = NewTrigger(deployedTriggerAddr, backends.NewRPCBackend(conn))
-  if err != nil {
-    log.Fatalf(&amp;quot;Failed to instantiate a trigger contract: %v&amp;quot;, err)
-  }
-  // END IF YOU HAVE ALREADY DEPLOYED IT
-
-  owner, err := trigger.GetOwner(nil)
-  if err != nil {
-    log.Fatalf(&amp;quot;Failed to retrieve token name: %v&amp;quot;, err)
-  }
-  fmt.Printf(&amp;quot;owner address: 0x%x\n&amp;quot;, owner)
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;then, just run it&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;go run *.go
-owner address: 0xf2759b4a699dae4fdc3383a0d7a92cfc246315cd
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Et voila!&lt;/p&gt;
-
-&lt;h2 id=&#34;existing-issues&#34;&gt;Existing issues&lt;/h2&gt;
-
-&lt;p&gt;We have still not talked about listening to events.
-There are also still issues as soon as the contract imports other contracts, I will finish the writing once these are done.&lt;/p&gt;
-</description>
+      <description>The contract contract Trigger { function () { throw; } address owner; function Trigger() { owner = msg.sender; } event TriggerEvt(address _sender, uint _trigger); function trigger(uint _trigger) { TriggerEvt(msg.sender, _trigger); } function getOwner() constant returns (address) { return owner; } }  This is a very simple contract that we will take as an example.
+Getting the right tools for binding A good starting point is this wiki.
+You will need to follow the install procedure of go-ethereum.</description>
     </item>
     
     <item>
@@ -138,97 +28,7 @@ There are also still issues as soon as the contract imports other contracts, I w
       <pubDate>Mon, 01 Aug 2016 08:27:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/ethereum-dev-environment/</guid>
-      <description>
-
-&lt;h2 id=&#34;part-1-setup-your-ethereum-node&#34;&gt;Part 1 - Setup your ethereum node&lt;/h2&gt;
-
-&lt;p&gt;There are many ways you can setup a node to dev an Ethereum dapp.
-You can use the live network: not advisable obviously for cost and speed reasons.
-You can use the test network: not advisable for speed reasons.
-You can use a testchain set up with Geth: easy but a bit tedious as you need to mine.
-You can the ethereum testrpc: easiest!&lt;/p&gt;
-
-&lt;p&gt;I will talk about the last two setup in this article.&lt;/p&gt;
-
-&lt;h3 id=&#34;using-testrpc&#34;&gt;Using testrpc&lt;/h3&gt;
-
-&lt;p&gt;Simply install through npm (if you want it globally available, add -g after install, as usual)&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;npm install ethereumjs-testrpc
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And then run it&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;node_modules/ethereumjs-testrpc/bin/testrpc
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;using-geth&#34;&gt;Using geth&lt;/h3&gt;
-
-&lt;p&gt;Download geth latest release (&lt;a href=&#34;https://github.com/ethereum/go-ethereum/releases&#34;&gt;https://github.com/ethereum/go-ethereum/releases&lt;/a&gt;)
-and extract it.&lt;/p&gt;
-
-&lt;p&gt;Create a file customGenesis.json&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
-  &amp;quot;nonce&amp;quot;: &amp;quot;0x0000000000000042&amp;quot;,
-  &amp;quot;timestamp&amp;quot;: &amp;quot;0x0&amp;quot;,
-  &amp;quot;parentHash&amp;quot;: &amp;quot;0x0000000000000000000000000000000000000000000000000000000000000000&amp;quot;,
-  &amp;quot;extraData&amp;quot;: &amp;quot;0x0&amp;quot;,
-  &amp;quot;gasLimit&amp;quot;: &amp;quot;0x8000000&amp;quot;,
-  &amp;quot;difficulty&amp;quot;: &amp;quot;0x400&amp;quot;,
-  &amp;quot;mixhash&amp;quot;: &amp;quot;0x0000000000000000000000000000000000000000000000000000000000000000&amp;quot;,
-  &amp;quot;coinbase&amp;quot;: &amp;quot;0x3333333333333333333333333333333333333333&amp;quot;,
-  &amp;quot;alloc&amp;quot;: {}
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;then init yout node with the genesis block above&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;chmod +x geth
-./geth init ./customGenesis.json
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;run-your-node-with-console-attached&#34;&gt;Run your node with console attached&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;./geth \
-    --identity &amp;quot;gethTest&amp;quot; \
-    --rpc --rpcport &amp;quot;9012&amp;quot; \
-    --rpccorsdomain &amp;quot;YOUR_TEST_DOMAIN_APP_RUN_FROM&amp;quot; \
-    --datadir &amp;quot;./testChain&amp;quot; \
-    --port &amp;quot;30303&amp;quot; \
-    --nodiscover \
-    --rpcapi &amp;quot;db,eth,net,web3&amp;quot; \
-    --networkid 1999 \
-    --dev console
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;create-a-base-account&#34;&gt;Create a base account&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;gt; eth.accounts
-[]
-&amp;gt; personal.newAccount()
-Passphrase:
-Repeat passphrase:
-&amp;quot;0xedea6958c57fc0cd4bd63b3e7b395393dc76bfb6&amp;quot;
-&amp;gt; eth.accounts
-[&amp;quot;0xedea6958c57fc0cd4bd63b3e7b395393dc76bfb6&amp;quot;]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;mine-on-your-newly-created-account&#34;&gt;Mine on your newly created account&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;miner.setEtherbase(eth.accounts[0])
-miner.start(8)
-miner.stop()
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Check if the mining worked&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;gt; eth.getBalance(eth.accounts[0]).toNumber();
-55000000000000000000
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;In the next posts, we will start talking about development of dapps.&lt;/p&gt;
-</description>
+      <description>Part 1 - Setup your ethereum node There are many ways you can setup a node to dev an Ethereum dapp. You can use the live network: not advisable obviously for cost and speed reasons. You can use the test network: not advisable for speed reasons. You can use a testchain set up with Geth: easy but a bit tedious as you need to mine. You can the ethereum testrpc: easiest!</description>
     </item>
     
   </channel>

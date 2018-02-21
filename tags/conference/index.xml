@@ -2,11 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Conference on VS tech corner</title>
-    <link>https://vincentserpoul.github.io/tags/conference/index.xml</link>
+    <link>https://vincentserpoul.github.io/tags/conference/</link>
     <description>Recent content in Conference on VS tech corner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="https://vincentserpoul.github.io/tags/conference/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 16 Sep 2016 13:44:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://vincentserpoul.github.io/tags/conference/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Blockchain week in Shanghai!</title>
@@ -14,9 +17,7 @@
       <pubDate>Fri, 16 Sep 2016 13:44:00 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/ethereum-solidity/</guid>
-      <description>&lt;p&gt;I participated to the devcon2 and blockchain summit last week.
- &lt;a href=&#34;https://medium.com/innovateforward/blockchain-week-in-shanghai-8b38454eaeeb#.d4cnfj72z&#34;&gt;Here&lt;/a&gt; is my summary!&lt;/p&gt;
-</description>
+      <description>I participated to the devcon2 and blockchain summit last week. Here is my summary!</description>
     </item>
     
   </channel>
