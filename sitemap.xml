@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://vincentserpoul.github.io/post/decentralized-insurance/</loc>
+    <lastmod>2018-02-21T12:20:00+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://vincentserpoul.github.io/post/archlinux-bluetooth/</loc>
     <lastmod>2017-04-03T16:22:00+08:00</lastmod>
   </url>
@@ -122,7 +127,7 @@
   
   <url>
     <loc>https://vincentserpoul.github.io/tags/blockchain/</loc>
-    <lastmod>2016-10-27T13:34:00+08:00</lastmod>
+    <lastmod>2018-02-21T12:20:00+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -164,6 +169,12 @@
   <url>
     <loc>https://vincentserpoul.github.io/tags/dapps/</loc>
     <lastmod>2016-10-27T13:34:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/tags/decentralized/</loc>
+    <lastmod>2018-02-21T12:20:00+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -222,6 +233,12 @@
   </url>
   
   <url>
+    <loc>https://vincentserpoul.github.io/tags/insurance/</loc>
+    <lastmod>2018-02-21T12:20:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://vincentserpoul.github.io/tags/javascript/</loc>
     <lastmod>2016-08-03T20:00:00+08:00</lastmod>
     <priority>0</priority>
@@ -264,8 +281,14 @@
   </url>
   
   <url>
+    <loc>https://vincentserpoul.github.io/tags/p2p/</loc>
+    <lastmod>2018-02-21T12:20:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://vincentserpoul.github.io/post/</loc>
-    <lastmod>2017-04-03T16:22:00+08:00</lastmod>
+    <lastmod>2018-02-21T12:20:00+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -355,7 +378,7 @@
   
   <url>
     <loc>https://vincentserpoul.github.io/</loc>
-    <lastmod>2017-04-03T16:22:00+08:00</lastmod>
+    <lastmod>2018-02-21T12:20:00+08:00</lastmod>
     <priority>0</priority>
   </url>
   

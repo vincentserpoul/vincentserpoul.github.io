@@ -6,10 +6,19 @@
     <description>Recent content in Posts on VS tech corner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 03 Apr 2017 16:22:00 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 21 Feb 2018 12:20:00 +0800</lastBuildDate>
     
 	<atom:link href="https://vincentserpoul.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Landscape of the decentralized insurance</title>
+      <link>https://vincentserpoul.github.io/post/decentralized-insurance/</link>
+      <pubDate>Wed, 21 Feb 2018 12:20:00 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/post/decentralized-insurance/</guid>
+      <description> Listing current actors  Etherisc Aigang Byteball BitPark Tides PolicyPal ixledger Dynamis Rainvow  </description>
+    </item>
     
     <item>
       <title>Bluetooth activation at startup on arch linux</title>
