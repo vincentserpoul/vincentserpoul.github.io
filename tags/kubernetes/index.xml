@@ -6,10 +6,22 @@
     <description>Recent content in Kubernetes on VS tech corner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 28 Jul 2016 22:27:27 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 13 Jun 2018 11:37:00 +0800</lastBuildDate>
     
 	<atom:link href="https://vincentserpoul.github.io/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Using GKE with multiple accounts and clusters</title>
+      <link>https://vincentserpoul.github.io/post/gke-multi-accounts-clusters/</link>
+      <pubDate>Wed, 13 Jun 2018 11:37:00 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/post/gke-multi-accounts-clusters/</guid>
+      <description>Google cloud configs Download and install gcloud Simply follow this link
+Listing existing configurations gcloud config configurations list NAME IS_ACTIVE ACCOUNT PROJECT DEFAULT_ZONE DEFAULT_REGION  This should give you only one line, with a default account.
+Creating a configuration gcloud config configurations create testconf  This will guide you through the configuration of a new configuration. It allows you to set one config per account, project, cluster&amp;hellip;
+Activating a configuration gcloud config configurations activate testconf  As simple as this to change your account/config.</description>
+    </item>
     
     <item>
       <title>Kubernetes Singapore Birthday Event</title>

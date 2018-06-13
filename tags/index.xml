@@ -156,6 +156,15 @@
     </item>
     
     <item>
+      <title>Gcloud</title>
+      <link>https://vincentserpoul.github.io/tags/gcloud/</link>
+      <pubDate>Wed, 13 Jun 2018 11:37:00 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/tags/gcloud/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Geth</title>
       <link>https://vincentserpoul.github.io/tags/geth/</link>
       <pubDate>Mon, 01 Aug 2016 08:27:27 +0800</pubDate>
@@ -174,6 +183,15 @@
     </item>
     
     <item>
+      <title>Gke</title>
+      <link>https://vincentserpoul.github.io/tags/gke/</link>
+      <pubDate>Wed, 13 Jun 2018 11:37:00 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/tags/gke/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Golang</title>
       <link>https://vincentserpoul.github.io/tags/golang/</link>
       <pubDate>Tue, 27 Dec 2016 00:44:00 +0800</pubDate>
@@ -188,6 +206,15 @@
       <pubDate>Thu, 28 Jul 2016 22:27:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/tags/google/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Googlecloud</title>
+      <link>https://vincentserpoul.github.io/tags/googlecloud/</link>
+      <pubDate>Wed, 13 Jun 2018 11:37:00 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/tags/googlecloud/</guid>
       <description></description>
     </item>
     
@@ -212,7 +239,7 @@
     <item>
       <title>Kubernetes</title>
       <link>https://vincentserpoul.github.io/tags/kubernetes/</link>
-      <pubDate>Thu, 28 Jul 2016 22:27:27 +0800</pubDate>
+      <pubDate>Wed, 13 Jun 2018 11:37:00 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/tags/kubernetes/</guid>
       <description></description>
