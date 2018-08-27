@@ -41,7 +41,7 @@
     <item>
       <title>Blockchain</title>
       <link>https://vincentserpoul.github.io/tags/blockchain/</link>
-      <pubDate>Wed, 21 Feb 2018 12:20:00 +0800</pubDate>
+      <pubDate>Thu, 27 Oct 2016 13:34:00 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/tags/blockchain/</guid>
       <description></description>
@@ -98,15 +98,6 @@
       <pubDate>Thu, 27 Oct 2016 13:34:00 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/tags/dapps/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Decentralized</title>
-      <link>https://vincentserpoul.github.io/tags/decentralized/</link>
-      <pubDate>Wed, 21 Feb 2018 12:20:00 +0800</pubDate>
-      
-      <guid>https://vincentserpoul.github.io/tags/decentralized/</guid>
       <description></description>
     </item>
     
@@ -194,7 +185,7 @@
     <item>
       <title>Golang</title>
       <link>https://vincentserpoul.github.io/tags/golang/</link>
-      <pubDate>Tue, 27 Dec 2016 00:44:00 +0800</pubDate>
+      <pubDate>Mon, 27 Aug 2018 23:22:00 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/tags/golang/</guid>
       <description></description>
@@ -215,15 +206,6 @@
       <pubDate>Wed, 13 Jun 2018 11:37:00 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/tags/googlecloud/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Insurance</title>
-      <link>https://vincentserpoul.github.io/tags/insurance/</link>
-      <pubDate>Wed, 21 Feb 2018 12:20:00 +0800</pubDate>
-      
-      <guid>https://vincentserpoul.github.io/tags/insurance/</guid>
       <description></description>
     </item>
     
@@ -287,15 +269,6 @@
       <pubDate>Tue, 27 Dec 2016 00:44:00 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/tags/oracle/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>P2p</title>
-      <link>https://vincentserpoul.github.io/tags/p2p/</link>
-      <pubDate>Wed, 21 Feb 2018 12:20:00 +0800</pubDate>
-      
-      <guid>https://vincentserpoul.github.io/tags/p2p/</guid>
       <description></description>
     </item>
     
@@ -422,6 +395,15 @@
       <pubDate>Fri, 20 Feb 2015 08:27:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/tags/versioning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Wasm</title>
+      <link>https://vincentserpoul.github.io/tags/wasm/</link>
+      <pubDate>Mon, 27 Aug 2018 23:22:00 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/tags/wasm/</guid>
       <description></description>
     </item>
     

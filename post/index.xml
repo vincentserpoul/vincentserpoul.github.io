@@ -6,10 +6,23 @@
     <description>Recent content in Posts on VS tech corner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 13 Jun 2018 11:37:00 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 27 Aug 2018 23:22:00 +0800</lastBuildDate>
     
 	<atom:link href="https://vincentserpoul.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>a taste of wasm</title>
+      <link>https://vincentserpoul.github.io/post/playwithwasm-golang/</link>
+      <pubDate>Mon, 27 Aug 2018 23:22:00 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/post/playwithwasm-golang/</guid>
+      <description>Here it is, go 1.11 is out, and with it a new compilation target, Web Assembly!
+Let&amp;rsquo;s try it out!
+The test As dumb as it sounds, I needed a simple usecase to test this out. I decided to settle for the dumbest possible thing: a for loop incrementing a variable for 100000000 times.
+The git repo Here it is
+I uploaded it as well on surge for you to see without the hassle</description>
+    </item>
     
     <item>
       <title>Using GKE with multiple accounts and clusters</title>
@@ -21,15 +34,6 @@
 Listing existing configurations gcloud config configurations list NAME IS_ACTIVE ACCOUNT PROJECT DEFAULT_ZONE DEFAULT_REGION  This should give you only one line, with a default account.
 Creating a configuration gcloud config configurations create testconf  This will guide you through the configuration of a new configuration. It allows you to set one config per account, project, cluster&amp;hellip;
 Activating a configuration gcloud config configurations activate testconf  As simple as this to change your account/config.</description>
-    </item>
-    
-    <item>
-      <title>Landscape of the decentralized insurance</title>
-      <link>https://vincentserpoul.github.io/post/decentralized-insurance/</link>
-      <pubDate>Wed, 21 Feb 2018 12:20:00 +0800</pubDate>
-      
-      <guid>https://vincentserpoul.github.io/post/decentralized-insurance/</guid>
-      <description> Listing current actors  Etherisc Aigang Byteball BitPark Tides PolicyPal ixledger Dynamis Rainvow  </description>
     </item>
     
     <item>
