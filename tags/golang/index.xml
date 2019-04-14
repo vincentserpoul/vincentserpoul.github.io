@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Golang on VS tech corner</title>
+    <title>golang on VS tech corner</title>
     <link>https://vincentserpoul.github.io/tags/golang/</link>
-    <description>Recent content in Golang on VS tech corner</description>
+    <description>Recent content in golang on VS tech corner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 29 Sep 2018 09:22:00 +0800</lastBuildDate>

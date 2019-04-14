@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Wasm on VS tech corner</title>
+    <title>wasm on VS tech corner</title>
     <link>https://vincentserpoul.github.io/tags/wasm/</link>
-    <description>Recent content in Wasm on VS tech corner</description>
+    <description>Recent content in wasm on VS tech corner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 27 Aug 2018 23:22:00 +0800</lastBuildDate>

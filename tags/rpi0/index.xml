@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>rpi0 on VS tech corner</title>
+    <link>https://vincentserpoul.github.io/tags/rpi0/</link>
+    <description>Recent content in rpi0 on VS tech corner</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 11 Apr 2019 21:22:13 +0800</lastBuildDate>
+    
+	<atom:link href="https://vincentserpoul.github.io/tags/rpi0/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>installing alpine linux on rpi0</title>
+      <link>https://vincentserpoul.github.io/post/alpine-linux-rpi0/</link>
+      <pubDate>Thu, 11 Apr 2019 21:22:13 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/post/alpine-linux-rpi0/</guid>
+      <description>Prerequisites  One raspberry pi zero W One sd card  Download Alpine linux We&amp;rsquo;ll use the almost latest version: 3.9.2 (3.9.3 would not work for some reason) The one to use for RPI is the raspberry pi (surprising :P) armhf.
+On your local computer (assuming you re using linux) Mount the sdcard (should be automated, if not, you probably know how to do that and you probably don&amp;rsquo;t need that tutorial)</description>
+    </item>
+    
+  </channel>
+</rss>
