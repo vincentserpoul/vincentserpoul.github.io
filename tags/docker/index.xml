@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>rpi on VS tech corner</title>
-    <link>https://vincentserpoul.github.io/tags/rpi/</link>
-    <description>Recent content in rpi on VS tech corner</description>
+    <title>docker on VS tech corner</title>
+    <link>https://vincentserpoul.github.io/tags/docker/</link>
+    <description>Recent content in docker on VS tech corner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 16 Apr 2019 11:07:08 +0800</lastBuildDate>
     
-	<atom:link href="https://vincentserpoul.github.io/tags/rpi/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://vincentserpoul.github.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -22,16 +22,6 @@ In the cmdline.txt, add the following:
 echo -ne &amp;quot; cgroup_enable=memory cgroup_enable=cpuset swapaccount=1&amp;quot; &amp;gt;&amp;gt; /run/media/youruser/xxx/cmdline.txt  Docker needs all cgroups enabled, so this will do the trick
 On you rpi0 As simple as:
 sudo apk add docker sudo rc-update add docker boot sudo rc-service docker start  To make sure your docker env doesn&amp;rsquo;t go in memory (512MB RAM won&amp;rsquo;t bring you far&amp;hellip;), set it on mmcblk0p3 by editing /etc/docker/daemon.</description>
-    </item>
-    
-    <item>
-      <title>installing alpine linux on rpi0</title>
-      <link>https://vincentserpoul.github.io/post/alpine-linux-rpi0/</link>
-      <pubDate>Thu, 11 Apr 2019 21:22:13 +0800</pubDate>
-      
-      <guid>https://vincentserpoul.github.io/post/alpine-linux-rpi0/</guid>
-      <description>Prerequisites  One raspberry pi zero W One sd card  Download Alpine linux We&amp;rsquo;ll use the almost latest version: 3.9.2 (3.9.3 would not work for some reason) The one to use for RPI is the raspberry pi (surprising :P) armhf.
-On your local computer (assuming you re using linux) Mount the sdcard (should be automated, if not, you probably know how to do that and you probably don&amp;rsquo;t need that tutorial)</description>
     </item>
     
   </channel>
