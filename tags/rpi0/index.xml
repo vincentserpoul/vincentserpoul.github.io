@@ -6,10 +6,24 @@
     <description>Recent content in rpi0 on VS tech corner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 11 Apr 2019 21:22:13 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 16 Apr 2019 11:07:08 +0800</lastBuildDate>
     
 	<atom:link href="https://vincentserpoul.github.io/tags/rpi0/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>installing docker on alpine linux</title>
+      <link>https://vincentserpoul.github.io/post/alpine-linux-rpi0-docke/</link>
+      <pubDate>Tue, 16 Apr 2019 11:07:08 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/post/alpine-linux-rpi0-docke/</guid>
+      <description>Prerequisites  One raspberry pi zero W One sd card  Enable all cgroups On you local linux, mount the partition containing alpine files.
+In the cmdline.txt, add the following:
+... cgroup_enable=memory cgroup_enable=cpuset swapaccount=1  Docker needs all cgroups enabled, so this will do the trick
+On you rpi0 As simple as:
+apk add docker rc-update add docker boot  reboot and check that everything is ok:
+docker run --rm hypriot/armhf-hello-world  You should see some text if everything is working</description>
+    </item>
     
     <item>
       <title>installing alpine linux on rpi0</title>

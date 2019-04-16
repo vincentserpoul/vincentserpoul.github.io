@@ -6,7 +6,7 @@
     <description>Recent content in Tags on VS tech corner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 11 Apr 2019 21:22:13 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 16 Apr 2019 11:07:08 +0800</lastBuildDate>
     
 	<atom:link href="https://vincentserpoul.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,16 +14,25 @@
     <item>
       <title>alpine</title>
       <link>https://vincentserpoul.github.io/tags/alpine/</link>
-      <pubDate>Thu, 11 Apr 2019 21:22:13 +0800</pubDate>
+      <pubDate>Tue, 16 Apr 2019 11:07:08 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/tags/alpine/</guid>
       <description></description>
     </item>
     
     <item>
+      <title>docker</title>
+      <link>https://vincentserpoul.github.io/tags/docker/</link>
+      <pubDate>Tue, 16 Apr 2019 11:07:08 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/tags/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>linux</title>
       <link>https://vincentserpoul.github.io/tags/linux/</link>
-      <pubDate>Thu, 11 Apr 2019 21:22:13 +0800</pubDate>
+      <pubDate>Tue, 16 Apr 2019 11:07:08 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/tags/linux/</guid>
       <description></description>
@@ -32,7 +41,7 @@
     <item>
       <title>rpi</title>
       <link>https://vincentserpoul.github.io/tags/rpi/</link>
-      <pubDate>Thu, 11 Apr 2019 21:22:13 +0800</pubDate>
+      <pubDate>Tue, 16 Apr 2019 11:07:08 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/tags/rpi/</guid>
       <description></description>
@@ -41,7 +50,7 @@
     <item>
       <title>rpi0</title>
       <link>https://vincentserpoul.github.io/tags/rpi0/</link>
-      <pubDate>Thu, 11 Apr 2019 21:22:13 +0800</pubDate>
+      <pubDate>Tue, 16 Apr 2019 11:07:08 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/tags/rpi0/</guid>
       <description></description>
