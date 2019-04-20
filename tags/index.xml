@@ -6,7 +6,7 @@
     <description>Recent content in Tags on VS tech corner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 16 Apr 2019 11:07:08 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 20 Apr 2019 19:02:02 +0800</lastBuildDate>
     
 	<atom:link href="https://vincentserpoul.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,9 +14,54 @@
     <item>
       <title>alpine</title>
       <link>https://vincentserpoul.github.io/tags/alpine/</link>
-      <pubDate>Tue, 16 Apr 2019 11:07:08 +0800</pubDate>
+      <pubDate>Sat, 20 Apr 2019 19:02:02 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/tags/alpine/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cross compilation</title>
+      <link>https://vincentserpoul.github.io/tags/cross-compilation/</link>
+      <pubDate>Sat, 20 Apr 2019 19:02:02 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/tags/cross-compilation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>linux</title>
+      <link>https://vincentserpoul.github.io/tags/linux/</link>
+      <pubDate>Sat, 20 Apr 2019 19:02:02 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rpi</title>
+      <link>https://vincentserpoul.github.io/tags/rpi/</link>
+      <pubDate>Sat, 20 Apr 2019 19:02:02 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/tags/rpi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rpi0</title>
+      <link>https://vincentserpoul.github.io/tags/rpi0/</link>
+      <pubDate>Sat, 20 Apr 2019 19:02:02 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/tags/rpi0/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rust</title>
+      <link>https://vincentserpoul.github.io/tags/rust/</link>
+      <pubDate>Sat, 20 Apr 2019 19:02:02 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/tags/rust/</guid>
       <description></description>
     </item>
     
@@ -26,33 +71,6 @@
       <pubDate>Tue, 16 Apr 2019 11:07:08 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/tags/docker/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>linux</title>
-      <link>https://vincentserpoul.github.io/tags/linux/</link>
-      <pubDate>Tue, 16 Apr 2019 11:07:08 +0800</pubDate>
-      
-      <guid>https://vincentserpoul.github.io/tags/linux/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>rpi</title>
-      <link>https://vincentserpoul.github.io/tags/rpi/</link>
-      <pubDate>Tue, 16 Apr 2019 11:07:08 +0800</pubDate>
-      
-      <guid>https://vincentserpoul.github.io/tags/rpi/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>rpi0</title>
-      <link>https://vincentserpoul.github.io/tags/rpi0/</link>
-      <pubDate>Tue, 16 Apr 2019 11:07:08 +0800</pubDate>
-      
-      <guid>https://vincentserpoul.github.io/tags/rpi0/</guid>
       <description></description>
     </item>
     

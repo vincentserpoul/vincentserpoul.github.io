@@ -17,15 +17,15 @@
 	
         <meta property="og:site_name" content="VS tech corner">
         <meta property="og:title" content="VS tech corner">
-        <meta property="og:url" content="https://vincentserpoul.github.io/tags/rpi0/">
+        <meta property="og:url" content="https://vincentserpoul.github.io/tags/rust/">
         <meta property="og:description" content="">
     
         <meta property="og:type" content="website" />
     
         <meta name="generator" content="Hugo 0.56.0-DEV" />
-        <title>rpi0 &middot; VS tech corner </title>
+        <title>rust &middot; VS tech corner </title>
         <link rel="canonical" href="https://vincentserpoul.github.io/" />
-        <link rel="alternate" type="application/rss+xml" title="RSS" href="https://vincentserpoul.github.io/tags/rpi0/index.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS" href="https://vincentserpoul.github.io/tags/rust/index.xml">
         <link rel="stylesheet" type='text/css' href="https://vincentserpoul.github.io/css/main.css"/>
         <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300|Montserrat:700' rel='stylesheet' type='text/css'>
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
@@ -62,53 +62,6 @@ Compiling from NOT a rpi0 Obviously, you don&rsquo;t want to compile from a rasp
             
             	&nbsp;&nbsp;<i class="fa fa-tag"></i>
             	linux, alpine, rpi, rpi0, rust, cross compilation
-            
-        </span>
-    </footer>
-</article>
-	
-		<article class="li post">
-    <header class="post-header">
-        <h3 class="post-title"><a href="https://vincentserpoul.github.io/post/alpine-linux-rpi0-docker/">installing docker on alpine linux</a></h3>
-        <p class="post-time"><time datetime="2019-04-16T11:07:08&#43;08:00">April 16, 2019</time></p>
-    </header>
-
-    <section class="post-excerpt">
-        <p>Prerequisites  One raspberry pi zero W One sd card  Enable all cgroups On you local linux, mount the partition containing alpine files.
-In the cmdline.txt, add the following:
-echo -ne &quot; cgroup_enable=memory cgroup_enable=cpuset swapaccount=1&quot; &gt;&gt; /run/media/youruser/xxx/cmdline.txt  Docker needs all cgroups enabled, so this will do the trick
-On you rpi0 As simple as:
-sudo apk add docker sudo rc-update add docker boot sudo rc-service docker start  To make sure your docker env doesn&rsquo;t go in memory (512MB RAM won&rsquo;t bring you far&hellip;), set it on mmcblk0p3 by editing /etc/docker/daemon.</p>
-    </section>
-
-    <footer class="post-footer">
-        <span>
-            
-            
-            	&nbsp;&nbsp;<i class="fa fa-tag"></i>
-            	linux, alpine, rpi, rpi0, docker
-            
-        </span>
-    </footer>
-</article>
-	
-		<article class="li post">
-    <header class="post-header">
-        <h3 class="post-title"><a href="https://vincentserpoul.github.io/post/alpine-linux-rpi0/">installing alpine linux on rpi0</a></h3>
-        <p class="post-time"><time datetime="2019-04-11T21:22:13&#43;08:00">April 11, 2019</time></p>
-    </header>
-
-    <section class="post-excerpt">
-        <p>Prerequisites  One raspberry pi zero W One sd card  Download Alpine linux We&rsquo;ll use the almost latest version: 3.9.2 (3.9.3 would not work for some reason) The one to use for RPI is the raspberry pi (surprising :P) armhf.
-On your local computer (assuming you re using linux) Mount the sdcard (should be automated, if not, you probably know how to do that and you probably don&rsquo;t need that tutorial)</p>
-    </section>
-
-    <footer class="post-footer">
-        <span>
-            
-            
-            	&nbsp;&nbsp;<i class="fa fa-tag"></i>
-            	linux, alpine, rpi, rpi0
             
         </span>
     </footer>

@@ -6,17 +6,28 @@
     <description>Recent content in alpine on VS tech corner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 16 Apr 2019 11:07:08 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 20 Apr 2019 19:02:02 +0800</lastBuildDate>
     
 	<atom:link href="https://vincentserpoul.github.io/tags/alpine/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>cross compiling rust from linux to rpi0/alpine</title>
+      <link>https://vincentserpoul.github.io/post/alpine-rpi0-rust/</link>
+      <pubDate>Sat, 20 Apr 2019 19:02:02 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/post/alpine-rpi0-rust/</guid>
+      <description>If you read my previous posts, you should now have a raspberry-pi running alpine and docker.
+Resources are pretty limited on rpi0, so we are going to deploy programs using rust. Note: golang could have fit in there as well (and ofc all C and close to machine languages).
+Compiling from NOT a rpi0 Obviously, you don&amp;rsquo;t want to compile from a raspberry pi zero, unless you have all the time in the world and love waiting.</description>
+    </item>
+    
+    <item>
       <title>installing docker on alpine linux</title>
-      <link>https://vincentserpoul.github.io/post/alpine-linux-rpi0-docke/</link>
+      <link>https://vincentserpoul.github.io/post/alpine-linux-rpi0-docker/</link>
       <pubDate>Tue, 16 Apr 2019 11:07:08 +0800</pubDate>
       
-      <guid>https://vincentserpoul.github.io/post/alpine-linux-rpi0-docke/</guid>
+      <guid>https://vincentserpoul.github.io/post/alpine-linux-rpi0-docker/</guid>
       <description>Prerequisites  One raspberry pi zero W One sd card  Enable all cgroups On you local linux, mount the partition containing alpine files.
 In the cmdline.txt, add the following:
 echo -ne &amp;quot; cgroup_enable=memory cgroup_enable=cpuset swapaccount=1&amp;quot; &amp;gt;&amp;gt; /run/media/youruser/xxx/cmdline.txt  Docker needs all cgroups enabled, so this will do the trick

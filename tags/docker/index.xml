@@ -13,10 +13,10 @@
     
     <item>
       <title>installing docker on alpine linux</title>
-      <link>https://vincentserpoul.github.io/post/alpine-linux-rpi0-docke/</link>
+      <link>https://vincentserpoul.github.io/post/alpine-linux-rpi0-docker/</link>
       <pubDate>Tue, 16 Apr 2019 11:07:08 +0800</pubDate>
       
-      <guid>https://vincentserpoul.github.io/post/alpine-linux-rpi0-docke/</guid>
+      <guid>https://vincentserpoul.github.io/post/alpine-linux-rpi0-docker/</guid>
       <description>Prerequisites  One raspberry pi zero W One sd card  Enable all cgroups On you local linux, mount the partition containing alpine files.
 In the cmdline.txt, add the following:
 echo -ne &amp;quot; cgroup_enable=memory cgroup_enable=cpuset swapaccount=1&amp;quot; &amp;gt;&amp;gt; /run/media/youruser/xxx/cmdline.txt  Docker needs all cgroups enabled, so this will do the trick

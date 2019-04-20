@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>rust on VS tech corner</title>
+    <link>https://vincentserpoul.github.io/tags/rust/</link>
+    <description>Recent content in rust on VS tech corner</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 20 Apr 2019 19:02:02 +0800</lastBuildDate>
+    
+	<atom:link href="https://vincentserpoul.github.io/tags/rust/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>cross compiling rust from linux to rpi0/alpine</title>
+      <link>https://vincentserpoul.github.io/post/alpine-rpi0-rust/</link>
+      <pubDate>Sat, 20 Apr 2019 19:02:02 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/post/alpine-rpi0-rust/</guid>
+      <description>If you read my previous posts, you should now have a raspberry-pi running alpine and docker.
+Resources are pretty limited on rpi0, so we are going to deploy programs using rust. Note: golang could have fit in there as well (and ofc all C and close to machine languages).
+Compiling from NOT a rpi0 Obviously, you don&amp;rsquo;t want to compile from a raspberry pi zero, unless you have all the time in the world and love waiting.</description>
+    </item>
+    
+  </channel>
+</rss>
