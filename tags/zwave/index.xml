@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>zwave on VS tech corner</title>
+    <link>https://vincentserpoul.github.io/tags/zwave/</link>
+    <description>Recent content in zwave on VS tech corner</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 29 Apr 2019 00:23:23 +0800</lastBuildDate>
+    
+	<atom:link href="https://vincentserpoul.github.io/tags/zwave/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>testing mozilla iot gateway</title>
+      <link>https://vincentserpoul.github.io/post/mozilla-iot-gateway/</link>
+      <pubDate>Mon, 29 Apr 2019 00:23:23 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/post/mozilla-iot-gateway/</guid>
+      <description>Mozilla iot gateway Here is what I am going to setup. I am obviously not going to rewrite one more time the tutorial and docs from mozilla. I will simply describe the specific setup I used, and the little things I setup to make it work.
+Prerequisites  Raspberry pi 3b Zigbee dongle, zwave dongle list of compatible hardware - I used Digi XStick (ZB mesh version) and Aeotec Z-Stick (Gen5) Zigbee Smart bulb (i used a philips hue), zigbee motion detector (I used philips motion sensor)  Linux I used my favorite lean alpine linux, with the setup as I explained in this post minus the complexity brought up by the rpi0.</description>
+    </item>
+    
+  </channel>
+</rss>

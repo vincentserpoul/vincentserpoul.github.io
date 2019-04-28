@@ -6,7 +6,7 @@
     <description>Recent content in Tags on VS tech corner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 20 Apr 2019 19:02:02 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 29 Apr 2019 00:23:23 +0800</lastBuildDate>
     
 	<atom:link href="https://vincentserpoul.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,9 +14,54 @@
     <item>
       <title>alpine</title>
       <link>https://vincentserpoul.github.io/tags/alpine/</link>
-      <pubDate>Sat, 20 Apr 2019 19:02:02 +0800</pubDate>
+      <pubDate>Mon, 29 Apr 2019 00:23:23 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/tags/alpine/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>docker</title>
+      <link>https://vincentserpoul.github.io/tags/docker/</link>
+      <pubDate>Mon, 29 Apr 2019 00:23:23 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/tags/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>iot</title>
+      <link>https://vincentserpoul.github.io/tags/iot/</link>
+      <pubDate>Mon, 29 Apr 2019 00:23:23 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/tags/iot/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mozilla-iot-gateway</title>
+      <link>https://vincentserpoul.github.io/tags/mozilla-iot-gateway/</link>
+      <pubDate>Mon, 29 Apr 2019 00:23:23 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/tags/mozilla-iot-gateway/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>zigbee</title>
+      <link>https://vincentserpoul.github.io/tags/zigbee/</link>
+      <pubDate>Mon, 29 Apr 2019 00:23:23 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/tags/zigbee/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>zwave</title>
+      <link>https://vincentserpoul.github.io/tags/zwave/</link>
+      <pubDate>Mon, 29 Apr 2019 00:23:23 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/tags/zwave/</guid>
       <description></description>
     </item>
     
@@ -62,15 +107,6 @@
       <pubDate>Sat, 20 Apr 2019 19:02:02 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/tags/rust/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>docker</title>
-      <link>https://vincentserpoul.github.io/tags/docker/</link>
-      <pubDate>Tue, 16 Apr 2019 11:07:08 +0800</pubDate>
-      
-      <guid>https://vincentserpoul.github.io/tags/docker/</guid>
       <description></description>
     </item>
     

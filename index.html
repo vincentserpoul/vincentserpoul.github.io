@@ -46,6 +46,28 @@
 	
 		<article class="li post">
     <header class="post-header">
+        <h3 class="post-title"><a href="https://vincentserpoul.github.io/post/mozilla-iot-gateway/">testing mozilla iot gateway</a></h3>
+        <p class="post-time"><time datetime="2019-04-29T00:23:23&#43;08:00">April 29, 2019</time></p>
+    </header>
+
+    <section class="post-excerpt">
+        <p>Mozilla iot gateway Here is what I am going to setup. I am obviously not going to rewrite one more time the tutorial and docs from mozilla. I will simply describe the specific setup I used, and the little things I setup to make it work.
+Prerequisites  Raspberry pi 3b Zigbee dongle, zwave dongle list of compatible hardware - I used Digi XStick (ZB mesh version) and Aeotec Z-Stick (Gen5) Zigbee Smart bulb (i used a philips hue), zigbee motion detector (I used philips motion sensor)  Linux I used my favorite lean alpine linux, with the setup as I explained in this post minus the complexity brought up by the rpi0.</p>
+    </section>
+
+    <footer class="post-footer">
+        <span>
+            
+            
+            	&nbsp;&nbsp;<i class="fa fa-tag"></i>
+            	alpine, docker, iot, zwave, zigbee, mozilla-iot-gateway
+            
+        </span>
+    </footer>
+</article>
+	
+		<article class="li post">
+    <header class="post-header">
         <h3 class="post-title"><a href="https://vincentserpoul.github.io/post/alpine-rpi0-rust/">cross compiling rust from linux to rpi0/alpine</a></h3>
         <p class="post-time"><time datetime="2019-04-20T19:02:02&#43;08:00">April 20, 2019</time></p>
     </header>
@@ -252,29 +274,6 @@ import { take, call, put, cancel, select, fork } from 'redux-saga/effects'; impo
             
             	&nbsp;&nbsp;<i class="fa fa-tag"></i>
             	react, blockchain, ethereum, dev, dapps
-            
-        </span>
-    </footer>
-</article>
-	
-		<article class="li post">
-    <header class="post-header">
-        <h3 class="post-title"><a href="https://vincentserpoul.github.io/post/binding-ethereum-golang/">Ethereum contracts and Golang</a></h3>
-        <p class="post-time"><time datetime="2016-10-10T12:54:00&#43;08:00">October 10, 2016</time></p>
-    </header>
-
-    <section class="post-excerpt">
-        <p>The contract contract Trigger { function () { throw; } address owner; function Trigger() { owner = msg.sender; } event TriggerEvt(address _sender, uint _trigger); function trigger(uint _trigger) { TriggerEvt(msg.sender, _trigger); } function getOwner() constant returns (address) { return owner; } }  This is a very simple contract that we will take as an example.
-Getting the right tools for binding A good starting point is this wiki.
-You will need to follow the install procedure of go-ethereum.</p>
-    </section>
-
-    <footer class="post-footer">
-        <span>
-            
-            
-            	&nbsp;&nbsp;<i class="fa fa-tag"></i>
-            	golang, blockchain, ethereum, dev, testrpc
             
         </span>
     </footer>
