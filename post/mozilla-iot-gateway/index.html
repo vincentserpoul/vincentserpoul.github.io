@@ -84,6 +84,14 @@ Assuming your alpine hostname is &ldquo;home-gateway&rdquo;:</p>
 sudo chown root:dialout /dev/ttyACM0
 </code></pre>
 
+<p>If you want this change to be permanent, you will need to use the eudev package:</p>
+
+<pre><code class="language-bash">sudo apk add eudev
+printf 'SUBSYSTEM==&quot;tty&quot;, KERNEL==&quot;ttyUSB0&quot;, ATTRS{product}==&quot;XStick&quot;, GROUP=&quot;dialout&quot;\n\nSUBSYSTEM==&quot;tty&quot;, KERNEL==&quot;ttyACM0&quot;, ATTRS{product}==&quot;DWC OTG Controller&quot;, GROUP=&quot;dialout&quot;\n' | sudo tee -a /etc/udev/rules.d/90-tty.rules &gt; /dev/null
+sudo rc-update add udev sysinit
+sudo lbu ci
+</code></pre>
+
 <p>Launching the container with the needed devices:</p>
 
 <pre><code class="language-bash">sudo docker run -d --restart always --name mozilla-iot-gateway --net host -v /media/mmcblk0p3/mozilla-iot-gateway:/home/node/.mozilla-iot mozillaiot/gateway:arm
