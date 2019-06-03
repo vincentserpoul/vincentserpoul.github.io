@@ -24,7 +24,7 @@
         <meta property="og:article:author" content="" />
         <meta property="og:article:published_time" content="2019-04-29T00:23:23&#43;08:00" />
     
-        <meta name="generator" content="Hugo 0.56.0-DEV" />
+        <meta name="generator" content="Hugo 0.55.6" />
         <title>testing mozilla iot gateway &middot; VS tech corner </title>
         <link rel="canonical" href="https://vincentserpoul.github.io/" />
         <link rel="alternate" type="application/rss+xml" title="RSS" href="">
@@ -79,24 +79,15 @@ I will simply describe the specific setup I used, and the little things I setup 
 
 <p>First thing first, if you are using a zwave dongle, you need to make sure /dev/ttyACM0 is owned by the dialout group, otherwise, it won&rsquo;t be available.
 Assuming your alpine hostname is &ldquo;home-gateway&rdquo;:</p>
-
-<pre><code class="language-bash">ssh -i ~/.ssh/YOURPUBKEY maintenance@home-gateway
-sudo chown root:dialout /dev/ttyACM0
-</code></pre>
-
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh -i ~/.ssh/YOURPUBKEY maintenance@home-gateway
+sudo chown root:dialout /dev/ttyACM0</code></pre></div>
 <p>If you want this change to be permanent, you will need to use the eudev package:</p>
-
-<pre><code class="language-bash">sudo apk add eudev
-printf 'SUBSYSTEM==&quot;tty&quot;, KERNEL==&quot;ttyUSB0&quot;, ATTRS{product}==&quot;XStick&quot;, GROUP=&quot;dialout&quot;\n\nSUBSYSTEM==&quot;tty&quot;, KERNEL==&quot;ttyACM0&quot;, ATTRS{product}==&quot;DWC OTG Controller&quot;, GROUP=&quot;dialout&quot;\n' | sudo tee -a /etc/udev/rules.d/90-tty.rules &gt; /dev/null
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apk add eudev
+<span style="color:#008000">printf</span> <span style="color:#ba2121">&#39;SUBSYSTEM==&#34;tty&#34;, KERNEL==&#34;ttyUSB0&#34;, ATTRS{product}==&#34;XStick&#34;, GROUP=&#34;dialout&#34;\n\nSUBSYSTEM==&#34;tty&#34;, KERNEL==&#34;ttyACM0&#34;, ATTRS{product}==&#34;DWC OTG Controller&#34;, GROUP=&#34;dialout&#34;\n&#39;</span> | sudo tee -a /etc/udev/rules.d/90-tty.rules &gt; /dev/null
 sudo rc-update add udev sysinit
-sudo lbu ci
-</code></pre>
-
+sudo lbu ci</code></pre></div>
 <p>Launching the container with the needed devices:</p>
-
-<pre><code class="language-bash">sudo docker run -d --restart always --name mozilla-iot-gateway --net host -v /media/mmcblk0p3/mozilla-iot-gateway:/home/node/.mozilla-iot mozillaiot/gateway:arm
-</code></pre>
-
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo docker run -d --restart always --name mozilla-iot-gateway --net host -v /media/mmcblk0p3/mozilla-iot-gateway:/home/node/.mozilla-iot mozillaiot/gateway:arm</code></pre></div>
 <p>A little explanation:</p>
 
 <ul>

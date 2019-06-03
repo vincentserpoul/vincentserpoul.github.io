@@ -40,8 +40,8 @@ Example web3 component with React This boilerplate uses immutable, redux and red
       <pubDate>Mon, 08 Aug 2016 15:00:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/ethereum-first-dapp-part-1/</guid>
-      <description>Contracts Prepare your folder for your dapp mkdir dapp  inside this folder, we&amp;rsquo;ll create one folder for truffle, one for geth.
-cd dapp mkdir truffle geth  inside the geth folder, simply put the customGenesis block you can find in the ethereum-dev-environment blog post.
+      <description>Contracts Prepare your folder for your dapp mkdir dapp inside this folder, we&amp;rsquo;ll create one folder for truffle, one for geth.
+cd dapp mkdir truffle geth inside the geth folder, simply put the customGenesis block you can find in the ethereum-dev-environment blog post.
 We are going to use two Ethereum clients, one for tests and devs, testrpc and one for a more real interaction, geth.
 Let&amp;rsquo;s install truffle and testrpc</description>
     </item>
@@ -56,7 +56,7 @@ Let&amp;rsquo;s install truffle and testrpc</description>
 Babel is a transpiler, it will convert your ES6-7 to plain ES5 javascript that most browsers (&amp;gt;ie9 most probably) will understand.
 To install babel
 npm install -g babel  Then within your javascript project, you can create a .babelrc file with the following content:
-{ &amp;quot;presets&amp;quot;: [&amp;quot;es2015&amp;quot;, &amp;quot;stage-0&amp;quot;, &amp;quot;react&amp;quot;] }  React and its surrounding libraries After starting using React, I realized it was vey good and was surrounded with libraries which makes it even better: redux, immutable, react-router&amp;hellip;</description>
+{ &amp;#34;presets&amp;#34;: [&amp;#34;es2015&amp;#34;, &amp;#34;stage-0&amp;#34;, &amp;#34;react&amp;#34;] } React and its surrounding libraries After starting using React, I realized it was vey good and was surrounded with libraries which makes it even better: redux, immutable, react-router&amp;hellip;</description>
     </item>
     
     <item>
@@ -84,12 +84,12 @@ Make sure your linter is working In sublime text, open the console (view &amp;gt
 http://www.wolfe.id.au/2015/03/05/using-sublime-text-for-go-development/
 Within sublimetext, from the package manager, install gosublime, install gooracle.
 install go/tools:
-go get -u golang.org/x/tools/cmd/goimports go get -u golang.org/x/tools/cmd/vet go get -u golang.org/x/tools/cmd/oracle go get -u golang.org/x/tools/cmd/godoc  install gometalinter (https://github.com/alecthomas/gometalinter)
+go get -u golang.org/x/tools/cmd/goimports go get -u golang.org/x/tools/cmd/vet go get -u golang.org/x/tools/cmd/oracle go get -u golang.org/x/tools/cmd/godoc install gometalinter (https://github.com/alecthomas/gometalinter)
 install interfacer (https://github.com/mvdan/interfacer/)
 install gosimple (https://github.com/dominikh/go-simple)
 install gocov (https://github.com/axw/gocov)
 Here is the package settings I use for gosublime:
-{ // you may set specific environment variables here // e.g &amp;quot;env&amp;quot;: { &amp;quot;PATH&amp;quot;: &amp;quot;$HOME/go/bin:$PATH&amp;quot; } // in values, $PATH and ${PATH} are replaced with // the corresponding environment(PATH) variable, if it exists.</description>
+{ // you may set specific environment variables here // e.g &amp;#34;env&amp;#34;: { &amp;#34;PATH&amp;#34;: &amp;#34;$HOME/go/bin:$PATH&amp;#34; } // in values, $PATH and ${PATH} are replaced with // the corresponding environment(PATH) variable, if it exists.</description>
     </item>
     
     <item>

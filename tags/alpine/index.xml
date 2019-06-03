@@ -40,9 +40,9 @@ Compiling from NOT a rpi0 Obviously, you don&amp;rsquo;t want to compile from a 
       <guid>https://vincentserpoul.github.io/post/alpine-linux-rpi0-docker/</guid>
       <description>Prerequisites  One raspberry pi zero W One sd card  Enable all cgroups On you local linux, mount the partition containing alpine files.
 In the cmdline.txt, add the following:
-echo -ne &amp;quot; cgroup_enable=memory cgroup_enable=cpuset swapaccount=1&amp;quot; &amp;gt;&amp;gt; /run/media/youruser/xxx/cmdline.txt  Docker needs all cgroups enabled, so this will do the trick
+echo -ne &amp;#34; cgroup_enable=memory cgroup_enable=cpuset swapaccount=1&amp;#34; &amp;gt;&amp;gt; /run/media/youruser/xxx/cmdline.txt Docker needs all cgroups enabled, so this will do the trick
 On you rpi0 As simple as:
-sudo apk add docker sudo rc-update add docker boot sudo rc-service docker start  To make sure your docker env doesn&amp;rsquo;t go in memory (512MB RAM won&amp;rsquo;t bring you far&amp;hellip;), set it on mmcblk0p3 by editing /etc/docker/daemon.</description>
+sudo apk add docker sudo rc-update add docker boot sudo rc-service docker start To make sure your docker env doesn&amp;rsquo;t go in memory (512MB RAM won&amp;rsquo;t bring you far&amp;hellip;), set it on mmcblk0p3 by editing /etc/docker/daemon.</description>
     </item>
     
     <item>

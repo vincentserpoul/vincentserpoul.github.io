@@ -40,8 +40,8 @@ Example web3 component with React This boilerplate uses immutable, redux and red
       <pubDate>Mon, 08 Aug 2016 15:00:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/ethereum-first-dapp-part-1/</guid>
-      <description>Contracts Prepare your folder for your dapp mkdir dapp  inside this folder, we&amp;rsquo;ll create one folder for truffle, one for geth.
-cd dapp mkdir truffle geth  inside the geth folder, simply put the customGenesis block you can find in the ethereum-dev-environment blog post.
+      <description>Contracts Prepare your folder for your dapp mkdir dapp inside this folder, we&amp;rsquo;ll create one folder for truffle, one for geth.
+cd dapp mkdir truffle geth inside the geth folder, simply put the customGenesis block you can find in the ethereum-dev-environment blog post.
 We are going to use two Ethereum clients, one for tests and devs, testrpc and one for a more real interaction, geth.
 Let&amp;rsquo;s install truffle and testrpc</description>
     </item>
@@ -55,7 +55,7 @@ Let&amp;rsquo;s install truffle and testrpc</description>
       <description>Check the address of the current deployed contract Remember when you mined your contract, it told your its address. Now, reuse it!
 eth.getCode(&amp;quot;0x5f3425ccedeae0eb36521c4cf93ec6544dbad9bd&amp;quot;)  Test the contract with a simple interaction get the latest web3-light.min.js js from https://github.com/ethereum/web3.js/releases and simply copy the dist/web3-light.min.js into the same folder as the following HTML file.
 then, use this html to interact with your contract on the local node:
-&amp;lt;!doctype&amp;gt; &amp;lt;html&amp;gt; &amp;lt;head&amp;gt; &amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;https://cdnjs.</description>
+&amp;lt;!doctype&amp;gt; &amp;lt;html&amp;gt; &amp;lt;head&amp;gt; &amp;lt;script type=&amp;#34;text/javascript&amp;#34; src=&amp;#34;https://cdnjs.</description>
     </item>
     
   </channel>

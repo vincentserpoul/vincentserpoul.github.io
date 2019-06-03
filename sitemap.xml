@@ -4,19 +4,30 @@
   
   <url>
     <loc>https://vincentserpoul.github.io/post/</loc>
-    <lastmod>2019-04-29T00:23:23+08:00</lastmod>
+    <lastmod>2019-06-03T13:38:35+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://vincentserpoul.github.io/tags/</loc>
-    <lastmod>2019-04-29T00:23:23+08:00</lastmod>
+    <lastmod>2019-06-03T13:38:35+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://vincentserpoul.github.io/</loc>
-    <lastmod>2019-04-29T00:23:23+08:00</lastmod>
+    <lastmod>2019-06-03T13:38:35+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/post/wasm-intro-talk/</loc>
+    <lastmod>2019-06-03T13:38:35+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://vincentserpoul.github.io/tags/wasm/</loc>
+    <lastmod>2019-06-03T13:38:35+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -120,12 +131,6 @@
   <url>
     <loc>https://vincentserpoul.github.io/post/playwithwasm-golang/</loc>
     <lastmod>2018-08-27T23:22:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://vincentserpoul.github.io/tags/wasm/</loc>
-    <lastmod>2018-08-27T23:22:00+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>

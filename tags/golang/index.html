@@ -22,10 +22,10 @@
     
         <meta property="og:type" content="website" />
     
-        <meta name="generator" content="Hugo 0.56.0-DEV" />
+        <meta name="generator" content="Hugo 0.55.6" />
         <title>golang &middot; VS tech corner </title>
         <link rel="canonical" href="https://vincentserpoul.github.io/" />
-        <link rel="alternate" type="application/rss+xml" title="RSS" href="https://vincentserpoul.github.io/tags/golang/index.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS" href="/tags/golang/index.xml">
         <link rel="stylesheet" type='text/css' href="https://vincentserpoul.github.io/css/main.css"/>
         <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300|Montserrat:700' rel='stylesheet' type='text/css'>
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
@@ -101,8 +101,8 @@ I uploaded it as well on surge for you to see without the hassle</p>
     <section class="post-excerpt">
         <p>Which library To this day, the most up to date library seems to be rana/ora
 How to install (linux &amp; macosx) Download Oracle Instant Client for linux x64: both packages Basic and SDK Unzip each of them in the same folder /opt/oracle
-mkdir -p /opt/oracle cd /opt/oracle unzip ~/Downloads/instantclient-basiclite-linux.x64-12.2.0.1.0.zip unzip ~/Downloads/instantclient-sdk-linux.x64-12.2.0.1.0.zip cd /opt/oracle/instantclient_12_1  Add the necessary env variables and paths:
-# Oracle export LD_LIBRARY_PATH=/opt/oracle/instantclient_12_2:$LD_LIBRARY_PATH export PKG_CONFIG_PATH=/opt/oracle export ORACLE_HOME=$LD_LIBRARY_PATH  copy from the go package .</p>
+mkdir -p /opt/oracle cd /opt/oracle unzip ~/Downloads/instantclient-basiclite-linux.x64-12.2.0.1.0.zip unzip ~/Downloads/instantclient-sdk-linux.x64-12.2.0.1.0.zip cd /opt/oracle/instantclient_12_1 Add the necessary env variables and paths:
+# Oracle export LD_LIBRARY_PATH=/opt/oracle/instantclient_12_2:$LD_LIBRARY_PATH export PKG_CONFIG_PATH=/opt/oracle export ORACLE_HOME=$LD_LIBRARY_PATH copy from the go package .</p>
     </section>
 
     <footer class="post-footer">
@@ -123,7 +123,7 @@ mkdir -p /opt/oracle cd /opt/oracle unzip ~/Downloads/instantclient-basiclite-li
     </header>
 
     <section class="post-excerpt">
-        <p>The contract contract Trigger { function () { throw; } address owner; function Trigger() { owner = msg.sender; } event TriggerEvt(address _sender, uint _trigger); function trigger(uint _trigger) { TriggerEvt(msg.sender, _trigger); } function getOwner() constant returns (address) { return owner; } }  This is a very simple contract that we will take as an example.
+        <p>The contract contract Trigger { function () { throw; } address owner; function Trigger() { owner = msg.sender; } event TriggerEvt(address _sender, uint _trigger); function trigger(uint _trigger) { TriggerEvt(msg.sender, _trigger); } function getOwner() constant returns (address) { return owner; } } This is a very simple contract that we will take as an example.
 Getting the right tools for binding A good starting point is this wiki.
 You will need to follow the install procedure of go-ethereum.</p>
     </section>
@@ -171,12 +171,12 @@ You will need to follow the install procedure of go-ethereum.</p>
 http://www.wolfe.id.au/2015/03/05/using-sublime-text-for-go-development/
 Within sublimetext, from the package manager, install gosublime, install gooracle.
 install go/tools:
-go get -u golang.org/x/tools/cmd/goimports go get -u golang.org/x/tools/cmd/vet go get -u golang.org/x/tools/cmd/oracle go get -u golang.org/x/tools/cmd/godoc  install gometalinter (https://github.com/alecthomas/gometalinter)
+go get -u golang.org/x/tools/cmd/goimports go get -u golang.org/x/tools/cmd/vet go get -u golang.org/x/tools/cmd/oracle go get -u golang.org/x/tools/cmd/godoc install gometalinter (https://github.com/alecthomas/gometalinter)
 install interfacer (https://github.com/mvdan/interfacer/)
 install gosimple (https://github.com/dominikh/go-simple)
 install gocov (https://github.com/axw/gocov)
 Here is the package settings I use for gosublime:
-{ // you may set specific environment variables here // e.g &quot;env&quot;: { &quot;PATH&quot;: &quot;$HOME/go/bin:$PATH&quot; } // in values, $PATH and ${PATH} are replaced with // the corresponding environment(PATH) variable, if it exists.</p>
+{ // you may set specific environment variables here // e.g &#34;env&#34;: { &#34;PATH&#34;: &#34;$HOME/go/bin:$PATH&#34; } // in values, $PATH and ${PATH} are replaced with // the corresponding environment(PATH) variable, if it exists.</p>
     </section>
 
     <footer class="post-footer">

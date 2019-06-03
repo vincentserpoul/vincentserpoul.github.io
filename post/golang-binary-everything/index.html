@@ -24,7 +24,7 @@
         <meta property="og:article:author" content="" />
         <meta property="og:article:published_time" content="2018-09-29T09:22:00&#43;08:00" />
     
-        <meta name="generator" content="Hugo 0.56.0-DEV" />
+        <meta name="generator" content="Hugo 0.55.6" />
         <title>golang binaries &middot; VS tech corner </title>
         <link rel="canonical" href="https://vincentserpoul.github.io/" />
         <link rel="alternate" type="application/rss+xml" title="RSS" href="">
@@ -77,38 +77,32 @@ Why? Mostly because it can be used without any stand alone executable and that&r
 <h4 id="defining-what-and-where">Defining what and where</h4>
 
 <p>First, let&rsquo;s choose the file we want to turn into a binary.</p>
-
-<pre><code class="language-shell">mkdir -p wow/embed
-echo &quot;lerooyyyy&quot; &gt; wow/embed/jenkins.txt
-</code></pre>
-
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">mkdir -p wow/embed
+<span style="color:#008000">echo</span> <span style="color:#ba2121">&#34;lerooyyyy&#34;</span> &gt; wow/embed/jenkins.txt</code></pre></div>
 <p>Then, let&rsquo;s create the file wow/wow_generate.go that will generate the binaries, in our case, the http.FileSystem:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang">    <span style="color:#408080;font-style:italic">// +build ignore
+</span><span style="color:#408080;font-style:italic"></span>
+    <span style="color:#008000;font-weight:bold">package</span> main
 
-<pre><code class="language-golang">    // +build ignore
+    <span style="color:#008000;font-weight:bold">import</span> (
+        <span style="color:#ba2121">&#34;log&#34;</span>
+        <span style="color:#ba2121">&#34;net/http&#34;</span>
 
-    package main
-
-    import (
-        &quot;log&quot;
-        &quot;net/http&quot;
-
-        &quot;github.com/shurcooL/vfsgen&quot;
+        <span style="color:#ba2121">&#34;github.com/shurcooL/vfsgen&#34;</span>
     )
 
-    func main() {
-        err := vfsgen.Generate(
-            http.Dir(&quot;./embed&quot;),
+    <span style="color:#008000;font-weight:bold">func</span> <span style="color:#00f">main</span>() {
+        err <span style="color:#666">:=</span> vfsgen.<span style="color:#00f">Generate</span>(
+            http.<span style="color:#00f">Dir</span>(<span style="color:#ba2121">&#34;./embed&#34;</span>),
             vfsgen.Options{
-                Filename:     &quot;./wow_vfsdata.go&quot;,
-                PackageName:  &quot;wow&quot;,
-                VariableName: &quot;noobAssets&quot;,
+                Filename:     <span style="color:#ba2121">&#34;./wow_vfsdata.go&#34;</span>,
+                PackageName:  <span style="color:#ba2121">&#34;wow&#34;</span>,
+                VariableName: <span style="color:#ba2121">&#34;noobAssets&#34;</span>,
             })
-        if err != nil {
-            log.Fatalln(err)
+        <span style="color:#008000;font-weight:bold">if</span> err <span style="color:#666">!=</span> <span style="color:#008000;font-weight:bold">nil</span> {
+            log.<span style="color:#00f">Fatalln</span>(err)
         }
-    }
-</code></pre>
-
+    }</code></pre></div>
 <p>Let&rsquo;s quickly explain the details:</p>
 
 <p>// +build ignore simply means that this file will be ignored when we will build our go program.</p>
@@ -122,18 +116,11 @@ echo &quot;lerooyyyy&quot; &gt; wow/embed/jenkins.txt
 <p>Now, how to make it happen? Use go generate!</p>
 
 <p>Create a file, wow/wow.go, in the same folder you created the previous one:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#008000;font-weight:bold">package</span> wow
 
-<pre><code class="language-golang">package wow
-
-//go:generate go run wow_generate.go
-
-</code></pre>
-
+<span style="color:#666">//</span><span style="color:#008000;font-weight:bold">go</span>:generate <span style="color:#008000;font-weight:bold">go</span> run wow_generate.<span style="color:#008000;font-weight:bold">go</span></code></pre></div>
 <p>then, here we are</p>
-
-<pre><code class="language-shell">go generate ./wow
-</code></pre>
-
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">go generate ./wow</code></pre></div>
 <p>and you can now see wow_vfsdata.go created in the folder.</p>
 
 <h4 id="use">Use</h4>
@@ -141,150 +128,147 @@ echo &quot;lerooyyyy&quot; &gt; wow/embed/jenkins.txt
 <p>The file created is a http.FileSystem, you can mount it to serve it with http.FileServer(noobAssets) but you can also turn it into a more classical FileSystem with a little bit of code, we&rsquo;ll come back to it later, enjoy your everything binary now!</p>
 
 <p>Here is the code created:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang">    <span style="color:#408080;font-style:italic">// Code generated by vfsgen; DO NOT EDIT.
+</span><span style="color:#408080;font-style:italic"></span>
+    <span style="color:#008000;font-weight:bold">package</span> wow
 
-<pre><code class="language-golang">    // Code generated by vfsgen; DO NOT EDIT.
-
-    package wow
-
-    import (
-        &quot;bytes&quot;
-        &quot;compress/gzip&quot;
-        &quot;fmt&quot;
-        &quot;io&quot;
-        &quot;io/ioutil&quot;
-        &quot;net/http&quot;
-        &quot;os&quot;
-        pathpkg &quot;path&quot;
-        &quot;time&quot;
+    <span style="color:#008000;font-weight:bold">import</span> (
+        <span style="color:#ba2121">&#34;bytes&#34;</span>
+        <span style="color:#ba2121">&#34;compress/gzip&#34;</span>
+        <span style="color:#ba2121">&#34;fmt&#34;</span>
+        <span style="color:#ba2121">&#34;io&#34;</span>
+        <span style="color:#ba2121">&#34;io/ioutil&#34;</span>
+        <span style="color:#ba2121">&#34;net/http&#34;</span>
+        <span style="color:#ba2121">&#34;os&#34;</span>
+        pathpkg <span style="color:#ba2121">&#34;path&#34;</span>
+        <span style="color:#ba2121">&#34;time&#34;</span>
     )
 
-    // noobAssets statically implements the virtual filesystem provided to vfsgen.
-    var noobAssets = func() http.FileSystem {
-        fs := vfsgen۰FS{
-            &quot;/&quot;: &amp;vfsgen۰DirInfo{
-                name:    &quot;/&quot;,
-                modTime: time.Date(2018, 9, 29, 3, 12, 35, 780695280, time.UTC),
+    <span style="color:#408080;font-style:italic">// noobAssets statically implements the virtual filesystem provided to vfsgen.
+</span><span style="color:#408080;font-style:italic"></span>    <span style="color:#008000;font-weight:bold">var</span> noobAssets = <span style="color:#008000;font-weight:bold">func</span>() http.FileSystem {
+        fs <span style="color:#666">:=</span> vfsgen۰FS{
+            <span style="color:#ba2121">&#34;/&#34;</span>: <span style="color:#666">&amp;</span>vfsgen۰DirInfo{
+                name:    <span style="color:#ba2121">&#34;/&#34;</span>,
+                modTime: time.<span style="color:#00f">Date</span>(<span style="color:#666">2018</span>, <span style="color:#666">9</span>, <span style="color:#666">29</span>, <span style="color:#666">3</span>, <span style="color:#666">12</span>, <span style="color:#666">35</span>, <span style="color:#666">780695280</span>, time.UTC),
             },
-            &quot;/jenkins.txt&quot;: &amp;vfsgen۰FileInfo{
-                name:    &quot;jenkins.txt&quot;,
-                modTime: time.Date(2018, 9, 29, 3, 12, 35, 780787937, time.UTC),
-                content: []byte(&quot;\x6c\x65\x72\x6f\x6f\x79\x79\x79\x79\x0a&quot;),
+            <span style="color:#ba2121">&#34;/jenkins.txt&#34;</span>: <span style="color:#666">&amp;</span>vfsgen۰FileInfo{
+                name:    <span style="color:#ba2121">&#34;jenkins.txt&#34;</span>,
+                modTime: time.<span style="color:#00f">Date</span>(<span style="color:#666">2018</span>, <span style="color:#666">9</span>, <span style="color:#666">29</span>, <span style="color:#666">3</span>, <span style="color:#666">12</span>, <span style="color:#666">35</span>, <span style="color:#666">780787937</span>, time.UTC),
+                content: []<span style="color:#008000">byte</span>(<span style="color:#ba2121">&#34;\x6c\x65\x72\x6f\x6f\x79\x79\x79\x79\x0a&#34;</span>),
             },
         }
-        fs[&quot;/&quot;].(*vfsgen۰DirInfo).entries = []os.FileInfo{
-            fs[&quot;/jenkins.txt&quot;].(os.FileInfo),
+        fs[<span style="color:#ba2121">&#34;/&#34;</span>].(<span style="color:#666">*</span>vfsgen۰DirInfo).entries = []os.FileInfo{
+            fs[<span style="color:#ba2121">&#34;/jenkins.txt&#34;</span>].(os.FileInfo),
         }
 
-        return fs
+        <span style="color:#008000;font-weight:bold">return</span> fs
     }()
 
-    type vfsgen۰FS map[string]interface{}
+    <span style="color:#008000;font-weight:bold">type</span> vfsgen۰FS <span style="color:#008000;font-weight:bold">map</span>[<span style="color:#b00040">string</span>]<span style="color:#008000;font-weight:bold">interface</span>{}
 
-    func (fs vfsgen۰FS) Open(path string) (http.File, error) {
-        path = pathpkg.Clean(&quot;/&quot; + path)
-        f, ok := fs[path]
-        if !ok {
-            return nil, &amp;os.PathError{Op: &quot;open&quot;, Path: path, Err: os.ErrNotExist}
+    <span style="color:#008000;font-weight:bold">func</span> (fs vfsgen۰FS) <span style="color:#00f">Open</span>(path <span style="color:#b00040">string</span>) (http.File, <span style="color:#b00040">error</span>) {
+        path = pathpkg.<span style="color:#00f">Clean</span>(<span style="color:#ba2121">&#34;/&#34;</span> <span style="color:#666">+</span> path)
+        f, ok <span style="color:#666">:=</span> fs[path]
+        <span style="color:#008000;font-weight:bold">if</span> !ok {
+            <span style="color:#008000;font-weight:bold">return</span> <span style="color:#008000;font-weight:bold">nil</span>, <span style="color:#666">&amp;</span>os.PathError{Op: <span style="color:#ba2121">&#34;open&#34;</span>, Path: path, Err: os.ErrNotExist}
         }
 
-        switch f := f.(type) {
-        case *vfsgen۰FileInfo:
-            return &amp;vfsgen۰File{
+        <span style="color:#008000;font-weight:bold">switch</span> f <span style="color:#666">:=</span> f.(<span style="color:#008000;font-weight:bold">type</span>) {
+        <span style="color:#008000;font-weight:bold">case</span> <span style="color:#666">*</span>vfsgen۰FileInfo:
+            <span style="color:#008000;font-weight:bold">return</span> <span style="color:#666">&amp;</span>vfsgen۰File{
                 vfsgen۰FileInfo: f,
-                Reader:          bytes.NewReader(f.content),
-            }, nil
-        case *vfsgen۰DirInfo:
-            return &amp;vfsgen۰Dir{
+                Reader:          bytes.<span style="color:#00f">NewReader</span>(f.content),
+            }, <span style="color:#008000;font-weight:bold">nil</span>
+        <span style="color:#008000;font-weight:bold">case</span> <span style="color:#666">*</span>vfsgen۰DirInfo:
+            <span style="color:#008000;font-weight:bold">return</span> <span style="color:#666">&amp;</span>vfsgen۰Dir{
                 vfsgen۰DirInfo: f,
-            }, nil
-        default:
-            // This should never happen because we generate only the above types.
-            panic(fmt.Sprintf(&quot;unexpected type %T&quot;, f))
+            }, <span style="color:#008000;font-weight:bold">nil</span>
+        <span style="color:#008000;font-weight:bold">default</span>:
+            <span style="color:#408080;font-style:italic">// This should never happen because we generate only the above types.
+</span><span style="color:#408080;font-style:italic"></span>            <span style="color:#008000">panic</span>(fmt.<span style="color:#00f">Sprintf</span>(<span style="color:#ba2121">&#34;unexpected type %T&#34;</span>, f))
         }
     }
 
-    // We already imported &quot;compress/gzip&quot; and &quot;io/ioutil&quot;, but ended up not using them. Avoid unused import error.
-    var _ = gzip.Reader{}
-    var _ = ioutil.Discard
+    <span style="color:#408080;font-style:italic">// We already imported &#34;compress/gzip&#34; and &#34;io/ioutil&#34;, but ended up not using them. Avoid unused import error.
+</span><span style="color:#408080;font-style:italic"></span>    <span style="color:#008000;font-weight:bold">var</span> _ = gzip.Reader{}
+    <span style="color:#008000;font-weight:bold">var</span> _ = ioutil.Discard
 
-    // vfsgen۰FileInfo is a static definition of an uncompressed file (because it's not worth gzip compressing).
-    type vfsgen۰FileInfo struct {
-        name    string
+    <span style="color:#408080;font-style:italic">// vfsgen۰FileInfo is a static definition of an uncompressed file (because it&#39;s not worth gzip compressing).
+</span><span style="color:#408080;font-style:italic"></span>    <span style="color:#008000;font-weight:bold">type</span> vfsgen۰FileInfo <span style="color:#008000;font-weight:bold">struct</span> {
+        name    <span style="color:#b00040">string</span>
         modTime time.Time
-        content []byte
+        content []<span style="color:#b00040">byte</span>
     }
 
-    func (f *vfsgen۰FileInfo) Readdir(count int) ([]os.FileInfo, error) {
-        return nil, fmt.Errorf(&quot;cannot Readdir from file %s&quot;, f.name)
+    <span style="color:#008000;font-weight:bold">func</span> (f <span style="color:#666">*</span>vfsgen۰FileInfo) <span style="color:#00f">Readdir</span>(count <span style="color:#b00040">int</span>) ([]os.FileInfo, <span style="color:#b00040">error</span>) {
+        <span style="color:#008000;font-weight:bold">return</span> <span style="color:#008000;font-weight:bold">nil</span>, fmt.<span style="color:#00f">Errorf</span>(<span style="color:#ba2121">&#34;cannot Readdir from file %s&#34;</span>, f.name)
     }
-    func (f *vfsgen۰FileInfo) Stat() (os.FileInfo, error) { return f, nil }
+    <span style="color:#008000;font-weight:bold">func</span> (f <span style="color:#666">*</span>vfsgen۰FileInfo) <span style="color:#00f">Stat</span>() (os.FileInfo, <span style="color:#b00040">error</span>) { <span style="color:#008000;font-weight:bold">return</span> f, <span style="color:#008000;font-weight:bold">nil</span> }
 
-    func (f *vfsgen۰FileInfo) NotWorthGzipCompressing() {}
+    <span style="color:#008000;font-weight:bold">func</span> (f <span style="color:#666">*</span>vfsgen۰FileInfo) <span style="color:#00f">NotWorthGzipCompressing</span>() {}
 
-    func (f *vfsgen۰FileInfo) Name() string       { return f.name }
-    func (f *vfsgen۰FileInfo) Size() int64        { return int64(len(f.content)) }
-    func (f *vfsgen۰FileInfo) Mode() os.FileMode  { return 0444 }
-    func (f *vfsgen۰FileInfo) ModTime() time.Time { return f.modTime }
-    func (f *vfsgen۰FileInfo) IsDir() bool        { return false }
-    func (f *vfsgen۰FileInfo) Sys() interface{}   { return nil }
+    <span style="color:#008000;font-weight:bold">func</span> (f <span style="color:#666">*</span>vfsgen۰FileInfo) <span style="color:#00f">Name</span>() <span style="color:#b00040">string</span>       { <span style="color:#008000;font-weight:bold">return</span> f.name }
+    <span style="color:#008000;font-weight:bold">func</span> (f <span style="color:#666">*</span>vfsgen۰FileInfo) <span style="color:#00f">Size</span>() <span style="color:#b00040">int64</span>        { <span style="color:#008000;font-weight:bold">return</span> <span style="color:#008000">int64</span>(<span style="color:#008000">len</span>(f.content)) }
+    <span style="color:#008000;font-weight:bold">func</span> (f <span style="color:#666">*</span>vfsgen۰FileInfo) <span style="color:#00f">Mode</span>() os.FileMode  { <span style="color:#008000;font-weight:bold">return</span> <span style="color:#666">0444</span> }
+    <span style="color:#008000;font-weight:bold">func</span> (f <span style="color:#666">*</span>vfsgen۰FileInfo) <span style="color:#00f">ModTime</span>() time.Time { <span style="color:#008000;font-weight:bold">return</span> f.modTime }
+    <span style="color:#008000;font-weight:bold">func</span> (f <span style="color:#666">*</span>vfsgen۰FileInfo) <span style="color:#00f">IsDir</span>() <span style="color:#b00040">bool</span>        { <span style="color:#008000;font-weight:bold">return</span> <span style="color:#008000;font-weight:bold">false</span> }
+    <span style="color:#008000;font-weight:bold">func</span> (f <span style="color:#666">*</span>vfsgen۰FileInfo) <span style="color:#00f">Sys</span>() <span style="color:#008000;font-weight:bold">interface</span>{}   { <span style="color:#008000;font-weight:bold">return</span> <span style="color:#008000;font-weight:bold">nil</span> }
 
-    // vfsgen۰File is an opened file instance.
-    type vfsgen۰File struct {
-        *vfsgen۰FileInfo
-        *bytes.Reader
-    }
-
-    func (f *vfsgen۰File) Close() error {
-        return nil
+    <span style="color:#408080;font-style:italic">// vfsgen۰File is an opened file instance.
+</span><span style="color:#408080;font-style:italic"></span>    <span style="color:#008000;font-weight:bold">type</span> vfsgen۰File <span style="color:#008000;font-weight:bold">struct</span> {
+        <span style="color:#666">*</span>vfsgen۰FileInfo
+        <span style="color:#666">*</span>bytes.Reader
     }
 
-    // vfsgen۰DirInfo is a static definition of a directory.
-    type vfsgen۰DirInfo struct {
-        name    string
+    <span style="color:#008000;font-weight:bold">func</span> (f <span style="color:#666">*</span>vfsgen۰File) <span style="color:#00f">Close</span>() <span style="color:#b00040">error</span> {
+        <span style="color:#008000;font-weight:bold">return</span> <span style="color:#008000;font-weight:bold">nil</span>
+    }
+
+    <span style="color:#408080;font-style:italic">// vfsgen۰DirInfo is a static definition of a directory.
+</span><span style="color:#408080;font-style:italic"></span>    <span style="color:#008000;font-weight:bold">type</span> vfsgen۰DirInfo <span style="color:#008000;font-weight:bold">struct</span> {
+        name    <span style="color:#b00040">string</span>
         modTime time.Time
         entries []os.FileInfo
     }
 
-    func (d *vfsgen۰DirInfo) Read([]byte) (int, error) {
-        return 0, fmt.Errorf(&quot;cannot Read from directory %s&quot;, d.name)
+    <span style="color:#008000;font-weight:bold">func</span> (d <span style="color:#666">*</span>vfsgen۰DirInfo) <span style="color:#00f">Read</span>([]<span style="color:#b00040">byte</span>) (<span style="color:#b00040">int</span>, <span style="color:#b00040">error</span>) {
+        <span style="color:#008000;font-weight:bold">return</span> <span style="color:#666">0</span>, fmt.<span style="color:#00f">Errorf</span>(<span style="color:#ba2121">&#34;cannot Read from directory %s&#34;</span>, d.name)
     }
-    func (d *vfsgen۰DirInfo) Close() error               { return nil }
-    func (d *vfsgen۰DirInfo) Stat() (os.FileInfo, error) { return d, nil }
+    <span style="color:#008000;font-weight:bold">func</span> (d <span style="color:#666">*</span>vfsgen۰DirInfo) <span style="color:#00f">Close</span>() <span style="color:#b00040">error</span>               { <span style="color:#008000;font-weight:bold">return</span> <span style="color:#008000;font-weight:bold">nil</span> }
+    <span style="color:#008000;font-weight:bold">func</span> (d <span style="color:#666">*</span>vfsgen۰DirInfo) <span style="color:#00f">Stat</span>() (os.FileInfo, <span style="color:#b00040">error</span>) { <span style="color:#008000;font-weight:bold">return</span> d, <span style="color:#008000;font-weight:bold">nil</span> }
 
-    func (d *vfsgen۰DirInfo) Name() string       { return d.name }
-    func (d *vfsgen۰DirInfo) Size() int64        { return 0 }
-    func (d *vfsgen۰DirInfo) Mode() os.FileMode  { return 0755 | os.ModeDir }
-    func (d *vfsgen۰DirInfo) ModTime() time.Time { return d.modTime }
-    func (d *vfsgen۰DirInfo) IsDir() bool        { return true }
-    func (d *vfsgen۰DirInfo) Sys() interface{}   { return nil }
+    <span style="color:#008000;font-weight:bold">func</span> (d <span style="color:#666">*</span>vfsgen۰DirInfo) <span style="color:#00f">Name</span>() <span style="color:#b00040">string</span>       { <span style="color:#008000;font-weight:bold">return</span> d.name }
+    <span style="color:#008000;font-weight:bold">func</span> (d <span style="color:#666">*</span>vfsgen۰DirInfo) <span style="color:#00f">Size</span>() <span style="color:#b00040">int64</span>        { <span style="color:#008000;font-weight:bold">return</span> <span style="color:#666">0</span> }
+    <span style="color:#008000;font-weight:bold">func</span> (d <span style="color:#666">*</span>vfsgen۰DirInfo) <span style="color:#00f">Mode</span>() os.FileMode  { <span style="color:#008000;font-weight:bold">return</span> <span style="color:#666">0755</span> | os.ModeDir }
+    <span style="color:#008000;font-weight:bold">func</span> (d <span style="color:#666">*</span>vfsgen۰DirInfo) <span style="color:#00f">ModTime</span>() time.Time { <span style="color:#008000;font-weight:bold">return</span> d.modTime }
+    <span style="color:#008000;font-weight:bold">func</span> (d <span style="color:#666">*</span>vfsgen۰DirInfo) <span style="color:#00f">IsDir</span>() <span style="color:#b00040">bool</span>        { <span style="color:#008000;font-weight:bold">return</span> <span style="color:#008000;font-weight:bold">true</span> }
+    <span style="color:#008000;font-weight:bold">func</span> (d <span style="color:#666">*</span>vfsgen۰DirInfo) <span style="color:#00f">Sys</span>() <span style="color:#008000;font-weight:bold">interface</span>{}   { <span style="color:#008000;font-weight:bold">return</span> <span style="color:#008000;font-weight:bold">nil</span> }
 
-    // vfsgen۰Dir is an opened dir instance.
-    type vfsgen۰Dir struct {
-        *vfsgen۰DirInfo
-        pos int // Position within entries for Seek and Readdir.
-    }
+    <span style="color:#408080;font-style:italic">// vfsgen۰Dir is an opened dir instance.
+</span><span style="color:#408080;font-style:italic"></span>    <span style="color:#008000;font-weight:bold">type</span> vfsgen۰Dir <span style="color:#008000;font-weight:bold">struct</span> {
+        <span style="color:#666">*</span>vfsgen۰DirInfo
+        pos <span style="color:#b00040">int</span> <span style="color:#408080;font-style:italic">// Position within entries for Seek and Readdir.
+</span><span style="color:#408080;font-style:italic"></span>    }
 
-    func (d *vfsgen۰Dir) Seek(offset int64, whence int) (int64, error) {
-        if offset == 0 &amp;&amp; whence == io.SeekStart {
-            d.pos = 0
-            return 0, nil
+    <span style="color:#008000;font-weight:bold">func</span> (d <span style="color:#666">*</span>vfsgen۰Dir) <span style="color:#00f">Seek</span>(offset <span style="color:#b00040">int64</span>, whence <span style="color:#b00040">int</span>) (<span style="color:#b00040">int64</span>, <span style="color:#b00040">error</span>) {
+        <span style="color:#008000;font-weight:bold">if</span> offset <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> whence <span style="color:#666">==</span> io.SeekStart {
+            d.pos = <span style="color:#666">0</span>
+            <span style="color:#008000;font-weight:bold">return</span> <span style="color:#666">0</span>, <span style="color:#008000;font-weight:bold">nil</span>
         }
-        return 0, fmt.Errorf(&quot;unsupported Seek in directory %s&quot;, d.name)
+        <span style="color:#008000;font-weight:bold">return</span> <span style="color:#666">0</span>, fmt.<span style="color:#00f">Errorf</span>(<span style="color:#ba2121">&#34;unsupported Seek in directory %s&#34;</span>, d.name)
     }
 
-    func (d *vfsgen۰Dir) Readdir(count int) ([]os.FileInfo, error) {
-        if d.pos &gt;= len(d.entries) &amp;&amp; count &gt; 0 {
-            return nil, io.EOF
+    <span style="color:#008000;font-weight:bold">func</span> (d <span style="color:#666">*</span>vfsgen۰Dir) <span style="color:#00f">Readdir</span>(count <span style="color:#b00040">int</span>) ([]os.FileInfo, <span style="color:#b00040">error</span>) {
+        <span style="color:#008000;font-weight:bold">if</span> d.pos <span style="color:#666">&gt;=</span> <span style="color:#008000">len</span>(d.entries) <span style="color:#666">&amp;&amp;</span> count &gt; <span style="color:#666">0</span> {
+            <span style="color:#008000;font-weight:bold">return</span> <span style="color:#008000;font-weight:bold">nil</span>, io.EOF
         }
-        if count &lt;= 0 || count &gt; len(d.entries)-d.pos {
-            count = len(d.entries) - d.pos
+        <span style="color:#008000;font-weight:bold">if</span> count <span style="color:#666">&lt;=</span> <span style="color:#666">0</span> <span style="color:#666">||</span> count &gt; <span style="color:#008000">len</span>(d.entries)<span style="color:#666">-</span>d.pos {
+            count = <span style="color:#008000">len</span>(d.entries) <span style="color:#666">-</span> d.pos
         }
-        e := d.entries[d.pos : d.pos+count]
-        d.pos += count
-        return e, nil
-    }
-</code></pre>
-
+        e <span style="color:#666">:=</span> d.entries[d.pos : d.pos<span style="color:#666">+</span>count]
+        d.pos <span style="color:#666">+=</span> count
+        <span style="color:#008000;font-weight:bold">return</span> e, <span style="color:#008000;font-weight:bold">nil</span>
+    }</code></pre></div>
     </section>
 
     <hr>

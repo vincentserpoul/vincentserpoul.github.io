@@ -24,7 +24,7 @@
         <meta property="og:article:author" content="" />
         <meta property="og:article:published_time" content="2019-04-11T21:22:13&#43;08:00" />
     
-        <meta name="generator" content="Hugo 0.56.0-DEV" />
+        <meta name="generator" content="Hugo 0.55.6" />
         <title>installing alpine linux on rpi0 &middot; VS tech corner </title>
         <link rel="canonical" href="https://vincentserpoul.github.io/" />
         <link rel="alternate" type="application/rss+xml" title="RSS" href="">
@@ -70,11 +70,8 @@ The one to use for RPI is the raspberry pi (surprising :P) <a href="http://dl-cd
 <p>Mount the sdcard (should be automated, if not, you probably know how to do that and you probably don&rsquo;t need that tutorial)</p>
 
 <p>List your disks:</p>
-
-<pre><code class="language-bash">sudo fdisk -l
-Disk /dev/sda: 14,8 GiB, 15836643328 bytes, 30930944 sectors
-</code></pre>
-
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo fdisk -l
+Disk /dev/sda: <span style="color:#666">14</span>,8 GiB, <span style="color:#666">15836643328</span> bytes, <span style="color:#666">30930944</span> sectors</code></pre></div>
 <p>The disk you just inserted should be available in the list. It most likely should be called /dev/sda.</p>
 
 <p>You&rsquo;ll create 3 partitions:</p>
@@ -82,197 +79,121 @@ Disk /dev/sda: 14,8 GiB, 15836643328 bytes, 30930944 sectors
 <ul>
 <li>256MiB partition for alpine itself (have to be of type 0x0c - W95 FAT32 (LBA))</li>
 <li>1GiB partition for the cache and config files</li>
-
-<li><p>13.5GiB partition for your var folder</p>
-
-<pre><code class="language-bash">sudo fdisk /dev/sda
-n - p - 1 - +256M - t - 1 - c - a - w
-n - p - 2 - +1G - w
-n - p - 3 - - - w
-</code></pre></li>
+<li>13.5GiB partition for your var folder</li>
 </ul>
-
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo fdisk /dev/sda
+n - p - <span style="color:#666">1</span> - +256M - t - <span style="color:#666">1</span> - c - a - w
+n - p - <span style="color:#666">2</span> - +1G - w
+n - p - <span style="color:#666">3</span> - - - w</code></pre></div>
 <p>Format you first partition to fat, and the 2 others to ext4</p>
-
-<pre><code class="language-bash">sudo mkfs.vfat -F 32 /dev/sda1
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo mkfs.vfat -F <span style="color:#666">32</span> /dev/sda1
 sudo mkfs.ext4 /dev/sda2
-sudo mkfs.ext4 /dev/sda3
-</code></pre>
-
+sudo mkfs.ext4 /dev/sda3</code></pre></div>
 <p>Check where it is mounted:</p>
-
-<pre><code class="language-bash">lsblk
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">lsblk
 
 NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
-sda           8:0    1  14,8G  0 disk
-├─sda1        8:1    1   256M  0 part /run/media/youruser/24CB-FC98
-├─sda2        8:2    1     1G  0 part /run/media/youruser/4bb8adf3-f1c9-4367-8e38-7c09bad775ee
-└─sda3        8:3    1  13,5G  0 part /run/media/youruser/42b25298-f013-483c-845c-9408e330bb75
-</code></pre>
-
+sda           <span style="color:#666">8</span>:0    <span style="color:#666">1</span>  <span style="color:#666">14</span>,8G  <span style="color:#666">0</span> disk
+├─sda1        <span style="color:#666">8</span>:1    <span style="color:#666">1</span>   256M  <span style="color:#666">0</span> part /run/media/youruser/24CB-FC98
+├─sda2        <span style="color:#666">8</span>:2    <span style="color:#666">1</span>     1G  <span style="color:#666">0</span> part /run/media/youruser/4bb8adf3-f1c9-4367-8e38-7c09bad775ee
+└─sda3        <span style="color:#666">8</span>:3    <span style="color:#666">1</span>  <span style="color:#666">13</span>,5G  <span style="color:#666">0</span> part /run/media/youruser/42b25298-f013-483c-845c-9408e330bb75</code></pre></div>
 <p>Extract your previously downloaded alpine linux to the root of this partition:</p>
-
-<pre><code class="language-bash">sudo tar -C /run/media/youruser/24CB-FC98 -xzf ~/Downloads/alpine-rpi-3.9.2-armhf.tar.gz
-</code></pre>
-
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo tar -C /run/media/youruser/24CB-FC98 -xzf ~/Downloads/alpine-rpi-3.9.2-armhf.tar.gz</code></pre></div>
 <p>For reasons (in the <a href="https://wiki.alpinelinux.org/wiki/Raspberry_Pi_Zero_W_-_Installation">alpine wiki</a>):</p>
-
-<pre><code class="language-bash">echo enable_uart=1 &gt; /run/media/youruser/24CB-FC98/usercfg.txt
-</code></pre>
-
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#008000">echo</span> <span style="color:#19177c">enable_uart</span><span style="color:#666">=</span><span style="color:#666">1</span> &gt; /run/media/youruser/24CB-FC98/usercfg.txt</code></pre></div>
 <p>unmount the sdcard:</p>
-
-<pre><code class="language-bash">umount /run/media/toto/10F8-4DDB
-</code></pre>
-
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">umount /run/media/toto/10F8-4DDB</code></pre></div>
 <h2 id="on-your-rpi0">On your rpi0</h2>
 
 <p>Put back the sdcard into the rpi and boot it up (with keyboard and screen).</p>
 
 <p>Mount your 2 other partitions:</p>
-
-<pre><code class="language-bash">mkdir /media/mmcblk0p2
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mkdir /media/mmcblk0p2
 mkdir /media/mmcblk0p3
 mount /dev/mmcblk0p2 /media/mmcblk0p2
-mount /dev/mmcblk0p3 /media/mmcblk0p3
-</code></pre>
-
+mount /dev/mmcblk0p3 /media/mmcblk0p3</code></pre></div>
 <p>and run the setup:</p>
-
-<pre><code class="language-bash">setup-alpine
-</code></pre>
-
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">setup-alpine</code></pre></div>
 <p>And let yourself be guided, don&rsquo;t forget to set the config and cache partition mmcblk0p2 to be saved to.</p>
 
 <p>As of now, it seems there is a <a href="https://bugs.alpinelinux.org/issues/8025">bug</a> for the dhcp lease, just install wpa_supplicant and
 and add it to boot:</p>
-
-<pre><code class="language-bash">apk add wpa_supplicant
-rc-update add wpa_supplicant boot
-</code></pre>
-
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">apk add wpa_supplicant
+rc-update add wpa_supplicant boot</code></pre></div>
 <p>Enable community repositories (for visudo):</p>
-
-<pre><code class="language-bash">vi /etc/apk/repositories
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">vi /etc/apk/repositories
 uncomment http://dl-cdn.alpinelinux.org/alpine/latest-stable/community
-apk update
-</code></pre>
-
+apk update</code></pre></div>
 <p>Add a user and add its group to the sudoers:</p>
-
-<pre><code class="language-bash">addgroup -S maintenance &amp;&amp; adduser maintenance -G maintenance
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">addgroup -S maintenance <span style="color:#666">&amp;&amp;</span> adduser maintenance -G maintenance
 apk add sudo
 visudo
-&quot;%maintenance ALL=(ALL) ALL&quot;
+<span style="color:#ba2121">&#34;%maintenance ALL=(ALL) ALL&#34;</span>
 chown root:root /etc/sudoers
-lbu add /home/maintenance
-</code></pre>
-
+lbu add /home/maintenance</code></pre></div>
 <p>And don&rsquo;t forget the commit and most importantly, don&rsquo;t forget to set a password for it, so it&rsquo;s not visible to anyone getting access to your sdcard!</p>
-
-<pre><code class="language-bash">lbu commit -p YOURPASSWORD
-</code></pre>
-
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">lbu commit -p YOURPASSWORD</code></pre></div>
 <h2 id="back-on-your-local-computer">Back on your local computer</h2>
 
 <h3 id="apkovl">apkovl</h3>
 
 <p>Unzip the local backup tarball (host.apkovl.tar.gz):</p>
-
-<pre><code class="language-bash">mkdir -p ~/alpine-install/armv6/lb
-tar -C ~/alpine-install/armv6/lb -xzf /sda2mountpoint/host.apkovl.tar.gz
-</code></pre>
-
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mkdir -p ~/alpine-install/armv6/lb
+tar -C ~/alpine-install/armv6/lb -xzf /sda2mountpoint/host.apkovl.tar.gz</code></pre></div>
 <h3 id="ssh-connection">ssh connection</h3>
 
 <p>Add your ssh key to the authorized_keys of the maintenance user and allow ssh connection</p>
-
-<pre><code class="language-bash">ssh-keygen -t rsa -C &quot;youremail&quot;
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh-keygen -t rsa -C <span style="color:#ba2121">&#34;youremail&#34;</span>
 mkdir -p ~/alpine-install/armv6/lb/home/maintenance/.ssh
 cat ~/.ssh/id_rsa.pub &gt; ~/alpine-install/armv6/lb/home/maintenance/.ssh/authorized_keys
-chmod 700 ~/alpine-install/armv6/lb/home/maintenance/.ssh
-chmod 600 ~/alpine-install/armv6/lb/home/maintenance/.ssh/authorized_keys
-chown root:root ~/alpine-install/armv6/lb/etc/sudoers
-</code></pre>
-
+chmod <span style="color:#666">700</span> ~/alpine-install/armv6/lb/home/maintenance/.ssh
+chmod <span style="color:#666">600</span> ~/alpine-install/armv6/lb/home/maintenance/.ssh/authorized_keys
+chown root:root ~/alpine-install/armv6/lb/etc/sudoers</code></pre></div>
 <h3 id="auto-mount-mmcblk0p3">Auto mount mmcblk0p3</h3>
 
 <p>Add as well your 3rd partition to fstab:</p>
-
-<pre><code class="language-bash">echo &quot;/dev/mmcblk0p3 /media/mmcblk0p3 ext4 rw,relatime 0 0&quot; &gt;&gt; ~/alpine-install/armv6/lb/etc/fstab
-</code></pre>
-
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#008000">echo</span> <span style="color:#ba2121">&#34;/dev/mmcblk0p3 /media/mmcblk0p3 ext4 rw,relatime 0 0&#34;</span> &gt;&gt; ~/alpine-install/armv6/lb/etc/fstab</code></pre></div>
 <h3 id="bonus-change-the-welcome-message">Bonus: change the welcome message</h3>
-
-<pre><code class="language-bash">echo &quot;Welcome home\!&quot; &gt; ~/alpine-install/armv6/lb/etc/motd
-</code></pre>
-
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#008000">echo</span> <span style="color:#ba2121">&#34;Welcome home\!&#34;</span> &gt; ~/alpine-install/armv6/lb/etc/motd</code></pre></div>
 <h3 id="copy-back-the-lbu-to-your-sdcard">Copy back the lbu to your sdcard</h3>
 
 <p>Recompress everything (be careful to change the host to your selected hostname):</p>
-
-<pre><code class="language-bash">sudo tar -czvf ~/alpine-install/armv6/host.apkovl.tar.gz -C ~/alpine-install/armv6/lb .
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo tar -czvf ~/alpine-install/armv6/host.apkovl.tar.gz -C ~/alpine-install/armv6/lb .
 rm -rf ~/alpine-install/armv6/lb
 sudo cp ~/alpine-install/armv6/host.apkovl.tar.gz /sda2mountpoint/
-umount /sda2mountpoint
-</code></pre>
-
+umount /sda2mountpoint</code></pre></div>
 <h2 id="connecting-through-ssh">Connecting through ssh</h2>
 
 <p>Put back the sdcar in the rpi0 and boot.</p>
 
 <p>Connect via ssh with the maintenance user:</p>
-
-<pre><code class="language-bash">ssh -vv -i ~/.ssh/id_rsa maintenance@192.168.1.100
-</code></pre>
-
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh -vv -i ~/.ssh/id_rsa maintenance@192.168.1.100</code></pre></div>
 <p>Tips if you have errors, on you rpi, just uncomment the two following lines in /etc/sshd_config, and you should see logs in /var/log/auth.log:</p>
-
-<pre><code class="language-code">    SyslogFacility AUTH
-    LogLevel INFO
-</code></pre>
-
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-code" data-lang="code">    SyslogFacility AUTH
+    LogLevel INFO</code></pre></div>
 <p>Making sure maintenance stays the owner of its home:</p>
-
-<pre><code class="language-bash">sudo chown -r maintenance:maintenance /home/maintenance
-</code></pre>
-
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo chown -r maintenance:maintenance /home/maintenance</code></pre></div>
 <h2 id="securing-ssh-connection">Securing SSH connection</h2>
 
 <p>Let&rsquo;s secure the ssh connection by removing the password access and enabling 2FA</p>
 
 <p>Install needed packages:</p>
-
-<pre><code class="language-bash">apk add google-authenticator openssh-server-pam
-</code></pre>
-
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">apk add google-authenticator openssh-server-pam</code></pre></div>
 <p>As the maintenance user, run googleauthenticator and follow the config (don&rsquo;t forget to add your 2FA).</p>
 
 <p>Inside /etc/ssh/sshdconfig:
 (add if not present)</p>
-
-<pre><code class="language-bash">ChallengeResponseAuthentication yes
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ChallengeResponseAuthentication yes
 UsePAM yes
 PasswordAuthentication no
-AuthenticationMethods publickey,keyboard-interactive
-</code></pre>
-
+AuthenticationMethods publickey,keyboard-interactive</code></pre></div>
 <p>then create the PAM sshd conf:</p>
-
-<pre><code class="language-bash">echo &quot;auth required pam_google_authenticator.so&quot; &gt; /etc/pam.d/sshd
-</code></pre>
-
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#008000">echo</span> <span style="color:#ba2121">&#34;auth required pam_google_authenticator.so&#34;</span> &gt; /etc/pam.d/sshd</code></pre></div>
 <p>and restart sshd</p>
-
-<pre><code class="language-bash">sudo rc-service sshd restart
-</code></pre>
-
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo rc-service sshd restart</code></pre></div>
 <p>You can just run the googleauthenticator ith the maintenance user and still disallow root login in sshd.
 and don&rsquo;t forget to commit!</p>
-
-<pre><code class="language-bash">lbu commit -p YOURPASSWORD
-</code></pre>
-
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">lbu commit -p YOURPASSWORD</code></pre></div>
 <h3 id="addendum-more-disk-available">Addendum: More disk available</h3>
 
 <p>Diskless alpine is great as the fs is readonly and it&rsquo;s the safest and cleanest wa to install it.
@@ -280,10 +201,7 @@ Problem: the RAM is not THAT big in a rpi0, hence, once you start playing with t
 Solution: use the overlayfs, it will allow you to deport some folders in the last, biggest partition, in a persistent manner.</p>
 
 <p>For example, if you want to use /var/test, you can overlay /var/test:</p>
-
-<pre><code class="language-bash">echo &quot;overlay /var/test overlay lowerdir=/var/test,upperdir=/media/mmcblk0p3/var/test 0 0&quot; &gt;&gt; ~/alpine-install/armv6/lb/etc/fstab
-</code></pre>
-
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#008000">echo</span> <span style="color:#ba2121">&#34;overlay /var/test overlay lowerdir=/var/test,upperdir=/media/mmcblk0p3/var/test 0 0&#34;</span> &gt;&gt; ~/alpine-install/armv6/lb/etc/fstab</code></pre></div>
     </section>
 
     <hr>

@@ -24,7 +24,7 @@
         <meta property="og:article:author" content="" />
         <meta property="og:article:published_time" content="2016-03-10T20:48:27&#43;08:00" />
     
-        <meta name="generator" content="Hugo 0.56.0-DEV" />
+        <meta name="generator" content="Hugo 0.55.6" />
         <title>javascript dev environment setup &middot; VS tech corner </title>
         <link rel="canonical" href="https://vincentserpoul.github.io/" />
         <link rel="alternate" type="application/rss+xml" title="RSS" href="">
@@ -80,30 +80,24 @@
 <p>Alright, let&rsquo;s check if everything is fine. Let&rsquo;s create a test project in a new folder.</p>
 
 <p>Add a .eslintrc file, with this content:</p>
-
-<pre><code class="language-json">{
-  &quot;extends&quot;: &quot;airbnb&quot;,
-  &quot;ecmaFeatures&quot;: {
-    &quot;jsx&quot;: true,
-    &quot;modules&quot;: true
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#008000;font-weight:bold">&#34;extends&#34;</span>: <span style="color:#ba2121">&#34;airbnb&#34;</span>,
+  <span style="color:#008000;font-weight:bold">&#34;ecmaFeatures&#34;</span>: {
+    <span style="color:#008000;font-weight:bold">&#34;jsx&#34;</span>: <span style="color:#008000;font-weight:bold">true</span>,
+    <span style="color:#008000;font-weight:bold">&#34;modules&#34;</span>: <span style="color:#008000;font-weight:bold">true</span>
   },
-  &quot;env&quot;: {
-    &quot;browser&quot;: true,
-    &quot;node&quot;: true
+  <span style="color:#008000;font-weight:bold">&#34;env&#34;</span>: {
+    <span style="color:#008000;font-weight:bold">&#34;browser&#34;</span>: <span style="color:#008000;font-weight:bold">true</span>,
+    <span style="color:#008000;font-weight:bold">&#34;node&#34;</span>: <span style="color:#008000;font-weight:bold">true</span>
   },
-  &quot;parser&quot;: &quot;babel-eslint&quot;,
-  &quot;rules&quot;: {
-    &quot;quotes&quot;: [2, &quot;single&quot;],
-    &quot;strict&quot;: [2, &quot;never&quot;]
+  <span style="color:#008000;font-weight:bold">&#34;parser&#34;</span>: <span style="color:#ba2121">&#34;babel-eslint&#34;</span>,
+  <span style="color:#008000;font-weight:bold">&#34;rules&#34;</span>: {
+    <span style="color:#008000;font-weight:bold">&#34;quotes&#34;</span>: [<span style="color:#666">2</span>, <span style="color:#ba2121">&#34;single&#34;</span>],
+    <span style="color:#008000;font-weight:bold">&#34;strict&#34;</span>: [<span style="color:#666">2</span>, <span style="color:#ba2121">&#34;never&#34;</span>]
   }
-}
-</code></pre>
-
+}</code></pre></div>
 <p>then create a simple test.js with this content:</p>
-
-<pre><code class="language-shell">echo &quot;test&quot;
-</code></pre>
-
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#008000">echo</span> <span style="color:#ba2121">&#34;test&#34;</span></code></pre></div>
 <p>You should see the linter complaining, telling you something is wrong and you need to correct your javascript (check the lower grey line of sublime for the comment).</p>
 
 <p>If you don&rsquo;t see anything, check the console again.</p>

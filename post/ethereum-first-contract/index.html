@@ -24,7 +24,7 @@
         <meta property="og:article:author" content="" />
         <meta property="og:article:published_time" content="2016-08-03T13:00:00&#43;08:00" />
     
-        <meta name="generator" content="Hugo 0.56.0-DEV" />
+        <meta name="generator" content="Hugo 0.55.6" />
         <title>Ethereum first smart contract &middot; VS tech corner </title>
         <link rel="canonical" href="https://vincentserpoul.github.io/" />
         <link rel="alternate" type="application/rss+xml" title="RSS" href="">
@@ -54,19 +54,16 @@
         
 
 <h2 id="launch-your-geth-or-testrpc-private-instance">Launch your geth (or testrpc) private instance</h2>
-
-<pre><code class="language-shell">./geth \
-    --identity &quot;gethTest&quot; \
-    --rpc --rpcport &quot;9012&quot; \
-    --rpccorsdomain &quot;YOUR_TEST_DOMAIN_APP_RUN_FROM&quot; \
-    --datadir &quot;./testChain&quot; \
-    --port &quot;30303&quot; \
-    --nodiscover \
-    --rpcapi &quot;db,eth,net,web3&quot; \
-    --networkid 1999 \
-    --dev console
-</code></pre>
-
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">./geth <span style="color:#b62;font-weight:bold">\
+</span><span style="color:#b62;font-weight:bold"></span>    --identity <span style="color:#ba2121">&#34;gethTest&#34;</span> <span style="color:#b62;font-weight:bold">\
+</span><span style="color:#b62;font-weight:bold"></span>    --rpc --rpcport <span style="color:#ba2121">&#34;9012&#34;</span> <span style="color:#b62;font-weight:bold">\
+</span><span style="color:#b62;font-weight:bold"></span>    --rpccorsdomain <span style="color:#ba2121">&#34;YOUR_TEST_DOMAIN_APP_RUN_FROM&#34;</span> <span style="color:#b62;font-weight:bold">\
+</span><span style="color:#b62;font-weight:bold"></span>    --datadir <span style="color:#ba2121">&#34;./testChain&#34;</span> <span style="color:#b62;font-weight:bold">\
+</span><span style="color:#b62;font-weight:bold"></span>    --port <span style="color:#ba2121">&#34;30303&#34;</span> <span style="color:#b62;font-weight:bold">\
+</span><span style="color:#b62;font-weight:bold"></span>    --nodiscover <span style="color:#b62;font-weight:bold">\
+</span><span style="color:#b62;font-weight:bold"></span>    --rpcapi <span style="color:#ba2121">&#34;db,eth,net,web3&#34;</span> <span style="color:#b62;font-weight:bold">\
+</span><span style="color:#b62;font-weight:bold"></span>    --networkid <span style="color:#666">1999</span> <span style="color:#b62;font-weight:bold">\
+</span><span style="color:#b62;font-weight:bold"></span>    --dev console</code></pre></div>
 <h2 id="within-the-console-compile-your-contract">Within the console, compile your contract</h2>
 
 <p>check this tutorial: <a href="https://www.ethereum.org/greeter">https://www.ethereum.org/greeter</a></p>
@@ -75,28 +72,26 @@
 
 <p>The issue was that my account was locked :/ and the greeter contract stupidly silently fails&hellip;
 Here is the modified code to see the obvious error.</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#008000;font-weight:bold">var</span> _greeting <span style="color:#666">=</span> <span style="color:#ba2121">&#34;Hello World!&#34;</span>
+<span style="color:#008000;font-weight:bold">var</span> greeterContract <span style="color:#666">=</span> web3.eth.contract(greeterCompiled.greeter.info.abiDefinition);
 
-<pre><code class="language-javascript">var _greeting = &quot;Hello World!&quot;
-var greeterContract = web3.eth.contract(greeterCompiled.greeter.info.abiDefinition);
+<span style="color:#008000;font-weight:bold">var</span> greeter <span style="color:#666">=</span> greeterContract.<span style="color:#008000;font-weight:bold">new</span>(_greeting,{from<span style="color:#666">:</span>web3.eth.accounts[<span style="color:#666">0</span>], data<span style="color:#666">:</span> greeterCompiled.greeter.code, gas<span style="color:#666">:</span> <span style="color:#666">30000000</span>}, <span style="color:#008000;font-weight:bold">function</span>(e, contract){
+    <span style="color:#008000;font-weight:bold">if</span>(<span style="color:#666">!</span>e) {
 
-var greeter = greeterContract.new(_greeting,{from:web3.eth.accounts[0], data: greeterCompiled.greeter.code, gas: 30000000}, function(e, contract){
-    if(!e) {
+      <span style="color:#008000;font-weight:bold">if</span>(<span style="color:#666">!</span>contract.address) {
+        console.log(<span style="color:#ba2121">&#34;Contract transaction send: TransactionHash: &#34;</span> <span style="color:#666">+</span> contract.transactionHash <span style="color:#666">+</span> <span style="color:#ba2121">&#34; waiting to be mined...&#34;</span>);
 
-      if(!contract.address) {
-        console.log(&quot;Contract transaction send: TransactionHash: &quot; + contract.transactionHash + &quot; waiting to be mined...&quot;);
-
-      } else {
-        console.log(&quot;Contract mined! Address: &quot; + contract.address);
+      } <span style="color:#008000;font-weight:bold">else</span> {
+        console.log(<span style="color:#ba2121">&#34;Contract mined! Address: &#34;</span> <span style="color:#666">+</span> contract.address);
         console.log(contract);
       }
 
-    } else {
-        console.log(&quot;error!&quot;);
+    } <span style="color:#008000;font-weight:bold">else</span> {
+        console.log(<span style="color:#ba2121">&#34;error!&#34;</span>);
         console.log(e);
     }
 })
-</code></pre>
-
+</code></pre></div>
 <p>which returns</p>
 
 <pre><code>error!

@@ -19,8 +19,8 @@
       <guid>https://vincentserpoul.github.io/post/ethereum-react-dapps/</guid>
       <description>I finished my first dapp with (react-boilerplate)[https://github.com/mxstbr/] this week and here are the few things I learnt. I won&amp;rsquo;t get into the redux, redux-saga details, I let you play with the amazing boilerplate.
 Interacting with constant functions Let&amp;rsquo;s use the typical balanceOf function of the EIP20 contracts:
-function balanceOf(address _owner) constant returns (uint256 balance) { return balances[_owner]; }  Here are the sagas (redux-sagas) I used to interact:
-import { take, call, put, cancel, select, fork } from &#39;redux-saga/effects&#39;; import { BALANCE_OF_GET, } from &#39;.</description>
+function balanceOf(address _owner) constant returns (uint256 balance) { return balances[_owner]; } Here are the sagas (redux-sagas) I used to interact:
+import { take, call, put, cancel, select, fork } from &amp;#39;redux-saga/effects&amp;#39;; import { BALANCE_OF_GET, } from &amp;#39;.</description>
     </item>
     
   </channel>

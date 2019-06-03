@@ -43,8 +43,8 @@ I uploaded it as well on surge for you to see without the hassle</description>
       <guid>https://vincentserpoul.github.io/post/golang-playwithsql-oracle/</guid>
       <description>Which library To this day, the most up to date library seems to be rana/ora
 How to install (linux &amp;amp; macosx) Download Oracle Instant Client for linux x64: both packages Basic and SDK Unzip each of them in the same folder /opt/oracle
-mkdir -p /opt/oracle cd /opt/oracle unzip ~/Downloads/instantclient-basiclite-linux.x64-12.2.0.1.0.zip unzip ~/Downloads/instantclient-sdk-linux.x64-12.2.0.1.0.zip cd /opt/oracle/instantclient_12_1  Add the necessary env variables and paths:
-# Oracle export LD_LIBRARY_PATH=/opt/oracle/instantclient_12_2:$LD_LIBRARY_PATH export PKG_CONFIG_PATH=/opt/oracle export ORACLE_HOME=$LD_LIBRARY_PATH  copy from the go package .</description>
+mkdir -p /opt/oracle cd /opt/oracle unzip ~/Downloads/instantclient-basiclite-linux.x64-12.2.0.1.0.zip unzip ~/Downloads/instantclient-sdk-linux.x64-12.2.0.1.0.zip cd /opt/oracle/instantclient_12_1 Add the necessary env variables and paths:
+# Oracle export LD_LIBRARY_PATH=/opt/oracle/instantclient_12_2:$LD_LIBRARY_PATH export PKG_CONFIG_PATH=/opt/oracle export ORACLE_HOME=$LD_LIBRARY_PATH copy from the go package .</description>
     </item>
     
     <item>
@@ -53,7 +53,7 @@ mkdir -p /opt/oracle cd /opt/oracle unzip ~/Downloads/instantclient-basiclite-li
       <pubDate>Mon, 10 Oct 2016 12:54:00 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/binding-ethereum-golang/</guid>
-      <description>The contract contract Trigger { function () { throw; } address owner; function Trigger() { owner = msg.sender; } event TriggerEvt(address _sender, uint _trigger); function trigger(uint _trigger) { TriggerEvt(msg.sender, _trigger); } function getOwner() constant returns (address) { return owner; } }  This is a very simple contract that we will take as an example.
+      <description>The contract contract Trigger { function () { throw; } address owner; function Trigger() { owner = msg.sender; } event TriggerEvt(address _sender, uint _trigger); function trigger(uint _trigger) { TriggerEvt(msg.sender, _trigger); } function getOwner() constant returns (address) { return owner; } } This is a very simple contract that we will take as an example.
 Getting the right tools for binding A good starting point is this wiki.
 You will need to follow the install procedure of go-ethereum.</description>
     </item>
@@ -77,12 +77,12 @@ You will need to follow the install procedure of go-ethereum.</description>
 http://www.wolfe.id.au/2015/03/05/using-sublime-text-for-go-development/
 Within sublimetext, from the package manager, install gosublime, install gooracle.
 install go/tools:
-go get -u golang.org/x/tools/cmd/goimports go get -u golang.org/x/tools/cmd/vet go get -u golang.org/x/tools/cmd/oracle go get -u golang.org/x/tools/cmd/godoc  install gometalinter (https://github.com/alecthomas/gometalinter)
+go get -u golang.org/x/tools/cmd/goimports go get -u golang.org/x/tools/cmd/vet go get -u golang.org/x/tools/cmd/oracle go get -u golang.org/x/tools/cmd/godoc install gometalinter (https://github.com/alecthomas/gometalinter)
 install interfacer (https://github.com/mvdan/interfacer/)
 install gosimple (https://github.com/dominikh/go-simple)
 install gocov (https://github.com/axw/gocov)
 Here is the package settings I use for gosublime:
-{ // you may set specific environment variables here // e.g &amp;quot;env&amp;quot;: { &amp;quot;PATH&amp;quot;: &amp;quot;$HOME/go/bin:$PATH&amp;quot; } // in values, $PATH and ${PATH} are replaced with // the corresponding environment(PATH) variable, if it exists.</description>
+{ // you may set specific environment variables here // e.g &amp;#34;env&amp;#34;: { &amp;#34;PATH&amp;#34;: &amp;#34;$HOME/go/bin:$PATH&amp;#34; } // in values, $PATH and ${PATH} are replaced with // the corresponding environment(PATH) variable, if it exists.</description>
     </item>
     
   </channel>

@@ -22,10 +22,10 @@
     
         <meta property="og:type" content="website" />
     
-        <meta name="generator" content="Hugo 0.56.0-DEV" />
+        <meta name="generator" content="Hugo 0.55.6" />
         <title>dev &middot; VS tech corner </title>
         <link rel="canonical" href="https://vincentserpoul.github.io/" />
-        <link rel="alternate" type="application/rss+xml" title="RSS" href="https://vincentserpoul.github.io/tags/dev/index.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS" href="/tags/dev/index.xml">
         <link rel="stylesheet" type='text/css' href="https://vincentserpoul.github.io/css/main.css"/>
         <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300|Montserrat:700' rel='stylesheet' type='text/css'>
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
@@ -53,8 +53,8 @@
     <section class="post-excerpt">
         <p>I finished my first dapp with (react-boilerplate)[https://github.com/mxstbr/] this week and here are the few things I learnt. I won&rsquo;t get into the redux, redux-saga details, I let you play with the amazing boilerplate.
 Interacting with constant functions Let&rsquo;s use the typical balanceOf function of the EIP20 contracts:
-function balanceOf(address _owner) constant returns (uint256 balance) { return balances[_owner]; }  Here are the sagas (redux-sagas) I used to interact:
-import { take, call, put, cancel, select, fork } from 'redux-saga/effects'; import { BALANCE_OF_GET, } from '.</p>
+function balanceOf(address _owner) constant returns (uint256 balance) { return balances[_owner]; } Here are the sagas (redux-sagas) I used to interact:
+import { take, call, put, cancel, select, fork } from &#39;redux-saga/effects&#39;; import { BALANCE_OF_GET, } from &#39;.</p>
     </section>
 
     <footer class="post-footer">
@@ -75,7 +75,7 @@ import { take, call, put, cancel, select, fork } from 'redux-saga/effects'; impo
     </header>
 
     <section class="post-excerpt">
-        <p>The contract contract Trigger { function () { throw; } address owner; function Trigger() { owner = msg.sender; } event TriggerEvt(address _sender, uint _trigger); function trigger(uint _trigger) { TriggerEvt(msg.sender, _trigger); } function getOwner() constant returns (address) { return owner; } }  This is a very simple contract that we will take as an example.
+        <p>The contract contract Trigger { function () { throw; } address owner; function Trigger() { owner = msg.sender; } event TriggerEvt(address _sender, uint _trigger); function trigger(uint _trigger) { TriggerEvt(msg.sender, _trigger); } function getOwner() constant returns (address) { return owner; } } This is a very simple contract that we will take as an example.
 Getting the right tools for binding A good starting point is this wiki.
 You will need to follow the install procedure of go-ethereum.</p>
     </section>

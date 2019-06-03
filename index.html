@@ -22,10 +22,10 @@
     
         <meta property="og:type" content="website" />
     
-        <meta name="generator" content="Hugo 0.56.0-DEV" />
+        <meta name="generator" content="Hugo 0.55.6" />
         <title>VS tech corner &middot; VS tech corner </title>
         <link rel="canonical" href="https://vincentserpoul.github.io/" />
-        <link rel="alternate" type="application/rss+xml" title="RSS" href="https://vincentserpoul.github.io/index.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS" href="/index.xml">
         <link rel="stylesheet" type='text/css' href="https://vincentserpoul.github.io/css/main.css"/>
         <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300|Montserrat:700' rel='stylesheet' type='text/css'>
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
@@ -43,6 +43,28 @@
     </header>
 <main class="content" role="main">
 	<div class="container">
+	
+		<article class="li post">
+    <header class="post-header">
+        <h3 class="post-title"><a href="https://vincentserpoul.github.io/post/wasm-intro-talk/">Wasm Prez</a></h3>
+        <p class="post-time"><time datetime="2019-06-03T13:38:35&#43;08:00">June 3, 2019</time></p>
+    </header>
+
+    <section class="post-excerpt">
+        <p>I presented at voxxed days last week.
+Here is the talk I gave, video coming when it&rsquo;s published.</p>
+    </section>
+
+    <footer class="post-footer">
+        <span>
+            
+            
+            	&nbsp;&nbsp;<i class="fa fa-tag"></i>
+            	wasm
+            
+        </span>
+    </footer>
+</article>
 	
 		<article class="li post">
     <header class="post-header">
@@ -98,9 +120,9 @@ Compiling from NOT a rpi0 Obviously, you don&rsquo;t want to compile from a rasp
     <section class="post-excerpt">
         <p>Prerequisites  One raspberry pi zero W One sd card  Enable all cgroups On you local linux, mount the partition containing alpine files.
 In the cmdline.txt, add the following:
-echo -ne &quot; cgroup_enable=memory cgroup_enable=cpuset swapaccount=1&quot; &gt;&gt; /run/media/youruser/xxx/cmdline.txt  Docker needs all cgroups enabled, so this will do the trick
+echo -ne &#34; cgroup_enable=memory cgroup_enable=cpuset swapaccount=1&#34; &gt;&gt; /run/media/youruser/xxx/cmdline.txt Docker needs all cgroups enabled, so this will do the trick
 On you rpi0 As simple as:
-sudo apk add docker sudo rc-update add docker boot sudo rc-service docker start  To make sure your docker env doesn&rsquo;t go in memory (512MB RAM won&rsquo;t bring you far&hellip;), set it on mmcblk0p3 by editing /etc/docker/daemon.</p>
+sudo apk add docker sudo rc-update add docker boot sudo rc-service docker start To make sure your docker env doesn&rsquo;t go in memory (512MB RAM won&rsquo;t bring you far&hellip;), set it on mmcblk0p3 by editing /etc/docker/daemon.</p>
     </section>
 
     <footer class="post-footer">
@@ -192,9 +214,9 @@ I uploaded it as well on surge for you to see without the hassle</p>
 
     <section class="post-excerpt">
         <p>Google cloud configs Download and install gcloud Simply follow this link
-Listing existing configurations gcloud config configurations list NAME IS_ACTIVE ACCOUNT PROJECT DEFAULT_ZONE DEFAULT_REGION  This should give you only one line, with a default account.
-Creating a configuration gcloud config configurations create testconf  This will guide you through the configuration of a new configuration. It allows you to set one config per account, project, cluster&hellip;
-Activating a configuration gcloud config configurations activate testconf  As simple as this to change your account/config.</p>
+Listing existing configurations gcloud config configurations list NAME IS_ACTIVE ACCOUNT PROJECT DEFAULT_ZONE DEFAULT_REGION This should give you only one line, with a default account.
+Creating a configuration gcloud config configurations create testconf This will guide you through the configuration of a new configuration. It allows you to set one config per account, project, cluster&hellip;
+Activating a configuration gcloud config configurations activate testconf As simple as this to change your account/config.</p>
     </section>
 
     <footer class="post-footer">
@@ -240,8 +262,8 @@ What is the solution?</p>
     <section class="post-excerpt">
         <p>Which library To this day, the most up to date library seems to be rana/ora
 How to install (linux &amp; macosx) Download Oracle Instant Client for linux x64: both packages Basic and SDK Unzip each of them in the same folder /opt/oracle
-mkdir -p /opt/oracle cd /opt/oracle unzip ~/Downloads/instantclient-basiclite-linux.x64-12.2.0.1.0.zip unzip ~/Downloads/instantclient-sdk-linux.x64-12.2.0.1.0.zip cd /opt/oracle/instantclient_12_1  Add the necessary env variables and paths:
-# Oracle export LD_LIBRARY_PATH=/opt/oracle/instantclient_12_2:$LD_LIBRARY_PATH export PKG_CONFIG_PATH=/opt/oracle export ORACLE_HOME=$LD_LIBRARY_PATH  copy from the go package .</p>
+mkdir -p /opt/oracle cd /opt/oracle unzip ~/Downloads/instantclient-basiclite-linux.x64-12.2.0.1.0.zip unzip ~/Downloads/instantclient-sdk-linux.x64-12.2.0.1.0.zip cd /opt/oracle/instantclient_12_1 Add the necessary env variables and paths:
+# Oracle export LD_LIBRARY_PATH=/opt/oracle/instantclient_12_2:$LD_LIBRARY_PATH export PKG_CONFIG_PATH=/opt/oracle export ORACLE_HOME=$LD_LIBRARY_PATH copy from the go package .</p>
     </section>
 
     <footer class="post-footer">
@@ -250,30 +272,6 @@ mkdir -p /opt/oracle cd /opt/oracle unzip ~/Downloads/instantclient-basiclite-li
             
             	&nbsp;&nbsp;<i class="fa fa-tag"></i>
             	golang, oracle, linux, macosx, sql
-            
-        </span>
-    </footer>
-</article>
-	
-		<article class="li post">
-    <header class="post-header">
-        <h3 class="post-title"><a href="https://vincentserpoul.github.io/post/ethereum-react-dapps/">Ethereum react dapps</a></h3>
-        <p class="post-time"><time datetime="2016-10-27T13:34:00&#43;08:00">October 27, 2016</time></p>
-    </header>
-
-    <section class="post-excerpt">
-        <p>I finished my first dapp with (react-boilerplate)[https://github.com/mxstbr/] this week and here are the few things I learnt. I won&rsquo;t get into the redux, redux-saga details, I let you play with the amazing boilerplate.
-Interacting with constant functions Let&rsquo;s use the typical balanceOf function of the EIP20 contracts:
-function balanceOf(address _owner) constant returns (uint256 balance) { return balances[_owner]; }  Here are the sagas (redux-sagas) I used to interact:
-import { take, call, put, cancel, select, fork } from 'redux-saga/effects'; import { BALANCE_OF_GET, } from '.</p>
-    </section>
-
-    <footer class="post-footer">
-        <span>
-            
-            
-            	&nbsp;&nbsp;<i class="fa fa-tag"></i>
-            	react, blockchain, ethereum, dev, dapps
             
         </span>
     </footer>

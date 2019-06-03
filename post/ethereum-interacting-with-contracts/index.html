@@ -24,7 +24,7 @@
         <meta property="og:article:author" content="" />
         <meta property="og:article:published_time" content="2016-08-03T20:00:00&#43;08:00" />
     
-        <meta name="generator" content="Hugo 0.56.0-DEV" />
+        <meta name="generator" content="Hugo 0.55.6" />
         <title>Interacting with an Ethereum smart contract &middot; VS tech corner </title>
         <link rel="canonical" href="https://vincentserpoul.github.io/" />
         <link rel="alternate" type="application/rss+xml" title="RSS" href="">
@@ -66,88 +66,82 @@ Now, reuse it!</p>
 <p>get the latest web3-light.min.js js from <a href="https://github.com/ethereum/web3.js/releases">https://github.com/ethereum/web3.js/releases</a> and simply copy the dist/web3-light.min.js into the same folder as the following HTML file.</p>
 
 <p>then, use this html to interact with your contract on the local node:</p>
-
-<pre><code class="language-html">&lt;!doctype&gt;
-&lt;html&gt;
-&lt;head&gt;
-    &lt;script type=&quot;text/javascript&quot; src=&quot;https://cdnjs.cloudflare.com/ajax/libs/bignumber.js/2.4.0/bignumber.min.js&quot;&gt;&lt;/script&gt;
-    &lt;script type=&quot;text/javascript&quot; src=&quot;./web3-light.min.js&quot;&gt;&lt;/script&gt;
-    &lt;script type=&quot;text/javascript&quot;&gt;
-    var Web3 = require('web3');
-    var web3 = new Web3();
-    web3.setProvider(new web3.providers.HttpProvider('http://localhost:9012'));
-    function watchBalance() {
-        var coinbase = web3.eth.coinbase;
-        var originalBalance = web3.eth.getBalance(coinbase).toNumber();
-        document.getElementById('coinbase').innerText = 'coinbase: ' + coinbase;
-        document.getElementById('original').innerText = ' original balance: ' + originalBalance + '    watching...';
-        web3.eth.filter('latest').watch(function() {
-            var currentBalance = web3.eth.getBalance(coinbase).toNumber();
-            document.getElementById(&quot;current&quot;).innerText = 'current: ' + currentBalance;
-            document.getElementById(&quot;diff&quot;).innerText = 'diff:    ' + (currentBalance - originalBalance);
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#bc7a00">&lt;!doctype&gt;</span>
+&lt;<span style="color:#008000;font-weight:bold">html</span>&gt;
+&lt;<span style="color:#008000;font-weight:bold">head</span>&gt;
+    &lt;<span style="color:#008000;font-weight:bold">script</span> <span style="color:#7d9029">type</span><span style="color:#666">=</span><span style="color:#ba2121">&#34;text/javascript&#34;</span> <span style="color:#7d9029">src</span><span style="color:#666">=</span><span style="color:#ba2121">&#34;https://cdnjs.cloudflare.com/ajax/libs/bignumber.js/2.4.0/bignumber.min.js&#34;</span>&gt;&lt;/<span style="color:#008000;font-weight:bold">script</span>&gt;
+    &lt;<span style="color:#008000;font-weight:bold">script</span> <span style="color:#7d9029">type</span><span style="color:#666">=</span><span style="color:#ba2121">&#34;text/javascript&#34;</span> <span style="color:#7d9029">src</span><span style="color:#666">=</span><span style="color:#ba2121">&#34;./web3-light.min.js&#34;</span>&gt;&lt;/<span style="color:#008000;font-weight:bold">script</span>&gt;
+    &lt;<span style="color:#008000;font-weight:bold">script</span> <span style="color:#7d9029">type</span><span style="color:#666">=</span><span style="color:#ba2121">&#34;text/javascript&#34;</span>&gt;
+    <span style="color:#008000;font-weight:bold">var</span> Web3 <span style="color:#666">=</span> require(<span style="color:#ba2121">&#39;web3&#39;</span>);
+    <span style="color:#008000;font-weight:bold">var</span> web3 <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">new</span> Web3();
+    web3.setProvider(<span style="color:#008000;font-weight:bold">new</span> web3.providers.HttpProvider(<span style="color:#ba2121">&#39;http://localhost:9012&#39;</span>));
+    <span style="color:#008000;font-weight:bold">function</span> watchBalance() {
+        <span style="color:#008000;font-weight:bold">var</span> coinbase <span style="color:#666">=</span> web3.eth.coinbase;
+        <span style="color:#008000;font-weight:bold">var</span> originalBalance <span style="color:#666">=</span> web3.eth.getBalance(coinbase).toNumber();
+        <span style="color:#008000">document</span>.getElementById(<span style="color:#ba2121">&#39;coinbase&#39;</span>).innerText <span style="color:#666">=</span> <span style="color:#ba2121">&#39;coinbase: &#39;</span> <span style="color:#666">+</span> coinbase;
+        <span style="color:#008000">document</span>.getElementById(<span style="color:#ba2121">&#39;original&#39;</span>).innerText <span style="color:#666">=</span> <span style="color:#ba2121">&#39; original balance: &#39;</span> <span style="color:#666">+</span> originalBalance <span style="color:#666">+</span> <span style="color:#ba2121">&#39;    watching...&#39;</span>;
+        web3.eth.filter(<span style="color:#ba2121">&#39;latest&#39;</span>).watch(<span style="color:#008000;font-weight:bold">function</span>() {
+            <span style="color:#008000;font-weight:bold">var</span> currentBalance <span style="color:#666">=</span> web3.eth.getBalance(coinbase).toNumber();
+            <span style="color:#008000">document</span>.getElementById(<span style="color:#ba2121">&#34;current&#34;</span>).innerText <span style="color:#666">=</span> <span style="color:#ba2121">&#39;current: &#39;</span> <span style="color:#666">+</span> currentBalance;
+            <span style="color:#008000">document</span>.getElementById(<span style="color:#ba2121">&#34;diff&#34;</span>).innerText <span style="color:#666">=</span> <span style="color:#ba2121">&#39;diff:    &#39;</span> <span style="color:#666">+</span> (currentBalance <span style="color:#666">-</span> originalBalance);
         });
     }
-    &lt;/script&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;h1&gt;coinbase balance&lt;/h1&gt;
-    &lt;button type=&quot;button&quot; onClick=&quot;watchBalance();&quot;&gt;watch balance&lt;/button&gt;
-    &lt;div&gt;&lt;/div&gt;
-    &lt;div id=&quot;coinbase&quot;&gt;&lt;/div&gt;
-    &lt;div id=&quot;original&quot;&gt;&lt;/div&gt;
-    &lt;div id=&quot;current&quot;&gt;&lt;/div&gt;
-    &lt;div id=&quot;diff&quot;&gt;&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-
+    &lt;/<span style="color:#008000;font-weight:bold">script</span>&gt;
+&lt;/<span style="color:#008000;font-weight:bold">head</span>&gt;
+&lt;<span style="color:#008000;font-weight:bold">body</span>&gt;
+    &lt;<span style="color:#008000;font-weight:bold">h1</span>&gt;coinbase balance&lt;/<span style="color:#008000;font-weight:bold">h1</span>&gt;
+    &lt;<span style="color:#008000;font-weight:bold">button</span> <span style="color:#7d9029">type</span><span style="color:#666">=</span><span style="color:#ba2121">&#34;button&#34;</span> <span style="color:#7d9029">onClick</span><span style="color:#666">=</span><span style="color:#ba2121">&#34;watchBalance();&#34;</span>&gt;watch balance&lt;/<span style="color:#008000;font-weight:bold">button</span>&gt;
+    &lt;<span style="color:#008000;font-weight:bold">div</span>&gt;&lt;/<span style="color:#008000;font-weight:bold">div</span>&gt;
+    &lt;<span style="color:#008000;font-weight:bold">div</span> <span style="color:#7d9029">id</span><span style="color:#666">=</span><span style="color:#ba2121">&#34;coinbase&#34;</span>&gt;&lt;/<span style="color:#008000;font-weight:bold">div</span>&gt;
+    &lt;<span style="color:#008000;font-weight:bold">div</span> <span style="color:#7d9029">id</span><span style="color:#666">=</span><span style="color:#ba2121">&#34;original&#34;</span>&gt;&lt;/<span style="color:#008000;font-weight:bold">div</span>&gt;
+    &lt;<span style="color:#008000;font-weight:bold">div</span> <span style="color:#7d9029">id</span><span style="color:#666">=</span><span style="color:#ba2121">&#34;current&#34;</span>&gt;&lt;/<span style="color:#008000;font-weight:bold">div</span>&gt;
+    &lt;<span style="color:#008000;font-weight:bold">div</span> <span style="color:#7d9029">id</span><span style="color:#666">=</span><span style="color:#ba2121">&#34;diff&#34;</span>&gt;&lt;/<span style="color:#008000;font-weight:bold">div</span>&gt;
+&lt;/<span style="color:#008000;font-weight:bold">body</span>&gt;
+&lt;/<span style="color:#008000;font-weight:bold">html</span>&gt;</code></pre></div>
 <p>and&hellip; It works, you can see the balance on the contract!</p>
 
 <h2 id="let-s-greet-now">Let&rsquo;s greet now</h2>
-
-<pre><code class="language-html">&lt;!doctype&gt;
-&lt;html&gt;
-&lt;head&gt;
-    &lt;script type=&quot;text/javascript&quot; src=&quot;https://cdnjs.cloudflare.com/ajax/libs/bignumber.js/2.4.0/bignumber.min.js&quot;&gt;&lt;/script&gt;
-    &lt;script type=&quot;text/javascript&quot; src=&quot;./web3-light.min.js&quot;&gt;&lt;/script&gt;
-    &lt;script type=&quot;text/javascript&quot;&gt;
-        var Web3 = require('web3');
-        var web3 = new Web3();
-        web3.setProvider(new web3.providers.HttpProvider('http://localhost:9012'));
-        function watchBalance() {
-            var coinbase = web3.eth.coinbase;
-            var originalBalance = web3.eth.getBalance(coinbase).toNumber();
-            document.getElementById('coinbase').innerText = 'coinbase: ' + coinbase;
-            document.getElementById('original').innerText = ' original balance: ' + originalBalance + '    watching...';
-            web3.eth.filter('latest').watch(function() {
-                var currentBalance = web3.eth.getBalance(coinbase).toNumber();
-                document.getElementById(&quot;current&quot;).innerText = 'current: ' + currentBalance;
-                document.getElementById(&quot;diff&quot;).innerText = 'diff:    ' + (currentBalance - originalBalance);
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#bc7a00">&lt;!doctype&gt;</span>
+&lt;<span style="color:#008000;font-weight:bold">html</span>&gt;
+&lt;<span style="color:#008000;font-weight:bold">head</span>&gt;
+    &lt;<span style="color:#008000;font-weight:bold">script</span> <span style="color:#7d9029">type</span><span style="color:#666">=</span><span style="color:#ba2121">&#34;text/javascript&#34;</span> <span style="color:#7d9029">src</span><span style="color:#666">=</span><span style="color:#ba2121">&#34;https://cdnjs.cloudflare.com/ajax/libs/bignumber.js/2.4.0/bignumber.min.js&#34;</span>&gt;&lt;/<span style="color:#008000;font-weight:bold">script</span>&gt;
+    &lt;<span style="color:#008000;font-weight:bold">script</span> <span style="color:#7d9029">type</span><span style="color:#666">=</span><span style="color:#ba2121">&#34;text/javascript&#34;</span> <span style="color:#7d9029">src</span><span style="color:#666">=</span><span style="color:#ba2121">&#34;./web3-light.min.js&#34;</span>&gt;&lt;/<span style="color:#008000;font-weight:bold">script</span>&gt;
+    &lt;<span style="color:#008000;font-weight:bold">script</span> <span style="color:#7d9029">type</span><span style="color:#666">=</span><span style="color:#ba2121">&#34;text/javascript&#34;</span>&gt;
+        <span style="color:#008000;font-weight:bold">var</span> Web3 <span style="color:#666">=</span> require(<span style="color:#ba2121">&#39;web3&#39;</span>);
+        <span style="color:#008000;font-weight:bold">var</span> web3 <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">new</span> Web3();
+        web3.setProvider(<span style="color:#008000;font-weight:bold">new</span> web3.providers.HttpProvider(<span style="color:#ba2121">&#39;http://localhost:9012&#39;</span>));
+        <span style="color:#008000;font-weight:bold">function</span> watchBalance() {
+            <span style="color:#008000;font-weight:bold">var</span> coinbase <span style="color:#666">=</span> web3.eth.coinbase;
+            <span style="color:#008000;font-weight:bold">var</span> originalBalance <span style="color:#666">=</span> web3.eth.getBalance(coinbase).toNumber();
+            <span style="color:#008000">document</span>.getElementById(<span style="color:#ba2121">&#39;coinbase&#39;</span>).innerText <span style="color:#666">=</span> <span style="color:#ba2121">&#39;coinbase: &#39;</span> <span style="color:#666">+</span> coinbase;
+            <span style="color:#008000">document</span>.getElementById(<span style="color:#ba2121">&#39;original&#39;</span>).innerText <span style="color:#666">=</span> <span style="color:#ba2121">&#39; original balance: &#39;</span> <span style="color:#666">+</span> originalBalance <span style="color:#666">+</span> <span style="color:#ba2121">&#39;    watching...&#39;</span>;
+            web3.eth.filter(<span style="color:#ba2121">&#39;latest&#39;</span>).watch(<span style="color:#008000;font-weight:bold">function</span>() {
+                <span style="color:#008000;font-weight:bold">var</span> currentBalance <span style="color:#666">=</span> web3.eth.getBalance(coinbase).toNumber();
+                <span style="color:#008000">document</span>.getElementById(<span style="color:#ba2121">&#34;current&#34;</span>).innerText <span style="color:#666">=</span> <span style="color:#ba2121">&#39;current: &#39;</span> <span style="color:#666">+</span> currentBalance;
+                <span style="color:#008000">document</span>.getElementById(<span style="color:#ba2121">&#34;diff&#34;</span>).innerText <span style="color:#666">=</span> <span style="color:#ba2121">&#39;diff:    &#39;</span> <span style="color:#666">+</span> (currentBalance <span style="color:#666">-</span> originalBalance);
             });
         }
-        function greet() {
-            var contractAddress = '0x5d3425ccedeae0eb36521c4cf93ec6544dbad9bd';
-            var greeter = web3.eth.contract([{constant:false,inputs:[],name:'kill',outputs:[],type:'function'},{constant:true,inputs:[],name:'greet',outputs:[{name:'',type:'string'}],type:'function'},{inputs:[{name:'_greeting',type:'string'}],type:'constructor'}]).at(contractAddress);
-            var greetings = greeter.greet();
-            document.getElementById('greeting').innerText = greetings;
+        <span style="color:#008000;font-weight:bold">function</span> greet() {
+            <span style="color:#008000;font-weight:bold">var</span> contractAddress <span style="color:#666">=</span> <span style="color:#ba2121">&#39;0x5d3425ccedeae0eb36521c4cf93ec6544dbad9bd&#39;</span>;
+            <span style="color:#008000;font-weight:bold">var</span> greeter <span style="color:#666">=</span> web3.eth.contract([{constant<span style="color:#666">:</span><span style="color:#008000;font-weight:bold">false</span>,inputs<span style="color:#666">:</span>[],name<span style="color:#666">:</span><span style="color:#ba2121">&#39;kill&#39;</span>,outputs<span style="color:#666">:</span>[],type<span style="color:#666">:</span><span style="color:#ba2121">&#39;function&#39;</span>},{constant<span style="color:#666">:</span><span style="color:#008000;font-weight:bold">true</span>,inputs<span style="color:#666">:</span>[],name<span style="color:#666">:</span><span style="color:#ba2121">&#39;greet&#39;</span>,outputs<span style="color:#666">:</span>[{name<span style="color:#666">:</span><span style="color:#ba2121">&#39;&#39;</span>,type<span style="color:#666">:</span><span style="color:#ba2121">&#39;string&#39;</span>}],type<span style="color:#666">:</span><span style="color:#ba2121">&#39;function&#39;</span>},{inputs<span style="color:#666">:</span>[{name<span style="color:#666">:</span><span style="color:#ba2121">&#39;_greeting&#39;</span>,type<span style="color:#666">:</span><span style="color:#ba2121">&#39;string&#39;</span>}],type<span style="color:#666">:</span><span style="color:#ba2121">&#39;constructor&#39;</span>}]).at(contractAddress);
+            <span style="color:#008000;font-weight:bold">var</span> greetings <span style="color:#666">=</span> greeter.greet();
+            <span style="color:#008000">document</span>.getElementById(<span style="color:#ba2121">&#39;greeting&#39;</span>).innerText <span style="color:#666">=</span> greetings;
         }
-    &lt;/script&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;h1&gt;coinbase balance&lt;/h1&gt;
-    &lt;button type=&quot;button&quot; onClick=&quot;watchBalance();&quot;&gt;watch balance&lt;/button&gt;
-    &lt;div&gt;&lt;/div&gt;
-    &lt;div id=&quot;coinbase&quot;&gt;&lt;/div&gt;
-    &lt;div id=&quot;original&quot;&gt;&lt;/div&gt;
-    &lt;div id=&quot;current&quot;&gt;&lt;/div&gt;
-    &lt;div id=&quot;diff&quot;&gt;&lt;/div&gt;
-    &lt;h1&gt;greetings&lt;/h1&gt;
-    &lt;button type=&quot;button&quot; onClick=&quot;greet();&quot;&gt;greet!&lt;/button&gt;
-    &lt;div id=&quot;greeting&quot;&gt;&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-
+    &lt;/<span style="color:#008000;font-weight:bold">script</span>&gt;
+&lt;/<span style="color:#008000;font-weight:bold">head</span>&gt;
+&lt;<span style="color:#008000;font-weight:bold">body</span>&gt;
+    &lt;<span style="color:#008000;font-weight:bold">h1</span>&gt;coinbase balance&lt;/<span style="color:#008000;font-weight:bold">h1</span>&gt;
+    &lt;<span style="color:#008000;font-weight:bold">button</span> <span style="color:#7d9029">type</span><span style="color:#666">=</span><span style="color:#ba2121">&#34;button&#34;</span> <span style="color:#7d9029">onClick</span><span style="color:#666">=</span><span style="color:#ba2121">&#34;watchBalance();&#34;</span>&gt;watch balance&lt;/<span style="color:#008000;font-weight:bold">button</span>&gt;
+    &lt;<span style="color:#008000;font-weight:bold">div</span>&gt;&lt;/<span style="color:#008000;font-weight:bold">div</span>&gt;
+    &lt;<span style="color:#008000;font-weight:bold">div</span> <span style="color:#7d9029">id</span><span style="color:#666">=</span><span style="color:#ba2121">&#34;coinbase&#34;</span>&gt;&lt;/<span style="color:#008000;font-weight:bold">div</span>&gt;
+    &lt;<span style="color:#008000;font-weight:bold">div</span> <span style="color:#7d9029">id</span><span style="color:#666">=</span><span style="color:#ba2121">&#34;original&#34;</span>&gt;&lt;/<span style="color:#008000;font-weight:bold">div</span>&gt;
+    &lt;<span style="color:#008000;font-weight:bold">div</span> <span style="color:#7d9029">id</span><span style="color:#666">=</span><span style="color:#ba2121">&#34;current&#34;</span>&gt;&lt;/<span style="color:#008000;font-weight:bold">div</span>&gt;
+    &lt;<span style="color:#008000;font-weight:bold">div</span> <span style="color:#7d9029">id</span><span style="color:#666">=</span><span style="color:#ba2121">&#34;diff&#34;</span>&gt;&lt;/<span style="color:#008000;font-weight:bold">div</span>&gt;
+    &lt;<span style="color:#008000;font-weight:bold">h1</span>&gt;greetings&lt;/<span style="color:#008000;font-weight:bold">h1</span>&gt;
+    &lt;<span style="color:#008000;font-weight:bold">button</span> <span style="color:#7d9029">type</span><span style="color:#666">=</span><span style="color:#ba2121">&#34;button&#34;</span> <span style="color:#7d9029">onClick</span><span style="color:#666">=</span><span style="color:#ba2121">&#34;greet();&#34;</span>&gt;greet!&lt;/<span style="color:#008000;font-weight:bold">button</span>&gt;
+    &lt;<span style="color:#008000;font-weight:bold">div</span> <span style="color:#7d9029">id</span><span style="color:#666">=</span><span style="color:#ba2121">&#34;greeting&#34;</span>&gt;&lt;/<span style="color:#008000;font-weight:bold">div</span>&gt;
+&lt;/<span style="color:#008000;font-weight:bold">body</span>&gt;
+&lt;/<span style="color:#008000;font-weight:bold">html</span>&gt;</code></pre></div>
 <p>And you have it! the dapp is responding!</p>
 
 <p>caveat: when you won&rsquo;t be running a test, you will need to get an http provider connected to the live blockchain. You can be sure to have one if you run your own node, I&rsquo;m not sure yet if there is any open htt provider node out there.</p>

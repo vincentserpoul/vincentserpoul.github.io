@@ -24,7 +24,7 @@
         <meta property="og:article:author" content="" />
         <meta property="og:article:published_time" content="2016-08-08T15:00:27&#43;08:00" />
     
-        <meta name="generator" content="Hugo 0.56.0-DEV" />
+        <meta name="generator" content="Hugo 0.55.6" />
         <title>Ethereum first dapp - part 1 &middot; VS tech corner </title>
         <link rel="canonical" href="https://vincentserpoul.github.io/" />
         <link rel="alternate" type="application/rss+xml" title="RSS" href="">
@@ -56,43 +56,28 @@
 <h1 id="contracts">Contracts</h1>
 
 <h2 id="prepare-your-folder-for-your-dapp">Prepare your folder for your dapp</h2>
-
-<pre><code class="language-shell">mkdir dapp
-</code></pre>
-
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">mkdir dapp</code></pre></div>
 <p>inside this folder, we&rsquo;ll create one folder for truffle, one for geth.</p>
-
-<pre><code class="language-shell">cd dapp
-mkdir truffle geth
-</code></pre>
-
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#008000">cd</span> dapp
+mkdir truffle geth</code></pre></div>
 <p>inside the geth folder, simply put the customGenesis block you can find in the ethereum-dev-environment blog post.</p>
 
 <p>We are going to use two Ethereum clients, one for tests and devs, testrpc and one for a more real interaction, geth.</p>
 
 <p>Let&rsquo;s install truffle and testrpc</p>
-
-<pre><code class="language-shell">npm install ethereumjs-testrpc truffle
-</code></pre>
-
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">npm install ethereumjs-testrpc truffle</code></pre></div>
 <h2 id="truffle">Truffle</h2>
 
 <p>Truffle is a-m-a-z-i-n-g for contract development. It will allow you to unit test the contracts and compile them into usable javascript objects usable in web3! Just what we needed!</p>
 
 <p>First, init truffle scaffolding (I don&rsquo;t like -g install XD, so bear with my node_modules folder).</p>
-
-<pre><code class="language-shell">node_modules/truffle/cli.js init
-</code></pre>
-
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">node_modules/truffle/cli.js init</code></pre></div>
 <p>This will create different folders. You can have a look at <a href="http://truffle.readthedocs.io/">http://truffle.readthedocs.io/</a> to have more details.</p>
 
 <h2 id="testrpc">Testrpc</h2>
 
 <p>Let&rsquo;s launch the ethereumjs-testrpc</p>
-
-<pre><code class="language-shell">node_modules/ethereumjs-testrpc/bin/testrpc
-</code></pre>
-
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">node_modules/ethereumjs-testrpc/bin/testrpc</code></pre></div>
 <p>You will see it will create a new chain, in memory and create 10 new accounts for you to test.</p>
 
 <h2 id="standard-token-contracts">Standard token contracts</h2>
@@ -111,78 +96,71 @@ Have a look here: <a href="https://github.com/ConsenSys/Tokens">https://github.c
 <h2 id="migrate">Migrate</h2>
 
 <p>Here is the simple migration script I used</p>
-
-<pre><code class="language-javascript">module.exports = (deployer) =&gt; {
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">module.exports <span style="color:#666">=</span> (deployer) =&gt; {
   deployer.deploy(
     HumanStandardToken,
-        1000000,
-        'mold',
-        '0',
-        'M'
+        <span style="color:#666">1000000</span>,
+        <span style="color:#ba2121">&#39;mold&#39;</span>,
+        <span style="color:#ba2121">&#39;0&#39;</span>,
+        <span style="color:#ba2121">&#39;M&#39;</span>
   );
 };
-</code></pre>
-
+</code></pre></div>
 <p>In order to compile and deploy your contracts in the rpc node you configured in truffle.js, you need to launch the following command:</p>
-
-<pre><code class="language-shell">node_modules/truffle/cli.js migrate
-</code></pre>
-
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">node_modules/truffle/cli.js migrate</code></pre></div>
 <p>If your code compiles, it will create javascript objects for each of your contract in the folder build/contracts.</p>
 
 <h2 id="testing">Testing</h2>
 
 <p>Here is an example of tests on HumanStandardToken (ES6)</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#008000;font-weight:bold">const</span> it <span style="color:#666">=</span> require(<span style="color:#ba2121">&#39;mocha&#39;</span>).it;
+<span style="color:#008000;font-weight:bold">const</span> assert <span style="color:#666">=</span> require(<span style="color:#ba2121">&#39;chai&#39;</span>).assert;
 
-<pre><code class="language-javascript">const it = require('mocha').it;
-const assert = require('chai').assert;
+contract(<span style="color:#ba2121">&#39;HumanStandardToken&#39;</span>, (accounts) =&gt; {
+  it(<span style="color:#ba2121">&#39;should put 1000000 molds in the first account&#39;</span>, () =&gt; {
+    <span style="color:#008000;font-weight:bold">const</span> molds <span style="color:#666">=</span> HumanStandardToken.deployed();
+    <span style="color:#008000;font-weight:bold">const</span> initSupply <span style="color:#666">=</span> <span style="color:#666">1000000</span>;
 
-contract('HumanStandardToken', (accounts) =&gt; {
-  it('should put 1000000 molds in the first account', () =&gt; {
-    const molds = HumanStandardToken.deployed();
-    const initSupply = 1000000;
-
-    return molds.balanceOf(accounts[0])
+    <span style="color:#008000;font-weight:bold">return</span> molds.balanceOf(accounts[<span style="color:#666">0</span>])
       .then(balance =&gt; assert.equal(
           balance.valueOf(), initSupply,
-          `${initSupply} molds weren't in the first account`
+          <span style="color:#ba2121">`</span><span style="color:#b68;font-weight:bold">${</span>initSupply<span style="color:#b68;font-weight:bold">}</span><span style="color:#ba2121"> molds weren&#39;t in the first account`</span>
         )
       );
   });
 
-  it('should transfer molds to another user', () =&gt; {
-    const molds = HumanStandardToken.deployed();
+  it(<span style="color:#ba2121">&#39;should transfer molds to another user&#39;</span>, () =&gt; {
+    <span style="color:#008000;font-weight:bold">const</span> molds <span style="color:#666">=</span> HumanStandardToken.deployed();
 
-    return molds.transfer(accounts[1], 100, { from: accounts[0], gas: 400000 })
+    <span style="color:#008000;font-weight:bold">return</span> molds.transfer(accounts[<span style="color:#666">1</span>], <span style="color:#666">100</span>, { from<span style="color:#666">:</span> accounts[<span style="color:#666">0</span>], gas<span style="color:#666">:</span> <span style="color:#666">400000</span> })
       .then(
-        () =&gt; molds.balanceOf(accounts[1])
+        () =&gt; molds.balanceOf(accounts[<span style="color:#666">1</span>])
       )
       .then(balance =&gt; assert.equal(
-          balance.valueOf(), 100,
-          `${accounts[1]} didn't was not transfered 100 molds but ${balance.valueOf()}`
+          balance.valueOf(), <span style="color:#666">100</span>,
+          <span style="color:#ba2121">`</span><span style="color:#b68;font-weight:bold">${</span>accounts[<span style="color:#666">1</span>]<span style="color:#b68;font-weight:bold">}</span><span style="color:#ba2121"> didn&#39;t was not transfered 100 molds but </span><span style="color:#b68;font-weight:bold">${</span>balance.valueOf()<span style="color:#b68;font-weight:bold">}</span><span style="color:#ba2121">`</span>
         )
       );
   });
 
-  it('should emit a transfer event when there is a transfer', (done) =&gt; {
-    const transferredAmt = 1;
+  it(<span style="color:#ba2121">&#39;should emit a transfer event when there is a transfer&#39;</span>, (done) =&gt; {
+    <span style="color:#008000;font-weight:bold">const</span> transferredAmt <span style="color:#666">=</span> <span style="color:#666">1</span>;
 
-    const transferWatcher = molds.Transfer({ fromBlock: 'latest' },
+    <span style="color:#008000;font-weight:bold">const</span> transferWatcher <span style="color:#666">=</span> molds.Transfer({ fromBlock<span style="color:#666">:</span> <span style="color:#ba2121">&#39;latest&#39;</span> },
       (error, results) =&gt; {
         assert.equal(
           results.args._value.valueOf(), transferredAmt,
-          `transfer event amount not equal to ${transferredAmt}`
+          <span style="color:#ba2121">`transfer event amount not equal to </span><span style="color:#b68;font-weight:bold">${</span>transferredAmt<span style="color:#b68;font-weight:bold">}</span><span style="color:#ba2121">`</span>
         );
         transferWatcher.stopWatching();
         done();
       });
 
-    // trigger the event
-    molds.transfer(accounts[1], transferredAmt, { from: accounts[0], gas: 400000 });
+    <span style="color:#408080;font-style:italic">// trigger the event
+</span><span style="color:#408080;font-style:italic"></span>    molds.transfer(accounts[<span style="color:#666">1</span>], transferredAmt, { from<span style="color:#666">:</span> accounts[<span style="color:#666">0</span>], gas<span style="color:#666">:</span> <span style="color:#666">400000</span> });
   });  
 });
-</code></pre>
-
+</code></pre></div>
 <p>** / ! \ **
 I was stuck for hours because of the way contract functions can be called.
 There are two types of actions on the Ethereum blockchain. Action which change the contract states (like transfer funds for example), and the one which don&rsquo;t (like get balance, for example).
@@ -190,33 +168,22 @@ In truffle, you call the latter with a &ldquo;call&rdquo; on the contract object
 I found out later that there are constant functions in solidity, which basically mean functions that don&rsquo;t change the contract state. When you specify these functions in you contract definition as &ldquo;constant&rdquo;, then, truffle doesn&rsquo;t need the call&hellip; Problem solved, everything now looks uniform.</p>
 
 <p>Now you can try if everything works fine, launch testrpc</p>
-
-<pre><code class="language-shell">node_modules/ethereumjs-testrpc/bin/testrpc
-</code></pre>
-
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">node_modules/ethereumjs-testrpc/bin/testrpc</code></pre></div>
 <p>and open a new terminal and launch the tests</p>
-
-<pre><code class="language-shell">node_modules/truffle/cli.js test
-</code></pre>
-
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">node_modules/truffle/cli.js test</code></pre></div>
 <h2 id="creation-of-the-contracts-on-a-private-geth-or-even-morden">Creation of the contracts on a private geth or even morden</h2>
 
 <p>Modify your truffle.js to whichever node you want to migrate your contracts to.
 Mine is local geth, listening on port 9012, so truffle.js will become</p>
-
-<pre><code class="language-javascript">module.exports = {
-  rpc: {
-    host: 'localhost',
-    port: 9012,
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">module.exports <span style="color:#666">=</span> {
+  rpc<span style="color:#666">:</span> {
+    host<span style="color:#666">:</span> <span style="color:#ba2121">&#39;localhost&#39;</span>,
+    port<span style="color:#666">:</span> <span style="color:#666">9012</span>,
   },
 };
-</code></pre>
-
+</code></pre></div>
 <p>then migrate</p>
-
-<pre><code class="language-shell">node_modules/truffle/cli.js migrate
-</code></pre>
-
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">node_modules/truffle/cli.js migrate</code></pre></div>
 <p>Et voila! if everything is ok, truffle should have created your contracts and updated the built contracts with the right contract addresses in build/contracts.</p>
 
 <p>Now, let&rsquo;s play with these contracts on geth! See you on part 2.</p>

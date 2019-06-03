@@ -18,9 +18,9 @@
       
       <guid>https://vincentserpoul.github.io/post/gke-multi-accounts-clusters/</guid>
       <description>Google cloud configs Download and install gcloud Simply follow this link
-Listing existing configurations gcloud config configurations list NAME IS_ACTIVE ACCOUNT PROJECT DEFAULT_ZONE DEFAULT_REGION  This should give you only one line, with a default account.
-Creating a configuration gcloud config configurations create testconf  This will guide you through the configuration of a new configuration. It allows you to set one config per account, project, cluster&amp;hellip;
-Activating a configuration gcloud config configurations activate testconf  As simple as this to change your account/config.</description>
+Listing existing configurations gcloud config configurations list NAME IS_ACTIVE ACCOUNT PROJECT DEFAULT_ZONE DEFAULT_REGION This should give you only one line, with a default account.
+Creating a configuration gcloud config configurations create testconf This will guide you through the configuration of a new configuration. It allows you to set one config per account, project, cluster&amp;hellip;
+Activating a configuration gcloud config configurations activate testconf As simple as this to change your account/config.</description>
     </item>
     
     <item>

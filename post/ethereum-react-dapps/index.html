@@ -24,7 +24,7 @@
         <meta property="og:article:author" content="" />
         <meta property="og:article:published_time" content="2016-10-27T13:34:00&#43;08:00" />
     
-        <meta name="generator" content="Hugo 0.56.0-DEV" />
+        <meta name="generator" content="Hugo 0.55.6" />
         <title>Ethereum react dapps &middot; VS tech corner </title>
         <link rel="canonical" href="https://vincentserpoul.github.io/" />
         <link rel="alternate" type="application/rss+xml" title="RSS" href="">
@@ -59,227 +59,214 @@ I won&rsquo;t get into the redux, redux-saga details, I let you play with the am
 <h2 id="interacting-with-constant-functions">Interacting with constant functions</h2>
 
 <p>Let&rsquo;s use the typical balanceOf function of the EIP20 contracts:</p>
-
-<pre><code class="language-solidity">    function balanceOf(address _owner) constant returns (uint256 balance) {
-        return balances[_owner];
-    }
-</code></pre>
-
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-solidity" data-lang="solidity">    <span style="color:#008000;font-weight:bold">function</span> balanceOf(<span style="color:#b00040">address</span> _owner) <span style="color:#008000;font-weight:bold">constant</span> <span style="color:#008000;font-weight:bold">returns</span> (<span style="color:#b00040">uint256</span> <span style="color:#008000">balance</span>) {
+        <span style="color:#008000;font-weight:bold">return</span> balances[_owner];
+    }</code></pre></div>
 <p>Here are the sagas (redux-sagas) I used to interact:</p>
-
-<pre><code class="language-javascript">import { take, call, put, cancel, select, fork } from 'redux-saga/effects';
-import {
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#008000;font-weight:bold">import</span> { take, call, put, cancel, select, fork } from <span style="color:#ba2121">&#39;redux-saga/effects&#39;</span>;
+<span style="color:#008000;font-weight:bold">import</span> {
   BALANCE_OF_GET,
-} from './constants';
-import { LOCATION_CHANGE } from 'react-router-redux';
+} from <span style="color:#ba2121">&#39;./constants&#39;</span>;
+<span style="color:#008000;font-weight:bold">import</span> { LOCATION_CHANGE } from <span style="color:#ba2121">&#39;react-router-redux&#39;</span>;
 
-import {
+<span style="color:#008000;font-weight:bold">import</span> {
   balanceOfSuccess,
   balanceOfFailure,
-} from './actions';
+} from <span style="color:#ba2121">&#39;./actions&#39;</span>;
 
-import { selectEthConnectWeb3Connection } from 'containers/EthConnect/selectors';
+<span style="color:#008000;font-weight:bold">import</span> { selectEthConnectWeb3Connection } from <span style="color:#ba2121">&#39;containers/EthConnect/selectors&#39;</span>;
 
-import HumanStandardToken from 'contracts/HumanStandardToken.sol.js';
+<span style="color:#008000;font-weight:bold">import</span> HumanStandardToken from <span style="color:#ba2121">&#39;contracts/HumanStandardToken.sol.js&#39;</span>;
 
-function* balanceOfGet(ethAddress) {
-  const web3Connection = yield select(selectEthConnectWeb3Connection());
+<span style="color:#008000;font-weight:bold">function</span><span style="color:#666">*</span> balanceOfGet(ethAddress) {
+  <span style="color:#008000;font-weight:bold">const</span> web3Connection <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">yield</span> select(selectEthConnectWeb3Connection());
 
   HumanStandardToken.setProvider(web3Connection.currentProvider);
-  const token = HumanStandardToken.deployed();
+  <span style="color:#008000;font-weight:bold">const</span> token <span style="color:#666">=</span> HumanStandardToken.deployed();
 
-  const balancePromise = yield call(token.balanceOf, ethAddress);
+  <span style="color:#008000;font-weight:bold">const</span> balancePromise <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">yield</span> call(token.balanceOf, ethAddress);
 
-  // We return an object in a specific format, see utils/request.js for more information
-  if (balancePromise.err === undefined || balancePromise.err === null) {
-    yield put(balanceOfSuccess(ethAddress, balancePromise.valueOf()));
-  } else {
-    console.log(balancePromise.err.response); // eslint-disable-line no-console
-    yield put(balanceOfFailure(ethAddress, balancePromise.err.response));
+  <span style="color:#408080;font-style:italic">// We return an object in a specific format, see utils/request.js for more information
+</span><span style="color:#408080;font-style:italic"></span>  <span style="color:#008000;font-weight:bold">if</span> (balancePromise.err <span style="color:#666">===</span> <span style="color:#008000;font-weight:bold">undefined</span> <span style="color:#666">||</span> balancePromise.err <span style="color:#666">===</span> <span style="color:#008000;font-weight:bold">null</span>) {
+    <span style="color:#008000;font-weight:bold">yield</span> put(balanceOfSuccess(ethAddress, balancePromise.valueOf()));
+  } <span style="color:#008000;font-weight:bold">else</span> {
+    console.log(balancePromise.err.response); <span style="color:#408080;font-style:italic">// eslint-disable-line no-console
+</span><span style="color:#408080;font-style:italic"></span>    <span style="color:#008000;font-weight:bold">yield</span> put(balanceOfFailure(ethAddress, balancePromise.err.response));
   }
 }
 
-/**
- * Watches for BALANCE_OF_GET action and calls handler
- */
-export function* balanceOfWatcher() {
-  while (true) { // eslint-disable-line no-constant-condition
-    const { ethAddress } = yield take(BALANCE_OF_GET);
-    // use fork and not call to be sure to fork all
-    yield fork(balanceOfGet, ethAddress);
+<span style="color:#408080;font-style:italic">/**
+</span><span style="color:#408080;font-style:italic"> * Watches for BALANCE_OF_GET action and calls handler
+</span><span style="color:#408080;font-style:italic"> */</span>
+<span style="color:#008000;font-weight:bold">export</span> <span style="color:#008000;font-weight:bold">function</span><span style="color:#666">*</span> balanceOfWatcher() {
+  <span style="color:#008000;font-weight:bold">while</span> (<span style="color:#008000;font-weight:bold">true</span>) { <span style="color:#408080;font-style:italic">// eslint-disable-line no-constant-condition
+</span><span style="color:#408080;font-style:italic"></span>    <span style="color:#008000;font-weight:bold">const</span> { ethAddress } <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">yield</span> take(BALANCE_OF_GET);
+    <span style="color:#408080;font-style:italic">// use fork and not call to be sure to fork all
+</span><span style="color:#408080;font-style:italic"></span>    <span style="color:#008000;font-weight:bold">yield</span> fork(balanceOfGet, ethAddress);
   }
 }
 
 
-/**
- * Root saga manages watcher lifecycle
- */
-export function* balanceOfSaga() {
-  // Fork watcher so we can continue execution
-  const watcher = yield fork(balanceOfWatcher);
+<span style="color:#408080;font-style:italic">/**
+</span><span style="color:#408080;font-style:italic"> * Root saga manages watcher lifecycle
+</span><span style="color:#408080;font-style:italic"> */</span>
+<span style="color:#008000;font-weight:bold">export</span> <span style="color:#008000;font-weight:bold">function</span><span style="color:#666">*</span> balanceOfSaga() {
+  <span style="color:#408080;font-style:italic">// Fork watcher so we can continue execution
+</span><span style="color:#408080;font-style:italic"></span>  <span style="color:#008000;font-weight:bold">const</span> watcher <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">yield</span> fork(balanceOfWatcher);
 
-  // Suspend execution until location changes
-  yield take(LOCATION_CHANGE);
-  yield cancel(watcher);
+  <span style="color:#408080;font-style:italic">// Suspend execution until location changes
+</span><span style="color:#408080;font-style:italic"></span>  <span style="color:#008000;font-weight:bold">yield</span> take(LOCATION_CHANGE);
+  <span style="color:#008000;font-weight:bold">yield</span> cancel(watcher);
 }
 
-// All sagas to be loaded
-export default [
+<span style="color:#408080;font-style:italic">// All sagas to be loaded
+</span><span style="color:#408080;font-style:italic"></span><span style="color:#008000;font-weight:bold">export</span> <span style="color:#008000;font-weight:bold">default</span> [
   balanceOfSaga,
 ];
-
-</code></pre>
-
+</code></pre></div>
 <p>Then, simply implement the right reducers, actions and you are done! you can easily get the balance in your UI.</p>
 
 <h2 id="interacting-with-functions-that-needs-transactions">Interacting with functions that needs transactions</h2>
 
 <p>Let&rsquo;s use the same EIP20 contract again:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-solidity" data-lang="solidity">    <span style="color:#008000;font-weight:bold">event</span> Approval(<span style="color:#b00040">address</span> <span style="color:#008000;font-weight:bold">indexed</span> _owner, <span style="color:#b00040">address</span> <span style="color:#008000;font-weight:bold">indexed</span> _spender, <span style="color:#b00040">uint256</span> _value);
 
-<pre><code class="language-solidity">    event Approval(address indexed _owner, address indexed _spender, uint256 _value);
-
-    function approve(address _spender, uint256 _value) returns (bool success) {
-        allowed[msg.sender][_spender] = _value;
-        Approval(msg.sender, _spender, _value);
-        return true;
-    }
-</code></pre>
-
-<pre><code class="language-javascript">import { take, call, put, select, cancel, fork } from 'redux-saga/effects';
-import {
+    <span style="color:#008000;font-weight:bold">function</span> approve(<span style="color:#b00040">address</span> _spender, <span style="color:#b00040">uint256</span> _value) <span style="color:#008000;font-weight:bold">returns</span> (<span style="color:#b00040">bool</span> success) {
+        allowed[<span style="color:#008000">msg</span>.<span style="color:#008000">sender</span>][_spender] <span style="color:#666">=</span> _value;
+        Approval(<span style="color:#008000">msg</span>.<span style="color:#008000">sender</span>, _spender, _value);
+        <span style="color:#008000;font-weight:bold">return</span> <span style="color:#008000;font-weight:bold">true</span>;
+    }</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#008000;font-weight:bold">import</span> { take, call, put, select, cancel, fork } from <span style="color:#ba2121">&#39;redux-saga/effects&#39;</span>;
+<span style="color:#008000;font-weight:bold">import</span> {
   GIVEMETOKEN_LAUNCH,
-} from './constants';
-import { LOCATION_CHANGE } from 'react-router-redux';
+} from <span style="color:#ba2121">&#39;./constants&#39;</span>;
+<span style="color:#008000;font-weight:bold">import</span> { LOCATION_CHANGE } from <span style="color:#ba2121">&#39;react-router-redux&#39;</span>;
 
-import {
+<span style="color:#008000;font-weight:bold">import</span> {
   givemetokensSuccess,
   givemetokensFailure,
-} from './actions';
+} from <span style="color:#ba2121">&#39;./actions&#39;</span>;
 
-import {
+<span style="color:#008000;font-weight:bold">import</span> {
   balanceOfGet,
-} from 'containers/Token/actions';
+} from <span style="color:#ba2121">&#39;containers/Token/actions&#39;</span>;
 
-import { selectEthConnectWeb3Connection } from 'containers/EthConnect/selectors';
-// import { selectRianEthAddress } from './selectors';
+<span style="color:#008000;font-weight:bold">import</span> { selectEthConnectWeb3Connection } from <span style="color:#ba2121">&#39;containers/EthConnect/selectors&#39;</span>;
+<span style="color:#408080;font-style:italic">// import { selectRianEthAddress } from &#39;./selectors&#39;;
+</span><span style="color:#408080;font-style:italic"></span>
+<span style="color:#008000;font-weight:bold">import</span> HumanStandardToken from <span style="color:#ba2121">&#39;contracts/HumanStandardToken.sol.js&#39;</span>;
 
-import HumanStandardToken from 'contracts/HumanStandardToken.sol.js';
-
-function* givemetokens(ethAddress) {
-  const web3Connection = yield select(selectEthConnectWeb3Connection());
+<span style="color:#008000;font-weight:bold">function</span><span style="color:#666">*</span> givemetokens(ethAddress) {
+  <span style="color:#008000;font-weight:bold">const</span> web3Connection <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">yield</span> select(selectEthConnectWeb3Connection());
   HumanStandardToken.setProvider(web3Connection.currentProvider);
-  const tokens = HumanStandardToken.deployed();
+  <span style="color:#008000;font-weight:bold">const</span> tokens <span style="color:#666">=</span> HumanStandardToken.deployed();
 
-  const tokensOwner = yield call(tokens.getOwner.call);
+  <span style="color:#008000;font-weight:bold">const</span> tokensOwner <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">yield</span> call(tokens.getOwner.call);
 
-  try {
-    yield call(tokens.approve, ethAddress, 100, { from: tokensOwner, gas: 200000 });
-  } catch (e) {
-    console.log(e); // eslint-disable-line no-console
-    yield put(givemetokensFailure(ethAddress));
-    return;
+  <span style="color:#008000;font-weight:bold">try</span> {
+    <span style="color:#008000;font-weight:bold">yield</span> call(tokens.approve, ethAddress, <span style="color:#666">100</span>, { from<span style="color:#666">:</span> tokensOwner, gas<span style="color:#666">:</span> <span style="color:#666">200000</span> });
+  } <span style="color:#008000;font-weight:bold">catch</span> (e) {
+    console.log(e); <span style="color:#408080;font-style:italic">// eslint-disable-line no-console
+</span><span style="color:#408080;font-style:italic"></span>    <span style="color:#008000;font-weight:bold">yield</span> put(givemetokensFailure(ethAddress));
+    <span style="color:#008000;font-weight:bold">return</span>;
   }
 
-  const approvedAmt = yield call(tokens.allowance.call, tokensOwner, ethAddress);
-  console.log(`approved amount: ${approvedAmt}`);
+  <span style="color:#008000;font-weight:bold">const</span> approvedAmt <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">yield</span> call(tokens.allowance.call, tokensOwner, ethAddress);
+  console.log(<span style="color:#ba2121">`approved amount: </span><span style="color:#b68;font-weight:bold">${</span>approvedAmt<span style="color:#b68;font-weight:bold">}</span><span style="color:#ba2121">`</span>);
 
-  try {
-    yield call(tokens.transferFrom, tokensOwner, ethAddress, 100, { from: ethAddress, gas: 200000 });
-  } catch (e) {
-    console.log(e); // eslint-disable-line no-console
-    yield put(givemetokensFailure(ethAddress));
+  <span style="color:#008000;font-weight:bold">try</span> {
+    <span style="color:#008000;font-weight:bold">yield</span> call(tokens.transferFrom, tokensOwner, ethAddress, <span style="color:#666">100</span>, { from<span style="color:#666">:</span> ethAddress, gas<span style="color:#666">:</span> <span style="color:#666">200000</span> });
+  } <span style="color:#008000;font-weight:bold">catch</span> (e) {
+    console.log(e); <span style="color:#408080;font-style:italic">// eslint-disable-line no-console
+</span><span style="color:#408080;font-style:italic"></span>    <span style="color:#008000;font-weight:bold">yield</span> put(givemetokensFailure(ethAddress));
   }
 
-  yield put(givemetokensSuccess(ethAddress, true));
-  yield put(balanceOfGet(ethAddress));
+  <span style="color:#008000;font-weight:bold">yield</span> put(givemetokensSuccess(ethAddress, <span style="color:#008000;font-weight:bold">true</span>));
+  <span style="color:#008000;font-weight:bold">yield</span> put(balanceOfGet(ethAddress));
 }
 
-/**
- * Watches for SIMPLEINSURANCE_givemetokens_LAUNCH action and calls handler
- */
-export function* givemetokensWatcher() {
-  while (true) { // eslint-disable-line no-constant-condition
-    const { ethAddress } = yield take(GIVEMETOKEN_LAUNCH);
-    yield call(givemetokens, ethAddress);
+<span style="color:#408080;font-style:italic">/**
+</span><span style="color:#408080;font-style:italic"> * Watches for SIMPLEINSURANCE_givemetokens_LAUNCH action and calls handler
+</span><span style="color:#408080;font-style:italic"> */</span>
+<span style="color:#008000;font-weight:bold">export</span> <span style="color:#008000;font-weight:bold">function</span><span style="color:#666">*</span> givemetokensWatcher() {
+  <span style="color:#008000;font-weight:bold">while</span> (<span style="color:#008000;font-weight:bold">true</span>) { <span style="color:#408080;font-style:italic">// eslint-disable-line no-constant-condition
+</span><span style="color:#408080;font-style:italic"></span>    <span style="color:#008000;font-weight:bold">const</span> { ethAddress } <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">yield</span> take(GIVEMETOKEN_LAUNCH);
+    <span style="color:#008000;font-weight:bold">yield</span> call(givemetokens, ethAddress);
   }
 }
 
 
-/**
- * Root saga manages watcher lifecycle
- */
-export function* givemetokensSaga() {
-  // Fork watcher so we can continue execution
-  const watcher = yield fork(givemetokensWatcher);
+<span style="color:#408080;font-style:italic">/**
+</span><span style="color:#408080;font-style:italic"> * Root saga manages watcher lifecycle
+</span><span style="color:#408080;font-style:italic"> */</span>
+<span style="color:#008000;font-weight:bold">export</span> <span style="color:#008000;font-weight:bold">function</span><span style="color:#666">*</span> givemetokensSaga() {
+  <span style="color:#408080;font-style:italic">// Fork watcher so we can continue execution
+</span><span style="color:#408080;font-style:italic"></span>  <span style="color:#008000;font-weight:bold">const</span> watcher <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">yield</span> fork(givemetokensWatcher);
 
-  // Suspend execution until location changes
-  yield take(LOCATION_CHANGE);
-  yield cancel(watcher);
+  <span style="color:#408080;font-style:italic">// Suspend execution until location changes
+</span><span style="color:#408080;font-style:italic"></span>  <span style="color:#008000;font-weight:bold">yield</span> take(LOCATION_CHANGE);
+  <span style="color:#008000;font-weight:bold">yield</span> cancel(watcher);
 }
 
-// All sagas to be loaded
-export default [
+<span style="color:#408080;font-style:italic">// All sagas to be loaded
+</span><span style="color:#408080;font-style:italic"></span><span style="color:#008000;font-weight:bold">export</span> <span style="color:#008000;font-weight:bold">default</span> [
   givemetokensSaga,
 ];
-</code></pre>
-
+</code></pre></div>
 <p>At that point, you only know that the transaction has gone through, you don&rsquo;t really know what happened. That&rsquo;s when you need to listen to the event of your contracts.</p>
 
 <h2 id="listening-to-events">Listening to events</h2>
 
 <p>Same example as above, we will listen to the Approval event.
 We need to create a eventChannel, as the event is coming from <em>outside</em> this time, it won&rsquo;t be generated by our own UI.</p>
-
-<pre><code class="language-javascript">const ethEvent = () =&gt; eventChannel((emitter) =&gt; {
-  const tokensApproval = tokens.Approval({ fromBlock: 'latest' });
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#008000;font-weight:bold">const</span> ethEvent <span style="color:#666">=</span> () =&gt; eventChannel((emitter) =&gt; {
+  <span style="color:#008000;font-weight:bold">const</span> tokensApproval <span style="color:#666">=</span> tokens.Approval({ fromBlock<span style="color:#666">:</span> <span style="color:#ba2121">&#39;latest&#39;</span> });
   tokensApproval.watch((error, results) =&gt; {
-    const eventType = 'approve';
-    const eventTime = new Date().toISOString();
-    const eventEthAddress = results.args._owner;
-    let eventDescription;
-    if (error) {
-      console.log(`Approval error ${error}`); // eslint-disable-line no-console
-      eventDescription = `ERROR - ${results.args._owner.substring(0,6)} allowed ${results.args._spender.substring(0,6)} to spend ${results.args._value}Ʉ on his behalf`;
-    } else {
-      eventDescription = `${results.args._owner.substring(0,6)} allowed ${results.args._spender.substring(0,6)} to spend ${results.args._value}Ʉ on his behalf`;
+    <span style="color:#008000;font-weight:bold">const</span> eventType <span style="color:#666">=</span> <span style="color:#ba2121">&#39;approve&#39;</span>;
+    <span style="color:#008000;font-weight:bold">const</span> eventTime <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">new</span> <span style="color:#008000">Date</span>().toISOString();
+    <span style="color:#008000;font-weight:bold">const</span> eventEthAddress <span style="color:#666">=</span> results.args._owner;
+    <span style="color:#008000;font-weight:bold">let</span> eventDescription;
+    <span style="color:#008000;font-weight:bold">if</span> (error) {
+      console.log(<span style="color:#ba2121">`Approval error </span><span style="color:#b68;font-weight:bold">${</span>error<span style="color:#b68;font-weight:bold">}</span><span style="color:#ba2121">`</span>); <span style="color:#408080;font-style:italic">// eslint-disable-line no-console
+</span><span style="color:#408080;font-style:italic"></span>      eventDescription <span style="color:#666">=</span> <span style="color:#ba2121">`ERROR - </span><span style="color:#b68;font-weight:bold">${</span>results.args._owner.substring(<span style="color:#666">0</span>,<span style="color:#666">6</span>)<span style="color:#b68;font-weight:bold">}</span><span style="color:#ba2121"> allowed </span><span style="color:#b68;font-weight:bold">${</span>results.args._spender.substring(<span style="color:#666">0</span>,<span style="color:#666">6</span>)<span style="color:#b68;font-weight:bold">}</span><span style="color:#ba2121"> to spend </span><span style="color:#b68;font-weight:bold">${</span>results.args._value<span style="color:#b68;font-weight:bold">}</span><span style="color:#ba2121">Ʉ on his behalf`</span>;
+    } <span style="color:#008000;font-weight:bold">else</span> {
+      eventDescription <span style="color:#666">=</span> <span style="color:#ba2121">`</span><span style="color:#b68;font-weight:bold">${</span>results.args._owner.substring(<span style="color:#666">0</span>,<span style="color:#666">6</span>)<span style="color:#b68;font-weight:bold">}</span><span style="color:#ba2121"> allowed </span><span style="color:#b68;font-weight:bold">${</span>results.args._spender.substring(<span style="color:#666">0</span>,<span style="color:#666">6</span>)<span style="color:#b68;font-weight:bold">}</span><span style="color:#ba2121"> to spend </span><span style="color:#b68;font-weight:bold">${</span>results.args._value<span style="color:#b68;font-weight:bold">}</span><span style="color:#ba2121">Ʉ on his behalf`</span>;
     }
 
     emitter({ eventEthAddress, eventType, eventTime, eventDescription });
   });
 
-  return () =&gt; {
+  <span style="color:#008000;font-weight:bold">return</span> () =&gt; {
     tokensApproval.stopWatching();
   };
 });
 
-function* handleEthEvent(event) {
-  switch (event.eventType) {
-    case 'approve':
-      yield put(ethEventListenerReceiveAction(event.eventEthAddress, event.eventType, event.eventTime, event.eventDescription));
-      break;
-    default:
-      console.log(event); // eslint-disable-line no-console
-  }
+<span style="color:#008000;font-weight:bold">function</span><span style="color:#666">*</span> handleEthEvent(event) {
+  <span style="color:#008000;font-weight:bold">switch</span> (event.eventType) {
+    <span style="color:#008000;font-weight:bold">case</span> <span style="color:#ba2121">&#39;approve&#39;</span><span style="color:#666">:</span>
+      <span style="color:#008000;font-weight:bold">yield</span> put(ethEventListenerReceiveAction(event.eventEthAddress, event.eventType, event.eventTime, event.eventDescription));
+      <span style="color:#008000;font-weight:bold">break</span>;
+    <span style="color:#008000;font-weight:bold">default</span><span style="color:#666">:</span>
+      console.log(event); <span style="color:#408080;font-style:italic">// eslint-disable-line no-console
+</span><span style="color:#408080;font-style:italic"></span>  }
 }
 
-export function* ethEventListenerSaga() {
-  yield put(ethEventListenerCreateAction());
+<span style="color:#008000;font-weight:bold">export</span> <span style="color:#008000;font-weight:bold">function</span><span style="color:#666">*</span> ethEventListenerSaga() {
+  <span style="color:#008000;font-weight:bold">yield</span> put(ethEventListenerCreateAction());
 
-  const chan = yield call(ethEvent);
-  try {
-    while (true) {
-      const event = yield take(chan);
-      yield call(handleEthEvent, event);
+  <span style="color:#008000;font-weight:bold">const</span> chan <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">yield</span> call(ethEvent);
+  <span style="color:#008000;font-weight:bold">try</span> {
+    <span style="color:#008000;font-weight:bold">while</span> (<span style="color:#008000;font-weight:bold">true</span>) {
+      <span style="color:#008000;font-weight:bold">const</span> event <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">yield</span> take(chan);
+      <span style="color:#008000;font-weight:bold">yield</span> call(handleEthEvent, event);
     }
-  } finally {
-    if (yield cancelled()) {
+  } <span style="color:#008000;font-weight:bold">finally</span> {
+    <span style="color:#008000;font-weight:bold">if</span> (<span style="color:#008000;font-weight:bold">yield</span> cancelled()) {
       chan.close();
-      console.log('listening cancelled');
+      console.log(<span style="color:#ba2121">&#39;listening cancelled&#39;</span>);
     }
   }
 } 
-</code></pre>
-
+</code></pre></div>
 <p>And here you go! You can now listen to the stream of events.</p>
 
 <h2 id="getting-a-list-of-events">Getting a list of events</h2>
@@ -287,90 +274,88 @@ export function* ethEventListenerSaga() {
 <p>In Ethereum, you can get the list of past events, it can kind of act like a kind of storage for the history of your contracts (I won&rsquo;t go into details for this, but some node might not keep the whole history).</p>
 
 <p>How to get the history of events on the contract?</p>
-
-<pre><code class="language-javascript">import { take, call, put, cancel, fork } from 'redux-saga/effects';
-import {
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#008000;font-weight:bold">import</span> { take, call, put, cancel, fork } from <span style="color:#ba2121">&#39;redux-saga/effects&#39;</span>;
+<span style="color:#008000;font-weight:bold">import</span> {
   APPROVAL_HISTORY_GET,
-} from './constants';
-import { LOCATION_CHANGE } from 'react-router-redux';
-import { web3Connect } from 'utils/web3.js';
-import {
+} from <span style="color:#ba2121">&#39;./constants&#39;</span>;
+<span style="color:#008000;font-weight:bold">import</span> { LOCATION_CHANGE } from <span style="color:#ba2121">&#39;react-router-redux&#39;</span>;
+<span style="color:#008000;font-weight:bold">import</span> { web3Connect } from <span style="color:#ba2121">&#39;utils/web3.js&#39;</span>;
+<span style="color:#008000;font-weight:bold">import</span> {
   receiveApprovalHistory,
-} from './actions';
-import {
+} from <span style="color:#ba2121">&#39;./actions&#39;</span>;
+<span style="color:#008000;font-weight:bold">import</span> {
   balanceOfGet,
-} from 'containers/Token/actions';
-import HumanStandardToken from 'contracts/HumanStandardToken.sol.js';
+} from <span style="color:#ba2121">&#39;containers/Token/actions&#39;</span>;
+<span style="color:#008000;font-weight:bold">import</span> HumanStandardToken from <span style="color:#ba2121">&#39;contracts/HumanStandardToken.sol.js&#39;</span>;
 
-function* getApprovalHistory(ethAddress) {
-  const web3Connection = web3Connect();
+<span style="color:#008000;font-weight:bold">function</span><span style="color:#666">*</span> getApprovalHistory(ethAddress) {
+  <span style="color:#008000;font-weight:bold">const</span> web3Connection <span style="color:#666">=</span> web3Connect();
 
   HumanStandardToken.setProvider(web3Connection.currentProvider);
-  const tokens = HumanStandardToken.deployed();
+  <span style="color:#008000;font-weight:bold">const</span> tokens <span style="color:#666">=</span> HumanStandardToken.deployed();
 
-  const approvalHistory = [];
-  // Getting the list of events from block 0 to latest block, with a filter on _owner as it is an indexed field
-  const tokensApproval = tokens.Approval({ _owner: ethAddress }, { fromBlock: '0', toBlock: 'latest' });
+  <span style="color:#008000;font-weight:bold">const</span> approvalHistory <span style="color:#666">=</span> [];
+  <span style="color:#408080;font-style:italic">// Getting the list of events from block 0 to latest block, with a filter on _owner as it is an indexed field
+</span><span style="color:#408080;font-style:italic"></span>  <span style="color:#008000;font-weight:bold">const</span> tokensApproval <span style="color:#666">=</span> tokens.Approval({ _owner<span style="color:#666">:</span> ethAddress }, { fromBlock<span style="color:#666">:</span> <span style="color:#ba2121">&#39;0&#39;</span>, toBlock<span style="color:#666">:</span> <span style="color:#ba2121">&#39;latest&#39;</span> });
 
-  const getApprovalLogPromise = yield call(eventGetPromisified, tokensApproval);
+  <span style="color:#008000;font-weight:bold">const</span> getApprovalLogPromise <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">yield</span> call(eventGetPromisified, tokensApproval);
 
-  if (getApprovalLogPromise.err === null || getApprovalLogPromise.err === undefined) {
-    for (const results of getApprovalLogPromise) {
+  <span style="color:#008000;font-weight:bold">if</span> (getApprovalLogPromise.err <span style="color:#666">===</span> <span style="color:#008000;font-weight:bold">null</span> <span style="color:#666">||</span> getApprovalLogPromise.err <span style="color:#666">===</span> <span style="color:#008000;font-weight:bold">undefined</span>) {
+    <span style="color:#008000;font-weight:bold">for</span> (<span style="color:#008000;font-weight:bold">const</span> results <span style="color:#008000;font-weight:bold">of</span> getApprovalLogPromise) {
       approvalHistory.push({
-        trigger: results.args._trigger,
-        measurement: results.args._measurement.valueOf(),
-        premium: results.args._amount.valueOf(),
-        refundedAmount: results.args._refundAmount.valueOf(),
-        settled: results.args._timeEnded.valueOf(),
-        refunded: results.args._due.valueOf(),
+        trigger<span style="color:#666">:</span> results.args._trigger,
+        measurement<span style="color:#666">:</span> results.args._measurement.valueOf(),
+        premium<span style="color:#666">:</span> results.args._amount.valueOf(),
+        refundedAmount<span style="color:#666">:</span> results.args._refundAmount.valueOf(),
+        settled<span style="color:#666">:</span> results.args._timeEnded.valueOf(),
+        refunded<span style="color:#666">:</span> results.args._due.valueOf(),
       });
     }
-  } else {
+  } <span style="color:#008000;font-weight:bold">else</span> {
     console.log(getApprovalLogPromise.err);
   }
 
-  yield put(receiveApprovalHistory(ethAddress, approvalHistory));
+  <span style="color:#008000;font-weight:bold">yield</span> put(receiveApprovalHistory(ethAddress, approvalHistory));
 }
 
-// Event promisifier to turn the nasty web3 callback to a promise ES6 form
-const eventGetPromisified = (event) =&gt; new Promise((resolve, reject) =&gt; {
+<span style="color:#408080;font-style:italic">// Event promisifier to turn the nasty web3 callback to a promise ES6 form
+</span><span style="color:#408080;font-style:italic"></span><span style="color:#008000;font-weight:bold">const</span> eventGetPromisified <span style="color:#666">=</span> (event) =&gt; <span style="color:#008000;font-weight:bold">new</span> <span style="color:#008000">Promise</span>((resolve, reject) =&gt; {
   event.get((error, logs) =&gt; {
-    if (error) {
+    <span style="color:#008000;font-weight:bold">if</span> (error) {
       reject(error);
-    } else {
+    } <span style="color:#008000;font-weight:bold">else</span> {
       resolve(logs);
     }
   });
 });
 
-/**
- * Watches for APPROVAL_HISTORY_GET action and calls handler
- */
-export function* getApprovalHistoryWatcher() {
-  while (true) { // eslint-disable-line no-constant-condition
-    const { ethAddress } = yield take(APPROVAL_HISTORY_GET);
-    yield fork(getApprovalHistory, ethAddress);
+<span style="color:#408080;font-style:italic">/**
+</span><span style="color:#408080;font-style:italic"> * Watches for APPROVAL_HISTORY_GET action and calls handler
+</span><span style="color:#408080;font-style:italic"> */</span>
+<span style="color:#008000;font-weight:bold">export</span> <span style="color:#008000;font-weight:bold">function</span><span style="color:#666">*</span> getApprovalHistoryWatcher() {
+  <span style="color:#008000;font-weight:bold">while</span> (<span style="color:#008000;font-weight:bold">true</span>) { <span style="color:#408080;font-style:italic">// eslint-disable-line no-constant-condition
+</span><span style="color:#408080;font-style:italic"></span>    <span style="color:#008000;font-weight:bold">const</span> { ethAddress } <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">yield</span> take(APPROVAL_HISTORY_GET);
+    <span style="color:#008000;font-weight:bold">yield</span> fork(getApprovalHistory, ethAddress);
   }
 }
 
-/**
- * Root saga manages watcher lifecycle
- */
-export function* approvalHistorySaga() {
-  // Fork watcher so we can continue execution
-  const getApprovalHistoryW = yield fork(getApprovalHistoryWatcher);
+<span style="color:#408080;font-style:italic">/**
+</span><span style="color:#408080;font-style:italic"> * Root saga manages watcher lifecycle
+</span><span style="color:#408080;font-style:italic"> */</span>
+<span style="color:#008000;font-weight:bold">export</span> <span style="color:#008000;font-weight:bold">function</span><span style="color:#666">*</span> approvalHistorySaga() {
+  <span style="color:#408080;font-style:italic">// Fork watcher so we can continue execution
+</span><span style="color:#408080;font-style:italic"></span>  <span style="color:#008000;font-weight:bold">const</span> getApprovalHistoryW <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">yield</span> fork(getApprovalHistoryWatcher);
 
-  // Suspend execution until location changes
-  yield take(LOCATION_CHANGE);
-  yield cancel(getApprovalHistoryW);
+  <span style="color:#408080;font-style:italic">// Suspend execution until location changes
+</span><span style="color:#408080;font-style:italic"></span>  <span style="color:#008000;font-weight:bold">yield</span> take(LOCATION_CHANGE);
+  <span style="color:#008000;font-weight:bold">yield</span> cancel(getApprovalHistoryW);
 }
 
-// All sagas to be loaded
-export default [
+<span style="color:#408080;font-style:italic">// All sagas to be loaded
+</span><span style="color:#408080;font-style:italic"></span><span style="color:#008000;font-weight:bold">export</span> <span style="color:#008000;font-weight:bold">default</span> [
   approvalHistorySaga,
 ];
-</code></pre>
-
+</code></pre></div>
 <p>Et voila!</p>
 
     </section>

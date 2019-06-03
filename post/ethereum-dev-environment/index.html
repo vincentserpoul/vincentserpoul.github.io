@@ -24,7 +24,7 @@
         <meta property="og:article:author" content="" />
         <meta property="og:article:published_time" content="2016-08-01T08:27:27&#43;08:00" />
     
-        <meta name="generator" content="Hugo 0.56.0-DEV" />
+        <meta name="generator" content="Hugo 0.55.6" />
         <title>Ethereum dev environment &middot; VS tech corner </title>
         <link rel="canonical" href="https://vincentserpoul.github.io/" />
         <link rel="alternate" type="application/rss+xml" title="RSS" href="">
@@ -81,40 +81,31 @@ You can the ethereum testrpc: easiest!</p>
 and extract it.</p>
 
 <p>Create a file customGenesis.json</p>
-
-<pre><code class="language-json">{
-  &quot;nonce&quot;: &quot;0x0000000000000042&quot;,
-  &quot;timestamp&quot;: &quot;0x0&quot;,
-  &quot;parentHash&quot;: &quot;0x0000000000000000000000000000000000000000000000000000000000000000&quot;,
-  &quot;extraData&quot;: &quot;0x0&quot;,
-  &quot;gasLimit&quot;: &quot;0x8000000&quot;,
-  &quot;difficulty&quot;: &quot;0x400&quot;,
-  &quot;mixhash&quot;: &quot;0x0000000000000000000000000000000000000000000000000000000000000000&quot;,
-  &quot;coinbase&quot;: &quot;0x3333333333333333333333333333333333333333&quot;,
-  &quot;alloc&quot;: {}
-}
-</code></pre>
-
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#008000;font-weight:bold">&#34;nonce&#34;</span>: <span style="color:#ba2121">&#34;0x0000000000000042&#34;</span>,
+  <span style="color:#008000;font-weight:bold">&#34;timestamp&#34;</span>: <span style="color:#ba2121">&#34;0x0&#34;</span>,
+  <span style="color:#008000;font-weight:bold">&#34;parentHash&#34;</span>: <span style="color:#ba2121">&#34;0x0000000000000000000000000000000000000000000000000000000000000000&#34;</span>,
+  <span style="color:#008000;font-weight:bold">&#34;extraData&#34;</span>: <span style="color:#ba2121">&#34;0x0&#34;</span>,
+  <span style="color:#008000;font-weight:bold">&#34;gasLimit&#34;</span>: <span style="color:#ba2121">&#34;0x8000000&#34;</span>,
+  <span style="color:#008000;font-weight:bold">&#34;difficulty&#34;</span>: <span style="color:#ba2121">&#34;0x400&#34;</span>,
+  <span style="color:#008000;font-weight:bold">&#34;mixhash&#34;</span>: <span style="color:#ba2121">&#34;0x0000000000000000000000000000000000000000000000000000000000000000&#34;</span>,
+  <span style="color:#008000;font-weight:bold">&#34;coinbase&#34;</span>: <span style="color:#ba2121">&#34;0x3333333333333333333333333333333333333333&#34;</span>,
+  <span style="color:#008000;font-weight:bold">&#34;alloc&#34;</span>: {}
+}</code></pre></div>
 <p>then init yout node with the genesis block above</p>
-
-<pre><code class="language-shell">chmod +x geth
-./geth init ./customGenesis.json
-</code></pre>
-
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">chmod +x geth
+./geth init ./customGenesis.json</code></pre></div>
 <h4 id="run-your-node-with-console-attached">Run your node with console attached</h4>
-
-<pre><code class="language-shell">./geth \
-    --identity &quot;gethTest&quot; \
-    --rpc --rpcport &quot;9012&quot; \
-    --rpccorsdomain &quot;YOUR_TEST_DOMAIN_APP_RUN_FROM&quot; \
-    --datadir &quot;./testChain&quot; \
-    --port &quot;30303&quot; \
-    --nodiscover \
-    --rpcapi &quot;db,eth,net,web3&quot; \
-    --networkid 1999 \
-    --dev console
-</code></pre>
-
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">./geth <span style="color:#b62;font-weight:bold">\
+</span><span style="color:#b62;font-weight:bold"></span>    --identity <span style="color:#ba2121">&#34;gethTest&#34;</span> <span style="color:#b62;font-weight:bold">\
+</span><span style="color:#b62;font-weight:bold"></span>    --rpc --rpcport <span style="color:#ba2121">&#34;9012&#34;</span> <span style="color:#b62;font-weight:bold">\
+</span><span style="color:#b62;font-weight:bold"></span>    --rpccorsdomain <span style="color:#ba2121">&#34;YOUR_TEST_DOMAIN_APP_RUN_FROM&#34;</span> <span style="color:#b62;font-weight:bold">\
+</span><span style="color:#b62;font-weight:bold"></span>    --datadir <span style="color:#ba2121">&#34;./testChain&#34;</span> <span style="color:#b62;font-weight:bold">\
+</span><span style="color:#b62;font-weight:bold"></span>    --port <span style="color:#ba2121">&#34;30303&#34;</span> <span style="color:#b62;font-weight:bold">\
+</span><span style="color:#b62;font-weight:bold"></span>    --nodiscover <span style="color:#b62;font-weight:bold">\
+</span><span style="color:#b62;font-weight:bold"></span>    --rpcapi <span style="color:#ba2121">&#34;db,eth,net,web3&#34;</span> <span style="color:#b62;font-weight:bold">\
+</span><span style="color:#b62;font-weight:bold"></span>    --networkid <span style="color:#666">1999</span> <span style="color:#b62;font-weight:bold">\
+</span><span style="color:#b62;font-weight:bold"></span>    --dev console</code></pre></div>
 <h4 id="create-a-base-account">Create a base account</h4>
 
 <pre><code>&gt; eth.accounts
