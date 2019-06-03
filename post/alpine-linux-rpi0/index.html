@@ -24,7 +24,7 @@
         <meta property="og:article:author" content="" />
         <meta property="og:article:published_time" content="2019-04-11T21:22:13&#43;08:00" />
     
-        <meta name="generator" content="Hugo 0.55.6" />
+        <meta name="generator" content="Hugo 0.56.0-DEV" />
         <title>installing alpine linux on rpi0 &middot; VS tech corner </title>
         <link rel="canonical" href="https://vincentserpoul.github.io/" />
         <link rel="alternate" type="application/rss+xml" title="RSS" href="">
@@ -79,12 +79,14 @@ Disk /dev/sda: <span style="color:#666">14</span>,8 GiB, <span style="color:#666
 <ul>
 <li>256MiB partition for alpine itself (have to be of type 0x0c - W95 FAT32 (LBA))</li>
 <li>1GiB partition for the cache and config files</li>
-<li>13.5GiB partition for your var folder</li>
-</ul>
+
+<li><p>13.5GiB partition for your var folder</p>
 <div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo fdisk /dev/sda
 n - p - <span style="color:#666">1</span> - +256M - t - <span style="color:#666">1</span> - c - a - w
 n - p - <span style="color:#666">2</span> - +1G - w
-n - p - <span style="color:#666">3</span> - - - w</code></pre></div>
+n - p - <span style="color:#666">3</span> - - - w</code></pre></div></li>
+</ul>
+
 <p>Format you first partition to fat, and the 2 others to ext4</p>
 <div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo mkfs.vfat -F <span style="color:#666">32</span> /dev/sda1
 sudo mkfs.ext4 /dev/sda2
@@ -202,6 +204,18 @@ Solution: use the overlayfs, it will allow you to deport some folders in the las
 
 <p>For example, if you want to use /var/test, you can overlay /var/test:</p>
 <div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#008000">echo</span> <span style="color:#ba2121">&#34;overlay /var/test overlay lowerdir=/var/test,upperdir=/media/mmcblk0p3/var/test 0 0&#34;</span> &gt;&gt; ~/alpine-install/armv6/lb/etc/fstab</code></pre></div>
+<h2 id="update-2019-06-03">Update 2019/06/03</h2>
+
+<p>We can use parted to automate the disk formatting:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo parted --script -a optimal /dev/sda <span style="color:#b62;font-weight:bold">\
+</span><span style="color:#b62;font-weight:bold"></span>    mklabel gpt <span style="color:#b62;font-weight:bold">\
+</span><span style="color:#b62;font-weight:bold"></span>    mkpart primary fat32 <span style="color:#666">0</span>% 256MiB <span style="color:#b62;font-weight:bold">\
+</span><span style="color:#b62;font-weight:bold"></span>    mkpart primary ext4 256MiB 2GiB <span style="color:#b62;font-weight:bold">\
+</span><span style="color:#b62;font-weight:bold"></span>    mkpart primary ext4 2GiB <span style="color:#666">100</span>% <span style="color:#b62;font-weight:bold">\
+</span><span style="color:#b62;font-weight:bold"></span>    <span style="color:#008000">set</span> <span style="color:#666">1</span> boot on <span style="color:#666">&amp;&amp;</span>
+sudo mkfs.vfat -F <span style="color:#666">32</span> /dev/sda1 <span style="color:#666">&amp;&amp;</span>
+sudo mkfs.ext4 /dev/sda2 <span style="color:#666">&amp;&amp;</span>
+sudo mkfs.ext4 /dev/sda3</code></pre></div>
     </section>
 
     <hr>
