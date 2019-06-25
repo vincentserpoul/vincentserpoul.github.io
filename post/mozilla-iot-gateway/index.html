@@ -98,10 +98,16 @@ sudo lbu ci</code></pre></div>
 
 <p>The booting time is <strong>very</strong> long, so be patient.</p>
 
+<h2 id="without-the-udev-rule">Without the udev rule</h2>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker run -d --restart always --name mozilla-iot-gateway --net host -v /media/mmcblk0p3/mozilla-iot-gateway:/home/node/.mozilla-iot --device<span style="color:#666">=</span>/dev/ttyUSB0 --device<span style="color:#666">=</span>/dev/ttyACM0  moz
+illaiot/gateway:arm</code></pre></div>
+<p>You have to add the device to docker run.</p>
+
 <h2 id="reaching-you-gateway">Reaching you gateway</h2>
 
 <p>You should be able to use an external URL to reach your RPi, XXX.mozilla-iot.org.
-It is not a simple website, it&rsquo;s also a PWA, allowing you to set it up as an app on your mobile phone!</p>
+It is not a simple website, it&rsquo;s also a PWA, allowing you to set it up as an app on your mobile phone!
+You can also reach it from within your network with <a href="https://home-gateway:4443/things">https://home-gateway:4443/things</a></p>
 
 <h2 id="configuration">Configuration</h2>
 
