@@ -24,7 +24,7 @@
         <meta property="og:article:author" content="" />
         <meta property="og:article:published_time" content="2019-04-20T19:02:02&#43;08:00" />
     
-        <meta name="generator" content="Hugo 0.56.0-DEV" />
+        <meta name="generator" content="Hugo 0.82.0" />
         <title>cross compiling rust from linux to rpi0/alpine &middot; VS tech corner </title>
         <link rel="canonical" href="https://vincentserpoul.github.io/" />
         <link rel="alternate" type="application/rss+xml" title="RSS" href="">
@@ -51,41 +51,26 @@
     </header>
 
     <section class="post-content">
-        
-
-<p>If you read my previous posts, you should now have a raspberry-pi running alpine and docker.</p>
-
+        <p>If you read my previous posts, you should now have a raspberry-pi running alpine and docker.</p>
 <p>Resources are pretty limited on rpi0, so we are going to deploy programs using rust.
 Note: golang could have fit in there as well (and ofc all C and close to machine languages).</p>
-
 <h2 id="compiling-from-not-a-rpi0">Compiling from NOT a rpi0</h2>
-
 <p>Obviously, you don&rsquo;t want to compile from a raspberry pi zero, unless you have all the time in the world and love waiting.
 So the solution is to &ldquo;cross compile&rdquo; from your local and deploy in the target.</p>
-
 <p>Here, there are two unusual things on the target: it&rsquo;s an arm cpu and the linux distribution is alpine, which is using musl lib c and not glibc.</p>
-
 <p>If you try to compile directly by simply adding the target to your local setup</p>
 <div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">rustup target add arm-unknown-linux-musleabihf
-cargo build --target<span style="color:#666">=</span>arm-unknown-linux-musleabihf</code></pre></div>
-<p>You immediately see errors, you&rsquo;re simply not able to compile here.</p>
-
+cargo build --target<span style="color:#666">=</span>arm-unknown-linux-musleabihf
+</code></pre></div><p>You immediately see errors, you&rsquo;re simply not able to compile here.</p>
 <h2 id="docker-to-the-rescue">Docker to the rescue</h2>
-
 <p>We are not the first ones to do that and some have already figured out an easy way: use docker to do the compilation.</p>
-
 <p>For rpi0, the target is arm-unknown-linux-musleabihf.</p>
-
 <p>The most well known cross compiler image is <a href="https://github.com/emk/rust-musl-builder">this one</a>. Unfortunately, it only takes care of rpi2 and rpi3, which carry armv7.</p>
-
 <p>Fortunately, <a href="https://github.com/messense/rust-musl-cross">another one</a> is available with the right target available.</p>
-
 <h2 id="compiling">Compiling</h2>
-
 <p>This is now very simple:</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker run --rm -it -v <span style="color:#ba2121">&#34;</span><span style="color:#008000;font-weight:bold">$(</span><span style="color:#008000">pwd</span><span style="color:#008000;font-weight:bold">)</span><span style="color:#ba2121">&#34;</span>:/home/rust/src messense/rust-musl-cross:arm-musleabihf cargo build --release</code></pre></div>
-<p>Now, either you can use this image to do a multistage build for docker and deploy as a container or simply scp your executable to the rpi0.</p>
-
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker run --rm -it -v <span style="color:#ba2121">&#34;</span><span style="color:#008000;font-weight:bold">$(</span><span style="color:#008000">pwd</span><span style="color:#008000;font-weight:bold">)</span><span style="color:#ba2121">&#34;</span>:/home/rust/src messense/rust-musl-cross:arm-musleabihf cargo build --release
+</code></pre></div><p>Now, either you can use this image to do a multistage build for docker and deploy as a container or simply scp your executable to the rpi0.</p>
 <p>Easy!</p>
 
     </section>

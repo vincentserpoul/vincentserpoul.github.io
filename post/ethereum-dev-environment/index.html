@@ -24,7 +24,7 @@
         <meta property="og:article:author" content="" />
         <meta property="og:article:published_time" content="2016-08-01T08:27:27&#43;08:00" />
     
-        <meta name="generator" content="Hugo 0.56.0-DEV" />
+        <meta name="generator" content="Hugo 0.82.0" />
         <title>Ethereum dev environment &middot; VS tech corner </title>
         <link rel="canonical" href="https://vincentserpoul.github.io/" />
         <link rel="alternate" type="application/rss+xml" title="RSS" href="">
@@ -51,35 +51,21 @@
     </header>
 
     <section class="post-content">
-        
-
-<h2 id="part-1-setup-your-ethereum-node">Part 1 - Setup your ethereum node</h2>
-
+        <h2 id="part-1---setup-your-ethereum-node">Part 1 - Setup your ethereum node</h2>
 <p>There are many ways you can setup a node to dev an Ethereum dapp.
 You can use the live network: not advisable obviously for cost and speed reasons.
 You can use the test network: not advisable for speed reasons.
 You can use a testchain set up with Geth: easy but a bit tedious as you need to mine.
 You can the ethereum testrpc: easiest!</p>
-
 <p>I will talk about the last two setup in this article.</p>
-
 <h3 id="using-testrpc">Using testrpc</h3>
-
 <p>Simply install through npm (if you want it globally available, add -g after install, as usual)</p>
-
 <pre><code>npm install ethereumjs-testrpc
-</code></pre>
-
-<p>And then run it</p>
-
+</code></pre><p>And then run it</p>
 <pre><code>node_modules/ethereumjs-testrpc/bin/testrpc
-</code></pre>
-
-<h3 id="using-geth">Using geth</h3>
-
+</code></pre><h3 id="using-geth">Using geth</h3>
 <p>Download geth latest release (<a href="https://github.com/ethereum/go-ethereum/releases">https://github.com/ethereum/go-ethereum/releases</a>)
 and extract it.</p>
-
 <p>Create a file customGenesis.json</p>
 <div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
   <span style="color:#008000;font-weight:bold">&#34;nonce&#34;</span>: <span style="color:#ba2121">&#34;0x0000000000000042&#34;</span>,
@@ -91,11 +77,11 @@ and extract it.</p>
   <span style="color:#008000;font-weight:bold">&#34;mixhash&#34;</span>: <span style="color:#ba2121">&#34;0x0000000000000000000000000000000000000000000000000000000000000000&#34;</span>,
   <span style="color:#008000;font-weight:bold">&#34;coinbase&#34;</span>: <span style="color:#ba2121">&#34;0x3333333333333333333333333333333333333333&#34;</span>,
   <span style="color:#008000;font-weight:bold">&#34;alloc&#34;</span>: {}
-}</code></pre></div>
-<p>then init yout node with the genesis block above</p>
+}
+</code></pre></div><p>then init yout node with the genesis block above</p>
 <div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">chmod +x geth
-./geth init ./customGenesis.json</code></pre></div>
-<h4 id="run-your-node-with-console-attached">Run your node with console attached</h4>
+./geth init ./customGenesis.json
+</code></pre></div><h4 id="run-your-node-with-console-attached">Run your node with console attached</h4>
 <div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">./geth <span style="color:#b62;font-weight:bold">\
 </span><span style="color:#b62;font-weight:bold"></span>    --identity <span style="color:#ba2121">&#34;gethTest&#34;</span> <span style="color:#b62;font-weight:bold">\
 </span><span style="color:#b62;font-weight:bold"></span>    --rpc --rpcport <span style="color:#ba2121">&#34;9012&#34;</span> <span style="color:#b62;font-weight:bold">\
@@ -105,9 +91,8 @@ and extract it.</p>
 </span><span style="color:#b62;font-weight:bold"></span>    --nodiscover <span style="color:#b62;font-weight:bold">\
 </span><span style="color:#b62;font-weight:bold"></span>    --rpcapi <span style="color:#ba2121">&#34;db,eth,net,web3&#34;</span> <span style="color:#b62;font-weight:bold">\
 </span><span style="color:#b62;font-weight:bold"></span>    --networkid <span style="color:#666">1999</span> <span style="color:#b62;font-weight:bold">\
-</span><span style="color:#b62;font-weight:bold"></span>    --dev console</code></pre></div>
-<h4 id="create-a-base-account">Create a base account</h4>
-
+</span><span style="color:#b62;font-weight:bold"></span>    --dev console
+</code></pre></div><h4 id="create-a-base-account">Create a base account</h4>
 <pre><code>&gt; eth.accounts
 []
 &gt; personal.newAccount()
@@ -116,22 +101,14 @@ Repeat passphrase:
 &quot;0xedea6958c57fc0cd4bd63b3e7b395393dc76bfb6&quot;
 &gt; eth.accounts
 [&quot;0xedea6958c57fc0cd4bd63b3e7b395393dc76bfb6&quot;]
-</code></pre>
-
-<h4 id="mine-on-your-newly-created-account">Mine on your newly created account</h4>
-
+</code></pre><h4 id="mine-on-your-newly-created-account">Mine on your newly created account</h4>
 <pre><code>miner.setEtherbase(eth.accounts[0])
 miner.start(8)
 miner.stop()
-</code></pre>
-
-<p>Check if the mining worked</p>
-
+</code></pre><p>Check if the mining worked</p>
 <pre><code>&gt; eth.getBalance(eth.accounts[0]).toNumber();
 55000000000000000000
-</code></pre>
-
-<p>In the next posts, we will start talking about development of dapps.</p>
+</code></pre><p>In the next posts, we will start talking about development of dapps.</p>
 
     </section>
 

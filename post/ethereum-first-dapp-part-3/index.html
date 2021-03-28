@@ -24,7 +24,7 @@
         <meta property="og:article:author" content="" />
         <meta property="og:article:published_time" content="2016-08-12T12:00:27&#43;08:00" />
     
-        <meta name="generator" content="Hugo 0.56.0-DEV" />
+        <meta name="generator" content="Hugo 0.82.0" />
         <title>Ethereum first dapp - part 3 &middot; VS tech corner </title>
         <link rel="canonical" href="https://vincentserpoul.github.io/" />
         <link rel="alternate" type="application/rss+xml" title="RSS" href="">
@@ -51,43 +51,25 @@
     </header>
 
     <section class="post-content">
-        
-
-<h2 id="setting-up-a-light-wallet">setting up a light wallet</h2>
-
-<p>In order to have a setup close to what the DAPP would be, we will use (metamask) [<a href="http://www.metamask.io">http://www.metamask.io</a>] as a light wallet (there are other choices).</p>
-
+        <h2 id="setting-up-a-light-wallet">setting up a light wallet</h2>
+<p>In order to have a setup close to what the DAPP would be, we will use (metamask) [http://www.metamask.io] as a light wallet (there are other choices).</p>
 <p>Metamask allows you to connect to a custom node.</p>
-
-<p>We will then connect to our node, <a href="http://localhost:9012">http://localhost:9012</a>
+<p>We will then connect to our node, http://localhost:9012
 If everthing is fine, metamasks should indicate it&rsquo;s connected.</p>
-
 <p>Then, we can import the metamask account to our local node by simply specifying the datadir we have setup the node data.</p>
-
 <p>Let&rsquo;s imagine metamask give us:</p>
-
 <pre><code>0xcddddd76a763de6e9ac19e7ec8f71ed77d61eebc0a93068fc9f2a544462db7d2
-</code></pre>
-
-<p>as the key.</p>
-
+</code></pre><p>as the key.</p>
 <p>Then let&rsquo;s just copy this, without thw 0x inside a separate file.</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#008000">echo</span> <span style="color:#ba2121">&#34;cddddd76a763de6e9ac19e7ec8f71ed77d61eebc0a93068fc9f2a544462db7d2&#34;</span> &gt;&gt; pvkey.txt</code></pre></div>
-<p>and then import it in our local chain</p>
-
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#008000">echo</span> <span style="color:#ba2121">&#34;cddddd76a763de6e9ac19e7ec8f71ed77d61eebc0a93068fc9f2a544462db7d2&#34;</span> &gt;&gt; pvkey.txt
+</code></pre></div><p>and then import it in our local chain</p>
 <pre><code>geth --datadir &quot;./testChain&quot; account import ./pvkey.txt
-</code></pre>
-
-<p>if you look at the list of accounts in your local node, you should see now the newly imported account.</p>
-
+</code></pre><p>if you look at the list of accounts in your local node, you should see now the newly imported account.</p>
 <h2 id="give-me-ether">give me ether!</h2>
-
 <p>Now, simply transfer some Ether to the newly imported account
 In geth, for example:</p>
-
 <pre><code>eth.sendTransaction({from: '0xfffffff', to: '0xddddddd', value: web3.toWei(1000, &quot;ether&quot;)})
 </code></pre>
-
     </section>
 
     <hr>

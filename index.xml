@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>VS tech corner</title>
@@ -6,10 +6,18 @@
     <description>Recent content on VS tech corner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 03 Jun 2019 13:38:35 +0800</lastBuildDate>
-    
-	<atom:link href="https://vincentserpoul.github.io/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Sun, 28 Mar 2021 18:39:35 +0800</lastBuildDate><atom:link href="https://vincentserpoul.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Go embed in go1.16</title>
+      <link>https://vincentserpoul.github.io/post/go-embed-1.16/</link>
+      <pubDate>Sun, 28 Mar 2021 18:39:35 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/post/go-embed-1.16/</guid>
+      <description>Golang 1.16 new feature: embed What is it about In previous versions of go, you needed to reach out for an external package in order to embed static content inside your binary.
+My go to one was shurcool/vfsgen, but there were many others worth using.
+Go 1.16 brings a new package, &amp;ldquo;embed&amp;rdquo;, which allows to do that with just the standard library.
+How to do that The best part of this, it&amp;rsquo;s extremely simple, just see for yourself.</description>
+    </item>
     
     <item>
       <title>Wasm Prez</title>
@@ -154,7 +162,7 @@ You will need to follow the install procedure of go-ethereum.</description>
       
       <guid>https://vincentserpoul.github.io/post/on-microservices-and-scaling/</guid>
       <description>I just watched that amazing videos from Matt Ranney
- Here are my takeaways and opinionated summary:
+Here are my takeaways and opinionated summary:
  Use RPC for service to service communications: gRPC seems to be a good way of tackling it Use many repositories Profiling should be unified: flamegraphs seem to be a good solution (Go profiling is great too) Premature optimization is bad but performance monitoring is crucial! Trace requests, keep context within all logs Log a lot, but only on a portion of your production architecture as logging can have a big cost.</description>
     </item>
     
@@ -209,9 +217,9 @@ Let&amp;rsquo;s install truffle and testrpc</description>
       
       <guid>https://vincentserpoul.github.io/post/ethereum-interacting-with-contracts/</guid>
       <description>Check the address of the current deployed contract Remember when you mined your contract, it told your its address. Now, reuse it!
-eth.getCode(&amp;quot;0x5f3425ccedeae0eb36521c4cf93ec6544dbad9bd&amp;quot;)  Test the contract with a simple interaction get the latest web3-light.min.js js from https://github.com/ethereum/web3.js/releases and simply copy the dist/web3-light.min.js into the same folder as the following HTML file.
+eth.getCode(&amp;quot;0x5f3425ccedeae0eb36521c4cf93ec6544dbad9bd&amp;quot;) Test the contract with a simple interaction get the latest web3-light.min.js js from https://github.com/ethereum/web3.js/releases and simply copy the dist/web3-light.min.js into the same folder as the following HTML file.
 then, use this html to interact with your contract on the local node:
-&amp;lt;!doctype&amp;gt; &amp;lt;html&amp;gt; &amp;lt;head&amp;gt; &amp;lt;script type=&amp;#34;text/javascript&amp;#34; src=&amp;#34;https://cdnjs.</description>
+&amp;lt;!doctype&amp;gt; &amp;lt;html&amp;gt; &amp;lt;head&amp;gt; &amp;lt;script type=&amp;#34;text/javascript&amp;#34; src=&amp;#34;https://cdnjs.cloudflare.com/ajax/libs/bignumber.js/2.4.0/bignumber.min.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;script type=&amp;#34;text/javascript&amp;#34; src=&amp;#34;.</description>
     </item>
     
     <item>
@@ -275,7 +283,7 @@ An advanced SPA (still under construction) https://www.gitbook.com/book/tonyhb/r
       <description>Working with ES6-7 In order to work with ECMAScript 2015 and even with future implementations of ES, you can use Babel.
 Babel is a transpiler, it will convert your ES6-7 to plain ES5 javascript that most browsers (&amp;gt;ie9 most probably) will understand.
 To install babel
-npm install -g babel  Then within your javascript project, you can create a .babelrc file with the following content:
+npm install -g babel Then within your javascript project, you can create a .babelrc file with the following content:
 { &amp;#34;presets&amp;#34;: [&amp;#34;es2015&amp;#34;, &amp;#34;stage-0&amp;#34;, &amp;#34;react&amp;#34;] } React and its surrounding libraries After starting using React, I realized it was vey good and was surrounded with libraries which makes it even better: redux, immutable, react-router&amp;hellip;</description>
     </item>
     
@@ -322,7 +330,8 @@ Here is the package settings I use for gosublime:
 https://www.sublimetext.com/3
 Download and install the sublime text package manager Go the package control website, download and install it on your sublime text (follow the instructions on the website).
 https://packagecontrol.io/installation
-Download and install sublime linter Go to the sublime linter website, download and install it on your sublime text.</description>
+Download and install sublime linter Go to the sublime linter website, download and install it on your sublime text.
+http://www.sublimelinter.com/en/latest/installation.html</description>
     </item>
     
     <item>
@@ -333,7 +342,7 @@ Download and install sublime linter Go to the sublime linter website, download a
       <guid>https://vincentserpoul.github.io/post/git-basic-usage/</guid>
       <description>Git basic commands When you have a new repo git clone git@github.com:vincentserpoul/rbac.git https or git? the git protocal provides better security and easiness if you are using a correct key.
 If you use the git protocol, you can easily associate your private key in the ~/.ssh/config file with the following:
-Host github Hostname github.com User vincentserpoul IdentityFile ~/.ssh/myprivatekey IdentitiesOnly yes  When you have a new modification ready for commit git status You will get an overview of what&amp;rsquo;s new If there is any new files (Untracked files), you will first need to add them:</description>
+Host github Hostname github.com User vincentserpoul IdentityFile ~/.ssh/myprivatekey IdentitiesOnly yes When you have a new modification ready for commit git status You will get an overview of what&amp;rsquo;s new If there is any new files (Untracked files), you will first need to add them:</description>
     </item>
     
     <item>

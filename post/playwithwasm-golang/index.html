@@ -24,7 +24,7 @@
         <meta property="og:article:author" content="" />
         <meta property="og:article:published_time" content="2018-08-27T23:22:00&#43;08:00" />
     
-        <meta name="generator" content="Hugo 0.56.0-DEV" />
+        <meta name="generator" content="Hugo 0.82.0" />
         <title>a taste of wasm &middot; VS tech corner </title>
         <link rel="canonical" href="https://vincentserpoul.github.io/" />
         <link rel="alternate" type="application/rss+xml" title="RSS" href="">
@@ -51,34 +51,20 @@
     </header>
 
     <section class="post-content">
-        
-
-<p>Here it is, go 1.11 is out, and with it a new compilation target, Web Assembly!</p>
-
+        <p>Here it is, go 1.11 is out, and with it a new compilation target, Web Assembly!</p>
 <p>Let&rsquo;s try it out!</p>
-
 <h2 id="the-test">The test</h2>
-
 <p>As dumb as it sounds, I needed a simple usecase to test this out.
 I decided to settle for the dumbest possible thing: a for loop incrementing a variable for 100000000 times.</p>
-
 <h2 id="the-git-repo">The git repo</h2>
-
 <p><a href="https://github.com/vincentserpoul/playwithwasm">Here it is</a></p>
-
 <p><a href="https://playwithwasm-golang.surge.sh">I uploaded it as well on surge for you to see without the hassle</a></p>
-
 <p>As far as I can see, and if you see something else, I&rsquo;d be glad to know, <strong>Go is 70x faster than pure javascript</strong>&hellip; Crazy!</p>
-
-<h2 id="let-s-all-jump-to-wasm">Let&rsquo;s all jump to wasm?!</h2>
-
+<h2 id="lets-all-jump-to-wasm">Let&rsquo;s all jump to wasm?!</h2>
 <p>Not yet! A lot of things are missing right now and it is just out.
 First issue, the size of the wasm file, which is huge for what it does (thanks to garbage collection included in it, as it is not provided in the wasm VM yet).</p>
-
-<h2 id="what-s-next">What&rsquo;s next</h2>
-
+<h2 id="whats-next">What&rsquo;s next</h2>
 <p>I will try the same thing with Rust, it should give us the same perf but with a lot smaller size.</p>
-
 <p><em>WASM is the future, be ready!</em></p>
 
     </section>

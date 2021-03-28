@@ -24,7 +24,7 @@
         <meta property="og:article:author" content="" />
         <meta property="og:article:published_time" content="2019-04-29T00:23:23&#43;08:00" />
     
-        <meta name="generator" content="Hugo 0.56.0-DEV" />
+        <meta name="generator" content="Hugo 0.82.0" />
         <title>testing mozilla iot gateway &middot; VS tech corner </title>
         <link rel="canonical" href="https://vincentserpoul.github.io/" />
         <link rel="alternate" type="application/rss+xml" title="RSS" href="">
@@ -51,70 +51,50 @@
     </header>
 
     <section class="post-content">
-        
-
-<h1 id="mozilla-iot-gateway">Mozilla iot gateway</h1>
-
+        <h1 id="mozilla-iot-gateway">Mozilla iot gateway</h1>
 <p><a href="https://iot.mozilla.org/gateway/">Here</a> is what I am going to setup.
 I am obviously not going to rewrite one more time the tutorial and docs from mozilla.
 I will simply describe the specific setup I used, and the little things I setup to make it work.</p>
-
 <h2 id="prerequisites">Prerequisites</h2>
-
 <ul>
 <li>Raspberry pi 3b</li>
 <li>Zigbee dongle, zwave dongle <a href="https://github.com/mozilla-iot/wiki/wiki/Supported-Hardware">list of compatible hardware</a> - I used Digi XStick (ZB mesh version) and Aeotec Z-Stick (Gen5)</li>
 <li>Zigbee Smart bulb (i used a philips hue), zigbee motion detector (I used philips motion sensor)</li>
 </ul>
-
 <h2 id="linux">Linux</h2>
-
 <p>I used my favorite lean alpine linux, with the setup as I explained in <a href="https://vincentserpoul.github.io/post/alpine-linux-rpi0/">this post</a> minus the complexity brought up by the rpi0.</p>
-
 <h2 id="docker">Docker</h2>
-
 <p>Again, following my <a href="https://vincentserpoul.github.io/post/alpine-linux-rpi0-docker/">previous post</a>, minus the rpi0 complexity.</p>
-
 <h2 id="launching-the-iot-gateway-with-docker">Launching the iot gateway with docker</h2>
-
 <p>First thing first, if you are using a zwave dongle, you need to make sure /dev/ttyACM0 is owned by the dialout group, otherwise, it won&rsquo;t be available.
 Assuming your alpine hostname is &ldquo;home-gateway&rdquo;:</p>
 <div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh -i ~/.ssh/YOURPUBKEY maintenance@home-gateway
-sudo chown root:dialout /dev/ttyACM0</code></pre></div>
-<p>If you want this change to be permanent, you will need to use the eudev package:</p>
+sudo chown root:dialout /dev/ttyACM0
+</code></pre></div><p>If you want this change to be permanent, you will need to use the eudev package:</p>
 <div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apk add eudev
 <span style="color:#008000">printf</span> <span style="color:#ba2121">&#39;SUBSYSTEM==&#34;tty&#34;, KERNEL==&#34;ttyUSB0&#34;, ATTRS{product}==&#34;XStick&#34;, GROUP=&#34;dialout&#34;\n\nSUBSYSTEM==&#34;tty&#34;, KERNEL==&#34;ttyACM0&#34;, ATTRS{product}==&#34;DWC OTG Controller&#34;, GROUP=&#34;dialout&#34;\n&#39;</span> | sudo tee -a /etc/udev/rules.d/90-tty.rules &gt; /dev/null
 sudo rc-update add udev sysinit
-sudo lbu ci</code></pre></div>
-<p>Launching the container with the needed devices:</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo docker run -d --restart always --name mozilla-iot-gateway --net host -v /media/mmcblk0p3/mozilla-iot-gateway:/home/node/.mozilla-iot mozillaiot/gateway:arm</code></pre></div>
-<p>A little explanation:</p>
-
+sudo lbu ci
+</code></pre></div><p>Launching the container with the needed devices:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo docker run -d --restart always --name mozilla-iot-gateway --net host -v /media/mmcblk0p3/mozilla-iot-gateway:/home/node/.mozilla-iot mozillaiot/gateway:arm
+</code></pre></div><p>A little explanation:</p>
 <ul>
 <li>restart always will simply restart if the container crashes, but also on startup</li>
 <li>&ndash;net host is unfortunately compulsory for some addons of the gateway</li>
 <li>mounting a volume saved on mmcblk0p3 allows to have persistent storage (remember alpine otherwise runs in ram)</li>
 </ul>
-
 <p>The booting time is <strong>very</strong> long, so be patient.</p>
-
 <h2 id="without-the-udev-rule">Without the udev rule</h2>
 <div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker run -d --restart always --name mozilla-iot-gateway --net host -v /media/mmcblk0p3/mozilla-iot-gateway:/home/node/.mozilla-iot --device<span style="color:#666">=</span>/dev/ttyUSB0 --device<span style="color:#666">=</span>/dev/ttyACM0  moz
-illaiot/gateway:arm</code></pre></div>
-<p>You have to add the device to docker run.</p>
-
+illaiot/gateway:arm
+</code></pre></div><p>You have to add the device to docker run.</p>
 <h2 id="reaching-you-gateway">Reaching you gateway</h2>
-
 <p>You should be able to use an external URL to reach your RPi, XXX.mozilla-iot.org.
 It is not a simple website, it&rsquo;s also a PWA, allowing you to set it up as an app on your mobile phone!
-You can also reach it from within your network with <a href="https://home-gateway:4443/things">https://home-gateway:4443/things</a></p>
-
+You can also reach it from within your network with https://home-gateway:4443/things</p>
 <h2 id="configuration">Configuration</h2>
-
 <p>From there on, I had no issues, you an simply follow the <a href="https://iot.mozilla.org/docs/gateway-user-guide.html">mozilla tutorial</a></p>
-
 <h2 id="conclusion">Conclusion</h2>
-
 <p>Here I am: docker, minimal host alpine linux and iot devices.
 Next step: k3s!</p>
 

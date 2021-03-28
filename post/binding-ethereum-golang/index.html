@@ -24,7 +24,7 @@
         <meta property="og:article:author" content="" />
         <meta property="og:article:published_time" content="2016-10-10T12:54:00&#43;08:00" />
     
-        <meta name="generator" content="Hugo 0.56.0-DEV" />
+        <meta name="generator" content="Hugo 0.82.0" />
         <title>Ethereum contracts and Golang &middot; VS tech corner </title>
         <link rel="canonical" href="https://vincentserpoul.github.io/" />
         <link rel="alternate" type="application/rss+xml" title="RSS" href="">
@@ -51,9 +51,7 @@
     </header>
 
     <section class="post-content">
-        
-
-<h2 id="the-contract">The contract</h2>
+        <h2 id="the-contract">The contract</h2>
 <div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-solidity" data-lang="solidity"><span style="color:#008000;font-weight:bold">contract</span> Trigger {
   <span style="color:#008000;font-weight:bold">function</span> () {
       <span style="color:#008000;font-weight:bold">throw</span>;
@@ -75,23 +73,16 @@
     <span style="color:#008000;font-weight:bold">return</span> owner;
   }
 
-}</code></pre></div>
-<p>This is a very simple contract that we will take as an example.</p>
-
+}
+</code></pre></div><p>This is a very simple contract that we will take as an example.</p>
 <h2 id="getting-the-right-tools-for-binding">Getting the right tools for binding</h2>
-
 <p>A good starting point is this <a href="https://github.com/ethereum/go-ethereum/wiki/Native-DApps:-Go-bindings-to-Ethereum-contracts">wiki</a>.</p>
-
 <p>You will need to follow the install procedure of <a href="https://github.com/ethereum/go-ethereum">go-ethereum</a>.</p>
-
 <p>Once done, you should have the abigen executable available on your command line.</p>
-
 <h2 id="automatically-generating-the-go-file">Automatically generating the go file</h2>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">abigen --sol contracts/Trigger.sol --pkg main --out trigger.go</code></pre></div>
-<p>If everything is fine, you should now have a file named trigger.go</p>
-
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">abigen --sol contracts/Trigger.sol --pkg main --out trigger.go
+</code></pre></div><p>If everything is fine, you should now have a file named trigger.go</p>
 <h2 id="using-the-generated-file-from-main">Using the generated file from main</h2>
-
 <p>You first need to have a node running (parity, geth, testrpc&hellip;). We will assume it&rsquo;s listening on port 9012.
 You then need to deploy your contract and write down the deployment address (you can use truffle or simple deploy your contract manually or use the following code with a working key pair).</p>
 <div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#008000;font-weight:bold">package</span> main
@@ -144,17 +135,12 @@ You then need to deploy your contract and write down the deployment address (you
     log.<span style="color:#00f">Fatalf</span>(<span style="color:#ba2121">&#34;Failed to retrieve token name: %v&#34;</span>, err)
   }
   fmt.<span style="color:#00f">Printf</span>(<span style="color:#ba2121">&#34;owner address: 0x%x\n&#34;</span>, owner)
-}</code></pre></div>
-<p>then, just run it</p>
-
+}
+</code></pre></div><p>then, just run it</p>
 <pre><code>go run *.go
 owner address: 0xf2759b4a699dae4fdc3383a0d7a92cfc246315cd
-</code></pre>
-
-<p>Et voila!</p>
-
+</code></pre><p>Et voila!</p>
 <h2 id="existing-issues">Existing issues</h2>
-
 <p>We have still not talked about listening to events.
 There are also still issues as soon as the contract imports other contracts, I will finish the writing once these are done.</p>
 

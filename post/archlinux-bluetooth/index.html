@@ -24,7 +24,7 @@
         <meta property="og:article:author" content="" />
         <meta property="og:article:published_time" content="2017-04-03T16:22:00&#43;08:00" />
     
-        <meta name="generator" content="Hugo 0.56.0-DEV" />
+        <meta name="generator" content="Hugo 0.82.0" />
         <title>Bluetooth activation at startup on arch linux &middot; VS tech corner </title>
         <link rel="canonical" href="https://vincentserpoul.github.io/" />
         <link rel="alternate" type="application/rss+xml" title="RSS" href="">
@@ -51,27 +51,17 @@
     </header>
 
     <section class="post-content">
-        
-
-<h2 id="why">Why?</h2>
-
+        <h2 id="why">Why?</h2>
 <p>You might not have reach that point yet but bluez has been deprecating hciconfig and other tools.
 In bluez 5.44, <a href="https://bugs.archlinux.org/task/53110">it&rsquo;s not there anymore</a>.</p>
-
 <h2 id="what-is-the-problem">What is the problem?</h2>
-
 <p>All hciconfig udev rules to activate bluetooth at startup won&rsquo;t work anymore.
 Most forum posts solving bluetooth issues are now outdated.
 Once I updated to bluez 5.44, my service leveraging hciconfig to activate bluetooth at startup didn&rsquo;t work anymore!</p>
-
 <h2 id="what-is-the-solution">What is the solution?</h2>
-
 <p>It&rsquo;s now actually documented in the <a href="https://wiki.archlinux.org/index.php/bluetooth">archwiki</a></p>
-
 <pre><code>Alternatively and instead of the custom service and udev rule, you can simply use the new AutoEnable feature introduced in BlueZ 5.35 by uncommenting  [Policy] and AutoEnable=true lines in /etc/bluetooth/main.conf.
-</code></pre>
-
-<p>Just uncomment and go, you don&rsquo;t need the service to activate bluetooth anymore, enjoy!</p>
+</code></pre><p>Just uncomment and go, you don&rsquo;t need the service to activate bluetooth anymore, enjoy!</p>
 
     </section>
 

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" prefix="og: http://ogp.me/ns#" xmlns:og="http://ogp.me/ns#"><!--<![endif]-->
+
+    <head>
+                <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="using go embed in go 1.16">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="author" content="">
+        <meta name="keywords" content="awesome, definitely">
+	
+        <meta property="og:site_name" content="VS tech corner">
+        <meta property="og:title" content="VS tech corner">
+        <meta property="og:url" content="https://vincentserpoul.github.io/post/go-embed-1.16/">
+        <meta property="og:description" content="">
+    
+        <meta property="og:type" content="article" />
+        <meta property="og:article:author" content="" />
+        <meta property="og:article:published_time" content="2021-03-28T18:39:35&#43;08:00" />
+    
+        <meta name="generator" content="Hugo 0.82.0" />
+        <title>Go embed in go1.16 &middot; VS tech corner </title>
+        <link rel="canonical" href="https://vincentserpoul.github.io/" />
+        <link rel="alternate" type="application/rss+xml" title="RSS" href="">
+        <link rel="stylesheet" type='text/css' href="https://vincentserpoul.github.io/css/main.css"/>
+        <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300|Montserrat:700' rel='stylesheet' type='text/css'>
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+        <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    </head>
+
+<body>
+<!--[if lt IE 7]><p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chrome/‎">install Google Chrome</a> to experience this site.</p><![endif]-->
+
+    <header id="site-header">
+        <div class="container">
+            <a href="https://vincentserpoul.github.io/" alt="VS tech corner"><h1 class="blog-title heading">VS tech corner</h1></a>
+            <p class="blog-description"></p>
+        </div>
+    </header>
+<main class="content" role="main">
+	<div class="container">
+		<article class="post">
+	<header class="post-header">
+        <h3 class="p-post-title">Go embed in go1.16</h3>
+    </header>
+
+    <section class="post-content">
+        <h2 id="golang-116-new-feature-embed">Golang 1.16 new feature: embed</h2>
+<h3 id="what-is-it-about">What is it about</h3>
+<p>In previous versions of go, you needed to reach out for an external package in order to embed static content inside your binary.</p>
+<p>My go to one was <a href="https://github.com/shurcooL/vfsgen">shurcool/vfsgen</a>, but there were many others worth using.</p>
+<p>Go 1.16 brings a new package, &ldquo;embed&rdquo;, which allows to do that with just the standard library.</p>
+<h3 id="how-to-do-that">How to do that</h3>
+<p>The best part of this, it&rsquo;s extremely simple, just see for yourself.
+Let&rsquo;s say you want to include an index.html located at the same path of your main.</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#008000;font-weight:bold">package</span> main
+
+<span style="color:#008000;font-weight:bold">import</span> (
+	<span style="color:#ba2121">&#34;embed&#34;</span>
+	<span style="color:#ba2121">&#34;io/fs&#34;</span>
+	<span style="color:#ba2121">&#34;net/http&#34;</span>
+)
+
+<span style="color:#008000;font-weight:bold">func</span> <span style="color:#00f">main</span>() {
+	<span style="color:#008000;font-weight:bold">if</span> err <span style="color:#666">:=</span> http.<span style="color:#00f">ListenAndServe</span>(<span style="color:#ba2121">&#34;:9003&#34;</span>, <span style="color:#00f">straightforward</span>()); err <span style="color:#666">!=</span> <span style="color:#008000;font-weight:bold">nil</span> {
+		<span style="color:#008000">panic</span>(err)
+	}
+}
+
+<span style="color:#408080;font-style:italic">//go:embed index.html
+</span><span style="color:#408080;font-style:italic"></span><span style="color:#008000;font-weight:bold">var</span> straightforwardStatic embed.FS
+
+<span style="color:#008000;font-weight:bold">func</span> <span style="color:#00f">straightforward</span>() http.Handler {
+	<span style="color:#008000;font-weight:bold">return</span> http.<span style="color:#00f">FileServer</span>(http.<span style="color:#00f">FS</span>(straightforwardStatic))
+}
+</code></pre></div><h3 id="what-if-you-need-to-embed-a-subfolder">What if you need to embed a subfolder</h3>
+<p>Now let&rsquo;s say you want to include a full static website, from within a subfolder containing all your files.</p>
+<p>With go1.16, a few refactors also happened for the io packages.
+Now, a new package io/fs allows you to actually take a subfolder to include.</p>
+<p>Let&rsquo;s see how that goes:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#008000;font-weight:bold">package</span> main
+
+<span style="color:#008000;font-weight:bold">import</span> (
+	<span style="color:#ba2121">&#34;embed&#34;</span>
+	<span style="color:#ba2121">&#34;io/fs&#34;</span>
+	<span style="color:#ba2121">&#34;net/http&#34;</span>
+)
+
+<span style="color:#008000;font-weight:bold">func</span> <span style="color:#00f">main</span>() {
+	<span style="color:#008000;font-weight:bold">if</span> err <span style="color:#666">:=</span> http.<span style="color:#00f">ListenAndServe</span>(<span style="color:#ba2121">&#34;:9003&#34;</span>, <span style="color:#00f">subfolder</span>()); err <span style="color:#666">!=</span> <span style="color:#008000;font-weight:bold">nil</span> {
+		<span style="color:#008000">panic</span>(err)
+	}
+}
+
+<span style="color:#408080;font-style:italic">//go:embed include/*
+</span><span style="color:#408080;font-style:italic"></span><span style="color:#008000;font-weight:bold">var</span> static embed.FS
+
+<span style="color:#008000;font-weight:bold">func</span> <span style="color:#00f">subfolder</span>() http.Handler {
+	subStatic, err <span style="color:#666">:=</span> fs.<span style="color:#00f">Sub</span>(static, <span style="color:#ba2121">&#34;include&#34;</span>)
+	<span style="color:#008000;font-weight:bold">if</span> err <span style="color:#666">!=</span> <span style="color:#008000;font-weight:bold">nil</span> {
+		<span style="color:#008000">panic</span>(<span style="color:#ba2121">&#34;no folder include present in static&#34;</span>)
+	}
+
+	<span style="color:#008000;font-weight:bold">return</span> http.<span style="color:#00f">FileServer</span>(http.<span style="color:#00f">FS</span>(subStatic))
+}
+
+</code></pre></div><h3 id="official-docs">Official docs</h3>
+<p>You can have a look at <a href="https://pkg.go.dev/embed">official docs</a> to have more details.</p>
+<p>Enjoy!</p>
+
+    </section>
+
+    <hr>
+
+    <footer class="post-footer">
+        <section class="f-1">
+            
+
+            <p class="f-post-time"><time datetime="2021-03-28T18:39:35&#43;08:00">March 28, 2021</time></p>
+        </section>
+
+        <section class="f-2">
+            <section class="share">
+                <span>Share:
+                <a class="icon-twitter" href="http://twitter.com/share?text=Go%20embed%20in%20go1.16&url=https%3a%2f%2fvincentserpoul.github.io%2fpost%2fgo-embed-1.16%2f"
+                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="fa fa-twitter"></i>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fvincentserpoul.github.io%2fpost%2fgo-embed-1.16%2f"
+                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="fa fa-facebook"></i>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=https%3a%2f%2fvincentserpoul.github.io%2fpost%2fgo-embed-1.16%2f"
+                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="fa fa-google-plus"></i>
+                </a>
+                </span>
+            </section>
+
+            
+            	<span class="f-post-tags"><i class="fa fa-tag"></i>
+            	golang, embed, static, simple
+            	</span>
+            
+        </section>
+    </footer>
+
+    <div id="disqus_thread"></div>
+<script>
+var disqus_config = function () {
+    this.page.url = "https://vincentserpoul.github.io/post/go-embed-1.16/";  
+    this.page.identifier = "https://vincentserpoul.github.io/post/go-embed-1.16/"; 
+};
+
+(function() { 
+    var d = document, s = d.createElement('script');
+    s.src = '//vincentserpoul-tech-corner.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</article>
+	</div>
+</main>
+    <footer id="site-footer">
+        <div class="container">
+            <a href="https://vincentserpoul.github.io/index.xml" title="Get the RSS feed"><span class="tooltip"><i class="fa fa-rss"></i></span></a>
+        </div>
+    </footer>
+
+    <script type="text/javascript" src="https://vincentserpoul.github.io/js/fittext.js"></script>
+    <script type="text/javascript">
+      $(".heading").fitText();
+    </script>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-81802018-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</body>
+</html>

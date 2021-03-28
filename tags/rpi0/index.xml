@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>rpi0 on VS tech corner</title>
@@ -6,11 +6,7 @@
     <description>Recent content in rpi0 on VS tech corner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 20 Apr 2019 19:02:02 +0800</lastBuildDate>
-    
-	<atom:link href="https://vincentserpoul.github.io/tags/rpi0/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 20 Apr 2019 19:02:02 +0800</lastBuildDate><atom:link href="https://vincentserpoul.github.io/tags/rpi0/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>cross compiling rust from linux to rpi0/alpine</title>
       <link>https://vincentserpoul.github.io/post/alpine-rpi0-rust/</link>

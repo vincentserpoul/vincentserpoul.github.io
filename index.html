@@ -22,7 +22,7 @@
     
         <meta property="og:type" content="website" />
     
-        <meta name="generator" content="Hugo 0.56.0-DEV" />
+        <meta name="generator" content="Hugo 0.82.0" />
         <title>VS tech corner &middot; VS tech corner </title>
         <link rel="canonical" href="https://vincentserpoul.github.io/" />
         <link rel="alternate" type="application/rss+xml" title="RSS" href="/index.xml">
@@ -43,6 +43,30 @@
     </header>
 <main class="content" role="main">
 	<div class="container">
+	
+		<article class="li post">
+    <header class="post-header">
+        <h3 class="post-title"><a href="https://vincentserpoul.github.io/post/go-embed-1.16/">Go embed in go1.16</a></h3>
+        <p class="post-time"><time datetime="2021-03-28T18:39:35&#43;08:00">March 28, 2021</time></p>
+    </header>
+
+    <section class="post-excerpt">
+        <p>Golang 1.16 new feature: embed What is it about In previous versions of go, you needed to reach out for an external package in order to embed static content inside your binary.
+My go to one was shurcool/vfsgen, but there were many others worth using.
+Go 1.16 brings a new package, &ldquo;embed&rdquo;, which allows to do that with just the standard library.
+How to do that The best part of this, it&rsquo;s extremely simple, just see for yourself.</p>
+    </section>
+
+    <footer class="post-footer">
+        <span>
+            
+            
+            	&nbsp;&nbsp;<i class="fa fa-tag"></i>
+            	golang, embed, static, simple
+            
+        </span>
+    </footer>
+</article>
 	
 		<article class="li post">
     <header class="post-header">
@@ -248,30 +272,6 @@ What is the solution?</p>
             
             	&nbsp;&nbsp;<i class="fa fa-tag"></i>
             	archlinux, bluetooth
-            
-        </span>
-    </footer>
-</article>
-	
-		<article class="li post">
-    <header class="post-header">
-        <h3 class="post-title"><a href="https://vincentserpoul.github.io/post/golang-playwithsql-oracle/">Golang and Oracle</a></h3>
-        <p class="post-time"><time datetime="2016-12-27T00:44:00&#43;08:00">December 27, 2016</time></p>
-    </header>
-
-    <section class="post-excerpt">
-        <p>Which library To this day, the most up to date library seems to be rana/ora
-How to install (linux &amp; macosx) Download Oracle Instant Client for linux x64: both packages Basic and SDK Unzip each of them in the same folder /opt/oracle
-mkdir -p /opt/oracle cd /opt/oracle unzip ~/Downloads/instantclient-basiclite-linux.x64-12.2.0.1.0.zip unzip ~/Downloads/instantclient-sdk-linux.x64-12.2.0.1.0.zip cd /opt/oracle/instantclient_12_1 Add the necessary env variables and paths:
-# Oracle export LD_LIBRARY_PATH=/opt/oracle/instantclient_12_2:$LD_LIBRARY_PATH export PKG_CONFIG_PATH=/opt/oracle export ORACLE_HOME=$LD_LIBRARY_PATH copy from the go package .</p>
-    </section>
-
-    <footer class="post-footer">
-        <span>
-            
-            
-            	&nbsp;&nbsp;<i class="fa fa-tag"></i>
-            	golang, oracle, linux, macosx, sql
             
         </span>
     </footer>

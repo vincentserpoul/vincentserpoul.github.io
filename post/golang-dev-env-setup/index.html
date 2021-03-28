@@ -24,7 +24,7 @@
         <meta property="og:article:author" content="" />
         <meta property="og:article:published_time" content="2016-02-20T20:48:27&#43;08:00" />
     
-        <meta name="generator" content="Hugo 0.56.0-DEV" />
+        <meta name="generator" content="Hugo 0.82.0" />
         <title>golang dev environment setup &middot; VS tech corner </title>
         <link rel="canonical" href="https://vincentserpoul.github.io/" />
         <link rel="alternate" type="application/rss+xml" title="RSS" href="">
@@ -51,29 +51,19 @@
     </header>
 
     <section class="post-content">
-        
-
-<h3 id="golang-environment">Golang environment</h3>
-
+        <h3 id="golang-environment">Golang environment</h3>
 <p>install golang</p>
-
 <p><a href="http://www.wolfe.id.au/2015/03/05/using-sublime-text-for-go-development/">http://www.wolfe.id.au/2015/03/05/using-sublime-text-for-go-development/</a></p>
-
 <p>Within <a href="/sublimetext-dev-environment">sublimetext, from the package manager</a>, install gosublime, install gooracle.</p>
-
 <p>install go/tools:</p>
 <div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">go get -u golang.org/x/tools/cmd/goimports
 go get -u golang.org/x/tools/cmd/vet
 go get -u golang.org/x/tools/cmd/oracle
-go get -u golang.org/x/tools/cmd/godoc</code></pre></div>
-<p>install gometalinter (<a href="https://github.com/alecthomas/gometalinter">https://github.com/alecthomas/gometalinter</a>)</p>
-
+go get -u golang.org/x/tools/cmd/godoc
+</code></pre></div><p>install gometalinter (<a href="https://github.com/alecthomas/gometalinter">https://github.com/alecthomas/gometalinter</a>)</p>
 <p>install interfacer (<a href="https://github.com/mvdan/interfacer/">https://github.com/mvdan/interfacer/</a>)</p>
-
 <p>install gosimple (<a href="https://github.com/dominikh/go-simple">https://github.com/dominikh/go-simple</a>)</p>
-
 <p>install gocov (<a href="https://github.com/axw/gocov">https://github.com/axw/gocov</a>)</p>
-
 <p>Here is the package settings I use for gosublime:</p>
 <div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
 
@@ -110,7 +100,8 @@ go get -u golang.org/x/tools/cmd/godoc</code></pre></div>
         <span style="">//</span> <span style="">to</span> <span style="">a</span> <span style="">key</span> <span style="">binding</span> <span style="">if</span> <span style="">you</span> <span style="">want</span>
         {<span style="color:#008000;font-weight:bold">&#34;cmd&#34;</span>: <span style="color:#ba2121">&#34;gs_comp_lint&#34;</span>}
     ]
-<span style="">}</span></code></pre></div>
+<span style="">}</span>
+</code></pre></div>
     </section>
 
     <hr>
