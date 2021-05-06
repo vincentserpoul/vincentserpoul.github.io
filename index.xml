@@ -6,7 +6,20 @@
     <description>Recent content on VS tech corner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 28 Mar 2021 18:39:35 +0800</lastBuildDate><atom:link href="https://vincentserpoul.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 03 May 2021 22:50:27 +0800</lastBuildDate><atom:link href="https://vincentserpoul.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The stable coins</title>
+      <link>https://vincentserpoul.github.io/post/stable-coins/</link>
+      <pubDate>Mon, 03 May 2021 22:50:27 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/post/stable-coins/</guid>
+      <description>In today&amp;rsquo;s crypto world, a few tokens are said stable. that means stable regarding a specific asset, like fiat or even BTC. Here is a compiled list of a few, with information on the way they are backed and audited.
+💵 fiat based
+🪙 crypto curr based
+👑 Seigniorage Style Stablecoins
+   name symbol backed how? audit     USD Coin USDC 💵 Grant Thornton, LLP 2021   Tether USDT 💵 FSS 2018 2021   Binance dollar BUSD 💵 Withum 2021   Gemini dollar GUSD 💵 bpmca 2021   Maker DAO dai DAI 🪙 300% smart contracts   True USD TUSD 💵 armanino 2021   StableUnit SU 🪙 smart contracts   Paxos standard PAX 💵 Withum 2021   Terra UST 👑 smart contracts   Ampleforth AMPL 👑 smart contracts   Augmint A-EUR 👑 smart contracts   Frax FRAX 🪙 👑 smart contracts   sUSD sUSD 🪙 👑 smart contracts   mStable mUSD 🪙 👑 smart contracts    source: https://en.</description>
+    </item>
+    
     <item>
       <title>golang 1.16 new feature: embed</title>
       <link>https://vincentserpoul.github.io/post/go-embed-1.16/</link>
@@ -352,6 +365,15 @@ Host github Hostname github.com User vincentserpoul IdentityFile ~/.ssh/myprivat
       
       <guid>https://vincentserpoul.github.io/about/</guid>
       <description>Try out for Hugo!</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://vincentserpoul.github.io/post/analyzing-signal/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/post/analyzing-signal/</guid>
+      <description>hardware USB Logic Analyzer 24MHz 8 Channel [https://www.aliexpress.com/item/4000146595503.html?spm=a2g0s.9042311.0.0.16614c4dDxFqPG] software: yay -S sigrok-firmware-fx2lafw pulseview: yay -S pulseview</description>
     </item>
     
   </channel>

@@ -24,7 +24,7 @@
         <meta property="og:article:author" content="" />
         <meta property="og:article:published_time" content="2016-08-08T15:00:27&#43;08:00" />
     
-        <meta name="generator" content="Hugo 0.82.0" />
+        <meta name="generator" content="Hugo 0.83.1" />
         <title>Ethereum first dapp - part 1 &middot; VS tech corner </title>
         <link rel="canonical" href="https://vincentserpoul.github.io/" />
         <link rel="alternate" type="application/rss+xml" title="RSS" href="">
@@ -131,7 +131,7 @@ contract(<span style="color:#ba2121">&#39;HumanStandardToken&#39;</span>, (accou
     <span style="color:#008000;font-weight:bold">const</span> transferWatcher <span style="color:#666">=</span> molds.Transfer({ fromBlock<span style="color:#666">:</span> <span style="color:#ba2121">&#39;latest&#39;</span> },
       (error, results) =&gt; {
         assert.equal(
-          results.args._value.valueOf(), transferredAmt,
+          results.args.<span style="color:#666">_</span>value.valueOf(), transferredAmt,
           <span style="color:#ba2121">`transfer event amount not equal to </span><span style="color:#b68;font-weight:bold">${</span>transferredAmt<span style="color:#b68;font-weight:bold">}</span><span style="color:#ba2121">`</span>
         );
         transferWatcher.stopWatching();

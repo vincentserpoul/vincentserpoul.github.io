@@ -24,7 +24,7 @@
         <meta property="og:article:author" content="" />
         <meta property="og:article:published_time" content="2016-10-27T13:34:00&#43;08:00" />
     
-        <meta name="generator" content="Hugo 0.82.0" />
+        <meta name="generator" content="Hugo 0.83.1" />
         <title>Ethereum react dapps &middot; VS tech corner </title>
         <link rel="canonical" href="https://vincentserpoul.github.io/" />
         <link rel="alternate" type="application/rss+xml" title="RSS" href="">
@@ -215,13 +215,13 @@ We need to create a eventChannel, as the event is coming from <em>outside</em> t
   tokensApproval.watch((error, results) =&gt; {
     <span style="color:#008000;font-weight:bold">const</span> eventType <span style="color:#666">=</span> <span style="color:#ba2121">&#39;approve&#39;</span>;
     <span style="color:#008000;font-weight:bold">const</span> eventTime <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">new</span> <span style="color:#008000">Date</span>().toISOString();
-    <span style="color:#008000;font-weight:bold">const</span> eventEthAddress <span style="color:#666">=</span> results.args._owner;
+    <span style="color:#008000;font-weight:bold">const</span> eventEthAddress <span style="color:#666">=</span> results.args.<span style="color:#666">_</span>owner;
     <span style="color:#008000;font-weight:bold">let</span> eventDescription;
     <span style="color:#008000;font-weight:bold">if</span> (error) {
       console.log(<span style="color:#ba2121">`Approval error </span><span style="color:#b68;font-weight:bold">${</span>error<span style="color:#b68;font-weight:bold">}</span><span style="color:#ba2121">`</span>); <span style="color:#408080;font-style:italic">// eslint-disable-line no-console
-</span><span style="color:#408080;font-style:italic"></span>      eventDescription <span style="color:#666">=</span> <span style="color:#ba2121">`ERROR - </span><span style="color:#b68;font-weight:bold">${</span>results.args._owner.substring(<span style="color:#666">0</span>,<span style="color:#666">6</span>)<span style="color:#b68;font-weight:bold">}</span><span style="color:#ba2121"> allowed </span><span style="color:#b68;font-weight:bold">${</span>results.args._spender.substring(<span style="color:#666">0</span>,<span style="color:#666">6</span>)<span style="color:#b68;font-weight:bold">}</span><span style="color:#ba2121"> to spend </span><span style="color:#b68;font-weight:bold">${</span>results.args._value<span style="color:#b68;font-weight:bold">}</span><span style="color:#ba2121">Ʉ on his behalf`</span>;
+</span><span style="color:#408080;font-style:italic"></span>      eventDescription <span style="color:#666">=</span> <span style="color:#ba2121">`ERROR - </span><span style="color:#b68;font-weight:bold">${</span>results.args.<span style="color:#666">_</span>owner.substring(<span style="color:#666">0</span>,<span style="color:#666">6</span>)<span style="color:#b68;font-weight:bold">}</span><span style="color:#ba2121"> allowed </span><span style="color:#b68;font-weight:bold">${</span>results.args.<span style="color:#666">_</span>spender.substring(<span style="color:#666">0</span>,<span style="color:#666">6</span>)<span style="color:#b68;font-weight:bold">}</span><span style="color:#ba2121"> to spend </span><span style="color:#b68;font-weight:bold">${</span>results.args.<span style="color:#666">_</span>value<span style="color:#b68;font-weight:bold">}</span><span style="color:#ba2121">Ʉ on his behalf`</span>;
     } <span style="color:#008000;font-weight:bold">else</span> {
-      eventDescription <span style="color:#666">=</span> <span style="color:#ba2121">`</span><span style="color:#b68;font-weight:bold">${</span>results.args._owner.substring(<span style="color:#666">0</span>,<span style="color:#666">6</span>)<span style="color:#b68;font-weight:bold">}</span><span style="color:#ba2121"> allowed </span><span style="color:#b68;font-weight:bold">${</span>results.args._spender.substring(<span style="color:#666">0</span>,<span style="color:#666">6</span>)<span style="color:#b68;font-weight:bold">}</span><span style="color:#ba2121"> to spend </span><span style="color:#b68;font-weight:bold">${</span>results.args._value<span style="color:#b68;font-weight:bold">}</span><span style="color:#ba2121">Ʉ on his behalf`</span>;
+      eventDescription <span style="color:#666">=</span> <span style="color:#ba2121">`</span><span style="color:#b68;font-weight:bold">${</span>results.args.<span style="color:#666">_</span>owner.substring(<span style="color:#666">0</span>,<span style="color:#666">6</span>)<span style="color:#b68;font-weight:bold">}</span><span style="color:#ba2121"> allowed </span><span style="color:#b68;font-weight:bold">${</span>results.args.<span style="color:#666">_</span>spender.substring(<span style="color:#666">0</span>,<span style="color:#666">6</span>)<span style="color:#b68;font-weight:bold">}</span><span style="color:#ba2121"> to spend </span><span style="color:#b68;font-weight:bold">${</span>results.args.<span style="color:#666">_</span>value<span style="color:#b68;font-weight:bold">}</span><span style="color:#ba2121">Ʉ on his behalf`</span>;
     }
 
     emitter({ eventEthAddress, eventType, eventTime, eventDescription });
@@ -284,19 +284,19 @@ We need to create a eventChannel, as the event is coming from <em>outside</em> t
 
   <span style="color:#008000;font-weight:bold">const</span> approvalHistory <span style="color:#666">=</span> [];
   <span style="color:#408080;font-style:italic">// Getting the list of events from block 0 to latest block, with a filter on _owner as it is an indexed field
-</span><span style="color:#408080;font-style:italic"></span>  <span style="color:#008000;font-weight:bold">const</span> tokensApproval <span style="color:#666">=</span> tokens.Approval({ _owner<span style="color:#666">:</span> ethAddress }, { fromBlock<span style="color:#666">:</span> <span style="color:#ba2121">&#39;0&#39;</span>, toBlock<span style="color:#666">:</span> <span style="color:#ba2121">&#39;latest&#39;</span> });
+</span><span style="color:#408080;font-style:italic"></span>  <span style="color:#008000;font-weight:bold">const</span> tokensApproval <span style="color:#666">=</span> tokens.Approval({ <span style="color:#666">_</span>owner<span style="color:#666">:</span> ethAddress }, { fromBlock<span style="color:#666">:</span> <span style="color:#ba2121">&#39;0&#39;</span>, toBlock<span style="color:#666">:</span> <span style="color:#ba2121">&#39;latest&#39;</span> });
 
   <span style="color:#008000;font-weight:bold">const</span> getApprovalLogPromise <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">yield</span> call(eventGetPromisified, tokensApproval);
 
   <span style="color:#008000;font-weight:bold">if</span> (getApprovalLogPromise.err <span style="color:#666">===</span> <span style="color:#008000;font-weight:bold">null</span> <span style="color:#666">||</span> getApprovalLogPromise.err <span style="color:#666">===</span> <span style="color:#008000;font-weight:bold">undefined</span>) {
     <span style="color:#008000;font-weight:bold">for</span> (<span style="color:#008000;font-weight:bold">const</span> results <span style="color:#008000;font-weight:bold">of</span> getApprovalLogPromise) {
       approvalHistory.push({
-        trigger<span style="color:#666">:</span> results.args._trigger,
-        measurement<span style="color:#666">:</span> results.args._measurement.valueOf(),
-        premium<span style="color:#666">:</span> results.args._amount.valueOf(),
-        refundedAmount<span style="color:#666">:</span> results.args._refundAmount.valueOf(),
-        settled<span style="color:#666">:</span> results.args._timeEnded.valueOf(),
-        refunded<span style="color:#666">:</span> results.args._due.valueOf(),
+        trigger<span style="color:#666">:</span> results.args.<span style="color:#666">_</span>trigger,
+        measurement<span style="color:#666">:</span> results.args.<span style="color:#666">_</span>measurement.valueOf(),
+        premium<span style="color:#666">:</span> results.args.<span style="color:#666">_</span>amount.valueOf(),
+        refundedAmount<span style="color:#666">:</span> results.args.<span style="color:#666">_</span>refundAmount.valueOf(),
+        settled<span style="color:#666">:</span> results.args.<span style="color:#666">_</span>timeEnded.valueOf(),
+        refunded<span style="color:#666">:</span> results.args.<span style="color:#666">_</span>due.valueOf(),
       });
     }
   } <span style="color:#008000;font-weight:bold">else</span> {

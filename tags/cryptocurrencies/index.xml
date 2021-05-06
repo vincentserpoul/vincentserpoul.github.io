@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>cryptocurrencies on VS tech corner</title>
+    <link>https://vincentserpoul.github.io/tags/cryptocurrencies/</link>
+    <description>Recent content in cryptocurrencies on VS tech corner</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 03 May 2021 22:50:27 +0800</lastBuildDate><atom:link href="https://vincentserpoul.github.io/tags/cryptocurrencies/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The stable coins</title>
+      <link>https://vincentserpoul.github.io/post/stable-coins/</link>
+      <pubDate>Mon, 03 May 2021 22:50:27 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/post/stable-coins/</guid>
+      <description>In today&amp;rsquo;s crypto world, a few tokens are said stable. that means stable regarding a specific asset, like fiat or even BTC. Here is a compiled list of a few, with information on the way they are backed and audited.
+💵 fiat based
+🪙 crypto curr based
+👑 Seigniorage Style Stablecoins
+   name symbol backed how? audit     USD Coin USDC 💵 Grant Thornton, LLP 2021   Tether USDT 💵 FSS 2018 2021   Binance dollar BUSD 💵 Withum 2021   Gemini dollar GUSD 💵 bpmca 2021   Maker DAO dai DAI 🪙 300% smart contracts   True USD TUSD 💵 armanino 2021   StableUnit SU 🪙 smart contracts   Paxos standard PAX 💵 Withum 2021   Terra UST 👑 smart contracts   Ampleforth AMPL 👑 smart contracts   Augmint A-EUR 👑 smart contracts   Frax FRAX 🪙 👑 smart contracts   sUSD sUSD 🪙 👑 smart contracts   mStable mUSD 🪙 👑 smart contracts    source: https://en.</description>
+    </item>
+    
+  </channel>
+</rss>
