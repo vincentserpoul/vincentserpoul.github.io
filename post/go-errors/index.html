@@ -121,7 +121,6 @@ It keeps the nice opportunity to use errors.Is and removes the initialization co
 No wrapping when there is no additional context.
 Context is not stack trace.
 Externally available errors should be handling all errors, unwrap them and repackage them again.</p>
-<p><a href="https://play.golang.org/p/gzCFQLfaGdL">testable in the playground</a></p>
 <div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#008000;font-weight:bold">type</span> marshalError <span style="color:#b00040">string</span>
 
 <span style="color:#008000;font-weight:bold">func</span> (me marshalError) <span style="color:#00f">Error</span>() <span style="color:#b00040">string</span> {
@@ -134,7 +133,6 @@ Externally available errors should be handling all errors, unwrap them and repac
 	<span style="color:#008000;font-weight:bold">return</span> fmt.<span style="color:#00f">Errorf</span>(<span style="color:#ba2121">&#34;%w&#34;</span>, ErrBadInt)
 }
 </code></pre></div><h4 id="for-more-complex-errors">For more complex errors</h4>
-<p>With context built in, <a href="https://play.golang.org/p/XE7L2KWf3Au">on the playground</a></p>
 <div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#008000;font-weight:bold">type</span> badValueError <span style="color:#008000;font-weight:bold">struct</span> {
 	key   <span style="color:#b00040">string</span>
 	value <span style="color:#008000;font-weight:bold">interface</span>{}
