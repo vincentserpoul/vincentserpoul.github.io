@@ -6,7 +6,19 @@
     <description>Recent content in Posts on VS tech corner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 03 May 2021 22:50:27 +0800</lastBuildDate><atom:link href="https://vincentserpoul.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 17 May 2021 12:30:48 +0800</lastBuildDate><atom:link href="https://vincentserpoul.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>golang errors (after 1.13)</title>
+      <link>https://vincentserpoul.github.io/post/go-errors/</link>
+      <pubDate>Mon, 17 May 2021 12:30:48 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/post/go-errors/</guid>
+      <description>Since go 1.13, go has gone one step further in terms of error handling. Errors can be wrapped, bubbled up and act upon.
+We will here take a step back on error handling in go, from the perspective of a library.
+What data could we have in the error? Inspired by a rust talk from Jan Lusby about errors, here are a few things that error could contain:
+ The reason of the error Context of the error: struct field, struct surrounding values&amp;hellip; Stack trace: which part of the code triggered this error How to fix the error: suggest a way to fix it  Where are errors displayed?</description>
+    </item>
+    
     <item>
       <title>The stable coins</title>
       <link>https://vincentserpoul.github.io/post/stable-coins/</link>
@@ -17,7 +29,7 @@
 Types of stable coins 💵 fiat based
 🪙 crypto curr based
 👑 Seigniorage Style Stablecoins (also called algorithmic or synthetic)
-List    name symbol backed how? audit     USD Coin USDC 💵 Grant Thornton, LLP 2021   Tether USDT 💵 FSS 2018 2021   Binance dollar BUSD 💵 Withum 2021   Gemini dollar GUSD 💵 bpmca 2021   Maker DAO dai DAI 🪙 300% smart contracts   True USD TUSD 💵 armanino 2021   StableUnit SU 🪙 smart contracts   Paxos standard PAX 💵 Withum 2021   Terra UST 👑 smart contracts   Ampleforth AMPL 👑 smart contracts   Augmint A-EUR 👑 smart contracts   Frax FRAX 🪙 👑 smart contracts   sUSD sUSD 🪙 👑 smart contracts   mStable mUSD 🪙 👑 smart contracts   Fei FEI 🪙 👑 smart contracts    Subjective evaluation of stablity The criterias we will use are the following:</description>
+List    name symbol backed how? audit     USD Coin USDC 💵 Grant Thornton, LLP 2021   Tether USDT 💵 FSS 2018 2021   Binance dollar BUSD 💵 Withum 2021   Gemini dollar GUSD 💵 bpmca 2021   Maker DAO dai DAI 🪙 300% smart contracts   True USD TUSD 💵 armanino 2021   StableUnit SU 🪙 smart contracts   Paxos standard PAX 💵 Withum 2021   Terra UST 👑 smart contracts   Ampleforth AMPL 👑 smart contracts   Augmint A-EUR 👑 smart contracts   Frax FRAX 🪙 👑 smart contracts   sUSD sUSD 🪙 👑 smart contracts   mStable mUSD 🪙 👑 smart contracts   Fei FEI 🪙 👑 smart contracts    Stability and risk The criterias to evaluate the different platforms and protocols would be among the following:</description>
     </item>
     
     <item>

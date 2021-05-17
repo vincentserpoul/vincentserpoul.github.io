@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>errors on VS tech corner</title>
+    <link>https://vincentserpoul.github.io/tags/errors/</link>
+    <description>Recent content in errors on VS tech corner</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 17 May 2021 12:30:48 +0800</lastBuildDate><atom:link href="https://vincentserpoul.github.io/tags/errors/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>golang errors (after 1.13)</title>
+      <link>https://vincentserpoul.github.io/post/go-errors/</link>
+      <pubDate>Mon, 17 May 2021 12:30:48 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/post/go-errors/</guid>
+      <description>Since go 1.13, go has gone one step further in terms of error handling. Errors can be wrapped, bubbled up and act upon.
+We will here take a step back on error handling in go, from the perspective of a library.
+What data could we have in the error? Inspired by a rust talk from Jan Lusby about errors, here are a few things that error could contain:
+ The reason of the error Context of the error: struct field, struct surrounding values&amp;hellip; Stack trace: which part of the code triggered this error How to fix the error: suggest a way to fix it  Where are errors displayed?</description>
+    </item>
+    
+  </channel>
+</rss>

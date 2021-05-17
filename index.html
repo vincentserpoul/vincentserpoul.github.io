@@ -46,6 +46,30 @@
 	
 		<article class="li post">
     <header class="post-header">
+        <h3 class="post-title"><a href="https://vincentserpoul.github.io/post/go-errors/">golang errors (after 1.13)</a></h3>
+        <p class="post-time"><time datetime="2021-05-17T12:30:48&#43;08:00">May 17, 2021</time></p>
+    </header>
+
+    <section class="post-excerpt">
+        <p>Since go 1.13, go has gone one step further in terms of error handling. Errors can be wrapped, bubbled up and act upon.
+We will here take a step back on error handling in go, from the perspective of a library.
+What data could we have in the error? Inspired by a rust talk from Jan Lusby about errors, here are a few things that error could contain:
+ The reason of the error Context of the error: struct field, struct surrounding values&hellip; Stack trace: which part of the code triggered this error How to fix the error: suggest a way to fix it  Where are errors displayed?</p>
+    </section>
+
+    <footer class="post-footer">
+        <span>
+            
+            
+            	&nbsp;&nbsp;<i class="fa fa-tag"></i>
+            	golang, errors
+            
+        </span>
+    </footer>
+</article>
+	
+		<article class="li post">
+    <header class="post-header">
         <h3 class="post-title"><a href="https://vincentserpoul.github.io/post/stable-coins/">The stable coins</a></h3>
         <p class="post-time"><time datetime="2021-05-03T22:50:27&#43;08:00">May 3, 2021</time></p>
     </header>
@@ -55,7 +79,7 @@
 Types of stable coins 💵 fiat based
 🪙 crypto curr based
 👑 Seigniorage Style Stablecoins (also called algorithmic or synthetic)
-List    name symbol backed how? audit     USD Coin USDC 💵 Grant Thornton, LLP 2021   Tether USDT 💵 FSS 2018 2021   Binance dollar BUSD 💵 Withum 2021   Gemini dollar GUSD 💵 bpmca 2021   Maker DAO dai DAI 🪙 300% smart contracts   True USD TUSD 💵 armanino 2021   StableUnit SU 🪙 smart contracts   Paxos standard PAX 💵 Withum 2021   Terra UST 👑 smart contracts   Ampleforth AMPL 👑 smart contracts   Augmint A-EUR 👑 smart contracts   Frax FRAX 🪙 👑 smart contracts   sUSD sUSD 🪙 👑 smart contracts   mStable mUSD 🪙 👑 smart contracts   Fei FEI 🪙 👑 smart contracts    Subjective evaluation of stablity The criterias we will use are the following:</p>
+List    name symbol backed how? audit     USD Coin USDC 💵 Grant Thornton, LLP 2021   Tether USDT 💵 FSS 2018 2021   Binance dollar BUSD 💵 Withum 2021   Gemini dollar GUSD 💵 bpmca 2021   Maker DAO dai DAI 🪙 300% smart contracts   True USD TUSD 💵 armanino 2021   StableUnit SU 🪙 smart contracts   Paxos standard PAX 💵 Withum 2021   Terra UST 👑 smart contracts   Ampleforth AMPL 👑 smart contracts   Augmint A-EUR 👑 smart contracts   Frax FRAX 🪙 👑 smart contracts   sUSD sUSD 🪙 👑 smart contracts   mStable mUSD 🪙 👑 smart contracts   Fei FEI 🪙 👑 smart contracts    Stability and risk The criterias to evaluate the different platforms and protocols would be among the following:</p>
     </section>
 
     <footer class="post-footer">
@@ -250,30 +274,6 @@ I uploaded it as well on surge for you to see without the hassle</p>
             
             	&nbsp;&nbsp;<i class="fa fa-tag"></i>
             	wasm, golang
-            
-        </span>
-    </footer>
-</article>
-	
-		<article class="li post">
-    <header class="post-header">
-        <h3 class="post-title"><a href="https://vincentserpoul.github.io/post/gke-multi-accounts-clusters/">Using GKE with multiple accounts and clusters</a></h3>
-        <p class="post-time"><time datetime="2018-06-13T11:37:00&#43;08:00">June 13, 2018</time></p>
-    </header>
-
-    <section class="post-excerpt">
-        <p>Google cloud configs Download and install gcloud Simply follow this link
-Listing existing configurations gcloud config configurations list NAME IS_ACTIVE ACCOUNT PROJECT DEFAULT_ZONE DEFAULT_REGION This should give you only one line, with a default account.
-Creating a configuration gcloud config configurations create testconf This will guide you through the configuration of a new configuration. It allows you to set one config per account, project, cluster&hellip;
-Activating a configuration gcloud config configurations activate testconf As simple as this to change your account/config.</p>
-    </section>
-
-    <footer class="post-footer">
-        <span>
-            
-            
-            	&nbsp;&nbsp;<i class="fa fa-tag"></i>
-            	kubernetes, GKE, gcloud, googlecloud
             
         </span>
     </footer>
