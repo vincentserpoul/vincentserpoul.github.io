@@ -53,7 +53,7 @@
     <section class="post-content">
         <p>Since go 1.13, go has gone one step further in terms of error handling. Errors can be wrapped, bubbled up and act upon.</p>
 <p>We will here take a step back on error handling in go, from the perspective of a library.</p>
-<h2 id="what-data-_could_-we-have-in-the-error">What data <em>could</em> we have in the error?</h2>
+<h3 id="what-data-_could_-we-have-in-the-error">What data <em>could</em> we have in the error?</h3>
 <p>Inspired by a <a href="https://www.youtube.com/watch?v=rAF8mLI0naQ">rust talk</a> from <a href="https://github.com/yaahc">Jan Lusby</a> about errors, here are a few things that error could contain:</p>
 <ul>
 <li>The reason of the error</li>
@@ -61,13 +61,13 @@
 <li>Stack trace: which part of the code triggered this error</li>
 <li>How to fix the error: suggest a way to fix it</li>
 </ul>
-<h2 id="where-are-errors-displayed">Where are errors displayed?</h2>
+<h3 id="where-are-errors-displayed">Where are errors displayed?</h3>
 <ul>
 <li>In the logs of an application</li>
 <li>In front of the end user</li>
 </ul>
-<h2 id="ways-to-define-errors-after-golang-113">Ways to define errors after golang 1.13</h2>
-<h3 id="a-inline-with-no-type-definition">a) inline, with no type definition</h3>
+<h3 id="ways-to-define-errors-after-golang-113">Ways to define errors after golang 1.13</h3>
+<h4 id="a-inline-with-no-type-definition">a) inline, with no type definition</h4>
 <div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"> <span style="color:#008000;font-weight:bold">return</span> fmt.<span style="color:#00f">Errorf</span>(<span style="color:#ba2121">&#34;bad int %d&#34;</span>, i)
 </code></pre></div><p>(+)</p>
 <ul>
@@ -78,7 +78,7 @@
 <ul>
 <li>impossible to handle properly as you can&rsquo;t match and react accordingly</li>
 </ul>
-<h3 id="b-sentinel-errors">b) sentinel errors</h3>
+<h4 id="b-sentinel-errors">b) sentinel errors</h4>
 <div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#008000;font-weight:bold">var</span> errBadInt = errors.<span style="color:#00f">New</span>(<span style="color:#ba2121">&#34;bad int&#34;</span>)
 <span style="color:#008000;font-weight:bold">return</span> fmt.<span style="color:#00f">Errorf</span>(<span style="color:#ba2121">&#34;%w %d&#34;</span>, i)
 </code></pre></div><p>(+)</p>
@@ -91,7 +91,7 @@
 <li>binary size penalty</li>
 <li>global vars (fragile)</li>
 </ul>
-<h3 id="c-structs-with-defined-context-and-string-formatting">c) structs, with defined context and string formatting</h3>
+<h4 id="c-structs-with-defined-context-and-string-formatting">c) structs, with defined context and string formatting</h4>
 <div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang">
 <span style="color:#008000;font-weight:bold">type</span> errBadInt <span style="color:#008000;font-weight:bold">struct</span> {
    i <span style="color:#b00040">int</span>
@@ -104,18 +104,18 @@
 <span style="color:#008000;font-weight:bold">func</span> <span style="color:#00f">newErrBadInt</span>(i <span style="color:#b00040">int</span>) errBadInt {
     <span style="color:#008000;font-weight:bold">return</span> errBadInt{i}
 }
-</code></pre></div><h2 id="more-tricks-used-by-libs-out-there">More tricks used by libs out there</h2>
-<h3 id="upspinhttpsgithubcomupspinupspinblobmastererrorserrorsgo-by-rob-pike-himself"><a href="https://github.com/upspin/upspin/blob/master/errors/errors.go">upspin</a> by Rob Pike himself</h3>
+</code></pre></div><h3 id="more-tricks-used-by-libs-out-there">More tricks used by libs out there</h3>
+<h4 id="upspinhttpsgithubcomupspinupspinblobmastererrorserrorsgo-by-rob-pike-himself"><a href="https://github.com/upspin/upspin/blob/master/errors/errors.go">upspin</a> by Rob Pike himself</h4>
 <ul>
 <li>smart use of const and redefine the Error struct with context</li>
 <li>return stack in debug mode</li>
 </ul>
-<h3 id="big-cachehttpsgithubcomallegrobigcacheblob16762172f2ee433caf5bae1904cdbc11dcebffebiteratorgo"><a href="https://github.com/allegro/bigcache/blob/16762172f2ee433caf5bae1904cdbc11dcebffeb/iterator.go">big cache</a></h3>
+<h4 id="big-cachehttpsgithubcomallegrobigcacheblob16762172f2ee433caf5bae1904cdbc11dcebffebiteratorgo"><a href="https://github.com/allegro/bigcache/blob/16762172f2ee433caf5bae1904cdbc11dcebffeb/iterator.go">big cache</a></h4>
 <ul>
 <li>interesting usage of const + error interface to avoid global vars</li>
 </ul>
-<h2 id="so-what-should-we-do">So what should we do?</h2>
-<h3 id="for-simple-errors">For simple errors</h3>
+<h3 id="so-what-should-we-do">So what should we do?</h3>
+<h4 id="for-simple-errors">For simple errors</h4>
 <p>Keep the errors as they are, but turn them into const thanks to the bigcache trick.
 It keeps the nice opportunity to use errors.Is and removes the initialization cost.
 No wrapping when there is no additional context.
@@ -133,7 +133,7 @@ Externally available errors should be handling all errors, unwrap them and repac
 <span style="color:#008000;font-weight:bold">func</span> <span style="color:#00f">testErr</span>() <span style="color:#b00040">error</span> {
 	<span style="color:#008000;font-weight:bold">return</span> fmt.<span style="color:#00f">Errorf</span>(<span style="color:#ba2121">&#34;%w&#34;</span>, ErrBadInt)
 }
-</code></pre></div><h3 id="for-more-complex-errors">For more complex errors</h3>
+</code></pre></div><h4 id="for-more-complex-errors">For more complex errors</h4>
 <p>With context built in, <a href="https://play.golang.org/p/XE7L2KWf3Au">on the playground</a></p>
 <div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#008000;font-weight:bold">type</span> badValueError <span style="color:#008000;font-weight:bold">struct</span> {
 	key   <span style="color:#b00040">string</span>
@@ -149,8 +149,8 @@ Externally available errors should be handling all errors, unwrap them and repac
 	k <span style="color:#666">:=</span> <span style="color:#ba2121">&#34;test&#34;</span>
 	<span style="color:#008000;font-weight:bold">return</span> badValueError{key: k, value: v}
 }
-</code></pre></div><h2 id="handling-errors">Handling errors</h2>
-<h3 id="error-as-values">Error as values</h3>
+</code></pre></div><h3 id="handling-errors">Handling errors</h3>
+<h4 id="error-as-values">Error as values</h4>
 <p><a href="https://play.golang.org/p/gzCFQLfaGdL">testable in the playground</a></p>
 <div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#008000;font-weight:bold">package</span> main
 
@@ -181,7 +181,7 @@ Externally available errors should be handling all errors, unwrap them and repac
 		log.<span style="color:#00f">Println</span>(<span style="color:#ba2121">&#34;wrong&#34;</span>)
 	}
 }
-</code></pre></div><h3 id="error-as-struct">Error as struct</h3>
+</code></pre></div><h4 id="error-as-struct">Error as struct</h4>
 <p><a href="https://play.golang.org/p/XE7L2KWf3Au">on the playground</a></p>
 <div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#008000;font-weight:bold">package</span> main
 
@@ -216,18 +216,18 @@ Externally available errors should be handling all errors, unwrap them and repac
 		log.<span style="color:#00f">Println</span>(<span style="color:#ba2121">&#34;wrong&#34;</span>)
 	}
 }
-</code></pre></div><h2 id="further-thoughts">Further thoughts</h2>
-<h3 id="panic-or-not-panic">Panic or not panic?</h3>
+</code></pre></div><h3 id="further-thoughts">Further thoughts</h3>
+<h4 id="panic-or-not-panic">Panic or not panic?</h4>
 <p>I tend to agree with <a href="https://github.com/uber-go/guide/blob/master/style.md">uber recommendation</a> to not panic in a library, especially when you&rsquo;re expected to most likely handle user data. It allows the user of the lib to do whatever they want with the returned error.</p>
 <p>That said, it&rsquo;s important to actually notify the library user if the library is used improperly in cases that are supposedly &ldquo;not possible&rdquo; by panicking.
 The lib user is always able to handle these panics through a recover.</p>
-<h3 id="wrapping-or-not-wrapping">Wrapping or not wrapping?</h3>
+<h4 id="wrapping-or-not-wrapping">Wrapping or not wrapping?</h4>
 <p>from <a href="https://blog.golang.org/go1.13-errors#TOC_3.4.">go1.13 post on errors</a>:</p>
 <pre><code>&quot;wrapping an error makes that error part of your API. If you don't want to commit to supporting that error as part of your API in the future, you shouldn't wrap the error.&quot;
 </code></pre>
 <p>It also makes no sense to wrap unexported errors to the external user of the API, as the user has no way of testing/matching the error.
 External methods hence should not return internal errors and return their own exported type, catered at the lib user.</p>
-<h3 id="never-inline-errors">Never inline errors?</h3>
+<h4 id="never-inline-errors">Never inline errors?</h4>
 <p>Simple cases don&rsquo;t require to define sentinel values and a simple string is often enough to start with.
 If later on, you need to match on the error value or type, you can change this to an actual sentinel value.</p>
 <p>That said, I think any error part of your API should be typed, as you want the lib user to be able to handle it according to its need.</p>
