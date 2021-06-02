@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" prefix="og: http://ogp.me/ns#" xmlns:og="http://ogp.me/ns#"><!--<![endif]-->
+
+    <head>
+                <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="leveraging multistage docker build to deploy rust">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="author" content="">
+        <meta name="keywords" content="awesome, definitely">
+	
+        <meta property="og:site_name" content="VS tech corner">
+        <meta property="og:title" content="VS tech corner">
+        <meta property="og:url" content="https://vincentserpoul.github.io/post/rust-optimized-container/">
+        <meta property="og:description" content="">
+    
+        <meta property="og:type" content="article" />
+        <meta property="og:article:author" content="" />
+        <meta property="og:article:published_time" content="2021-06-02T18:12:40&#43;08:00" />
+    
+        <meta name="generator" content="Hugo 0.83.1" />
+        <title>deploying rust in containers &middot; VS tech corner </title>
+        <link rel="canonical" href="https://vincentserpoul.github.io/" />
+        <link rel="alternate" type="application/rss+xml" title="RSS" href="">
+        <link rel="stylesheet" type='text/css' href="https://vincentserpoul.github.io/css/main.css"/>
+        <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300|Montserrat:700' rel='stylesheet' type='text/css'>
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+        <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    </head>
+
+<body>
+<!--[if lt IE 7]><p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chrome/‎">install Google Chrome</a> to experience this site.</p><![endif]-->
+
+    <header id="site-header">
+        <div class="container">
+            <a href="https://vincentserpoul.github.io/" alt="VS tech corner"><h1 class="blog-title heading">VS tech corner</h1></a>
+            <p class="blog-description"></p>
+        </div>
+    </header>
+<main class="content" role="main">
+	<div class="container">
+		<article class="post">
+	<header class="post-header">
+        <h3 class="p-post-title">deploying rust in containers</h3>
+    </header>
+
+    <section class="post-content">
+        <h3 id="the-goal">The goal</h3>
+<p>I am pretty familiar with containers and multi stage deployment have been my go to since quite a while now, for my golang codebases.</p>
+<p>Now that I have been picking up rust, deploying my first rust service in production did bring me back to my usual habits of containerization.</p>
+<p>We&rsquo;ll be trying to optimize for speed of build and container size.</p>
+<h3 id="the-cargotoml">The cargo.toml</h3>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">[...]<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb"></span>[lib]<span style="color:#bbb">
+</span><span style="color:#bbb"></span>name = &#34;vs&#34;<span style="color:#bbb">
+</span><span style="color:#bbb"></span>path = &#34;src/lib.rs&#34;<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb"></span>[[bin]]<span style="color:#bbb">
+</span><span style="color:#bbb"></span>name = &#34;vs&#34;<span style="color:#bbb">
+</span><span style="color:#bbb"></span>path = &#34;src/bin/vs.rs&#34;<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb"></span>[dependencies]<span style="color:#bbb">
+</span><span style="color:#bbb"></span>serde = { version = &#34;^1.0&#34;, features = [&#34;derive&#34;] }<span style="color:#bbb">
+</span><span style="color:#bbb"></span>serde_json = &#34;^1.0&#34;<span style="color:#bbb">
+</span><span style="color:#bbb"></span>serde_with = { version = &#34;^1.9&#34;, features = [&#34;chrono&#34;] }<span style="color:#bbb">
+</span><span style="color:#bbb"></span>serde_repr = &#34;0.1&#34;<span style="color:#bbb">
+</span><span style="color:#bbb"></span>[...]<span style="color:#bbb">
+</span></code></pre></div><p>I removed not relevant parts of the Cargo.toml.</p>
+<p>You&rsquo;ll pay attention to the lib and bin entries. They allow you to mix a lib and multiple binaries in the same codebase.</p>
+<p>I&rsquo;ll be leveraging this in the Dockerfile.</p>
+<h3 id="the-dockerfile">The Dockerfile</h3>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-docker" data-lang="docker"><span style="color:#008000;font-weight:bold">FROM</span><span style="color:#ba2121"> rust:1.52.1 as builder</span><span style="">
+</span><span style="">
+</span><span style=""></span><span style="color:#008000;font-weight:bold">WORKDIR</span><span style="color:#ba2121"> /usr/codebase</span><span style="">
+</span><span style="">
+</span><span style=""></span><span style="color:#008000;font-weight:bold">COPY</span> ./Cargo.toml ./Cargo.toml<span style="">
+</span><span style="">
+</span><span style=""></span><span style="color:#008000;font-weight:bold">RUN</span> sed -i <span style="color:#ba2121">&#39;s#src/bin/vs.rs#fake.rs#&#39;</span> Cargo.toml<span style="">
+</span><span style=""></span><span style="color:#008000;font-weight:bold">RUN</span> sed -i <span style="color:#ba2121">&#39;s#src/lib.rs#fake_lib.rs#&#39;</span> Cargo.toml<span style="">
+</span><span style="">
+</span><span style=""></span><span style="color:#008000;font-weight:bold">RUN</span> <span style="color:#008000">echo</span> <span style="color:#ba2121">&#34;fn main() {}&#34;</span> &gt; fake.rs <span style="color:#666">&amp;&amp;</span><span style="color:#b62;font-weight:bold">\
+</span><span style="color:#b62;font-weight:bold"></span>    touch fake_lib.rs<span style="">
+</span><span style="">
+</span><span style=""></span><span style="color:#008000;font-weight:bold">RUN</span> cargo build --release<span style="">
+</span><span style=""></span><span style="color:#008000;font-weight:bold">RUN</span> rm fake.rs fake_lib.rs<span style="">
+</span><span style="">
+</span><span style=""></span><span style="color:#008000;font-weight:bold">RUN</span> sed -i <span style="color:#ba2121">&#39;s#fake.rs#src/bin/vs.rs#&#39;</span> Cargo.toml<span style="">
+</span><span style=""></span><span style="color:#008000;font-weight:bold">RUN</span> sed -i <span style="color:#ba2121">&#39;s#fake_lib.rs#src/lib.rs#&#39;</span> Cargo.toml<span style="">
+</span><span style="">
+</span><span style=""></span><span style="color:#008000;font-weight:bold">COPY</span> ./ ./<span style="">
+</span><span style="">
+</span><span style=""></span><span style="color:#008000;font-weight:bold">RUN</span> cargo build --bin vs --release<span style="">
+</span><span style="">
+</span><span style=""></span><span style="color:#408080;font-style:italic">#</span><span style="">
+</span><span style=""></span><span style="color:#008000;font-weight:bold">FROM</span><span style="color:#ba2121"> gcr.io/distroless/cc-debian10</span><span style="">
+</span><span style="">
+</span><span style=""></span><span style="color:#008000;font-weight:bold">COPY</span> --from<span style="color:#666">=</span>builder /usr/codebase/target/release/vs /app/<span style="">
+</span><span style="">
+</span><span style=""></span><span style="color:#008000;font-weight:bold">WORKDIR</span><span style="color:#ba2121"> /app</span><span style="">
+</span><span style="">
+</span><span style=""></span><span style="color:#008000;font-weight:bold">ENTRYPOINT</span> [<span style="color:#ba2121">&#34;./vs&#34;</span>]<span style="">
+</span></code></pre></div><p>We first want to cache the compiled dependencies.
+To do that, we first copy the Cargo.toml alone and then create a fake.rs and a fake_lib.rs.
+Then we tell cargo to look at these new files instead of the previous ones and ask it to compile.
+Cargo will compile and cache all the dependencies (as well as your useless fake.rs).
+Bingo! All the deps will be compiled and cache in this image layer.</p>
+<p>You can now restore the previous values, copy the rest of your codebase and voila, cargo will compile a LOT quicker in your next rebuild as it won&rsquo;t have to compile your deps again (except if they change, of course).</p>
+<p>Regarding the container for runtime, instead of using a debian:bullseye-slim, you can go for the distroless image, ending up with a final size of around 20-30MB.
+Notice the use of cc-debian10, allowing non statically compiled binaries to run properly.</p>
+<h3 id="the-dockerignore">The .dockerignore</h3>
+<p>You simply don&rsquo;t want to copy your huge target repo to the docker image, so you want to add it to the .dockerignore file.
+You can also take this opportunity to add any files that should not be exposed, even though it won&rsquo;t appear in the final container, you never know.</p>
+<pre><code>target
+mysecret
+Cargo.lock
+</code></pre><h3 id="on-from-scratch">On from scratch</h3>
+<p>Usually, I go for a scratch image for my go runtime. The issue here is that some rust dependencies seems to be not so easy to compile statically (at least from what I see now).
+If possible, you can go for a musl cross compilation and if that works, go for a scratch container.
+Maybe another post!</p>
+
+    </section>
+
+    <hr>
+
+    <footer class="post-footer">
+        <section class="f-1">
+            
+
+            <p class="f-post-time"><time datetime="2021-06-02T18:12:40&#43;08:00">June 2, 2021</time></p>
+        </section>
+
+        <section class="f-2">
+            <section class="share">
+                <span>Share:
+                <a class="icon-twitter" href="http://twitter.com/share?text=deploying%20rust%20in%20containers&url=https%3a%2f%2fvincentserpoul.github.io%2fpost%2frust-optimized-container%2f"
+                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="fa fa-twitter"></i>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fvincentserpoul.github.io%2fpost%2frust-optimized-container%2f"
+                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="fa fa-facebook"></i>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=https%3a%2f%2fvincentserpoul.github.io%2fpost%2frust-optimized-container%2f"
+                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="fa fa-google-plus"></i>
+                </a>
+                </span>
+            </section>
+
+            
+            	<span class="f-post-tags"><i class="fa fa-tag"></i>
+            	rust, container, docker
+            	</span>
+            
+        </section>
+    </footer>
+
+    <div id="disqus_thread"></div>
+<script>
+var disqus_config = function () {
+    this.page.url = "https://vincentserpoul.github.io/post/rust-optimized-container/";  
+    this.page.identifier = "https://vincentserpoul.github.io/post/rust-optimized-container/"; 
+};
+
+(function() { 
+    var d = document, s = d.createElement('script');
+    s.src = '//vincentserpoul-tech-corner.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</article>
+	</div>
+</main>
+    <footer id="site-footer">
+        <div class="container">
+            <a href="https://vincentserpoul.github.io/index.xml" title="Get the RSS feed"><span class="tooltip"><i class="fa fa-rss"></i></span></a>
+        </div>
+    </footer>
+
+    <script type="text/javascript" src="https://vincentserpoul.github.io/js/fittext.js"></script>
+    <script type="text/javascript">
+      $(".heading").fitText();
+    </script>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-81802018-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</body>
+</html>

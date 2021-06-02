@@ -6,7 +6,34 @@
     <description>Recent content in Tags on VS tech corner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 17 May 2021 12:30:48 +0800</lastBuildDate><atom:link href="https://vincentserpoul.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 02 Jun 2021 18:12:40 +0800</lastBuildDate><atom:link href="https://vincentserpoul.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>container</title>
+      <link>https://vincentserpoul.github.io/tags/container/</link>
+      <pubDate>Wed, 02 Jun 2021 18:12:40 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/tags/container/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>docker</title>
+      <link>https://vincentserpoul.github.io/tags/docker/</link>
+      <pubDate>Wed, 02 Jun 2021 18:12:40 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/tags/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rust</title>
+      <link>https://vincentserpoul.github.io/tags/rust/</link>
+      <pubDate>Wed, 02 Jun 2021 18:12:40 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/tags/rust/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>errors</title>
       <link>https://vincentserpoul.github.io/tags/errors/</link>
@@ -89,15 +116,6 @@
     </item>
     
     <item>
-      <title>docker</title>
-      <link>https://vincentserpoul.github.io/tags/docker/</link>
-      <pubDate>Mon, 29 Apr 2019 00:23:23 +0800</pubDate>
-      
-      <guid>https://vincentserpoul.github.io/tags/docker/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>iot</title>
       <link>https://vincentserpoul.github.io/tags/iot/</link>
       <pubDate>Mon, 29 Apr 2019 00:23:23 +0800</pubDate>
@@ -166,15 +184,6 @@
       <pubDate>Sat, 20 Apr 2019 19:02:02 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/tags/rpi0/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>rust</title>
-      <link>https://vincentserpoul.github.io/tags/rust/</link>
-      <pubDate>Sat, 20 Apr 2019 19:02:02 +0800</pubDate>
-      
-      <guid>https://vincentserpoul.github.io/tags/rust/</guid>
       <description></description>
     </item>
     

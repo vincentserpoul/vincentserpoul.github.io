@@ -6,7 +6,19 @@
     <description>Recent content in Posts on VS tech corner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 17 May 2021 12:30:48 +0800</lastBuildDate><atom:link href="https://vincentserpoul.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 02 Jun 2021 18:12:40 +0800</lastBuildDate><atom:link href="https://vincentserpoul.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>deploying rust in containers</title>
+      <link>https://vincentserpoul.github.io/post/rust-optimized-container/</link>
+      <pubDate>Wed, 02 Jun 2021 18:12:40 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/post/rust-optimized-container/</guid>
+      <description>The goal I am pretty familiar with containers and multi stage deployment have been my go to since quite a while now, for my golang codebases.
+Now that I have been picking up rust, deploying my first rust service in production did bring me back to my usual habits of containerization.
+We&amp;rsquo;ll be trying to optimize for speed of build and container size.
+The cargo.toml [...][lib]name = &amp;#34;vs&amp;#34;path = &amp;#34;src/lib.rs&amp;#34;[[bin]]name = &amp;#34;vs&amp;#34;path = &amp;#34;src/bin/vs.</description>
+    </item>
+    
     <item>
       <title>golang errors (after 1.13)</title>
       <link>https://vincentserpoul.github.io/post/go-errors/</link>
@@ -368,15 +380,6 @@ http://www.sublimelinter.com/en/latest/installation.html</description>
       <description>Git basic commands When you have a new repo git clone git@github.com:vincentserpoul/rbac.git https or git? the git protocal provides better security and easiness if you are using a correct key.
 If you use the git protocol, you can easily associate your private key in the ~/.ssh/config file with the following:
 Host github Hostname github.com User vincentserpoul IdentityFile ~/.ssh/myprivatekey IdentitiesOnly yes When you have a new modification ready for commit git status You will get an overview of what&amp;rsquo;s new If there is any new files (Untracked files), you will first need to add them:</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://vincentserpoul.github.io/post/analyzing-signal/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://vincentserpoul.github.io/post/analyzing-signal/</guid>
-      <description>hardware USB Logic Analyzer 24MHz 8 Channel [https://www.aliexpress.com/item/4000146595503.html?spm=a2g0s.9042311.0.0.16614c4dDxFqPG] software: yay -S sigrok-firmware-fx2lafw pulseview: yay -S pulseview</description>
     </item>
     
   </channel>

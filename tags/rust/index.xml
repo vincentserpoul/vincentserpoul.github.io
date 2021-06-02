@@ -6,7 +6,19 @@
     <description>Recent content in rust on VS tech corner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 20 Apr 2019 19:02:02 +0800</lastBuildDate><atom:link href="https://vincentserpoul.github.io/tags/rust/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 02 Jun 2021 18:12:40 +0800</lastBuildDate><atom:link href="https://vincentserpoul.github.io/tags/rust/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>deploying rust in containers</title>
+      <link>https://vincentserpoul.github.io/post/rust-optimized-container/</link>
+      <pubDate>Wed, 02 Jun 2021 18:12:40 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/post/rust-optimized-container/</guid>
+      <description>The goal I am pretty familiar with containers and multi stage deployment have been my go to since quite a while now, for my golang codebases.
+Now that I have been picking up rust, deploying my first rust service in production did bring me back to my usual habits of containerization.
+We&amp;rsquo;ll be trying to optimize for speed of build and container size.
+The cargo.toml [...][lib]name = &amp;#34;vs&amp;#34;path = &amp;#34;src/lib.rs&amp;#34;[[bin]]name = &amp;#34;vs&amp;#34;path = &amp;#34;src/bin/vs.</description>
+    </item>
+    
     <item>
       <title>cross compiling rust from linux to rpi0/alpine</title>
       <link>https://vincentserpoul.github.io/post/alpine-rpi0-rust/</link>

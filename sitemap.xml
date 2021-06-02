@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://vincentserpoul.github.io/tags/container/</loc>
+    <lastmod>2021-06-02T18:12:40+08:00</lastmod>
+  </url><url>
+    <loc>https://vincentserpoul.github.io/post/rust-optimized-container/</loc>
+    <lastmod>2021-06-02T18:12:40+08:00</lastmod>
+  </url><url>
+    <loc>https://vincentserpoul.github.io/tags/docker/</loc>
+    <lastmod>2021-06-02T18:12:40+08:00</lastmod>
+  </url><url>
+    <loc>https://vincentserpoul.github.io/post/</loc>
+    <lastmod>2021-06-02T18:12:40+08:00</lastmod>
+  </url><url>
+    <loc>https://vincentserpoul.github.io/tags/rust/</loc>
+    <lastmod>2021-06-02T18:12:40+08:00</lastmod>
+  </url><url>
+    <loc>https://vincentserpoul.github.io/tags/</loc>
+    <lastmod>2021-06-02T18:12:40+08:00</lastmod>
+  </url><url>
+    <loc>https://vincentserpoul.github.io/</loc>
+    <lastmod>2021-06-02T18:12:40+08:00</lastmod>
+  </url><url>
     <loc>https://vincentserpoul.github.io/tags/errors/</loc>
     <lastmod>2021-05-17T12:30:48+08:00</lastmod>
   </url><url>
@@ -9,15 +30,6 @@
     <lastmod>2021-05-17T12:30:48+08:00</lastmod>
   </url><url>
     <loc>https://vincentserpoul.github.io/post/go-errors/</loc>
-    <lastmod>2021-05-17T12:30:48+08:00</lastmod>
-  </url><url>
-    <loc>https://vincentserpoul.github.io/post/</loc>
-    <lastmod>2021-05-17T12:30:48+08:00</lastmod>
-  </url><url>
-    <loc>https://vincentserpoul.github.io/tags/</loc>
-    <lastmod>2021-05-17T12:30:48+08:00</lastmod>
-  </url><url>
-    <loc>https://vincentserpoul.github.io/</loc>
     <lastmod>2021-05-17T12:30:48+08:00</lastmod>
   </url><url>
     <loc>https://vincentserpoul.github.io/tags/cryptocurrencies/</loc>
@@ -50,9 +62,6 @@
     <loc>https://vincentserpoul.github.io/tags/alpine/</loc>
     <lastmod>2019-04-29T00:23:23+08:00</lastmod>
   </url><url>
-    <loc>https://vincentserpoul.github.io/tags/docker/</loc>
-    <lastmod>2019-04-29T00:23:23+08:00</lastmod>
-  </url><url>
     <loc>https://vincentserpoul.github.io/tags/iot/</loc>
     <lastmod>2019-04-29T00:23:23+08:00</lastmod>
   </url><url>
@@ -81,9 +90,6 @@
     <lastmod>2019-04-20T19:02:02+08:00</lastmod>
   </url><url>
     <loc>https://vincentserpoul.github.io/tags/rpi0/</loc>
-    <lastmod>2019-04-20T19:02:02+08:00</lastmod>
-  </url><url>
-    <loc>https://vincentserpoul.github.io/tags/rust/</loc>
     <lastmod>2019-04-20T19:02:02+08:00</lastmod>
   </url><url>
     <loc>https://vincentserpoul.github.io/post/alpine-linux-rpi0-docker/</loc>
@@ -289,8 +295,6 @@
   </url><url>
     <loc>https://vincentserpoul.github.io/about/</loc>
     <lastmod>2015-01-09T14:46:46+08:00</lastmod>
-  </url><url>
-    <loc>https://vincentserpoul.github.io/post/analyzing-signal/</loc>
   </url><url>
     <loc>https://vincentserpoul.github.io/categories/</loc>
   </url>
