@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>kubernetes on VS tech corner</title>
     <link>https://vincentserpoul.github.io/tags/kubernetes/</link>
@@ -13,10 +13,7 @@
       <pubDate>Wed, 13 Jun 2018 11:37:00 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/gke-multi-accounts-clusters/</guid>
-      <description>Google cloud configs Download and install gcloud Simply follow this link
-Listing existing configurations gcloud config configurations list NAME IS_ACTIVE ACCOUNT PROJECT DEFAULT_ZONE DEFAULT_REGION This should give you only one line, with a default account.
-Creating a configuration gcloud config configurations create testconf This will guide you through the configuration of a new configuration. It allows you to set one config per account, project, cluster&amp;hellip;
-Activating a configuration gcloud config configurations activate testconf As simple as this to change your account/config.</description>
+      <description>Using GKE with multiple accounts and clusters</description>
     </item>
     
     <item>
@@ -25,13 +22,7 @@ Activating a configuration gcloud config configurations activate testconf As sim
       <pubDate>Thu, 28 Jul 2016 22:27:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/kubernetes-talk/</guid>
-      <description>On the 28th, I was invited to talk at Google Singapore for the Kubernetes birthday http://www.meetup.com/fr-FR/GCPUGSG/events/232659329/?eventId=232659329
-I spoke about my experience with Kubernetes in production for one of my side projects.
-As I like to experiment stuff, I decide to drop power point and use React Spectacle library for my presentation!
-here is the result: https://kuberneprez.surge.sh
-here is the source code: https://github.com/vincentserpoul/prez-kubernetes
-The framework can be found here: http://stack.formidable.com/spectacle/#/?_k=cyx05u
-I will do it again!</description>
+      <description>It&amp;#39;s been 2 years since Kubernetes was open sourced and 1 year since it was announced production ready</description>
     </item>
     
   </channel>

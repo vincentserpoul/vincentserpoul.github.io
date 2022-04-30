@@ -1,322 +1,368 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]><html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--><html class="no-js" prefix="og: http://ogp.me/ns#" xmlns:og="http://ogp.me/ns#"><!--<![endif]-->
+<html lang="en" dir="auto">
 
-    <head>
-                <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
-        <meta name="mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <meta name="author" content="">
-        <meta name="keywords" content="awesome, definitely">
-	
-        <meta property="og:site_name" content="VS tech corner">
-        <meta property="og:title" content="VS tech corner">
-        <meta property="og:url" content="https://vincentserpoul.github.io/">
-        <meta property="og:description" content="">
-    
-        <meta property="og:type" content="website" />
-    
-        <meta name="generator" content="Hugo 0.83.1" />
-        <title>VS tech corner &middot; VS tech corner </title>
-        <link rel="canonical" href="https://vincentserpoul.github.io/" />
-        <link rel="alternate" type="application/rss+xml" title="RSS" href="/index.xml">
-        <link rel="stylesheet" type='text/css' href="https://vincentserpoul.github.io/css/main.css"/>
-        <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300|Montserrat:700' rel='stylesheet' type='text/css'>
-        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-        <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-    </head>
+<head>
+	<meta name="generator" content="Hugo 0.97.3" /><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>VS tech corner</title>
+<meta name="keywords" content="blog, technology">
+<meta name="description" content="Vincent Serpoul">
+<meta name="author" content="Me">
+<link rel="canonical" href="https://vincentserpoul.github.io/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.ec8da366ca2fb647537ccb7a8f6fa5b4e9cd3c7a0d3171dd2d3baad1e49c8bfc.css" integrity="sha256-7I2jZsovtkdTfMt6j2&#43;ltOnNPHoNMXHdLTuq0eSci/w=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://vincentserpoul.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://vincentserpoul.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://vincentserpoul.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://vincentserpoul.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://vincentserpoul.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" type="application/rss+xml" href="https://vincentserpoul.github.io/index.xml">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
-<body>
-<!--[if lt IE 7]><p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chrome/‎">install Google Chrome</a> to experience this site.</p><![endif]-->
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
 
-    <header id="site-header">
-        <div class="container">
-            <a href="https://vincentserpoul.github.io/" alt="VS tech corner"><h1 class="blog-title heading">VS tech corner</h1></a>
-            <p class="blog-description"></p>
-        </div>
-    </header>
-<main class="content" role="main">
-	<div class="container">
-	
-		<article class="li post">
-    <header class="post-header">
-        <h3 class="post-title"><a href="https://vincentserpoul.github.io/post/playwithwasm-golang/">a taste of wasm</a></h3>
-        <p class="post-time"><time datetime="2018-08-27T23:22:00&#43;08:00">August 27, 2018</time></p>
-    </header>
+            .list {
+                background: var(--theme);
+            }
 
-    <section class="post-excerpt">
-        <p>Here it is, go 1.11 is out, and with it a new compilation target, Web Assembly!
-Let&rsquo;s try it out!
-The test As dumb as it sounds, I needed a simple usecase to test this out. I decided to settle for the dumbest possible thing: a for loop incrementing a variable for 100000000 times.
-The git repo Here it is
-I uploaded it as well on surge for you to see without the hassle</p>
-    </section>
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
 
-    <footer class="post-footer">
-        <span>
-            
-            
-            	&nbsp;&nbsp;<i class="fa fa-tag"></i>
-            	wasm, golang
-            
-        </span>
-    </footer>
-</article>
-	
-		<article class="li post">
-    <header class="post-header">
-        <h3 class="post-title"><a href="https://vincentserpoul.github.io/post/gke-multi-accounts-clusters/">Using GKE with multiple accounts and clusters</a></h3>
-        <p class="post-time"><time datetime="2018-06-13T11:37:00&#43;08:00">June 13, 2018</time></p>
-    </header>
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
 
-    <section class="post-excerpt">
-        <p>Google cloud configs Download and install gcloud Simply follow this link
-Listing existing configurations gcloud config configurations list NAME IS_ACTIVE ACCOUNT PROJECT DEFAULT_ZONE DEFAULT_REGION This should give you only one line, with a default account.
-Creating a configuration gcloud config configurations create testconf This will guide you through the configuration of a new configuration. It allows you to set one config per account, project, cluster&hellip;
-Activating a configuration gcloud config configurations activate testconf As simple as this to change your account/config.</p>
-    </section>
-
-    <footer class="post-footer">
-        <span>
-            
-            
-            	&nbsp;&nbsp;<i class="fa fa-tag"></i>
-            	kubernetes, GKE, gcloud, googlecloud
-            
-        </span>
-    </footer>
-</article>
-	
-		<article class="li post">
-    <header class="post-header">
-        <h3 class="post-title"><a href="https://vincentserpoul.github.io/post/archlinux-bluetooth/">Bluetooth activation at startup on arch linux</a></h3>
-        <p class="post-time"><time datetime="2017-04-03T16:22:00&#43;08:00">April 3, 2017</time></p>
-    </header>
-
-    <section class="post-excerpt">
-        <p>Why? You might not have reach that point yet but bluez has been deprecating hciconfig and other tools. In bluez 5.44, it&rsquo;s not there anymore.
-What is the problem? All hciconfig udev rules to activate bluetooth at startup won&rsquo;t work anymore. Most forum posts solving bluetooth issues are now outdated. Once I updated to bluez 5.44, my service leveraging hciconfig to activate bluetooth at startup didn&rsquo;t work anymore!
-What is the solution?</p>
-    </section>
-
-    <footer class="post-footer">
-        <span>
-            
-            
-            	&nbsp;&nbsp;<i class="fa fa-tag"></i>
-            	archlinux, bluetooth
-            
-        </span>
-    </footer>
-</article>
-	
-		<article class="li post">
-    <header class="post-header">
-        <h3 class="post-title"><a href="https://vincentserpoul.github.io/post/golang-playwithsql-oracle/">Golang and Oracle</a></h3>
-        <p class="post-time"><time datetime="2016-12-27T00:44:00&#43;08:00">December 27, 2016</time></p>
-    </header>
-
-    <section class="post-excerpt">
-        <p>Which library To this day, the most up to date library seems to be rana/ora
-How to install (linux &amp; macosx) Download Oracle Instant Client for linux x64: both packages Basic and SDK Unzip each of them in the same folder /opt/oracle
-mkdir -p /opt/oracle cd /opt/oracle unzip ~/Downloads/instantclient-basiclite-linux.x64-12.2.0.1.0.zip unzip ~/Downloads/instantclient-sdk-linux.x64-12.2.0.1.0.zip cd /opt/oracle/instantclient_12_1 Add the necessary env variables and paths:
-# Oracle export LD_LIBRARY_PATH=/opt/oracle/instantclient_12_2:$LD_LIBRARY_PATH export PKG_CONFIG_PATH=/opt/oracle export ORACLE_HOME=$LD_LIBRARY_PATH copy from the go package .</p>
-    </section>
-
-    <footer class="post-footer">
-        <span>
-            
-            
-            	&nbsp;&nbsp;<i class="fa fa-tag"></i>
-            	golang, oracle, linux, macosx, sql
-            
-        </span>
-    </footer>
-</article>
-	
-		<article class="li post">
-    <header class="post-header">
-        <h3 class="post-title"><a href="https://vincentserpoul.github.io/post/ethereum-react-dapps/">Ethereum react dapps</a></h3>
-        <p class="post-time"><time datetime="2016-10-27T13:34:00&#43;08:00">October 27, 2016</time></p>
-    </header>
-
-    <section class="post-excerpt">
-        <p>I finished my first dapp with (react-boilerplate)[https://github.com/mxstbr/] this week and here are the few things I learnt. I won&rsquo;t get into the redux, redux-saga details, I let you play with the amazing boilerplate.
-Interacting with constant functions Let&rsquo;s use the typical balanceOf function of the EIP20 contracts:
-function balanceOf(address _owner) constant returns (uint256 balance) { return balances[_owner]; } Here are the sagas (redux-sagas) I used to interact:
-import { take, call, put, cancel, select, fork } from &#39;redux-saga/effects&#39;; import { BALANCE_OF_GET, } from &#39;.</p>
-    </section>
-
-    <footer class="post-footer">
-        <span>
-            
-            
-            	&nbsp;&nbsp;<i class="fa fa-tag"></i>
-            	react, blockchain, ethereum, dev, dapps
-            
-        </span>
-    </footer>
-</article>
-	
-		<article class="li post">
-    <header class="post-header">
-        <h3 class="post-title"><a href="https://vincentserpoul.github.io/post/binding-ethereum-golang/">Ethereum contracts and Golang</a></h3>
-        <p class="post-time"><time datetime="2016-10-10T12:54:00&#43;08:00">October 10, 2016</time></p>
-    </header>
-
-    <section class="post-excerpt">
-        <p>The contract contract Trigger { function () { throw; } address owner; function Trigger() { owner = msg.sender; } event TriggerEvt(address _sender, uint _trigger); function trigger(uint _trigger) { TriggerEvt(msg.sender, _trigger); } function getOwner() constant returns (address) { return owner; } } This is a very simple contract that we will take as an example.
-Getting the right tools for binding A good starting point is this wiki.
-You will need to follow the install procedure of go-ethereum.</p>
-    </section>
-
-    <footer class="post-footer">
-        <span>
-            
-            
-            	&nbsp;&nbsp;<i class="fa fa-tag"></i>
-            	golang, blockchain, ethereum, dev, testrpc
-            
-        </span>
-    </footer>
-</article>
-	
-		<article class="li post">
-    <header class="post-header">
-        <h3 class="post-title"><a href="https://vincentserpoul.github.io/post/on-microservices-and-scaling/">Summary of UBER lessons on scaling microservices</a></h3>
-        <p class="post-time"><time datetime="2016-09-30T12:06:01&#43;08:00">September 30, 2016</time></p>
-    </header>
-
-    <section class="post-excerpt">
-        <p>I just watched that amazing videos from Matt Ranney
-Here are my takeaways and opinionated summary:
- Use RPC for service to service communications: gRPC seems to be a good way of tackling it Use many repositories Profiling should be unified: flamegraphs seem to be a good solution (Go profiling is great too) Premature optimization is bad but performance monitoring is crucial! Trace requests, keep context within all logs Log a lot, but only on a portion of your production architecture as logging can have a big cost.</p>
-    </section>
-
-    <footer class="post-footer">
-        <span>
-            
-            
-            	&nbsp;&nbsp;<i class="fa fa-tag"></i>
-            	scaling, microservices, uber
-            
-        </span>
-    </footer>
-</article>
-	
-		<article class="li post">
-    <header class="post-header">
-        <h3 class="post-title"><a href="https://vincentserpoul.github.io/post/ethereum-solidity/">Blockchain week in Shanghai!</a></h3>
-        <p class="post-time"><time datetime="2016-09-16T13:44:00&#43;08:00">September 16, 2016</time></p>
-    </header>
-
-    <section class="post-excerpt">
-        <p>I participated to the devcon2 and blockchain summit last week. Here is my summary!</p>
-    </section>
-
-    <footer class="post-footer">
-        <span>
-            
-            
-            	&nbsp;&nbsp;<i class="fa fa-tag"></i>
-            	ethereum, blockchain, conference, devcon2
-            
-        </span>
-    </footer>
-</article>
-	
-		<article class="li post">
-    <header class="post-header">
-        <h3 class="post-title"><a href="https://vincentserpoul.github.io/post/ethereum-first-dapp-part-3/">Ethereum first dapp - part 3</a></h3>
-        <p class="post-time"><time datetime="2016-08-12T12:00:27&#43;08:00">August 12, 2016</time></p>
-    </header>
-
-    <section class="post-excerpt">
-        <p>setting up a light wallet In order to have a setup close to what the DAPP would be, we will use (metamask) [http://www.metamask.io] as a light wallet (there are other choices).
-Metamask allows you to connect to a custom node.
-We will then connect to our node, http://localhost:9012 If everthing is fine, metamasks should indicate it&rsquo;s connected.
-Then, we can import the metamask account to our local node by simply specifying the datadir we have setup the node data.</p>
-    </section>
-
-    <footer class="post-footer">
-        <span>
-            
-            
-            	&nbsp;&nbsp;<i class="fa fa-tag"></i>
-            	ethereum, dapp, development, metamask
-            
-        </span>
-    </footer>
-</article>
-	
-		<article class="li post">
-    <header class="post-header">
-        <h3 class="post-title"><a href="https://vincentserpoul.github.io/post/ethereum-first-dapp-part-2/">Ethereum first dapp - part 2</a></h3>
-        <p class="post-time"><time datetime="2016-08-10T15:00:27&#43;08:00">August 10, 2016</time></p>
-    </header>
-
-    <section class="post-excerpt">
-        <p>Frontend Prepare your folder for your dapp I will be using https://github.com/mxstbr/react-boilerplate as it&rsquo;s quite nice and I&rsquo;ve been playing with React for a bit now.
-I will not go into the details of setting this up, it&rsquo;s a totally different topic. If you are not familiar with it, it&rsquo;s probably a waste of time for you to read.
-Example web3 component with React This boilerplate uses immutable, redux and redux-sagas in order to deal with data.</p>
-    </section>
-
-    <footer class="post-footer">
-        <span>
-            
-            
-            	&nbsp;&nbsp;<i class="fa fa-tag"></i>
-            	ethereum, dapp, development
-            
-        </span>
-    </footer>
-</article>
-	
-	
-<nav role="pagination" class="pagination">
-  
-  <a href="/" class="newer-posts">
-    <i class="fa fa-angle-double-left"></i>&nbsp;Newer&nbsp;
-  </a>
-  
-	<span class="post-list-pagination-item post-list-pagination-item-current">Page 2 of 4</span>
-
-  <a href="/page/3/" class="older-posts">
-    &nbsp;Older&nbsp;<i class="fa fa-angle-double-right"></i>
-  </a>
-
-</nav>
-
-	</div>
-</main>
-    <footer id="site-footer">
-        <div class="container">
-            <a href="https://vincentserpoul.github.io/index.xml" title="Get the RSS feed"><span class="tooltip"><i class="fa fa-rss"></i></span></a>
-        </div>
-    </footer>
-
-    <script type="text/javascript" src="https://vincentserpoul.github.io/js/fittext.js"></script>
-    <script type="text/javascript">
-      $(".heading").fitText();
-    </script>
-
-    
+    </style>
+</noscript>
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 	ga('create', 'UA-81802018-1', 'auto');
 	
 	ga('send', 'pageview');
 }
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
+</script><meta property="og:title" content="VS tech corner" />
+<meta property="og:description" content="Vincent Serpoul" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://vincentserpoul.github.io/" /><meta property="og:site_name" content="Vincent Serpoul" />
 
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="VS tech corner"/>
+<meta name="twitter:description" content="Vincent Serpoul"/>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "VS tech corner",
+  "url": "https://vincentserpoul.github.io/",
+  "description": "Vincent Serpoul",
+  "thumbnailUrl": "https://vincentserpoul.github.io/favicon.ico",
+  "sameAs": [
+      "https://github.com/vincentserpoul"
+  ]
+}
+</script>
+</head>
+
+<body class="list" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://vincentserpoul.github.io/" accesskey="h" title="Home (Alt + H)">Home</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://vincentserpoul.github.io/tags/" title="tags">
+                    <span>tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://vincentserpoul.github.io/" title="vincentserpoul.github.io">
+                    <span class="active">vincentserpoul.github.io</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main"> 
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>golang binaries
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Embedding anything in a golang binary What is it about? One good thing about golang is that you compile everything to a binary. So easy to deploy, so easy to manage, so small.
+But what happens when you need to embed files in there? Migration files, static files, whatever you can think of?
+Well, you can simply deploy it in a container, add this files, you are going to say, and you are probably right, that’s imho, the cleanest solution....</p>
+  </div>
+  <footer class="entry-footer"><span title='2018-09-29 09:22:00 +0800 +08'>September 29, 2018</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Me</footer>
+  <a class="entry-link" aria-label="post link to golang binaries" href="https://vincentserpoul.github.io/post/golang-binary-everything/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>a taste of wasm
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Here it is, go 1.11 is out, and with it a new compilation target, Web Assembly!
+Let’s try it out!
+The test As dumb as it sounds, I needed a simple usecase to test this out. I decided to settle for the dumbest possible thing: a for loop incrementing a variable for 100000000 times.
+The git repo Here it is
+I uploaded it as well on surge for you to see without the hassle...</p>
+  </div>
+  <footer class="entry-footer"><span title='2018-08-27 23:22:00 +0800 +08'>August 27, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Me</footer>
+  <a class="entry-link" aria-label="post link to a taste of wasm" href="https://vincentserpoul.github.io/post/playwithwasm-golang/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Using GKE with multiple accounts and clusters
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Google cloud configs Download and install gcloud Simply follow this link
+Listing existing configurations gcloud config configurations list  NAME IS_ACTIVE ACCOUNT PROJECT DEFAULT_ZONE DEFAULT_REGION This should give you only one line, with a default account.
+Creating a configuration gcloud config configurations create testconf This will guide you through the configuration of a new configuration. It allows you to set one config per account, project, cluster…
+Activating a configuration gcloud config configurations activate testconf As simple as this to change your account/config....</p>
+  </div>
+  <footer class="entry-footer"><span title='2018-06-13 11:37:00 +0800 +08'>June 13, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Me</footer>
+  <a class="entry-link" aria-label="post link to Using GKE with multiple accounts and clusters" href="https://vincentserpoul.github.io/post/gke-multi-accounts-clusters/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Bluetooth activation at startup on arch linux
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Why? You might not have reach that point yet but bluez has been deprecating hciconfig and other tools. In bluez 5.44, it’s not there anymore.
+What is the problem? All hciconfig udev rules to activate bluetooth at startup won’t work anymore. Most forum posts solving bluetooth issues are now outdated. Once I updated to bluez 5.44, my service leveraging hciconfig to activate bluetooth at startup didn’t work anymore!
+What is the solution?...</p>
+  </div>
+  <footer class="entry-footer"><span title='2017-04-03 16:22:00 +0800 +08'>April 3, 2017</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Me</footer>
+  <a class="entry-link" aria-label="post link to Bluetooth activation at startup on arch linux" href="https://vincentserpoul.github.io/post/archlinux-bluetooth/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Golang and Oracle
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Which library To this day, the most up to date library seems to be rana/ora
+How to install (linux &amp; macosx) Download Oracle Instant Client for linux x64: both packages Basic and SDK Unzip each of them in the same folder /opt/oracle
+mkdir -p /opt/oracle cd /opt/oracle unzip ~/Downloads/instantclient-basiclite-linux.x64-12.2.0.1.0.zip unzip ~/Downloads/instantclient-sdk-linux.x64-12.2.0.1.0.zip cd /opt/oracle/instantclient_12_1 Add the necessary env variables and paths:
+# Oracle export LD_LIBRARY_PATH=/opt/oracle/instantclient_12_2:$LD_LIBRARY_PATH export PKG_CONFIG_PATH=/opt/oracle export ORACLE_HOME=$LD_LIBRARY_PATH copy from the go package ....</p>
+  </div>
+  <footer class="entry-footer"><span title='2016-12-27 00:44:00 +0800 +08'>December 27, 2016</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Me</footer>
+  <a class="entry-link" aria-label="post link to Golang and Oracle" href="https://vincentserpoul.github.io/post/golang-playwithsql-oracle/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Ethereum react dapps
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>I finished my first dapp with (react-boilerplate)[https://github.com/mxstbr/] this week and here are the few things I learnt. I won’t get into the redux, redux-saga details, I let you play with the amazing boilerplate.
+Interacting with constant functions Let’s use the typical balanceOf function of the EIP20 contracts:
+ function balanceOf(address _owner) constant returns (uint256 balance) {  return balances[_owner];  } Here are the sagas (redux-sagas) I used to interact:...</p>
+  </div>
+  <footer class="entry-footer"><span title='2016-10-27 13:34:00 +0800 +08'>October 27, 2016</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Me</footer>
+  <a class="entry-link" aria-label="post link to Ethereum react dapps" href="https://vincentserpoul.github.io/post/ethereum-react-dapps/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Ethereum contracts and Golang
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>The contract contract Trigger {  function () {  throw;  }   address owner;   function Trigger() {  owner = msg.sender;  }   event TriggerEvt(address _sender, uint _trigger);   function trigger(uint _trigger) {  TriggerEvt(msg.sender, _trigger);  }   function getOwner() constant returns (address) {  return owner;  }  } This is a very simple contract that we will take as an example....</p>
+  </div>
+  <footer class="entry-footer"><span title='2016-10-10 12:54:00 +0800 +08'>October 10, 2016</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Me</footer>
+  <a class="entry-link" aria-label="post link to Ethereum contracts and Golang" href="https://vincentserpoul.github.io/post/binding-ethereum-golang/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Summary of UBER lessons on scaling microservices
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>I just watched that amazing videos from Matt Ranney
+Here are my takeaways and opinionated summary:
+ Use RPC for service to service communications: gRPC seems to be a good way of tackling it Use many repositories Profiling should be unified: flamegraphs seem to be a good solution (Go profiling is great too) Premature optimization is bad but performance monitoring is crucial! Trace requests, keep context within all logs Log a lot, but only on a portion of your production architecture as logging can have a big cost....</p>
+  </div>
+  <footer class="entry-footer"><span title='2016-09-30 12:06:01 +0800 +08'>September 30, 2016</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Me</footer>
+  <a class="entry-link" aria-label="post link to Summary of UBER lessons on scaling microservices" href="https://vincentserpoul.github.io/post/on-microservices-and-scaling/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Blockchain week in Shanghai!
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>I participated to the devcon2 and blockchain summit last week. Here is my summary!</p>
+  </div>
+  <footer class="entry-footer"><span title='2016-09-16 13:44:00 +0800 +08'>September 16, 2016</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Me</footer>
+  <a class="entry-link" aria-label="post link to Blockchain week in Shanghai!" href="https://vincentserpoul.github.io/post/ethereum-solidity/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Ethereum first dapp - part 3
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>setting up a light wallet In order to have a setup close to what the DAPP would be, we will use (metamask) [http://www.metamask.io] as a light wallet (there are other choices).
+Metamask allows you to connect to a custom node.
+We will then connect to our node, http://localhost:9012 If everthing is fine, metamasks should indicate it’s connected.
+Then, we can import the metamask account to our local node by simply specifying the datadir we have setup the node data....</p>
+  </div>
+  <footer class="entry-footer"><span title='2016-08-12 12:00:27 +0800 +08'>August 12, 2016</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Me</footer>
+  <a class="entry-link" aria-label="post link to Ethereum first dapp - part 3" href="https://vincentserpoul.github.io/post/ethereum-first-dapp-part-3/"></a>
+</article>
+<footer class="page-footer">
+  <nav class="pagination">
+    <a class="prev" href="https://vincentserpoul.github.io/">« Prev Page</a>
+    <a class="next" href="https://vincentserpoul.github.io/page/3/">Next Page »</a>
+  </nav>
+</footer>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://vincentserpoul.github.io/">VS tech corner</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
 </body>
+
 </html>

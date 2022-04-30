@@ -1,427 +1,617 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]><html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--><html class="no-js" prefix="og: http://ogp.me/ns#" xmlns:og="http://ogp.me/ns#"><!--<![endif]-->
+<html lang="en" dir="auto">
 
-    <head>
-                <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="description" content="Ethereum contracts and dapps">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
-        <meta name="mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <meta name="author" content="">
-        <meta name="keywords" content="awesome, definitely">
-	
-        <meta property="og:site_name" content="VS tech corner">
-        <meta property="og:title" content="VS tech corner">
-        <meta property="og:url" content="https://vincentserpoul.github.io/post/ethereum-react-dapps/">
-        <meta property="og:description" content="">
-    
-        <meta property="og:type" content="article" />
-        <meta property="og:article:author" content="" />
-        <meta property="og:article:published_time" content="2016-10-27T13:34:00&#43;08:00" />
-    
-        <meta name="generator" content="Hugo 0.83.1" />
-        <title>Ethereum react dapps &middot; VS tech corner </title>
-        <link rel="canonical" href="https://vincentserpoul.github.io/" />
-        <link rel="alternate" type="application/rss+xml" title="RSS" href="">
-        <link rel="stylesheet" type='text/css' href="https://vincentserpoul.github.io/css/main.css"/>
-        <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300|Montserrat:700' rel='stylesheet' type='text/css'>
-        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-        <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-    </head>
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Ethereum react dapps | VS tech corner</title>
+<meta name="keywords" content="react, blockchain, ethereum, dev, dapps">
+<meta name="description" content="Ethereum contracts and dapps">
+<meta name="author" content="Me">
+<link rel="canonical" href="https://vincentserpoul.github.io/post/ethereum-react-dapps/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.ec8da366ca2fb647537ccb7a8f6fa5b4e9cd3c7a0d3171dd2d3baad1e49c8bfc.css" integrity="sha256-7I2jZsovtkdTfMt6j2&#43;ltOnNPHoNMXHdLTuq0eSci/w=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.2840b7fccd34145847db71a290569594bdbdb00047097f75d6495d162f5d7dff.js" integrity="sha256-KEC3/M00FFhH23GikFaVlL29sABHCX911kldFi9dff8="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://vincentserpoul.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://vincentserpoul.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://vincentserpoul.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://vincentserpoul.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://vincentserpoul.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
-<body>
-<!--[if lt IE 7]><p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chrome/‎">install Google Chrome</a> to experience this site.</p><![endif]-->
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
 
-    <header id="site-header">
-        <div class="container">
-            <a href="https://vincentserpoul.github.io/" alt="VS tech corner"><h1 class="blog-title heading">VS tech corner</h1></a>
-            <p class="blog-description"></p>
-        </div>
-    </header>
-<main class="content" role="main">
-	<div class="container">
-		<article class="post">
-	<header class="post-header">
-        <h3 class="p-post-title">Ethereum react dapps</h3>
-    </header>
+            .list {
+                background: var(--theme);
+            }
 
-    <section class="post-content">
-        <p>I finished my first dapp with (react-boilerplate)[https://github.com/mxstbr/] this week and here are the few things I learnt.
-I won&rsquo;t get into the redux, redux-saga details, I let you play with the amazing boilerplate.</p>
-<h2 id="interacting-with-constant-functions">Interacting with constant functions</h2>
-<p>Let&rsquo;s use the typical balanceOf function of the EIP20 contracts:</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-solidity" data-lang="solidity">    <span style="color:#008000;font-weight:bold">function</span> balanceOf(<span style="color:#b00040">address</span> _owner) <span style="color:#008000;font-weight:bold">constant</span> <span style="color:#008000;font-weight:bold">returns</span> (<span style="color:#b00040">uint256</span> <span style="color:#008000">balance</span>) {
-        <span style="color:#008000;font-weight:bold">return</span> balances[_owner];
-    }
-</code></pre></div><p>Here are the sagas (redux-sagas) I used to interact:</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#008000;font-weight:bold">import</span> { take, call, put, cancel, select, fork } from <span style="color:#ba2121">&#39;redux-saga/effects&#39;</span>;
-<span style="color:#008000;font-weight:bold">import</span> {
-  BALANCE_OF_GET,
-} from <span style="color:#ba2121">&#39;./constants&#39;</span>;
-<span style="color:#008000;font-weight:bold">import</span> { LOCATION_CHANGE } from <span style="color:#ba2121">&#39;react-router-redux&#39;</span>;
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
 
-<span style="color:#008000;font-weight:bold">import</span> {
-  balanceOfSuccess,
-  balanceOfFailure,
-} from <span style="color:#ba2121">&#39;./actions&#39;</span>;
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
 
-<span style="color:#008000;font-weight:bold">import</span> { selectEthConnectWeb3Connection } from <span style="color:#ba2121">&#39;containers/EthConnect/selectors&#39;</span>;
-
-<span style="color:#008000;font-weight:bold">import</span> HumanStandardToken from <span style="color:#ba2121">&#39;contracts/HumanStandardToken.sol.js&#39;</span>;
-
-<span style="color:#008000;font-weight:bold">function</span><span style="color:#666">*</span> balanceOfGet(ethAddress) {
-  <span style="color:#008000;font-weight:bold">const</span> web3Connection <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">yield</span> select(selectEthConnectWeb3Connection());
-
-  HumanStandardToken.setProvider(web3Connection.currentProvider);
-  <span style="color:#008000;font-weight:bold">const</span> token <span style="color:#666">=</span> HumanStandardToken.deployed();
-
-  <span style="color:#008000;font-weight:bold">const</span> balancePromise <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">yield</span> call(token.balanceOf, ethAddress);
-
-  <span style="color:#408080;font-style:italic">// We return an object in a specific format, see utils/request.js for more information
-</span><span style="color:#408080;font-style:italic"></span>  <span style="color:#008000;font-weight:bold">if</span> (balancePromise.err <span style="color:#666">===</span> <span style="color:#008000;font-weight:bold">undefined</span> <span style="color:#666">||</span> balancePromise.err <span style="color:#666">===</span> <span style="color:#008000;font-weight:bold">null</span>) {
-    <span style="color:#008000;font-weight:bold">yield</span> put(balanceOfSuccess(ethAddress, balancePromise.valueOf()));
-  } <span style="color:#008000;font-weight:bold">else</span> {
-    console.log(balancePromise.err.response); <span style="color:#408080;font-style:italic">// eslint-disable-line no-console
-</span><span style="color:#408080;font-style:italic"></span>    <span style="color:#008000;font-weight:bold">yield</span> put(balanceOfFailure(ethAddress, balancePromise.err.response));
-  }
-}
-
-<span style="color:#408080;font-style:italic">/**
-</span><span style="color:#408080;font-style:italic"> * Watches for BALANCE_OF_GET action and calls handler
-</span><span style="color:#408080;font-style:italic"> */</span>
-<span style="color:#008000;font-weight:bold">export</span> <span style="color:#008000;font-weight:bold">function</span><span style="color:#666">*</span> balanceOfWatcher() {
-  <span style="color:#008000;font-weight:bold">while</span> (<span style="color:#008000;font-weight:bold">true</span>) { <span style="color:#408080;font-style:italic">// eslint-disable-line no-constant-condition
-</span><span style="color:#408080;font-style:italic"></span>    <span style="color:#008000;font-weight:bold">const</span> { ethAddress } <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">yield</span> take(BALANCE_OF_GET);
-    <span style="color:#408080;font-style:italic">// use fork and not call to be sure to fork all
-</span><span style="color:#408080;font-style:italic"></span>    <span style="color:#008000;font-weight:bold">yield</span> fork(balanceOfGet, ethAddress);
-  }
-}
-
-
-<span style="color:#408080;font-style:italic">/**
-</span><span style="color:#408080;font-style:italic"> * Root saga manages watcher lifecycle
-</span><span style="color:#408080;font-style:italic"> */</span>
-<span style="color:#008000;font-weight:bold">export</span> <span style="color:#008000;font-weight:bold">function</span><span style="color:#666">*</span> balanceOfSaga() {
-  <span style="color:#408080;font-style:italic">// Fork watcher so we can continue execution
-</span><span style="color:#408080;font-style:italic"></span>  <span style="color:#008000;font-weight:bold">const</span> watcher <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">yield</span> fork(balanceOfWatcher);
-
-  <span style="color:#408080;font-style:italic">// Suspend execution until location changes
-</span><span style="color:#408080;font-style:italic"></span>  <span style="color:#008000;font-weight:bold">yield</span> take(LOCATION_CHANGE);
-  <span style="color:#008000;font-weight:bold">yield</span> cancel(watcher);
-}
-
-<span style="color:#408080;font-style:italic">// All sagas to be loaded
-</span><span style="color:#408080;font-style:italic"></span><span style="color:#008000;font-weight:bold">export</span> <span style="color:#008000;font-weight:bold">default</span> [
-  balanceOfSaga,
-];
-
-</code></pre></div><p>Then, simply implement the right reducers, actions and you are done! you can easily get the balance in your UI.</p>
-<h2 id="interacting-with-functions-that-needs-transactions">Interacting with functions that needs transactions</h2>
-<p>Let&rsquo;s use the same EIP20 contract again:</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-solidity" data-lang="solidity">    <span style="color:#008000;font-weight:bold">event</span> Approval(<span style="color:#b00040">address</span> <span style="color:#008000;font-weight:bold">indexed</span> _owner, <span style="color:#b00040">address</span> <span style="color:#008000;font-weight:bold">indexed</span> _spender, <span style="color:#b00040">uint256</span> _value);
-
-    <span style="color:#008000;font-weight:bold">function</span> approve(<span style="color:#b00040">address</span> _spender, <span style="color:#b00040">uint256</span> _value) <span style="color:#008000;font-weight:bold">returns</span> (<span style="color:#b00040">bool</span> success) {
-        allowed[<span style="color:#008000">msg</span>.<span style="color:#008000">sender</span>][_spender] <span style="color:#666">=</span> _value;
-        Approval(<span style="color:#008000">msg</span>.<span style="color:#008000">sender</span>, _spender, _value);
-        <span style="color:#008000;font-weight:bold">return</span> <span style="color:#008000;font-weight:bold">true</span>;
-    }
-</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#008000;font-weight:bold">import</span> { take, call, put, select, cancel, fork } from <span style="color:#ba2121">&#39;redux-saga/effects&#39;</span>;
-<span style="color:#008000;font-weight:bold">import</span> {
-  GIVEMETOKEN_LAUNCH,
-} from <span style="color:#ba2121">&#39;./constants&#39;</span>;
-<span style="color:#008000;font-weight:bold">import</span> { LOCATION_CHANGE } from <span style="color:#ba2121">&#39;react-router-redux&#39;</span>;
-
-<span style="color:#008000;font-weight:bold">import</span> {
-  givemetokensSuccess,
-  givemetokensFailure,
-} from <span style="color:#ba2121">&#39;./actions&#39;</span>;
-
-<span style="color:#008000;font-weight:bold">import</span> {
-  balanceOfGet,
-} from <span style="color:#ba2121">&#39;containers/Token/actions&#39;</span>;
-
-<span style="color:#008000;font-weight:bold">import</span> { selectEthConnectWeb3Connection } from <span style="color:#ba2121">&#39;containers/EthConnect/selectors&#39;</span>;
-<span style="color:#408080;font-style:italic">// import { selectRianEthAddress } from &#39;./selectors&#39;;
-</span><span style="color:#408080;font-style:italic"></span>
-<span style="color:#008000;font-weight:bold">import</span> HumanStandardToken from <span style="color:#ba2121">&#39;contracts/HumanStandardToken.sol.js&#39;</span>;
-
-<span style="color:#008000;font-weight:bold">function</span><span style="color:#666">*</span> givemetokens(ethAddress) {
-  <span style="color:#008000;font-weight:bold">const</span> web3Connection <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">yield</span> select(selectEthConnectWeb3Connection());
-  HumanStandardToken.setProvider(web3Connection.currentProvider);
-  <span style="color:#008000;font-weight:bold">const</span> tokens <span style="color:#666">=</span> HumanStandardToken.deployed();
-
-  <span style="color:#008000;font-weight:bold">const</span> tokensOwner <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">yield</span> call(tokens.getOwner.call);
-
-  <span style="color:#008000;font-weight:bold">try</span> {
-    <span style="color:#008000;font-weight:bold">yield</span> call(tokens.approve, ethAddress, <span style="color:#666">100</span>, { from<span style="color:#666">:</span> tokensOwner, gas<span style="color:#666">:</span> <span style="color:#666">200000</span> });
-  } <span style="color:#008000;font-weight:bold">catch</span> (e) {
-    console.log(e); <span style="color:#408080;font-style:italic">// eslint-disable-line no-console
-</span><span style="color:#408080;font-style:italic"></span>    <span style="color:#008000;font-weight:bold">yield</span> put(givemetokensFailure(ethAddress));
-    <span style="color:#008000;font-weight:bold">return</span>;
-  }
-
-  <span style="color:#008000;font-weight:bold">const</span> approvedAmt <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">yield</span> call(tokens.allowance.call, tokensOwner, ethAddress);
-  console.log(<span style="color:#ba2121">`approved amount: </span><span style="color:#b68;font-weight:bold">${</span>approvedAmt<span style="color:#b68;font-weight:bold">}</span><span style="color:#ba2121">`</span>);
-
-  <span style="color:#008000;font-weight:bold">try</span> {
-    <span style="color:#008000;font-weight:bold">yield</span> call(tokens.transferFrom, tokensOwner, ethAddress, <span style="color:#666">100</span>, { from<span style="color:#666">:</span> ethAddress, gas<span style="color:#666">:</span> <span style="color:#666">200000</span> });
-  } <span style="color:#008000;font-weight:bold">catch</span> (e) {
-    console.log(e); <span style="color:#408080;font-style:italic">// eslint-disable-line no-console
-</span><span style="color:#408080;font-style:italic"></span>    <span style="color:#008000;font-weight:bold">yield</span> put(givemetokensFailure(ethAddress));
-  }
-
-  <span style="color:#008000;font-weight:bold">yield</span> put(givemetokensSuccess(ethAddress, <span style="color:#008000;font-weight:bold">true</span>));
-  <span style="color:#008000;font-weight:bold">yield</span> put(balanceOfGet(ethAddress));
-}
-
-<span style="color:#408080;font-style:italic">/**
-</span><span style="color:#408080;font-style:italic"> * Watches for SIMPLEINSURANCE_givemetokens_LAUNCH action and calls handler
-</span><span style="color:#408080;font-style:italic"> */</span>
-<span style="color:#008000;font-weight:bold">export</span> <span style="color:#008000;font-weight:bold">function</span><span style="color:#666">*</span> givemetokensWatcher() {
-  <span style="color:#008000;font-weight:bold">while</span> (<span style="color:#008000;font-weight:bold">true</span>) { <span style="color:#408080;font-style:italic">// eslint-disable-line no-constant-condition
-</span><span style="color:#408080;font-style:italic"></span>    <span style="color:#008000;font-weight:bold">const</span> { ethAddress } <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">yield</span> take(GIVEMETOKEN_LAUNCH);
-    <span style="color:#008000;font-weight:bold">yield</span> call(givemetokens, ethAddress);
-  }
-}
-
-
-<span style="color:#408080;font-style:italic">/**
-</span><span style="color:#408080;font-style:italic"> * Root saga manages watcher lifecycle
-</span><span style="color:#408080;font-style:italic"> */</span>
-<span style="color:#008000;font-weight:bold">export</span> <span style="color:#008000;font-weight:bold">function</span><span style="color:#666">*</span> givemetokensSaga() {
-  <span style="color:#408080;font-style:italic">// Fork watcher so we can continue execution
-</span><span style="color:#408080;font-style:italic"></span>  <span style="color:#008000;font-weight:bold">const</span> watcher <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">yield</span> fork(givemetokensWatcher);
-
-  <span style="color:#408080;font-style:italic">// Suspend execution until location changes
-</span><span style="color:#408080;font-style:italic"></span>  <span style="color:#008000;font-weight:bold">yield</span> take(LOCATION_CHANGE);
-  <span style="color:#008000;font-weight:bold">yield</span> cancel(watcher);
-}
-
-<span style="color:#408080;font-style:italic">// All sagas to be loaded
-</span><span style="color:#408080;font-style:italic"></span><span style="color:#008000;font-weight:bold">export</span> <span style="color:#008000;font-weight:bold">default</span> [
-  givemetokensSaga,
-];
-</code></pre></div><p>At that point, you only know that the transaction has gone through, you don&rsquo;t really know what happened. That&rsquo;s when you need to listen to the event of your contracts.</p>
-<h2 id="listening-to-events">Listening to events</h2>
-<p>Same example as above, we will listen to the Approval event.
-We need to create a eventChannel, as the event is coming from <em>outside</em> this time, it won&rsquo;t be generated by our own UI.</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#008000;font-weight:bold">const</span> ethEvent <span style="color:#666">=</span> () =&gt; eventChannel((emitter) =&gt; {
-  <span style="color:#008000;font-weight:bold">const</span> tokensApproval <span style="color:#666">=</span> tokens.Approval({ fromBlock<span style="color:#666">:</span> <span style="color:#ba2121">&#39;latest&#39;</span> });
-  tokensApproval.watch((error, results) =&gt; {
-    <span style="color:#008000;font-weight:bold">const</span> eventType <span style="color:#666">=</span> <span style="color:#ba2121">&#39;approve&#39;</span>;
-    <span style="color:#008000;font-weight:bold">const</span> eventTime <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">new</span> <span style="color:#008000">Date</span>().toISOString();
-    <span style="color:#008000;font-weight:bold">const</span> eventEthAddress <span style="color:#666">=</span> results.args.<span style="color:#666">_</span>owner;
-    <span style="color:#008000;font-weight:bold">let</span> eventDescription;
-    <span style="color:#008000;font-weight:bold">if</span> (error) {
-      console.log(<span style="color:#ba2121">`Approval error </span><span style="color:#b68;font-weight:bold">${</span>error<span style="color:#b68;font-weight:bold">}</span><span style="color:#ba2121">`</span>); <span style="color:#408080;font-style:italic">// eslint-disable-line no-console
-</span><span style="color:#408080;font-style:italic"></span>      eventDescription <span style="color:#666">=</span> <span style="color:#ba2121">`ERROR - </span><span style="color:#b68;font-weight:bold">${</span>results.args.<span style="color:#666">_</span>owner.substring(<span style="color:#666">0</span>,<span style="color:#666">6</span>)<span style="color:#b68;font-weight:bold">}</span><span style="color:#ba2121"> allowed </span><span style="color:#b68;font-weight:bold">${</span>results.args.<span style="color:#666">_</span>spender.substring(<span style="color:#666">0</span>,<span style="color:#666">6</span>)<span style="color:#b68;font-weight:bold">}</span><span style="color:#ba2121"> to spend </span><span style="color:#b68;font-weight:bold">${</span>results.args.<span style="color:#666">_</span>value<span style="color:#b68;font-weight:bold">}</span><span style="color:#ba2121">Ʉ on his behalf`</span>;
-    } <span style="color:#008000;font-weight:bold">else</span> {
-      eventDescription <span style="color:#666">=</span> <span style="color:#ba2121">`</span><span style="color:#b68;font-weight:bold">${</span>results.args.<span style="color:#666">_</span>owner.substring(<span style="color:#666">0</span>,<span style="color:#666">6</span>)<span style="color:#b68;font-weight:bold">}</span><span style="color:#ba2121"> allowed </span><span style="color:#b68;font-weight:bold">${</span>results.args.<span style="color:#666">_</span>spender.substring(<span style="color:#666">0</span>,<span style="color:#666">6</span>)<span style="color:#b68;font-weight:bold">}</span><span style="color:#ba2121"> to spend </span><span style="color:#b68;font-weight:bold">${</span>results.args.<span style="color:#666">_</span>value<span style="color:#b68;font-weight:bold">}</span><span style="color:#ba2121">Ʉ on his behalf`</span>;
-    }
-
-    emitter({ eventEthAddress, eventType, eventTime, eventDescription });
-  });
-
-  <span style="color:#008000;font-weight:bold">return</span> () =&gt; {
-    tokensApproval.stopWatching();
-  };
-});
-
-<span style="color:#008000;font-weight:bold">function</span><span style="color:#666">*</span> handleEthEvent(event) {
-  <span style="color:#008000;font-weight:bold">switch</span> (event.eventType) {
-    <span style="color:#008000;font-weight:bold">case</span> <span style="color:#ba2121">&#39;approve&#39;</span><span style="color:#666">:</span>
-      <span style="color:#008000;font-weight:bold">yield</span> put(ethEventListenerReceiveAction(event.eventEthAddress, event.eventType, event.eventTime, event.eventDescription));
-      <span style="color:#008000;font-weight:bold">break</span>;
-    <span style="color:#008000;font-weight:bold">default</span><span style="color:#666">:</span>
-      console.log(event); <span style="color:#408080;font-style:italic">// eslint-disable-line no-console
-</span><span style="color:#408080;font-style:italic"></span>  }
-}
-
-<span style="color:#008000;font-weight:bold">export</span> <span style="color:#008000;font-weight:bold">function</span><span style="color:#666">*</span> ethEventListenerSaga() {
-  <span style="color:#008000;font-weight:bold">yield</span> put(ethEventListenerCreateAction());
-
-  <span style="color:#008000;font-weight:bold">const</span> chan <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">yield</span> call(ethEvent);
-  <span style="color:#008000;font-weight:bold">try</span> {
-    <span style="color:#008000;font-weight:bold">while</span> (<span style="color:#008000;font-weight:bold">true</span>) {
-      <span style="color:#008000;font-weight:bold">const</span> event <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">yield</span> take(chan);
-      <span style="color:#008000;font-weight:bold">yield</span> call(handleEthEvent, event);
-    }
-  } <span style="color:#008000;font-weight:bold">finally</span> {
-    <span style="color:#008000;font-weight:bold">if</span> (<span style="color:#008000;font-weight:bold">yield</span> cancelled()) {
-      chan.close();
-      console.log(<span style="color:#ba2121">&#39;listening cancelled&#39;</span>);
-    }
-  }
-} 
-</code></pre></div><p>And here you go! You can now listen to the stream of events.</p>
-<h2 id="getting-a-list-of-events">Getting a list of events</h2>
-<p>In Ethereum, you can get the list of past events, it can kind of act like a kind of storage for the history of your contracts (I won&rsquo;t go into details for this, but some node might not keep the whole history).</p>
-<p>How to get the history of events on the contract?</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#008000;font-weight:bold">import</span> { take, call, put, cancel, fork } from <span style="color:#ba2121">&#39;redux-saga/effects&#39;</span>;
-<span style="color:#008000;font-weight:bold">import</span> {
-  APPROVAL_HISTORY_GET,
-} from <span style="color:#ba2121">&#39;./constants&#39;</span>;
-<span style="color:#008000;font-weight:bold">import</span> { LOCATION_CHANGE } from <span style="color:#ba2121">&#39;react-router-redux&#39;</span>;
-<span style="color:#008000;font-weight:bold">import</span> { web3Connect } from <span style="color:#ba2121">&#39;utils/web3.js&#39;</span>;
-<span style="color:#008000;font-weight:bold">import</span> {
-  receiveApprovalHistory,
-} from <span style="color:#ba2121">&#39;./actions&#39;</span>;
-<span style="color:#008000;font-weight:bold">import</span> {
-  balanceOfGet,
-} from <span style="color:#ba2121">&#39;containers/Token/actions&#39;</span>;
-<span style="color:#008000;font-weight:bold">import</span> HumanStandardToken from <span style="color:#ba2121">&#39;contracts/HumanStandardToken.sol.js&#39;</span>;
-
-<span style="color:#008000;font-weight:bold">function</span><span style="color:#666">*</span> getApprovalHistory(ethAddress) {
-  <span style="color:#008000;font-weight:bold">const</span> web3Connection <span style="color:#666">=</span> web3Connect();
-
-  HumanStandardToken.setProvider(web3Connection.currentProvider);
-  <span style="color:#008000;font-weight:bold">const</span> tokens <span style="color:#666">=</span> HumanStandardToken.deployed();
-
-  <span style="color:#008000;font-weight:bold">const</span> approvalHistory <span style="color:#666">=</span> [];
-  <span style="color:#408080;font-style:italic">// Getting the list of events from block 0 to latest block, with a filter on _owner as it is an indexed field
-</span><span style="color:#408080;font-style:italic"></span>  <span style="color:#008000;font-weight:bold">const</span> tokensApproval <span style="color:#666">=</span> tokens.Approval({ <span style="color:#666">_</span>owner<span style="color:#666">:</span> ethAddress }, { fromBlock<span style="color:#666">:</span> <span style="color:#ba2121">&#39;0&#39;</span>, toBlock<span style="color:#666">:</span> <span style="color:#ba2121">&#39;latest&#39;</span> });
-
-  <span style="color:#008000;font-weight:bold">const</span> getApprovalLogPromise <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">yield</span> call(eventGetPromisified, tokensApproval);
-
-  <span style="color:#008000;font-weight:bold">if</span> (getApprovalLogPromise.err <span style="color:#666">===</span> <span style="color:#008000;font-weight:bold">null</span> <span style="color:#666">||</span> getApprovalLogPromise.err <span style="color:#666">===</span> <span style="color:#008000;font-weight:bold">undefined</span>) {
-    <span style="color:#008000;font-weight:bold">for</span> (<span style="color:#008000;font-weight:bold">const</span> results <span style="color:#008000;font-weight:bold">of</span> getApprovalLogPromise) {
-      approvalHistory.push({
-        trigger<span style="color:#666">:</span> results.args.<span style="color:#666">_</span>trigger,
-        measurement<span style="color:#666">:</span> results.args.<span style="color:#666">_</span>measurement.valueOf(),
-        premium<span style="color:#666">:</span> results.args.<span style="color:#666">_</span>amount.valueOf(),
-        refundedAmount<span style="color:#666">:</span> results.args.<span style="color:#666">_</span>refundAmount.valueOf(),
-        settled<span style="color:#666">:</span> results.args.<span style="color:#666">_</span>timeEnded.valueOf(),
-        refunded<span style="color:#666">:</span> results.args.<span style="color:#666">_</span>due.valueOf(),
-      });
-    }
-  } <span style="color:#008000;font-weight:bold">else</span> {
-    console.log(getApprovalLogPromise.err);
-  }
-
-  <span style="color:#008000;font-weight:bold">yield</span> put(receiveApprovalHistory(ethAddress, approvalHistory));
-}
-
-<span style="color:#408080;font-style:italic">// Event promisifier to turn the nasty web3 callback to a promise ES6 form
-</span><span style="color:#408080;font-style:italic"></span><span style="color:#008000;font-weight:bold">const</span> eventGetPromisified <span style="color:#666">=</span> (event) =&gt; <span style="color:#008000;font-weight:bold">new</span> <span style="color:#008000">Promise</span>((resolve, reject) =&gt; {
-  event.get((error, logs) =&gt; {
-    <span style="color:#008000;font-weight:bold">if</span> (error) {
-      reject(error);
-    } <span style="color:#008000;font-weight:bold">else</span> {
-      resolve(logs);
-    }
-  });
-});
-
-<span style="color:#408080;font-style:italic">/**
-</span><span style="color:#408080;font-style:italic"> * Watches for APPROVAL_HISTORY_GET action and calls handler
-</span><span style="color:#408080;font-style:italic"> */</span>
-<span style="color:#008000;font-weight:bold">export</span> <span style="color:#008000;font-weight:bold">function</span><span style="color:#666">*</span> getApprovalHistoryWatcher() {
-  <span style="color:#008000;font-weight:bold">while</span> (<span style="color:#008000;font-weight:bold">true</span>) { <span style="color:#408080;font-style:italic">// eslint-disable-line no-constant-condition
-</span><span style="color:#408080;font-style:italic"></span>    <span style="color:#008000;font-weight:bold">const</span> { ethAddress } <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">yield</span> take(APPROVAL_HISTORY_GET);
-    <span style="color:#008000;font-weight:bold">yield</span> fork(getApprovalHistory, ethAddress);
-  }
-}
-
-<span style="color:#408080;font-style:italic">/**
-</span><span style="color:#408080;font-style:italic"> * Root saga manages watcher lifecycle
-</span><span style="color:#408080;font-style:italic"> */</span>
-<span style="color:#008000;font-weight:bold">export</span> <span style="color:#008000;font-weight:bold">function</span><span style="color:#666">*</span> approvalHistorySaga() {
-  <span style="color:#408080;font-style:italic">// Fork watcher so we can continue execution
-</span><span style="color:#408080;font-style:italic"></span>  <span style="color:#008000;font-weight:bold">const</span> getApprovalHistoryW <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">yield</span> fork(getApprovalHistoryWatcher);
-
-  <span style="color:#408080;font-style:italic">// Suspend execution until location changes
-</span><span style="color:#408080;font-style:italic"></span>  <span style="color:#008000;font-weight:bold">yield</span> take(LOCATION_CHANGE);
-  <span style="color:#008000;font-weight:bold">yield</span> cancel(getApprovalHistoryW);
-}
-
-<span style="color:#408080;font-style:italic">// All sagas to be loaded
-</span><span style="color:#408080;font-style:italic"></span><span style="color:#008000;font-weight:bold">export</span> <span style="color:#008000;font-weight:bold">default</span> [
-  approvalHistorySaga,
-];
-</code></pre></div><p>Et voila!</p>
-
-    </section>
-
-    <hr>
-
-    <footer class="post-footer">
-        <section class="f-1">
-            
-
-            <p class="f-post-time"><time datetime="2016-10-27T13:34:00&#43;08:00">October 27, 2016</time></p>
-        </section>
-
-        <section class="f-2">
-            <section class="share">
-                <span>Share:
-                <a class="icon-twitter" href="http://twitter.com/share?text=Ethereum%20react%20dapps&url=https%3a%2f%2fvincentserpoul.github.io%2fpost%2fethereum-react-dapps%2f"
-                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
-                    <i class="fa fa-twitter"></i>
-                </a>
-                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fvincentserpoul.github.io%2fpost%2fethereum-react-dapps%2f"
-                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
-                    <i class="fa fa-facebook"></i>
-                </a>
-                <a class="icon-google-plus" href="https://plus.google.com/share?url=https%3a%2f%2fvincentserpoul.github.io%2fpost%2fethereum-react-dapps%2f"
-                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
-                    <i class="fa fa-google-plus"></i>
-                </a>
-                </span>
-            </section>
-
-            
-            	<span class="f-post-tags"><i class="fa fa-tag"></i>
-            	react, blockchain, ethereum, dev, dapps
-            	</span>
-            
-        </section>
-    </footer>
-
-    <div id="disqus_thread"></div>
-<script>
-var disqus_config = function () {
-    this.page.url = "https://vincentserpoul.github.io/post/ethereum-react-dapps/";  
-    this.page.identifier = "https://vincentserpoul.github.io/post/ethereum-react-dapps/"; 
-};
-
-(function() { 
-    var d = document, s = d.createElement('script');
-    s.src = '//vincentserpoul-tech-corner.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</article>
-	</div>
-</main>
-    <footer id="site-footer">
-        <div class="container">
-            <a href="https://vincentserpoul.github.io/index.xml" title="Get the RSS feed"><span class="tooltip"><i class="fa fa-rss"></i></span></a>
-        </div>
-    </footer>
-
-    <script type="text/javascript" src="https://vincentserpoul.github.io/js/fittext.js"></script>
-    <script type="text/javascript">
-      $(".heading").fitText();
-    </script>
-
-    
+    </style>
+</noscript>
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 	ga('create', 'UA-81802018-1', 'auto');
 	
 	ga('send', 'pageview');
 }
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
+</script><meta property="og:title" content="Ethereum react dapps" />
+<meta property="og:description" content="Ethereum contracts and dapps" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://vincentserpoul.github.io/post/ethereum-react-dapps/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2016-10-27T13:34:00&#43;08:00" />
+<meta property="article:modified_time" content="2016-10-27T13:34:00&#43;08:00" /><meta property="og:site_name" content="Vincent Serpoul" />
 
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Ethereum react dapps"/>
+<meta name="twitter:description" content="Ethereum contracts and dapps"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://vincentserpoul.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Ethereum react dapps",
+      "item": "https://vincentserpoul.github.io/post/ethereum-react-dapps/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Ethereum react dapps",
+  "name": "Ethereum react dapps",
+  "description": "Ethereum contracts and dapps",
+  "keywords": [
+    "react", "blockchain", "ethereum", "dev", "dapps"
+  ],
+  "articleBody": "I finished my first dapp with (react-boilerplate)[https://github.com/mxstbr/] this week and here are the few things I learnt. I won’t get into the redux, redux-saga details, I let you play with the amazing boilerplate.\nInteracting with constant functions Let’s use the typical balanceOf function of the EIP20 contracts:\n function balanceOf(address _owner) constant returns (uint256 balance) {  return balances[_owner];  } Here are the sagas (redux-sagas) I used to interact:\nimport { take, call, put, cancel, select, fork } from 'redux-saga/effects'; import {  BALANCE_OF_GET, } from './constants'; import { LOCATION_CHANGE } from 'react-router-redux';  import {  balanceOfSuccess,  balanceOfFailure, } from './actions';  import { selectEthConnectWeb3Connection } from 'containers/EthConnect/selectors';  import HumanStandardToken from 'contracts/HumanStandardToken.sol.js';  function* balanceOfGet(ethAddress) {  const web3Connection = yield select(selectEthConnectWeb3Connection());   HumanStandardToken.setProvider(web3Connection.currentProvider);  const token = HumanStandardToken.deployed();   const balancePromise = yield call(token.balanceOf, ethAddress);   // We return an object in a specific format, see utils/request.js for more information  if (balancePromise.err === undefined || balancePromise.err === null) {  yield put(balanceOfSuccess(ethAddress, balancePromise.valueOf()));  } else {  console.log(balancePromise.err.response); // eslint-disable-line no-console  yield put(balanceOfFailure(ethAddress, balancePromise.err.response));  } }  /** * Watches for BALANCE_OF_GET action and calls handler */ export function* balanceOfWatcher() {  while (true) { // eslint-disable-line no-constant-condition  const { ethAddress } = yield take(BALANCE_OF_GET);  // use fork and not call to be sure to fork all  yield fork(balanceOfGet, ethAddress);  } }   /** * Root saga manages watcher lifecycle */ export function* balanceOfSaga() {  // Fork watcher so we can continue execution  const watcher = yield fork(balanceOfWatcher);   // Suspend execution until location changes  yield take(LOCATION_CHANGE);  yield cancel(watcher); }  // All sagas to be loaded export default [  balanceOfSaga, ]; Then, simply implement the right reducers, actions and you are done! you can easily get the balance in your UI.\nInteracting with functions that needs transactions Let’s use the same EIP20 contract again:\n event Approval(address indexed _owner, address indexed _spender, uint256 _value);   function approve(address _spender, uint256 _value) returns (bool success) {  allowed[msg.sender][_spender] = _value;  Approval(msg.sender, _spender, _value);  return true;  } import { take, call, put, select, cancel, fork } from 'redux-saga/effects'; import {  GIVEMETOKEN_LAUNCH, } from './constants'; import { LOCATION_CHANGE } from 'react-router-redux';  import {  givemetokensSuccess,  givemetokensFailure, } from './actions';  import {  balanceOfGet, } from 'containers/Token/actions';  import { selectEthConnectWeb3Connection } from 'containers/EthConnect/selectors'; // import { selectRianEthAddress } from './selectors';  import HumanStandardToken from 'contracts/HumanStandardToken.sol.js';  function* givemetokens(ethAddress) {  const web3Connection = yield select(selectEthConnectWeb3Connection());  HumanStandardToken.setProvider(web3Connection.currentProvider);  const tokens = HumanStandardToken.deployed();   const tokensOwner = yield call(tokens.getOwner.call);   try {  yield call(tokens.approve, ethAddress, 100, { from: tokensOwner, gas: 200000 });  } catch (e) {  console.log(e); // eslint-disable-line no-console  yield put(givemetokensFailure(ethAddress));  return;  }   const approvedAmt = yield call(tokens.allowance.call, tokensOwner, ethAddress);  console.log(`approved amount: ${approvedAmt}`);   try {  yield call(tokens.transferFrom, tokensOwner, ethAddress, 100, { from: ethAddress, gas: 200000 });  } catch (e) {  console.log(e); // eslint-disable-line no-console  yield put(givemetokensFailure(ethAddress));  }   yield put(givemetokensSuccess(ethAddress, true));  yield put(balanceOfGet(ethAddress)); }  /** * Watches for SIMPLEINSURANCE_givemetokens_LAUNCH action and calls handler */ export function* givemetokensWatcher() {  while (true) { // eslint-disable-line no-constant-condition  const { ethAddress } = yield take(GIVEMETOKEN_LAUNCH);  yield call(givemetokens, ethAddress);  } }   /** * Root saga manages watcher lifecycle */ export function* givemetokensSaga() {  // Fork watcher so we can continue execution  const watcher = yield fork(givemetokensWatcher);   // Suspend execution until location changes  yield take(LOCATION_CHANGE);  yield cancel(watcher); }  // All sagas to be loaded export default [  givemetokensSaga, ]; At that point, you only know that the transaction has gone through, you don’t really know what happened. That’s when you need to listen to the event of your contracts.\nListening to events Same example as above, we will listen to the Approval event. We need to create a eventChannel, as the event is coming from outside this time, it won’t be generated by our own UI.\nconst ethEvent = () = eventChannel((emitter) = {  const tokensApproval = tokens.Approval({ fromBlock: 'latest' });  tokensApproval.watch((error, results) = {  const eventType = 'approve';  const eventTime = new Date().toISOString();  const eventEthAddress = results.args._owner;  let eventDescription;  if (error) {  console.log(`Approval error ${error}`); // eslint-disable-line no-console  eventDescription = `ERROR - ${results.args._owner.substring(0,6)}allowed ${results.args._spender.substring(0,6)}to spend ${results.args._value}Ʉ on his behalf`;  } else {  eventDescription = `${results.args._owner.substring(0,6)}allowed ${results.args._spender.substring(0,6)}to spend ${results.args._value}Ʉ on his behalf`;  }   emitter({ eventEthAddress, eventType, eventTime, eventDescription });  });   return () = {  tokensApproval.stopWatching();  }; });  function* handleEthEvent(event) {  switch (event.eventType) {  case 'approve':  yield put(ethEventListenerReceiveAction(event.eventEthAddress, event.eventType, event.eventTime, event.eventDescription));  break;  default:  console.log(event); // eslint-disable-line no-console  } }  export function* ethEventListenerSaga() {  yield put(ethEventListenerCreateAction());   const chan = yield call(ethEvent);  try {  while (true) {  const event = yield take(chan);  yield call(handleEthEvent, event);  }  } finally {  if (yield cancelled()) {  chan.close();  console.log('listening cancelled');  }  } } And here you go! You can now listen to the stream of events.\nGetting a list of events In Ethereum, you can get the list of past events, it can kind of act like a kind of storage for the history of your contracts (I won’t go into details for this, but some node might not keep the whole history).\nHow to get the history of events on the contract?\nimport { take, call, put, cancel, fork } from 'redux-saga/effects'; import {  APPROVAL_HISTORY_GET, } from './constants'; import { LOCATION_CHANGE } from 'react-router-redux'; import { web3Connect } from 'utils/web3.js'; import {  receiveApprovalHistory, } from './actions'; import {  balanceOfGet, } from 'containers/Token/actions'; import HumanStandardToken from 'contracts/HumanStandardToken.sol.js';  function* getApprovalHistory(ethAddress) {  const web3Connection = web3Connect();   HumanStandardToken.setProvider(web3Connection.currentProvider);  const tokens = HumanStandardToken.deployed();   const approvalHistory = [];  // Getting the list of events from block 0 to latest block, with a filter on _owner as it is an indexed field  const tokensApproval = tokens.Approval({ _owner: ethAddress }, { fromBlock: '0', toBlock: 'latest' });   const getApprovalLogPromise = yield call(eventGetPromisified, tokensApproval);   if (getApprovalLogPromise.err === null || getApprovalLogPromise.err === undefined) {  for (const results of getApprovalLogPromise) {  approvalHistory.push({  trigger: results.args._trigger,  measurement: results.args._measurement.valueOf(),  premium: results.args._amount.valueOf(),  refundedAmount: results.args._refundAmount.valueOf(),  settled: results.args._timeEnded.valueOf(),  refunded: results.args._due.valueOf(),  });  }  } else {  console.log(getApprovalLogPromise.err);  }   yield put(receiveApprovalHistory(ethAddress, approvalHistory)); }  // Event promisifier to turn the nasty web3 callback to a promise ES6 form const eventGetPromisified = (event) = new Promise((resolve, reject) = {  event.get((error, logs) = {  if (error) {  reject(error);  } else {  resolve(logs);  }  }); });  /** * Watches for APPROVAL_HISTORY_GET action and calls handler */ export function* getApprovalHistoryWatcher() {  while (true) { // eslint-disable-line no-constant-condition  const { ethAddress } = yield take(APPROVAL_HISTORY_GET);  yield fork(getApprovalHistory, ethAddress);  } }  /** * Root saga manages watcher lifecycle */ export function* approvalHistorySaga() {  // Fork watcher so we can continue execution  const getApprovalHistoryW = yield fork(getApprovalHistoryWatcher);   // Suspend execution until location changes  yield take(LOCATION_CHANGE);  yield cancel(getApprovalHistoryW); }  // All sagas to be loaded export default [  approvalHistorySaga, ]; Et voila!\n",
+  "wordCount" : "1067",
+  "inLanguage": "en",
+  "datePublished": "2016-10-27T13:34:00+08:00",
+  "dateModified": "2016-10-27T13:34:00+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Me"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://vincentserpoul.github.io/post/ethereum-react-dapps/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "VS tech corner",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://vincentserpoul.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://vincentserpoul.github.io/" accesskey="h" title="Home (Alt + H)">Home</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://vincentserpoul.github.io/tags/" title="tags">
+                    <span>tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://vincentserpoul.github.io/" title="vincentserpoul.github.io">
+                    <span>vincentserpoul.github.io</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://vincentserpoul.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://vincentserpoul.github.io/post/">Posts</a></div>
+    <h1 class="post-title">
+      Ethereum react dapps
+    </h1>
+    <div class="post-description">
+      Ethereum contracts and dapps
+    </div>
+    <div class="post-meta"><span title='2016-10-27 13:34:00 +0800 +08'>October 27, 2016</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Me
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#interacting-with-constant-functions" aria-label="Interacting with constant functions">Interacting with constant functions</a></li>
+                <li>
+                    <a href="#interacting-with-functions-that-needs-transactions" aria-label="Interacting with functions that needs transactions">Interacting with functions that needs transactions</a></li>
+                <li>
+                    <a href="#listening-to-events" aria-label="Listening to events">Listening to events</a></li>
+                <li>
+                    <a href="#getting-a-list-of-events" aria-label="Getting a list of events">Getting a list of events</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p>I finished my first dapp with (react-boilerplate)[https://github.com/mxstbr/] this week and here are the few things I learnt.
+I won&rsquo;t get into the redux, redux-saga details, I let you play with the amazing boilerplate.</p>
+<h2 id="interacting-with-constant-functions">Interacting with constant functions<a hidden class="anchor" aria-hidden="true" href="#interacting-with-constant-functions">#</a></h2>
+<p>Let&rsquo;s use the typical balanceOf function of the EIP20 contracts:</p>
+<div class="highlight"><pre tabindex="0" style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-solidity" data-lang="solidity"><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">function</span> <span style="color:#00f">balanceOf</span>(<span style="color:#b00040">address</span> _owner) <span style="color:#008000;font-weight:bold">constant</span> <span style="color:#008000;font-weight:bold">returns</span> (<span style="color:#b00040">uint256</span> <span style="color:#008000">balance</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#008000;font-weight:bold">return</span> balances[_owner];
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>Here are the sagas (redux-sagas) I used to interact:</p>
+<div class="highlight"><pre tabindex="0" style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">import</span> { take, call, put, cancel, select, fork } from <span style="color:#ba2121">&#39;redux-saga/effects&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">import</span> {
+</span></span><span style="display:flex;"><span>  BALANCE_OF_GET,
+</span></span><span style="display:flex;"><span>} from <span style="color:#ba2121">&#39;./constants&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">import</span> { LOCATION_CHANGE } from <span style="color:#ba2121">&#39;react-router-redux&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">import</span> {
+</span></span><span style="display:flex;"><span>  balanceOfSuccess,
+</span></span><span style="display:flex;"><span>  balanceOfFailure,
+</span></span><span style="display:flex;"><span>} from <span style="color:#ba2121">&#39;./actions&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">import</span> { selectEthConnectWeb3Connection } from <span style="color:#ba2121">&#39;containers/EthConnect/selectors&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">import</span> HumanStandardToken from <span style="color:#ba2121">&#39;contracts/HumanStandardToken.sol.js&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">function</span><span style="color:#666">*</span> balanceOfGet(ethAddress) {
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">const</span> web3Connection <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">yield</span> select(selectEthConnectWeb3Connection());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  HumanStandardToken.setProvider(web3Connection.currentProvider);
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">const</span> token <span style="color:#666">=</span> HumanStandardToken.deployed();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">const</span> balancePromise <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">yield</span> call(token.balanceOf, ethAddress);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#408080;font-style:italic">// We return an object in a specific format, see utils/request.js for more information
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"></span>  <span style="color:#008000;font-weight:bold">if</span> (balancePromise.err <span style="color:#666">===</span> <span style="color:#008000;font-weight:bold">undefined</span> <span style="color:#666">||</span> balancePromise.err <span style="color:#666">===</span> <span style="color:#008000;font-weight:bold">null</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">yield</span> put(balanceOfSuccess(ethAddress, balancePromise.valueOf()));
+</span></span><span style="display:flex;"><span>  } <span style="color:#008000;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>    console.log(balancePromise.err.response); <span style="color:#408080;font-style:italic">// eslint-disable-line no-console
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"></span>    <span style="color:#008000;font-weight:bold">yield</span> put(balanceOfFailure(ethAddress, balancePromise.err.response));
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"> * Watches for BALANCE_OF_GET action and calls handler
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">export</span> <span style="color:#008000;font-weight:bold">function</span><span style="color:#666">*</span> balanceOfWatcher() {
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">while</span> (<span style="color:#008000;font-weight:bold">true</span>) { <span style="color:#408080;font-style:italic">// eslint-disable-line no-constant-condition
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"></span>    <span style="color:#008000;font-weight:bold">const</span> { ethAddress } <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">yield</span> take(BALANCE_OF_GET);
+</span></span><span style="display:flex;"><span>    <span style="color:#408080;font-style:italic">// use fork and not call to be sure to fork all
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"></span>    <span style="color:#008000;font-weight:bold">yield</span> fork(balanceOfGet, ethAddress);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"> * Root saga manages watcher lifecycle
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">export</span> <span style="color:#008000;font-weight:bold">function</span><span style="color:#666">*</span> balanceOfSaga() {
+</span></span><span style="display:flex;"><span>  <span style="color:#408080;font-style:italic">// Fork watcher so we can continue execution
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"></span>  <span style="color:#008000;font-weight:bold">const</span> watcher <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">yield</span> fork(balanceOfWatcher);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#408080;font-style:italic">// Suspend execution until location changes
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"></span>  <span style="color:#008000;font-weight:bold">yield</span> take(LOCATION_CHANGE);
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">yield</span> cancel(watcher);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic">// All sagas to be loaded
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"></span><span style="color:#008000;font-weight:bold">export</span> <span style="color:#008000;font-weight:bold">default</span> [
+</span></span><span style="display:flex;"><span>  balanceOfSaga,
+</span></span><span style="display:flex;"><span>];
+</span></span></code></pre></div><p>Then, simply implement the right reducers, actions and you are done! you can easily get the balance in your UI.</p>
+<h2 id="interacting-with-functions-that-needs-transactions">Interacting with functions that needs transactions<a hidden class="anchor" aria-hidden="true" href="#interacting-with-functions-that-needs-transactions">#</a></h2>
+<p>Let&rsquo;s use the same EIP20 contract again:</p>
+<div class="highlight"><pre tabindex="0" style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-solidity" data-lang="solidity"><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">event</span> <span style="color:#00f;font-weight:bold">Approval</span>(<span style="color:#b00040">address</span> <span style="color:#008000;font-weight:bold">indexed</span> _owner, <span style="color:#b00040">address</span> <span style="color:#008000;font-weight:bold">indexed</span> _spender, <span style="color:#b00040">uint256</span> _value);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">function</span> <span style="color:#00f">approve</span>(<span style="color:#b00040">address</span> _spender, <span style="color:#b00040">uint256</span> _value) <span style="color:#008000;font-weight:bold">returns</span> (<span style="color:#b00040">bool</span> success) {
+</span></span><span style="display:flex;"><span>        allowed[<span style="color:#008000">msg</span>.<span style="color:#008000">sender</span>][_spender] <span style="color:#666">=</span> _value;
+</span></span><span style="display:flex;"><span>        Approval(<span style="color:#008000">msg</span>.<span style="color:#008000">sender</span>, _spender, _value);
+</span></span><span style="display:flex;"><span>        <span style="color:#008000;font-weight:bold">return</span> <span style="color:#008000;font-weight:bold">true</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">import</span> { take, call, put, select, cancel, fork } from <span style="color:#ba2121">&#39;redux-saga/effects&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">import</span> {
+</span></span><span style="display:flex;"><span>  GIVEMETOKEN_LAUNCH,
+</span></span><span style="display:flex;"><span>} from <span style="color:#ba2121">&#39;./constants&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">import</span> { LOCATION_CHANGE } from <span style="color:#ba2121">&#39;react-router-redux&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">import</span> {
+</span></span><span style="display:flex;"><span>  givemetokensSuccess,
+</span></span><span style="display:flex;"><span>  givemetokensFailure,
+</span></span><span style="display:flex;"><span>} from <span style="color:#ba2121">&#39;./actions&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">import</span> {
+</span></span><span style="display:flex;"><span>  balanceOfGet,
+</span></span><span style="display:flex;"><span>} from <span style="color:#ba2121">&#39;containers/Token/actions&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">import</span> { selectEthConnectWeb3Connection } from <span style="color:#ba2121">&#39;containers/EthConnect/selectors&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic">// import { selectRianEthAddress } from &#39;./selectors&#39;;
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"></span>
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">import</span> HumanStandardToken from <span style="color:#ba2121">&#39;contracts/HumanStandardToken.sol.js&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">function</span><span style="color:#666">*</span> givemetokens(ethAddress) {
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">const</span> web3Connection <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">yield</span> select(selectEthConnectWeb3Connection());
+</span></span><span style="display:flex;"><span>  HumanStandardToken.setProvider(web3Connection.currentProvider);
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">const</span> tokens <span style="color:#666">=</span> HumanStandardToken.deployed();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">const</span> tokensOwner <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">yield</span> call(tokens.getOwner.call);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">try</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">yield</span> call(tokens.approve, ethAddress, <span style="color:#666">100</span>, { from<span style="color:#666">:</span> tokensOwner, gas<span style="color:#666">:</span> <span style="color:#666">200000</span> });
+</span></span><span style="display:flex;"><span>  } <span style="color:#008000;font-weight:bold">catch</span> (e) {
+</span></span><span style="display:flex;"><span>    console.log(e); <span style="color:#408080;font-style:italic">// eslint-disable-line no-console
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"></span>    <span style="color:#008000;font-weight:bold">yield</span> put(givemetokensFailure(ethAddress));
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">return</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">const</span> approvedAmt <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">yield</span> call(tokens.allowance.call, tokensOwner, ethAddress);
+</span></span><span style="display:flex;"><span>  console.log(<span style="color:#ba2121">`approved amount: </span><span style="color:#b68;font-weight:bold">${</span>approvedAmt<span style="color:#b68;font-weight:bold">}</span><span style="color:#ba2121">`</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">try</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">yield</span> call(tokens.transferFrom, tokensOwner, ethAddress, <span style="color:#666">100</span>, { from<span style="color:#666">:</span> ethAddress, gas<span style="color:#666">:</span> <span style="color:#666">200000</span> });
+</span></span><span style="display:flex;"><span>  } <span style="color:#008000;font-weight:bold">catch</span> (e) {
+</span></span><span style="display:flex;"><span>    console.log(e); <span style="color:#408080;font-style:italic">// eslint-disable-line no-console
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"></span>    <span style="color:#008000;font-weight:bold">yield</span> put(givemetokensFailure(ethAddress));
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">yield</span> put(givemetokensSuccess(ethAddress, <span style="color:#008000;font-weight:bold">true</span>));
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">yield</span> put(balanceOfGet(ethAddress));
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"> * Watches for SIMPLEINSURANCE_givemetokens_LAUNCH action and calls handler
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">export</span> <span style="color:#008000;font-weight:bold">function</span><span style="color:#666">*</span> givemetokensWatcher() {
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">while</span> (<span style="color:#008000;font-weight:bold">true</span>) { <span style="color:#408080;font-style:italic">// eslint-disable-line no-constant-condition
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"></span>    <span style="color:#008000;font-weight:bold">const</span> { ethAddress } <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">yield</span> take(GIVEMETOKEN_LAUNCH);
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">yield</span> call(givemetokens, ethAddress);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"> * Root saga manages watcher lifecycle
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">export</span> <span style="color:#008000;font-weight:bold">function</span><span style="color:#666">*</span> givemetokensSaga() {
+</span></span><span style="display:flex;"><span>  <span style="color:#408080;font-style:italic">// Fork watcher so we can continue execution
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"></span>  <span style="color:#008000;font-weight:bold">const</span> watcher <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">yield</span> fork(givemetokensWatcher);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#408080;font-style:italic">// Suspend execution until location changes
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"></span>  <span style="color:#008000;font-weight:bold">yield</span> take(LOCATION_CHANGE);
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">yield</span> cancel(watcher);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic">// All sagas to be loaded
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"></span><span style="color:#008000;font-weight:bold">export</span> <span style="color:#008000;font-weight:bold">default</span> [
+</span></span><span style="display:flex;"><span>  givemetokensSaga,
+</span></span><span style="display:flex;"><span>];
+</span></span></code></pre></div><p>At that point, you only know that the transaction has gone through, you don&rsquo;t really know what happened. That&rsquo;s when you need to listen to the event of your contracts.</p>
+<h2 id="listening-to-events">Listening to events<a hidden class="anchor" aria-hidden="true" href="#listening-to-events">#</a></h2>
+<p>Same example as above, we will listen to the Approval event.
+We need to create a eventChannel, as the event is coming from <em>outside</em> this time, it won&rsquo;t be generated by our own UI.</p>
+<div class="highlight"><pre tabindex="0" style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">const</span> ethEvent <span style="color:#666">=</span> () =&gt; eventChannel((emitter) =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">const</span> tokensApproval <span style="color:#666">=</span> tokens.Approval({ fromBlock<span style="color:#666">:</span> <span style="color:#ba2121">&#39;latest&#39;</span> });
+</span></span><span style="display:flex;"><span>  tokensApproval.watch((error, results) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">const</span> eventType <span style="color:#666">=</span> <span style="color:#ba2121">&#39;approve&#39;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">const</span> eventTime <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">new</span> <span style="color:#008000">Date</span>().toISOString();
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">const</span> eventEthAddress <span style="color:#666">=</span> results.args._owner;
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">let</span> eventDescription;
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">if</span> (error) {
+</span></span><span style="display:flex;"><span>      console.log(<span style="color:#ba2121">`Approval error </span><span style="color:#b68;font-weight:bold">${</span>error<span style="color:#b68;font-weight:bold">}</span><span style="color:#ba2121">`</span>); <span style="color:#408080;font-style:italic">// eslint-disable-line no-console
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"></span>      eventDescription <span style="color:#666">=</span> <span style="color:#ba2121">`ERROR - </span><span style="color:#b68;font-weight:bold">${</span>results.args._owner.substring(<span style="color:#666">0</span>,<span style="color:#666">6</span>)<span style="color:#b68;font-weight:bold">}</span><span style="color:#ba2121"> allowed </span><span style="color:#b68;font-weight:bold">${</span>results.args._spender.substring(<span style="color:#666">0</span>,<span style="color:#666">6</span>)<span style="color:#b68;font-weight:bold">}</span><span style="color:#ba2121"> to spend </span><span style="color:#b68;font-weight:bold">${</span>results.args._value<span style="color:#b68;font-weight:bold">}</span><span style="color:#ba2121">Ʉ on his behalf`</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#008000;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>      eventDescription <span style="color:#666">=</span> <span style="color:#ba2121">`</span><span style="color:#b68;font-weight:bold">${</span>results.args._owner.substring(<span style="color:#666">0</span>,<span style="color:#666">6</span>)<span style="color:#b68;font-weight:bold">}</span><span style="color:#ba2121"> allowed </span><span style="color:#b68;font-weight:bold">${</span>results.args._spender.substring(<span style="color:#666">0</span>,<span style="color:#666">6</span>)<span style="color:#b68;font-weight:bold">}</span><span style="color:#ba2121"> to spend </span><span style="color:#b68;font-weight:bold">${</span>results.args._value<span style="color:#b68;font-weight:bold">}</span><span style="color:#ba2121">Ʉ on his behalf`</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    emitter({ eventEthAddress, eventType, eventTime, eventDescription });
+</span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">return</span> () =&gt; {
+</span></span><span style="display:flex;"><span>    tokensApproval.stopWatching();
+</span></span><span style="display:flex;"><span>  };
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">function</span><span style="color:#666">*</span> handleEthEvent(event) {
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">switch</span> (event.eventType) {
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">case</span> <span style="color:#ba2121">&#39;approve&#39;</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#008000;font-weight:bold">yield</span> put(ethEventListenerReceiveAction(event.eventEthAddress, event.eventType, event.eventTime, event.eventDescription));
+</span></span><span style="display:flex;"><span>      <span style="color:#008000;font-weight:bold">break</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">default</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>      console.log(event); <span style="color:#408080;font-style:italic">// eslint-disable-line no-console
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"></span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">export</span> <span style="color:#008000;font-weight:bold">function</span><span style="color:#666">*</span> ethEventListenerSaga() {
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">yield</span> put(ethEventListenerCreateAction());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">const</span> chan <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">yield</span> call(ethEvent);
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">try</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">while</span> (<span style="color:#008000;font-weight:bold">true</span>) {
+</span></span><span style="display:flex;"><span>      <span style="color:#008000;font-weight:bold">const</span> event <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">yield</span> take(chan);
+</span></span><span style="display:flex;"><span>      <span style="color:#008000;font-weight:bold">yield</span> call(handleEthEvent, event);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  } <span style="color:#008000;font-weight:bold">finally</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">if</span> (<span style="color:#008000;font-weight:bold">yield</span> cancelled()) {
+</span></span><span style="display:flex;"><span>      chan.close();
+</span></span><span style="display:flex;"><span>      console.log(<span style="color:#ba2121">&#39;listening cancelled&#39;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>} 
+</span></span></code></pre></div><p>And here you go! You can now listen to the stream of events.</p>
+<h2 id="getting-a-list-of-events">Getting a list of events<a hidden class="anchor" aria-hidden="true" href="#getting-a-list-of-events">#</a></h2>
+<p>In Ethereum, you can get the list of past events, it can kind of act like a kind of storage for the history of your contracts (I won&rsquo;t go into details for this, but some node might not keep the whole history).</p>
+<p>How to get the history of events on the contract?</p>
+<div class="highlight"><pre tabindex="0" style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">import</span> { take, call, put, cancel, fork } from <span style="color:#ba2121">&#39;redux-saga/effects&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">import</span> {
+</span></span><span style="display:flex;"><span>  APPROVAL_HISTORY_GET,
+</span></span><span style="display:flex;"><span>} from <span style="color:#ba2121">&#39;./constants&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">import</span> { LOCATION_CHANGE } from <span style="color:#ba2121">&#39;react-router-redux&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">import</span> { web3Connect } from <span style="color:#ba2121">&#39;utils/web3.js&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">import</span> {
+</span></span><span style="display:flex;"><span>  receiveApprovalHistory,
+</span></span><span style="display:flex;"><span>} from <span style="color:#ba2121">&#39;./actions&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">import</span> {
+</span></span><span style="display:flex;"><span>  balanceOfGet,
+</span></span><span style="display:flex;"><span>} from <span style="color:#ba2121">&#39;containers/Token/actions&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">import</span> HumanStandardToken from <span style="color:#ba2121">&#39;contracts/HumanStandardToken.sol.js&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">function</span><span style="color:#666">*</span> getApprovalHistory(ethAddress) {
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">const</span> web3Connection <span style="color:#666">=</span> web3Connect();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  HumanStandardToken.setProvider(web3Connection.currentProvider);
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">const</span> tokens <span style="color:#666">=</span> HumanStandardToken.deployed();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">const</span> approvalHistory <span style="color:#666">=</span> [];
+</span></span><span style="display:flex;"><span>  <span style="color:#408080;font-style:italic">// Getting the list of events from block 0 to latest block, with a filter on _owner as it is an indexed field
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"></span>  <span style="color:#008000;font-weight:bold">const</span> tokensApproval <span style="color:#666">=</span> tokens.Approval({ _owner<span style="color:#666">:</span> ethAddress }, { fromBlock<span style="color:#666">:</span> <span style="color:#ba2121">&#39;0&#39;</span>, toBlock<span style="color:#666">:</span> <span style="color:#ba2121">&#39;latest&#39;</span> });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">const</span> getApprovalLogPromise <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">yield</span> call(eventGetPromisified, tokensApproval);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">if</span> (getApprovalLogPromise.err <span style="color:#666">===</span> <span style="color:#008000;font-weight:bold">null</span> <span style="color:#666">||</span> getApprovalLogPromise.err <span style="color:#666">===</span> <span style="color:#008000;font-weight:bold">undefined</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">for</span> (<span style="color:#008000;font-weight:bold">const</span> results <span style="color:#008000;font-weight:bold">of</span> getApprovalLogPromise) {
+</span></span><span style="display:flex;"><span>      approvalHistory.push({
+</span></span><span style="display:flex;"><span>        trigger<span style="color:#666">:</span> results.args._trigger,
+</span></span><span style="display:flex;"><span>        measurement<span style="color:#666">:</span> results.args._measurement.valueOf(),
+</span></span><span style="display:flex;"><span>        premium<span style="color:#666">:</span> results.args._amount.valueOf(),
+</span></span><span style="display:flex;"><span>        refundedAmount<span style="color:#666">:</span> results.args._refundAmount.valueOf(),
+</span></span><span style="display:flex;"><span>        settled<span style="color:#666">:</span> results.args._timeEnded.valueOf(),
+</span></span><span style="display:flex;"><span>        refunded<span style="color:#666">:</span> results.args._due.valueOf(),
+</span></span><span style="display:flex;"><span>      });
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  } <span style="color:#008000;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>    console.log(getApprovalLogPromise.err);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">yield</span> put(receiveApprovalHistory(ethAddress, approvalHistory));
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic">// Event promisifier to turn the nasty web3 callback to a promise ES6 form
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"></span><span style="color:#008000;font-weight:bold">const</span> eventGetPromisified <span style="color:#666">=</span> (event) =&gt; <span style="color:#008000;font-weight:bold">new</span> <span style="color:#008000">Promise</span>((resolve, reject) =&gt; {
+</span></span><span style="display:flex;"><span>  event.get((error, logs) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">if</span> (error) {
+</span></span><span style="display:flex;"><span>      reject(error);
+</span></span><span style="display:flex;"><span>    } <span style="color:#008000;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>      resolve(logs);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"> * Watches for APPROVAL_HISTORY_GET action and calls handler
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">export</span> <span style="color:#008000;font-weight:bold">function</span><span style="color:#666">*</span> getApprovalHistoryWatcher() {
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">while</span> (<span style="color:#008000;font-weight:bold">true</span>) { <span style="color:#408080;font-style:italic">// eslint-disable-line no-constant-condition
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"></span>    <span style="color:#008000;font-weight:bold">const</span> { ethAddress } <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">yield</span> take(APPROVAL_HISTORY_GET);
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">yield</span> fork(getApprovalHistory, ethAddress);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"> * Root saga manages watcher lifecycle
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">export</span> <span style="color:#008000;font-weight:bold">function</span><span style="color:#666">*</span> approvalHistorySaga() {
+</span></span><span style="display:flex;"><span>  <span style="color:#408080;font-style:italic">// Fork watcher so we can continue execution
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"></span>  <span style="color:#008000;font-weight:bold">const</span> getApprovalHistoryW <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">yield</span> fork(getApprovalHistoryWatcher);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#408080;font-style:italic">// Suspend execution until location changes
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"></span>  <span style="color:#008000;font-weight:bold">yield</span> take(LOCATION_CHANGE);
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">yield</span> cancel(getApprovalHistoryW);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic">// All sagas to be loaded
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"></span><span style="color:#008000;font-weight:bold">export</span> <span style="color:#008000;font-weight:bold">default</span> [
+</span></span><span style="display:flex;"><span>  approvalHistorySaga,
+</span></span><span style="display:flex;"><span>];
+</span></span></code></pre></div><p>Et voila!</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://vincentserpoul.github.io/tags/react/">react</a></li>
+      <li><a href="https://vincentserpoul.github.io/tags/blockchain/">blockchain</a></li>
+      <li><a href="https://vincentserpoul.github.io/tags/ethereum/">ethereum</a></li>
+      <li><a href="https://vincentserpoul.github.io/tags/dev/">dev</a></li>
+      <li><a href="https://vincentserpoul.github.io/tags/dapps/">dapps</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://vincentserpoul.github.io/post/golang-playwithsql-oracle/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>Golang and Oracle</span>
+  </a>
+  <a class="next" href="https://vincentserpoul.github.io/post/binding-ethereum-golang/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>Ethereum contracts and Golang</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://vincentserpoul.github.io/">VS tech corner</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
 </body>
+
 </html>

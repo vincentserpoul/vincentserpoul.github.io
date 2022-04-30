@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>react on VS tech corner</title>
     <link>https://vincentserpoul.github.io/tags/react/</link>
@@ -13,10 +13,7 @@
       <pubDate>Thu, 27 Oct 2016 13:34:00 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/ethereum-react-dapps/</guid>
-      <description>I finished my first dapp with (react-boilerplate)[https://github.com/mxstbr/] this week and here are the few things I learnt. I won&amp;rsquo;t get into the redux, redux-saga details, I let you play with the amazing boilerplate.
-Interacting with constant functions Let&amp;rsquo;s use the typical balanceOf function of the EIP20 contracts:
-function balanceOf(address _owner) constant returns (uint256 balance) { return balances[_owner]; } Here are the sagas (redux-sagas) I used to interact:
-import { take, call, put, cancel, select, fork } from &amp;#39;redux-saga/effects&amp;#39;; import { BALANCE_OF_GET, } from &amp;#39;.</description>
+      <description>Ethereum contracts and dapps</description>
     </item>
     
     <item>
@@ -25,13 +22,7 @@ import { take, call, put, cancel, select, fork } from &amp;#39;redux-saga/effect
       <pubDate>Thu, 28 Jul 2016 22:27:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/kubernetes-talk/</guid>
-      <description>On the 28th, I was invited to talk at Google Singapore for the Kubernetes birthday http://www.meetup.com/fr-FR/GCPUGSG/events/232659329/?eventId=232659329
-I spoke about my experience with Kubernetes in production for one of my side projects.
-As I like to experiment stuff, I decide to drop power point and use React Spectacle library for my presentation!
-here is the result: https://kuberneprez.surge.sh
-here is the source code: https://github.com/vincentserpoul/prez-kubernetes
-The framework can be found here: http://stack.formidable.com/spectacle/#/?_k=cyx05u
-I will do it again!</description>
+      <description>It&amp;#39;s been 2 years since Kubernetes was open sourced and 1 year since it was announced production ready</description>
     </item>
     
     <item>
@@ -40,16 +31,7 @@ I will do it again!</description>
       <pubDate>Tue, 12 Apr 2016 12:22:20 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/learning-react/</guid>
-      <description>React Nothing beats the facebook React page:
-https://facebook.github.io/react/docs/getting-started.html
-Redux Nothing beats the redux tutorial:
-http://redux.js.org/
-And also available on egghead, by Dan Abramov himself:
-https://egghead.io/series/getting-started-with-redux
-A list of tutorials:
-https://github.com/happypoulp/redux-tutorial
-A great detailed introduction to your SPA setup http://blog.joanboixados.com/building-a-boilerplate-for-a-koa-redux-react-application-including-webpack-mocha-and-sass/
-An advanced SPA (still under construction) https://www.gitbook.com/book/tonyhb/redux-without-profanity/details</description>
+      <description>learning how to use react, redux, webpack...</description>
     </item>
     
     <item>
@@ -58,11 +40,7 @@ An advanced SPA (still under construction) https://www.gitbook.com/book/tonyhb/r
       <pubDate>Mon, 11 Apr 2016 20:48:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/react-dev-env-setup/</guid>
-      <description>Working with ES6-7 In order to work with ECMAScript 2015 and even with future implementations of ES, you can use Babel.
-Babel is a transpiler, it will convert your ES6-7 to plain ES5 javascript that most browsers (&amp;gt;ie9 most probably) will understand.
-To install babel
-npm install -g babel Then within your javascript project, you can create a .babelrc file with the following content:
-{ &amp;#34;presets&amp;#34;: [&amp;#34;es2015&amp;#34;, &amp;#34;stage-0&amp;#34;, &amp;#34;react&amp;#34;] } React and its surrounding libraries After starting using React, I realized it was vey good and was surrounded with libraries which makes it even better: redux, immutable, react-router&amp;hellip;</description>
+      <description>react setup with essential tools</description>
     </item>
     
   </channel>

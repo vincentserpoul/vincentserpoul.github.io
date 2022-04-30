@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>containers on VS tech corner</title>
     <link>https://vincentserpoul.github.io/tags/containers/</link>
@@ -13,13 +13,7 @@
       <pubDate>Thu, 28 Jul 2016 22:27:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/kubernetes-talk/</guid>
-      <description>On the 28th, I was invited to talk at Google Singapore for the Kubernetes birthday http://www.meetup.com/fr-FR/GCPUGSG/events/232659329/?eventId=232659329
-I spoke about my experience with Kubernetes in production for one of my side projects.
-As I like to experiment stuff, I decide to drop power point and use React Spectacle library for my presentation!
-here is the result: https://kuberneprez.surge.sh
-here is the source code: https://github.com/vincentserpoul/prez-kubernetes
-The framework can be found here: http://stack.formidable.com/spectacle/#/?_k=cyx05u
-I will do it again!</description>
+      <description>It&amp;#39;s been 2 years since Kubernetes was open sourced and 1 year since it was announced production ready</description>
     </item>
     
   </channel>

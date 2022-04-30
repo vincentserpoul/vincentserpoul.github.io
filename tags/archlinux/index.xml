@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>archlinux on VS tech corner</title>
     <link>https://vincentserpoul.github.io/tags/archlinux/</link>
@@ -13,9 +13,7 @@
       <pubDate>Mon, 03 Apr 2017 16:22:00 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/archlinux-bluetooth/</guid>
-      <description>Why? You might not have reach that point yet but bluez has been deprecating hciconfig and other tools. In bluez 5.44, it&amp;rsquo;s not there anymore.
-What is the problem? All hciconfig udev rules to activate bluetooth at startup won&amp;rsquo;t work anymore. Most forum posts solving bluetooth issues are now outdated. Once I updated to bluez 5.44, my service leveraging hciconfig to activate bluetooth at startup didn&amp;rsquo;t work anymore!
-What is the solution?</description>
+      <description>enabling bluetooth on bluez 5.44</description>
     </item>
     
   </channel>

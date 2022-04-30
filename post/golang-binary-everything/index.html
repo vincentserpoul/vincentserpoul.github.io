@@ -1,332 +1,530 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]><html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--><html class="no-js" prefix="og: http://ogp.me/ns#" xmlns:og="http://ogp.me/ns#"><!--<![endif]-->
+<html lang="en" dir="auto">
 
-    <head>
-                <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="description" content="golang embedding binaries">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
-        <meta name="mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <meta name="author" content="">
-        <meta name="keywords" content="awesome, definitely">
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>golang binaries | VS tech corner</title>
+<meta name="keywords" content="golang">
+<meta name="description" content="golang embedding binaries">
+<meta name="author" content="Me">
+<link rel="canonical" href="https://vincentserpoul.github.io/post/golang-binary-everything/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.ec8da366ca2fb647537ccb7a8f6fa5b4e9cd3c7a0d3171dd2d3baad1e49c8bfc.css" integrity="sha256-7I2jZsovtkdTfMt6j2&#43;ltOnNPHoNMXHdLTuq0eSci/w=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.2840b7fccd34145847db71a290569594bdbdb00047097f75d6495d162f5d7dff.js" integrity="sha256-KEC3/M00FFhH23GikFaVlL29sABHCX911kldFi9dff8="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://vincentserpoul.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://vincentserpoul.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://vincentserpoul.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://vincentserpoul.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://vincentserpoul.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-81802018-1', 'auto');
 	
-        <meta property="og:site_name" content="VS tech corner">
-        <meta property="og:title" content="VS tech corner">
-        <meta property="og:url" content="https://vincentserpoul.github.io/post/golang-binary-everything/">
-        <meta property="og:description" content="">
-    
-        <meta property="og:type" content="article" />
-        <meta property="og:article:author" content="" />
-        <meta property="og:article:published_time" content="2018-09-29T09:22:00&#43;08:00" />
-    
-        <meta name="generator" content="Hugo 0.83.1" />
-        <title>golang binaries &middot; VS tech corner </title>
-        <link rel="canonical" href="https://vincentserpoul.github.io/" />
-        <link rel="alternate" type="application/rss+xml" title="RSS" href="">
-        <link rel="stylesheet" type='text/css' href="https://vincentserpoul.github.io/css/main.css"/>
-        <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300|Montserrat:700' rel='stylesheet' type='text/css'>
-        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-        <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-    </head>
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="golang binaries" />
+<meta property="og:description" content="golang embedding binaries" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://vincentserpoul.github.io/post/golang-binary-everything/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2018-09-29T09:22:00&#43;08:00" />
+<meta property="article:modified_time" content="2018-09-29T09:22:00&#43;08:00" /><meta property="og:site_name" content="Vincent Serpoul" />
 
-<body>
-<!--[if lt IE 7]><p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chrome/‎">install Google Chrome</a> to experience this site.</p><![endif]-->
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="golang binaries"/>
+<meta name="twitter:description" content="golang embedding binaries"/>
 
-    <header id="site-header">
-        <div class="container">
-            <a href="https://vincentserpoul.github.io/" alt="VS tech corner"><h1 class="blog-title heading">VS tech corner</h1></a>
-            <p class="blog-description"></p>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://vincentserpoul.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "golang binaries",
+      "item": "https://vincentserpoul.github.io/post/golang-binary-everything/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "golang binaries",
+  "name": "golang binaries",
+  "description": "golang embedding binaries",
+  "keywords": [
+    "golang"
+  ],
+  "articleBody": "Embedding anything in a golang binary What is it about? One good thing about golang is that you compile everything to a binary. So easy to deploy, so easy to manage, so small.\nBut what happens when you need to embed files in there? Migration files, static files, whatever you can think of?\nWell, you can simply deploy it in a container, add this files, you are going to say, and you are probably right, that’s imho, the cleanest solution. But sometimes, you can’t, sometimes you can’t deploy containers and you can’t add files next to your binary.\nChoosing the library There are multiple solutions out there and a great article has done a great work at comparing most of them.\nI decided to follow the author advice and go for vfsgen. Why? Mostly because it can be used without any stand alone executable and that’s pretty convenient.\nImplementation Defining what and where First, let’s choose the file we want to turn into a binary.\nmkdir -p wow/embed echo \"lerooyyyy\"  wow/embed/jenkins.txt Then, let’s create the file wow/wow_generate.go that will generate the binaries, in our case, the http.FileSystem:\n // +build ignore   package main   import (  \"log\"  \"net/http\"   \"github.com/shurcooL/vfsgen\"  )   func main() {  err := vfsgen.Generate(  http.Dir(\"./embed\"),  vfsgen.Options{  Filename: \"./wow_vfsdata.go\",  PackageName: \"wow\",  VariableName: \"noobAssets\",  })  if err != nil {  log.Fatalln(err)  }  } Let’s quickly explain the details:\n// +build ignore simply means that this file will be ignored when we will build our go program.\nthe first argument to vfsgen.Generate, http.Dir(\"./embed\"), is the folder you want to embed.\nthe options are pretty obvious. Note that you can choose to use a global variable name, to have access to it outside of the wow package, but I think it’s probably not a good practice.\nGenerate Now, how to make it happen? Use go generate!\nCreate a file, wow/wow.go, in the same folder you created the previous one:\npackage wow  //go:generate go run wow_generate.go then, here we are\ngo generate ./wow and you can now see wow_vfsdata.go created in the folder.\nUse The file created is a http.FileSystem, you can mount it to serve it with http.FileServer(noobAssets) but you can also turn it into a more classical FileSystem with a little bit of code, we’ll come back to it later, enjoy your everything binary now!\nHere is the code created:\n // Code generated by vfsgen; DO NOT EDIT.   package wow   import (  \"bytes\"  \"compress/gzip\"  \"fmt\"  \"io\"  \"io/ioutil\"  \"net/http\"  \"os\"  pathpkg \"path\"  \"time\"  )   // noobAssets statically implements the virtual filesystem provided to vfsgen.  var noobAssets = func() http.FileSystem {  fs := vfsgen۰FS{  \"/\": \u0026vfsgen۰DirInfo{  name: \"/\",  modTime: time.Date(2018, 9, 29, 3, 12, 35, 780695280, time.UTC),  },  \"/jenkins.txt\": \u0026vfsgen۰FileInfo{  name: \"jenkins.txt\",  modTime: time.Date(2018, 9, 29, 3, 12, 35, 780787937, time.UTC),  content: []byte(\"\\x6c\\x65\\x72\\x6f\\x6f\\x79\\x79\\x79\\x79\\x0a\"),  },  }  fs[\"/\"].(*vfsgen۰DirInfo).entries = []os.FileInfo{  fs[\"/jenkins.txt\"].(os.FileInfo),  }   return fs  }()   type vfsgen۰FS map[string]interface{}   func (fs vfsgen۰FS) Open(path string) (http.File, error) {  path = pathpkg.Clean(\"/\" + path)  f, ok := fs[path]  if !ok {  return nil, \u0026os.PathError{Op: \"open\", Path: path, Err: os.ErrNotExist}  }   switch f := f.(type) {  case *vfsgen۰FileInfo:  return \u0026vfsgen۰File{  vfsgen۰FileInfo: f,  Reader: bytes.NewReader(f.content),  }, nil  case *vfsgen۰DirInfo:  return \u0026vfsgen۰Dir{  vfsgen۰DirInfo: f,  }, nil  default:  // This should never happen because we generate only the above types.  panic(fmt.Sprintf(\"unexpected type %T\", f))  }  }   // We already imported \"compress/gzip\" and \"io/ioutil\", but ended up not using them. Avoid unused import error.  var _ = gzip.Reader{}  var _ = ioutil.Discard   // vfsgen۰FileInfo is a static definition of an uncompressed file (because it's not worth gzip compressing).  type vfsgen۰FileInfo struct {  name string  modTime time.Time  content []byte  }   func (f *vfsgen۰FileInfo) Readdir(count int) ([]os.FileInfo, error) {  return nil, fmt.Errorf(\"cannot Readdir from file %s\", f.name)  }  func (f *vfsgen۰FileInfo) Stat() (os.FileInfo, error) { return f, nil }   func (f *vfsgen۰FileInfo) NotWorthGzipCompressing() {}   func (f *vfsgen۰FileInfo) Name() string { return f.name }  func (f *vfsgen۰FileInfo) Size() int64 { return int64(len(f.content)) }  func (f *vfsgen۰FileInfo) Mode() os.FileMode { return 0444 }  func (f *vfsgen۰FileInfo) ModTime() time.Time { return f.modTime }  func (f *vfsgen۰FileInfo) IsDir() bool { return false }  func (f *vfsgen۰FileInfo) Sys() interface{} { return nil }   // vfsgen۰File is an opened file instance.  type vfsgen۰File struct {  *vfsgen۰FileInfo  *bytes.Reader  }   func (f *vfsgen۰File) Close() error {  return nil  }   // vfsgen۰DirInfo is a static definition of a directory.  type vfsgen۰DirInfo struct {  name string  modTime time.Time  entries []os.FileInfo  }   func (d *vfsgen۰DirInfo) Read([]byte) (int, error) {  return 0, fmt.Errorf(\"cannot Read from directory %s\", d.name)  }  func (d *vfsgen۰DirInfo) Close() error { return nil }  func (d *vfsgen۰DirInfo) Stat() (os.FileInfo, error) { return d, nil }   func (d *vfsgen۰DirInfo) Name() string { return d.name }  func (d *vfsgen۰DirInfo) Size() int64 { return 0 }  func (d *vfsgen۰DirInfo) Mode() os.FileMode { return 0755 | os.ModeDir }  func (d *vfsgen۰DirInfo) ModTime() time.Time { return d.modTime }  func (d *vfsgen۰DirInfo) IsDir() bool { return true }  func (d *vfsgen۰DirInfo) Sys() interface{} { return nil }   // vfsgen۰Dir is an opened dir instance.  type vfsgen۰Dir struct {  *vfsgen۰DirInfo  pos int // Position within entries for Seek and Readdir.  }   func (d *vfsgen۰Dir) Seek(offset int64, whence int) (int64, error) {  if offset == 0 \u0026\u0026 whence == io.SeekStart {  d.pos = 0  return 0, nil  }  return 0, fmt.Errorf(\"unsupported Seek in directory %s\", d.name)  }   func (d *vfsgen۰Dir) Readdir(count int) ([]os.FileInfo, error) {  if d.pos = len(d.entries) \u0026\u0026 count  0 {  return nil, io.EOF  }  if count  0 || count  len(d.entries)-d.pos {  count = len(d.entries) - d.pos  }  e := d.entries[d.pos : d.pos+count]  d.pos += count  return e, nil  } ",
+  "wordCount" : "923",
+  "inLanguage": "en",
+  "datePublished": "2018-09-29T09:22:00+08:00",
+  "dateModified": "2018-09-29T09:22:00+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Me"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://vincentserpoul.github.io/post/golang-binary-everything/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "VS tech corner",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://vincentserpoul.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://vincentserpoul.github.io/" accesskey="h" title="Home (Alt + H)">Home</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
         </div>
-    </header>
-<main class="content" role="main">
-	<div class="container">
-		<article class="post">
-	<header class="post-header">
-        <h3 class="p-post-title">golang binaries</h3>
-    </header>
+        <ul id="menu">
+            <li>
+                <a href="https://vincentserpoul.github.io/tags/" title="tags">
+                    <span>tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://vincentserpoul.github.io/" title="vincentserpoul.github.io">
+                    <span>vincentserpoul.github.io</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
 
-    <section class="post-content">
-        <h2 id="embedding-anything-in-a-golang-binary">Embedding anything in a golang binary</h2>
-<h3 id="what-is-it-about">What is it about?</h3>
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://vincentserpoul.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://vincentserpoul.github.io/post/">Posts</a></div>
+    <h1 class="post-title">
+      golang binaries
+    </h1>
+    <div class="post-description">
+      golang embedding binaries
+    </div>
+    <div class="post-meta"><span title='2018-09-29 09:22:00 +0800 +08'>September 29, 2018</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Me
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#embedding-anything-in-a-golang-binary" aria-label="Embedding anything in a golang binary">Embedding anything in a golang binary</a><ul>
+                        
+                <li>
+                    <a href="#what-is-it-about" aria-label="What is it about?">What is it about?</a></li>
+                <li>
+                    <a href="#choosing-the-library" aria-label="Choosing the library">Choosing the library</a></li>
+                <li>
+                    <a href="#implementation" aria-label="Implementation">Implementation</a><ul>
+                        
+                <li>
+                    <a href="#defining-what-and-where" aria-label="Defining what and where">Defining what and where</a></li>
+                <li>
+                    <a href="#generate" aria-label="Generate">Generate</a></li>
+                <li>
+                    <a href="#use" aria-label="Use">Use</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="embedding-anything-in-a-golang-binary">Embedding anything in a golang binary<a hidden class="anchor" aria-hidden="true" href="#embedding-anything-in-a-golang-binary">#</a></h2>
+<h3 id="what-is-it-about">What is it about?<a hidden class="anchor" aria-hidden="true" href="#what-is-it-about">#</a></h3>
 <p>One good thing about golang is that you compile everything to a binary.
 So easy to deploy, so easy to manage, so small.</p>
 <p>But what happens when you need to embed files in there? Migration files, static files, whatever you can think of?</p>
 <p>Well, you can simply deploy it in a container, add this files, you are going to say, and you are probably right, that&rsquo;s imho, the cleanest solution.
 But sometimes, you can&rsquo;t, sometimes you can&rsquo;t deploy containers and you can&rsquo;t add files next to your binary.</p>
-<h3 id="choosing-the-library">Choosing the library</h3>
+<h3 id="choosing-the-library">Choosing the library<a hidden class="anchor" aria-hidden="true" href="#choosing-the-library">#</a></h3>
 <p>There are multiple solutions out there and a <a href="https://tech.townsourced.com/post/embedding-static-files-in-go/">great article</a> has done a great work at comparing most of them.</p>
 <p>I decided to follow the author advice and go for <a href="https://github.com/shurcooL/vfsgen">vfsgen</a>.
 Why? Mostly because it can be used without any stand alone executable and that&rsquo;s pretty convenient.</p>
-<h3 id="implementation">Implementation</h3>
-<h4 id="defining-what-and-where">Defining what and where</h4>
+<h3 id="implementation">Implementation<a hidden class="anchor" aria-hidden="true" href="#implementation">#</a></h3>
+<h4 id="defining-what-and-where">Defining what and where<a hidden class="anchor" aria-hidden="true" href="#defining-what-and-where">#</a></h4>
 <p>First, let&rsquo;s choose the file we want to turn into a binary.</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">mkdir -p wow/embed
-<span style="color:#008000">echo</span> <span style="color:#ba2121">&#34;lerooyyyy&#34;</span> &gt; wow/embed/jenkins.txt
-</code></pre></div><p>Then, let&rsquo;s create the file wow/wow_generate.go that will generate the binaries, in our case, the http.FileSystem:</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang">    <span style="color:#408080;font-style:italic">// +build ignore
-</span><span style="color:#408080;font-style:italic"></span>
-    <span style="color:#008000;font-weight:bold">package</span> main
-
-    <span style="color:#008000;font-weight:bold">import</span> (
-        <span style="color:#ba2121">&#34;log&#34;</span>
-        <span style="color:#ba2121">&#34;net/http&#34;</span>
-
-        <span style="color:#ba2121">&#34;github.com/shurcooL/vfsgen&#34;</span>
-    )
-
-    <span style="color:#008000;font-weight:bold">func</span> <span style="color:#00f">main</span>() {
-        err <span style="color:#666">:=</span> vfsgen.<span style="color:#00f">Generate</span>(
-            http.<span style="color:#00f">Dir</span>(<span style="color:#ba2121">&#34;./embed&#34;</span>),
-            vfsgen.Options{
-                Filename:     <span style="color:#ba2121">&#34;./wow_vfsdata.go&#34;</span>,
-                PackageName:  <span style="color:#ba2121">&#34;wow&#34;</span>,
-                VariableName: <span style="color:#ba2121">&#34;noobAssets&#34;</span>,
-            })
-        <span style="color:#008000;font-weight:bold">if</span> err <span style="color:#666">!=</span> <span style="color:#008000;font-weight:bold">nil</span> {
-            log.<span style="color:#00f">Fatalln</span>(err)
-        }
-    }
-</code></pre></div><p>Let&rsquo;s quickly explain the details:</p>
+<div class="highlight"><pre tabindex="0" style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mkdir -p wow/embed
+</span></span><span style="display:flex;"><span><span style="color:#008000">echo</span> <span style="color:#ba2121">&#34;lerooyyyy&#34;</span> &gt; wow/embed/jenkins.txt
+</span></span></code></pre></div><p>Then, let&rsquo;s create the file wow/wow_generate.go that will generate the binaries, in our case, the http.FileSystem:</p>
+<div class="highlight"><pre tabindex="0" style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span>    <span style="color:#408080;font-style:italic">// +build ignore
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">package</span> main
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">import</span> (
+</span></span><span style="display:flex;"><span>        <span style="color:#ba2121">&#34;log&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ba2121">&#34;net/http&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ba2121">&#34;github.com/shurcooL/vfsgen&#34;</span>
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">func</span> <span style="color:#00f">main</span>() {
+</span></span><span style="display:flex;"><span>        err <span style="color:#666">:=</span> vfsgen.<span style="color:#00f">Generate</span>(
+</span></span><span style="display:flex;"><span>            http.<span style="color:#00f">Dir</span>(<span style="color:#ba2121">&#34;./embed&#34;</span>),
+</span></span><span style="display:flex;"><span>            vfsgen.Options{
+</span></span><span style="display:flex;"><span>                Filename:     <span style="color:#ba2121">&#34;./wow_vfsdata.go&#34;</span>,
+</span></span><span style="display:flex;"><span>                PackageName:  <span style="color:#ba2121">&#34;wow&#34;</span>,
+</span></span><span style="display:flex;"><span>                VariableName: <span style="color:#ba2121">&#34;noobAssets&#34;</span>,
+</span></span><span style="display:flex;"><span>            })
+</span></span><span style="display:flex;"><span>        <span style="color:#008000;font-weight:bold">if</span> err <span style="color:#666">!=</span> <span style="color:#008000;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>            log.<span style="color:#00f">Fatalln</span>(err)
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>Let&rsquo;s quickly explain the details:</p>
 <p>// +build ignore simply means that this file will be ignored when we will build our go program.</p>
 <p>the first argument to vfsgen.Generate, http.Dir(&quot;./embed&quot;), is the folder you want to embed.</p>
 <p>the options are pretty obvious. Note that you can choose to use a global variable name, to have access to it outside of the wow package, but I think it&rsquo;s probably not a good practice.</p>
-<h4 id="generate">Generate</h4>
+<h4 id="generate">Generate<a hidden class="anchor" aria-hidden="true" href="#generate">#</a></h4>
 <p>Now, how to make it happen? Use go generate!</p>
 <p>Create a file, wow/wow.go, in the same folder you created the previous one:</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#008000;font-weight:bold">package</span> wow
-
-<span style="color:#408080;font-style:italic">//go:generate go run wow_generate.go
-</span><span style="color:#408080;font-style:italic"></span>
-</code></pre></div><p>then, here we are</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">go generate ./wow
-</code></pre></div><p>and you can now see wow_vfsdata.go created in the folder.</p>
-<h4 id="use">Use</h4>
+<div class="highlight"><pre tabindex="0" style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">package</span> wow
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic">//go:generate go run wow_generate.go
+</span></span></span></code></pre></div><p>then, here we are</p>
+<div class="highlight"><pre tabindex="0" style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>go generate ./wow
+</span></span></code></pre></div><p>and you can now see wow_vfsdata.go created in the folder.</p>
+<h4 id="use">Use<a hidden class="anchor" aria-hidden="true" href="#use">#</a></h4>
 <p>The file created is a http.FileSystem, you can mount it to serve it with http.FileServer(noobAssets) but you can also turn it into a more classical FileSystem with a little bit of code, we&rsquo;ll come back to it later, enjoy your everything binary now!</p>
 <p>Here is the code created:</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang">    <span style="color:#408080;font-style:italic">// Code generated by vfsgen; DO NOT EDIT.
-</span><span style="color:#408080;font-style:italic"></span>
-    <span style="color:#008000;font-weight:bold">package</span> wow
+<div class="highlight"><pre tabindex="0" style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span>    <span style="color:#408080;font-style:italic">// Code generated by vfsgen; DO NOT EDIT.
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">package</span> wow
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">import</span> (
+</span></span><span style="display:flex;"><span>        <span style="color:#ba2121">&#34;bytes&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ba2121">&#34;compress/gzip&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ba2121">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ba2121">&#34;io&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ba2121">&#34;io/ioutil&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ba2121">&#34;net/http&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ba2121">&#34;os&#34;</span>
+</span></span><span style="display:flex;"><span>        pathpkg <span style="color:#ba2121">&#34;path&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ba2121">&#34;time&#34;</span>
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#408080;font-style:italic">// noobAssets statically implements the virtual filesystem provided to vfsgen.
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"></span>    <span style="color:#008000;font-weight:bold">var</span> noobAssets = <span style="color:#008000;font-weight:bold">func</span>() http.FileSystem {
+</span></span><span style="display:flex;"><span>        fs <span style="color:#666">:=</span> vfsgen۰FS{
+</span></span><span style="display:flex;"><span>            <span style="color:#ba2121">&#34;/&#34;</span>: <span style="color:#666">&amp;</span>vfsgen۰DirInfo{
+</span></span><span style="display:flex;"><span>                name:    <span style="color:#ba2121">&#34;/&#34;</span>,
+</span></span><span style="display:flex;"><span>                modTime: time.<span style="color:#00f">Date</span>(<span style="color:#666">2018</span>, <span style="color:#666">9</span>, <span style="color:#666">29</span>, <span style="color:#666">3</span>, <span style="color:#666">12</span>, <span style="color:#666">35</span>, <span style="color:#666">780695280</span>, time.UTC),
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            <span style="color:#ba2121">&#34;/jenkins.txt&#34;</span>: <span style="color:#666">&amp;</span>vfsgen۰FileInfo{
+</span></span><span style="display:flex;"><span>                name:    <span style="color:#ba2121">&#34;jenkins.txt&#34;</span>,
+</span></span><span style="display:flex;"><span>                modTime: time.<span style="color:#00f">Date</span>(<span style="color:#666">2018</span>, <span style="color:#666">9</span>, <span style="color:#666">29</span>, <span style="color:#666">3</span>, <span style="color:#666">12</span>, <span style="color:#666">35</span>, <span style="color:#666">780787937</span>, time.UTC),
+</span></span><span style="display:flex;"><span>                content: []<span style="color:#008000">byte</span>(<span style="color:#ba2121">&#34;\x6c\x65\x72\x6f\x6f\x79\x79\x79\x79\x0a&#34;</span>),
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        fs[<span style="color:#ba2121">&#34;/&#34;</span>].(<span style="color:#666">*</span>vfsgen۰DirInfo).entries = []os.FileInfo{
+</span></span><span style="display:flex;"><span>            fs[<span style="color:#ba2121">&#34;/jenkins.txt&#34;</span>].(os.FileInfo),
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#008000;font-weight:bold">return</span> fs
+</span></span><span style="display:flex;"><span>    }()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">type</span> vfsgen۰FS <span style="color:#008000;font-weight:bold">map</span>[<span style="color:#b00040">string</span>]<span style="color:#008000;font-weight:bold">interface</span>{}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">func</span> (fs vfsgen۰FS) <span style="color:#00f">Open</span>(path <span style="color:#b00040">string</span>) (http.File, <span style="color:#b00040">error</span>) {
+</span></span><span style="display:flex;"><span>        path = pathpkg.<span style="color:#00f">Clean</span>(<span style="color:#ba2121">&#34;/&#34;</span> <span style="color:#666">+</span> path)
+</span></span><span style="display:flex;"><span>        f, ok <span style="color:#666">:=</span> fs[path]
+</span></span><span style="display:flex;"><span>        <span style="color:#008000;font-weight:bold">if</span> !ok {
+</span></span><span style="display:flex;"><span>            <span style="color:#008000;font-weight:bold">return</span> <span style="color:#008000;font-weight:bold">nil</span>, <span style="color:#666">&amp;</span>os.PathError{Op: <span style="color:#ba2121">&#34;open&#34;</span>, Path: path, Err: os.ErrNotExist}
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#008000;font-weight:bold">switch</span> f <span style="color:#666">:=</span> f.(<span style="color:#008000;font-weight:bold">type</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#008000;font-weight:bold">case</span> <span style="color:#666">*</span>vfsgen۰FileInfo:
+</span></span><span style="display:flex;"><span>            <span style="color:#008000;font-weight:bold">return</span> <span style="color:#666">&amp;</span>vfsgen۰File{
+</span></span><span style="display:flex;"><span>                vfsgen۰FileInfo: f,
+</span></span><span style="display:flex;"><span>                Reader:          bytes.<span style="color:#00f">NewReader</span>(f.content),
+</span></span><span style="display:flex;"><span>            }, <span style="color:#008000;font-weight:bold">nil</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#008000;font-weight:bold">case</span> <span style="color:#666">*</span>vfsgen۰DirInfo:
+</span></span><span style="display:flex;"><span>            <span style="color:#008000;font-weight:bold">return</span> <span style="color:#666">&amp;</span>vfsgen۰Dir{
+</span></span><span style="display:flex;"><span>                vfsgen۰DirInfo: f,
+</span></span><span style="display:flex;"><span>            }, <span style="color:#008000;font-weight:bold">nil</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#008000;font-weight:bold">default</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#408080;font-style:italic">// This should never happen because we generate only the above types.
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"></span>            <span style="color:#008000">panic</span>(fmt.<span style="color:#00f">Sprintf</span>(<span style="color:#ba2121">&#34;unexpected type %T&#34;</span>, f))
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#408080;font-style:italic">// We already imported &#34;compress/gzip&#34; and &#34;io/ioutil&#34;, but ended up not using them. Avoid unused import error.
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"></span>    <span style="color:#008000;font-weight:bold">var</span> _ = gzip.Reader{}
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">var</span> _ = ioutil.Discard
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#408080;font-style:italic">// vfsgen۰FileInfo is a static definition of an uncompressed file (because it&#39;s not worth gzip compressing).
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"></span>    <span style="color:#008000;font-weight:bold">type</span> vfsgen۰FileInfo <span style="color:#008000;font-weight:bold">struct</span> {
+</span></span><span style="display:flex;"><span>        name    <span style="color:#b00040">string</span>
+</span></span><span style="display:flex;"><span>        modTime time.Time
+</span></span><span style="display:flex;"><span>        content []<span style="color:#b00040">byte</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">func</span> (f <span style="color:#666">*</span>vfsgen۰FileInfo) <span style="color:#00f">Readdir</span>(count <span style="color:#b00040">int</span>) ([]os.FileInfo, <span style="color:#b00040">error</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#008000;font-weight:bold">return</span> <span style="color:#008000;font-weight:bold">nil</span>, fmt.<span style="color:#00f">Errorf</span>(<span style="color:#ba2121">&#34;cannot Readdir from file %s&#34;</span>, f.name)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">func</span> (f <span style="color:#666">*</span>vfsgen۰FileInfo) <span style="color:#00f">Stat</span>() (os.FileInfo, <span style="color:#b00040">error</span>) { <span style="color:#008000;font-weight:bold">return</span> f, <span style="color:#008000;font-weight:bold">nil</span> }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">func</span> (f <span style="color:#666">*</span>vfsgen۰FileInfo) <span style="color:#00f">NotWorthGzipCompressing</span>() {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">func</span> (f <span style="color:#666">*</span>vfsgen۰FileInfo) <span style="color:#00f">Name</span>() <span style="color:#b00040">string</span>       { <span style="color:#008000;font-weight:bold">return</span> f.name }
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">func</span> (f <span style="color:#666">*</span>vfsgen۰FileInfo) <span style="color:#00f">Size</span>() <span style="color:#b00040">int64</span>        { <span style="color:#008000;font-weight:bold">return</span> <span style="color:#008000">int64</span>(<span style="color:#008000">len</span>(f.content)) }
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">func</span> (f <span style="color:#666">*</span>vfsgen۰FileInfo) <span style="color:#00f">Mode</span>() os.FileMode  { <span style="color:#008000;font-weight:bold">return</span> <span style="color:#666">0444</span> }
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">func</span> (f <span style="color:#666">*</span>vfsgen۰FileInfo) <span style="color:#00f">ModTime</span>() time.Time { <span style="color:#008000;font-weight:bold">return</span> f.modTime }
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">func</span> (f <span style="color:#666">*</span>vfsgen۰FileInfo) <span style="color:#00f">IsDir</span>() <span style="color:#b00040">bool</span>        { <span style="color:#008000;font-weight:bold">return</span> <span style="color:#008000;font-weight:bold">false</span> }
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">func</span> (f <span style="color:#666">*</span>vfsgen۰FileInfo) <span style="color:#00f">Sys</span>() <span style="color:#008000;font-weight:bold">interface</span>{}   { <span style="color:#008000;font-weight:bold">return</span> <span style="color:#008000;font-weight:bold">nil</span> }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#408080;font-style:italic">// vfsgen۰File is an opened file instance.
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"></span>    <span style="color:#008000;font-weight:bold">type</span> vfsgen۰File <span style="color:#008000;font-weight:bold">struct</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#666">*</span>vfsgen۰FileInfo
+</span></span><span style="display:flex;"><span>        <span style="color:#666">*</span>bytes.Reader
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">func</span> (f <span style="color:#666">*</span>vfsgen۰File) <span style="color:#00f">Close</span>() <span style="color:#b00040">error</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#008000;font-weight:bold">return</span> <span style="color:#008000;font-weight:bold">nil</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#408080;font-style:italic">// vfsgen۰DirInfo is a static definition of a directory.
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"></span>    <span style="color:#008000;font-weight:bold">type</span> vfsgen۰DirInfo <span style="color:#008000;font-weight:bold">struct</span> {
+</span></span><span style="display:flex;"><span>        name    <span style="color:#b00040">string</span>
+</span></span><span style="display:flex;"><span>        modTime time.Time
+</span></span><span style="display:flex;"><span>        entries []os.FileInfo
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">func</span> (d <span style="color:#666">*</span>vfsgen۰DirInfo) <span style="color:#00f">Read</span>([]<span style="color:#b00040">byte</span>) (<span style="color:#b00040">int</span>, <span style="color:#b00040">error</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#008000;font-weight:bold">return</span> <span style="color:#666">0</span>, fmt.<span style="color:#00f">Errorf</span>(<span style="color:#ba2121">&#34;cannot Read from directory %s&#34;</span>, d.name)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">func</span> (d <span style="color:#666">*</span>vfsgen۰DirInfo) <span style="color:#00f">Close</span>() <span style="color:#b00040">error</span>               { <span style="color:#008000;font-weight:bold">return</span> <span style="color:#008000;font-weight:bold">nil</span> }
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">func</span> (d <span style="color:#666">*</span>vfsgen۰DirInfo) <span style="color:#00f">Stat</span>() (os.FileInfo, <span style="color:#b00040">error</span>) { <span style="color:#008000;font-weight:bold">return</span> d, <span style="color:#008000;font-weight:bold">nil</span> }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">func</span> (d <span style="color:#666">*</span>vfsgen۰DirInfo) <span style="color:#00f">Name</span>() <span style="color:#b00040">string</span>       { <span style="color:#008000;font-weight:bold">return</span> d.name }
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">func</span> (d <span style="color:#666">*</span>vfsgen۰DirInfo) <span style="color:#00f">Size</span>() <span style="color:#b00040">int64</span>        { <span style="color:#008000;font-weight:bold">return</span> <span style="color:#666">0</span> }
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">func</span> (d <span style="color:#666">*</span>vfsgen۰DirInfo) <span style="color:#00f">Mode</span>() os.FileMode  { <span style="color:#008000;font-weight:bold">return</span> <span style="color:#666">0755</span> | os.ModeDir }
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">func</span> (d <span style="color:#666">*</span>vfsgen۰DirInfo) <span style="color:#00f">ModTime</span>() time.Time { <span style="color:#008000;font-weight:bold">return</span> d.modTime }
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">func</span> (d <span style="color:#666">*</span>vfsgen۰DirInfo) <span style="color:#00f">IsDir</span>() <span style="color:#b00040">bool</span>        { <span style="color:#008000;font-weight:bold">return</span> <span style="color:#008000;font-weight:bold">true</span> }
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">func</span> (d <span style="color:#666">*</span>vfsgen۰DirInfo) <span style="color:#00f">Sys</span>() <span style="color:#008000;font-weight:bold">interface</span>{}   { <span style="color:#008000;font-weight:bold">return</span> <span style="color:#008000;font-weight:bold">nil</span> }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#408080;font-style:italic">// vfsgen۰Dir is an opened dir instance.
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"></span>    <span style="color:#008000;font-weight:bold">type</span> vfsgen۰Dir <span style="color:#008000;font-weight:bold">struct</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#666">*</span>vfsgen۰DirInfo
+</span></span><span style="display:flex;"><span>        pos <span style="color:#b00040">int</span> <span style="color:#408080;font-style:italic">// Position within entries for Seek and Readdir.
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"></span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">func</span> (d <span style="color:#666">*</span>vfsgen۰Dir) <span style="color:#00f">Seek</span>(offset <span style="color:#b00040">int64</span>, whence <span style="color:#b00040">int</span>) (<span style="color:#b00040">int64</span>, <span style="color:#b00040">error</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#008000;font-weight:bold">if</span> offset <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> whence <span style="color:#666">==</span> io.SeekStart {
+</span></span><span style="display:flex;"><span>            d.pos = <span style="color:#666">0</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#008000;font-weight:bold">return</span> <span style="color:#666">0</span>, <span style="color:#008000;font-weight:bold">nil</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#008000;font-weight:bold">return</span> <span style="color:#666">0</span>, fmt.<span style="color:#00f">Errorf</span>(<span style="color:#ba2121">&#34;unsupported Seek in directory %s&#34;</span>, d.name)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">func</span> (d <span style="color:#666">*</span>vfsgen۰Dir) <span style="color:#00f">Readdir</span>(count <span style="color:#b00040">int</span>) ([]os.FileInfo, <span style="color:#b00040">error</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#008000;font-weight:bold">if</span> d.pos <span style="color:#666">&gt;=</span> <span style="color:#008000">len</span>(d.entries) <span style="color:#666">&amp;&amp;</span> count &gt; <span style="color:#666">0</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#008000;font-weight:bold">return</span> <span style="color:#008000;font-weight:bold">nil</span>, io.EOF
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#008000;font-weight:bold">if</span> count <span style="color:#666">&lt;=</span> <span style="color:#666">0</span> <span style="color:#666">||</span> count &gt; <span style="color:#008000">len</span>(d.entries)<span style="color:#666">-</span>d.pos {
+</span></span><span style="display:flex;"><span>            count = <span style="color:#008000">len</span>(d.entries) <span style="color:#666">-</span> d.pos
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        e <span style="color:#666">:=</span> d.entries[d.pos : d.pos<span style="color:#666">+</span>count]
+</span></span><span style="display:flex;"><span>        d.pos <span style="color:#666">+=</span> count
+</span></span><span style="display:flex;"><span>        <span style="color:#008000;font-weight:bold">return</span> e, <span style="color:#008000;font-weight:bold">nil</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div>
 
-    <span style="color:#008000;font-weight:bold">import</span> (
-        <span style="color:#ba2121">&#34;bytes&#34;</span>
-        <span style="color:#ba2121">&#34;compress/gzip&#34;</span>
-        <span style="color:#ba2121">&#34;fmt&#34;</span>
-        <span style="color:#ba2121">&#34;io&#34;</span>
-        <span style="color:#ba2121">&#34;io/ioutil&#34;</span>
-        <span style="color:#ba2121">&#34;net/http&#34;</span>
-        <span style="color:#ba2121">&#34;os&#34;</span>
-        pathpkg <span style="color:#ba2121">&#34;path&#34;</span>
-        <span style="color:#ba2121">&#34;time&#34;</span>
-    )
+  </div>
 
-    <span style="color:#408080;font-style:italic">// noobAssets statically implements the virtual filesystem provided to vfsgen.
-</span><span style="color:#408080;font-style:italic"></span>    <span style="color:#008000;font-weight:bold">var</span> noobAssets = <span style="color:#008000;font-weight:bold">func</span>() http.FileSystem {
-        fs <span style="color:#666">:=</span> vfsgen۰FS{
-            <span style="color:#ba2121">&#34;/&#34;</span>: <span style="color:#666">&amp;</span>vfsgen۰DirInfo{
-                name:    <span style="color:#ba2121">&#34;/&#34;</span>,
-                modTime: time.<span style="color:#00f">Date</span>(<span style="color:#666">2018</span>, <span style="color:#666">9</span>, <span style="color:#666">29</span>, <span style="color:#666">3</span>, <span style="color:#666">12</span>, <span style="color:#666">35</span>, <span style="color:#666">780695280</span>, time.UTC),
-            },
-            <span style="color:#ba2121">&#34;/jenkins.txt&#34;</span>: <span style="color:#666">&amp;</span>vfsgen۰FileInfo{
-                name:    <span style="color:#ba2121">&#34;jenkins.txt&#34;</span>,
-                modTime: time.<span style="color:#00f">Date</span>(<span style="color:#666">2018</span>, <span style="color:#666">9</span>, <span style="color:#666">29</span>, <span style="color:#666">3</span>, <span style="color:#666">12</span>, <span style="color:#666">35</span>, <span style="color:#666">780787937</span>, time.UTC),
-                content: []<span style="color:#008000">byte</span>(<span style="color:#ba2121">&#34;\x6c\x65\x72\x6f\x6f\x79\x79\x79\x79\x0a&#34;</span>),
-            },
-        }
-        fs[<span style="color:#ba2121">&#34;/&#34;</span>].(<span style="color:#666">*</span>vfsgen۰DirInfo).entries = []os.FileInfo{
-            fs[<span style="color:#ba2121">&#34;/jenkins.txt&#34;</span>].(os.FileInfo),
-        }
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://vincentserpoul.github.io/tags/golang/">golang</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://vincentserpoul.github.io/post/alpine-linux-rpi0/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>installing alpine linux on rpi0</span>
+  </a>
+  <a class="next" href="https://vincentserpoul.github.io/post/playwithwasm-golang/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>a taste of wasm</span>
+  </a>
+</nav>
 
-        <span style="color:#008000;font-weight:bold">return</span> fs
-    }()
-
-    <span style="color:#008000;font-weight:bold">type</span> vfsgen۰FS <span style="color:#008000;font-weight:bold">map</span>[<span style="color:#b00040">string</span>]<span style="color:#008000;font-weight:bold">interface</span>{}
-
-    <span style="color:#008000;font-weight:bold">func</span> (fs vfsgen۰FS) <span style="color:#00f">Open</span>(path <span style="color:#b00040">string</span>) (http.File, <span style="color:#b00040">error</span>) {
-        path = pathpkg.<span style="color:#00f">Clean</span>(<span style="color:#ba2121">&#34;/&#34;</span> <span style="color:#666">+</span> path)
-        f, ok <span style="color:#666">:=</span> fs[path]
-        <span style="color:#008000;font-weight:bold">if</span> !ok {
-            <span style="color:#008000;font-weight:bold">return</span> <span style="color:#008000;font-weight:bold">nil</span>, <span style="color:#666">&amp;</span>os.PathError{Op: <span style="color:#ba2121">&#34;open&#34;</span>, Path: path, Err: os.ErrNotExist}
-        }
-
-        <span style="color:#008000;font-weight:bold">switch</span> f <span style="color:#666">:=</span> f.(<span style="color:#008000;font-weight:bold">type</span>) {
-        <span style="color:#008000;font-weight:bold">case</span> <span style="color:#666">*</span>vfsgen۰FileInfo:
-            <span style="color:#008000;font-weight:bold">return</span> <span style="color:#666">&amp;</span>vfsgen۰File{
-                vfsgen۰FileInfo: f,
-                Reader:          bytes.<span style="color:#00f">NewReader</span>(f.content),
-            }, <span style="color:#008000;font-weight:bold">nil</span>
-        <span style="color:#008000;font-weight:bold">case</span> <span style="color:#666">*</span>vfsgen۰DirInfo:
-            <span style="color:#008000;font-weight:bold">return</span> <span style="color:#666">&amp;</span>vfsgen۰Dir{
-                vfsgen۰DirInfo: f,
-            }, <span style="color:#008000;font-weight:bold">nil</span>
-        <span style="color:#008000;font-weight:bold">default</span>:
-            <span style="color:#408080;font-style:italic">// This should never happen because we generate only the above types.
-</span><span style="color:#408080;font-style:italic"></span>            <span style="color:#008000">panic</span>(fmt.<span style="color:#00f">Sprintf</span>(<span style="color:#ba2121">&#34;unexpected type %T&#34;</span>, f))
-        }
-    }
-
-    <span style="color:#408080;font-style:italic">// We already imported &#34;compress/gzip&#34; and &#34;io/ioutil&#34;, but ended up not using them. Avoid unused import error.
-</span><span style="color:#408080;font-style:italic"></span>    <span style="color:#008000;font-weight:bold">var</span> _ = gzip.Reader{}
-    <span style="color:#008000;font-weight:bold">var</span> _ = ioutil.Discard
-
-    <span style="color:#408080;font-style:italic">// vfsgen۰FileInfo is a static definition of an uncompressed file (because it&#39;s not worth gzip compressing).
-</span><span style="color:#408080;font-style:italic"></span>    <span style="color:#008000;font-weight:bold">type</span> vfsgen۰FileInfo <span style="color:#008000;font-weight:bold">struct</span> {
-        name    <span style="color:#b00040">string</span>
-        modTime time.Time
-        content []<span style="color:#b00040">byte</span>
-    }
-
-    <span style="color:#008000;font-weight:bold">func</span> (f <span style="color:#666">*</span>vfsgen۰FileInfo) <span style="color:#00f">Readdir</span>(count <span style="color:#b00040">int</span>) ([]os.FileInfo, <span style="color:#b00040">error</span>) {
-        <span style="color:#008000;font-weight:bold">return</span> <span style="color:#008000;font-weight:bold">nil</span>, fmt.<span style="color:#00f">Errorf</span>(<span style="color:#ba2121">&#34;cannot Readdir from file %s&#34;</span>, f.name)
-    }
-    <span style="color:#008000;font-weight:bold">func</span> (f <span style="color:#666">*</span>vfsgen۰FileInfo) <span style="color:#00f">Stat</span>() (os.FileInfo, <span style="color:#b00040">error</span>) { <span style="color:#008000;font-weight:bold">return</span> f, <span style="color:#008000;font-weight:bold">nil</span> }
-
-    <span style="color:#008000;font-weight:bold">func</span> (f <span style="color:#666">*</span>vfsgen۰FileInfo) <span style="color:#00f">NotWorthGzipCompressing</span>() {}
-
-    <span style="color:#008000;font-weight:bold">func</span> (f <span style="color:#666">*</span>vfsgen۰FileInfo) <span style="color:#00f">Name</span>() <span style="color:#b00040">string</span>       { <span style="color:#008000;font-weight:bold">return</span> f.name }
-    <span style="color:#008000;font-weight:bold">func</span> (f <span style="color:#666">*</span>vfsgen۰FileInfo) <span style="color:#00f">Size</span>() <span style="color:#b00040">int64</span>        { <span style="color:#008000;font-weight:bold">return</span> <span style="color:#008000">int64</span>(<span style="color:#008000">len</span>(f.content)) }
-    <span style="color:#008000;font-weight:bold">func</span> (f <span style="color:#666">*</span>vfsgen۰FileInfo) <span style="color:#00f">Mode</span>() os.FileMode  { <span style="color:#008000;font-weight:bold">return</span> <span style="color:#666">0444</span> }
-    <span style="color:#008000;font-weight:bold">func</span> (f <span style="color:#666">*</span>vfsgen۰FileInfo) <span style="color:#00f">ModTime</span>() time.Time { <span style="color:#008000;font-weight:bold">return</span> f.modTime }
-    <span style="color:#008000;font-weight:bold">func</span> (f <span style="color:#666">*</span>vfsgen۰FileInfo) <span style="color:#00f">IsDir</span>() <span style="color:#b00040">bool</span>        { <span style="color:#008000;font-weight:bold">return</span> <span style="color:#008000;font-weight:bold">false</span> }
-    <span style="color:#008000;font-weight:bold">func</span> (f <span style="color:#666">*</span>vfsgen۰FileInfo) <span style="color:#00f">Sys</span>() <span style="color:#008000;font-weight:bold">interface</span>{}   { <span style="color:#008000;font-weight:bold">return</span> <span style="color:#008000;font-weight:bold">nil</span> }
-
-    <span style="color:#408080;font-style:italic">// vfsgen۰File is an opened file instance.
-</span><span style="color:#408080;font-style:italic"></span>    <span style="color:#008000;font-weight:bold">type</span> vfsgen۰File <span style="color:#008000;font-weight:bold">struct</span> {
-        <span style="color:#666">*</span>vfsgen۰FileInfo
-        <span style="color:#666">*</span>bytes.Reader
-    }
-
-    <span style="color:#008000;font-weight:bold">func</span> (f <span style="color:#666">*</span>vfsgen۰File) <span style="color:#00f">Close</span>() <span style="color:#b00040">error</span> {
-        <span style="color:#008000;font-weight:bold">return</span> <span style="color:#008000;font-weight:bold">nil</span>
-    }
-
-    <span style="color:#408080;font-style:italic">// vfsgen۰DirInfo is a static definition of a directory.
-</span><span style="color:#408080;font-style:italic"></span>    <span style="color:#008000;font-weight:bold">type</span> vfsgen۰DirInfo <span style="color:#008000;font-weight:bold">struct</span> {
-        name    <span style="color:#b00040">string</span>
-        modTime time.Time
-        entries []os.FileInfo
-    }
-
-    <span style="color:#008000;font-weight:bold">func</span> (d <span style="color:#666">*</span>vfsgen۰DirInfo) <span style="color:#00f">Read</span>([]<span style="color:#b00040">byte</span>) (<span style="color:#b00040">int</span>, <span style="color:#b00040">error</span>) {
-        <span style="color:#008000;font-weight:bold">return</span> <span style="color:#666">0</span>, fmt.<span style="color:#00f">Errorf</span>(<span style="color:#ba2121">&#34;cannot Read from directory %s&#34;</span>, d.name)
-    }
-    <span style="color:#008000;font-weight:bold">func</span> (d <span style="color:#666">*</span>vfsgen۰DirInfo) <span style="color:#00f">Close</span>() <span style="color:#b00040">error</span>               { <span style="color:#008000;font-weight:bold">return</span> <span style="color:#008000;font-weight:bold">nil</span> }
-    <span style="color:#008000;font-weight:bold">func</span> (d <span style="color:#666">*</span>vfsgen۰DirInfo) <span style="color:#00f">Stat</span>() (os.FileInfo, <span style="color:#b00040">error</span>) { <span style="color:#008000;font-weight:bold">return</span> d, <span style="color:#008000;font-weight:bold">nil</span> }
-
-    <span style="color:#008000;font-weight:bold">func</span> (d <span style="color:#666">*</span>vfsgen۰DirInfo) <span style="color:#00f">Name</span>() <span style="color:#b00040">string</span>       { <span style="color:#008000;font-weight:bold">return</span> d.name }
-    <span style="color:#008000;font-weight:bold">func</span> (d <span style="color:#666">*</span>vfsgen۰DirInfo) <span style="color:#00f">Size</span>() <span style="color:#b00040">int64</span>        { <span style="color:#008000;font-weight:bold">return</span> <span style="color:#666">0</span> }
-    <span style="color:#008000;font-weight:bold">func</span> (d <span style="color:#666">*</span>vfsgen۰DirInfo) <span style="color:#00f">Mode</span>() os.FileMode  { <span style="color:#008000;font-weight:bold">return</span> <span style="color:#666">0755</span> | os.ModeDir }
-    <span style="color:#008000;font-weight:bold">func</span> (d <span style="color:#666">*</span>vfsgen۰DirInfo) <span style="color:#00f">ModTime</span>() time.Time { <span style="color:#008000;font-weight:bold">return</span> d.modTime }
-    <span style="color:#008000;font-weight:bold">func</span> (d <span style="color:#666">*</span>vfsgen۰DirInfo) <span style="color:#00f">IsDir</span>() <span style="color:#b00040">bool</span>        { <span style="color:#008000;font-weight:bold">return</span> <span style="color:#008000;font-weight:bold">true</span> }
-    <span style="color:#008000;font-weight:bold">func</span> (d <span style="color:#666">*</span>vfsgen۰DirInfo) <span style="color:#00f">Sys</span>() <span style="color:#008000;font-weight:bold">interface</span>{}   { <span style="color:#008000;font-weight:bold">return</span> <span style="color:#008000;font-weight:bold">nil</span> }
-
-    <span style="color:#408080;font-style:italic">// vfsgen۰Dir is an opened dir instance.
-</span><span style="color:#408080;font-style:italic"></span>    <span style="color:#008000;font-weight:bold">type</span> vfsgen۰Dir <span style="color:#008000;font-weight:bold">struct</span> {
-        <span style="color:#666">*</span>vfsgen۰DirInfo
-        pos <span style="color:#b00040">int</span> <span style="color:#408080;font-style:italic">// Position within entries for Seek and Readdir.
-</span><span style="color:#408080;font-style:italic"></span>    }
-
-    <span style="color:#008000;font-weight:bold">func</span> (d <span style="color:#666">*</span>vfsgen۰Dir) <span style="color:#00f">Seek</span>(offset <span style="color:#b00040">int64</span>, whence <span style="color:#b00040">int</span>) (<span style="color:#b00040">int64</span>, <span style="color:#b00040">error</span>) {
-        <span style="color:#008000;font-weight:bold">if</span> offset <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> whence <span style="color:#666">==</span> io.SeekStart {
-            d.pos = <span style="color:#666">0</span>
-            <span style="color:#008000;font-weight:bold">return</span> <span style="color:#666">0</span>, <span style="color:#008000;font-weight:bold">nil</span>
-        }
-        <span style="color:#008000;font-weight:bold">return</span> <span style="color:#666">0</span>, fmt.<span style="color:#00f">Errorf</span>(<span style="color:#ba2121">&#34;unsupported Seek in directory %s&#34;</span>, d.name)
-    }
-
-    <span style="color:#008000;font-weight:bold">func</span> (d <span style="color:#666">*</span>vfsgen۰Dir) <span style="color:#00f">Readdir</span>(count <span style="color:#b00040">int</span>) ([]os.FileInfo, <span style="color:#b00040">error</span>) {
-        <span style="color:#008000;font-weight:bold">if</span> d.pos <span style="color:#666">&gt;=</span> <span style="color:#008000">len</span>(d.entries) <span style="color:#666">&amp;&amp;</span> count &gt; <span style="color:#666">0</span> {
-            <span style="color:#008000;font-weight:bold">return</span> <span style="color:#008000;font-weight:bold">nil</span>, io.EOF
-        }
-        <span style="color:#008000;font-weight:bold">if</span> count <span style="color:#666">&lt;=</span> <span style="color:#666">0</span> <span style="color:#666">||</span> count &gt; <span style="color:#008000">len</span>(d.entries)<span style="color:#666">-</span>d.pos {
-            count = <span style="color:#008000">len</span>(d.entries) <span style="color:#666">-</span> d.pos
-        }
-        e <span style="color:#666">:=</span> d.entries[d.pos : d.pos<span style="color:#666">+</span>count]
-        d.pos <span style="color:#666">+=</span> count
-        <span style="color:#008000;font-weight:bold">return</span> e, <span style="color:#008000;font-weight:bold">nil</span>
-    }
-</code></pre></div>
-    </section>
-
-    <hr>
-
-    <footer class="post-footer">
-        <section class="f-1">
-            
-
-            <p class="f-post-time"><time datetime="2018-09-29T09:22:00&#43;08:00">September 29, 2018</time></p>
-        </section>
-
-        <section class="f-2">
-            <section class="share">
-                <span>Share:
-                <a class="icon-twitter" href="http://twitter.com/share?text=golang%20binaries&url=https%3a%2f%2fvincentserpoul.github.io%2fpost%2fgolang-binary-everything%2f"
-                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
-                    <i class="fa fa-twitter"></i>
-                </a>
-                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fvincentserpoul.github.io%2fpost%2fgolang-binary-everything%2f"
-                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
-                    <i class="fa fa-facebook"></i>
-                </a>
-                <a class="icon-google-plus" href="https://plus.google.com/share?url=https%3a%2f%2fvincentserpoul.github.io%2fpost%2fgolang-binary-everything%2f"
-                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
-                    <i class="fa fa-google-plus"></i>
-                </a>
-                </span>
-            </section>
-
-            
-            	<span class="f-post-tags"><i class="fa fa-tag"></i>
-            	golang
-            	</span>
-            
-        </section>
-    </footer>
-
-    <div id="disqus_thread"></div>
-<script>
-var disqus_config = function () {
-    this.page.url = "https://vincentserpoul.github.io/post/golang-binary-everything/";  
-    this.page.identifier = "https://vincentserpoul.github.io/post/golang-binary-everything/"; 
-};
-
-(function() { 
-    var d = document, s = d.createElement('script');
-    s.src = '//vincentserpoul-tech-corner.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </footer>
 </article>
-	</div>
-</main>
-    <footer id="site-footer">
-        <div class="container">
-            <a href="https://vincentserpoul.github.io/index.xml" title="Get the RSS feed"><span class="tooltip"><i class="fa fa-rss"></i></span></a>
-        </div>
-    </footer>
-
-    <script type="text/javascript" src="https://vincentserpoul.github.io/js/fittext.js"></script>
-    <script type="text/javascript">
-      $(".heading").fitText();
-    </script>
-
+    </main>
     
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-81802018-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://vincentserpoul.github.io/">VS tech corner</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
 
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
 </body>
+
 </html>

@@ -1,59 +1,272 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]><html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--><html class="no-js" prefix="og: http://ogp.me/ns#" xmlns:og="http://ogp.me/ns#"><!--<![endif]-->
+<html lang="en" dir="auto">
 
-    <head>
-                <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="description" content="golang errors (after 1.13)">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
-        <meta name="mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <meta name="author" content="">
-        <meta name="keywords" content="awesome, definitely">
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>golang errors (after 1.13) | VS tech corner</title>
+<meta name="keywords" content="golang, errors">
+<meta name="description" content="golang errors (after 1.13)">
+<meta name="author" content="Me">
+<link rel="canonical" href="https://vincentserpoul.github.io/post/go-errors/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.ec8da366ca2fb647537ccb7a8f6fa5b4e9cd3c7a0d3171dd2d3baad1e49c8bfc.css" integrity="sha256-7I2jZsovtkdTfMt6j2&#43;ltOnNPHoNMXHdLTuq0eSci/w=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.2840b7fccd34145847db71a290569594bdbdb00047097f75d6495d162f5d7dff.js" integrity="sha256-KEC3/M00FFhH23GikFaVlL29sABHCX911kldFi9dff8="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://vincentserpoul.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://vincentserpoul.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://vincentserpoul.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://vincentserpoul.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://vincentserpoul.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-81802018-1', 'auto');
 	
-        <meta property="og:site_name" content="VS tech corner">
-        <meta property="og:title" content="VS tech corner">
-        <meta property="og:url" content="https://vincentserpoul.github.io/post/go-errors/">
-        <meta property="og:description" content="">
-    
-        <meta property="og:type" content="article" />
-        <meta property="og:article:author" content="" />
-        <meta property="og:article:published_time" content="2021-05-17T12:30:48&#43;08:00" />
-    
-        <meta name="generator" content="Hugo 0.83.1" />
-        <title>golang errors (after 1.13) &middot; VS tech corner </title>
-        <link rel="canonical" href="https://vincentserpoul.github.io/" />
-        <link rel="alternate" type="application/rss+xml" title="RSS" href="">
-        <link rel="stylesheet" type='text/css' href="https://vincentserpoul.github.io/css/main.css"/>
-        <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300|Montserrat:700' rel='stylesheet' type='text/css'>
-        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-        <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-    </head>
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="golang errors (after 1.13)" />
+<meta property="og:description" content="golang errors (after 1.13)" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://vincentserpoul.github.io/post/go-errors/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-05-17T12:30:48&#43;08:00" />
+<meta property="article:modified_time" content="2021-05-17T12:30:48&#43;08:00" /><meta property="og:site_name" content="Vincent Serpoul" />
 
-<body>
-<!--[if lt IE 7]><p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chrome/‎">install Google Chrome</a> to experience this site.</p><![endif]-->
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="golang errors (after 1.13)"/>
+<meta name="twitter:description" content="golang errors (after 1.13)"/>
 
-    <header id="site-header">
-        <div class="container">
-            <a href="https://vincentserpoul.github.io/" alt="VS tech corner"><h1 class="blog-title heading">VS tech corner</h1></a>
-            <p class="blog-description"></p>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://vincentserpoul.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "golang errors (after 1.13)",
+      "item": "https://vincentserpoul.github.io/post/go-errors/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "golang errors (after 1.13)",
+  "name": "golang errors (after 1.13)",
+  "description": "golang errors (after 1.13)",
+  "keywords": [
+    "golang", "errors"
+  ],
+  "articleBody": "Since go 1.13, go has gone one step further in terms of error handling. Errors can be wrapped, bubbled up and act upon.\nWe will here take a step back on error handling in go, from the perspective of a library.\nWhat data could we have in the error? Inspired by a rust talk from Jan Lusby about errors, here are a few things that error could contain:\n The reason of the error Context of the error: struct field, struct surrounding values… Stack trace: which part of the code triggered this error How to fix the error: suggest a way to fix it  Where are errors displayed?  In the logs of an application In front of the end user  Ways to define errors after golang 1.13 a) inline, with no type definition  return fmt.Errorf(\"bad int %d\", i) (+)\n simple to write no runtime penalty  (-)\n impossible to handle properly as you can’t match and react accordingly  b) sentinel errors var errBadInt = errors.New(\"bad int\") return fmt.Errorf(\"%w %d\", i) (+)\n match on error possible  (-)\n runtime (init) penalty binary size penalty global vars (fragile)  c) structs, with defined context and string formatting  type errBadInt struct {  i int }  func (e errBadInt) Error() string {  return fmt.Errorf(\"bad int: %d\", i) }  func newErrBadInt(i int) errBadInt {  return errBadInt{i} } More tricks used by libs out there upspin by Rob Pike himself  smart use of const and redefine the Error struct with context return stack in debug mode  big cache  interesting usage of const + error interface to avoid global vars  So what should we do? For simple errors Keep the errors as they are, but turn them into const thanks to the bigcache trick. It keeps the nice opportunity to use errors.Is and removes the initialization cost. No wrapping when there is no additional context. Context is not stack trace. Externally available errors should be handling all errors, unwrap them and repackage them again.\ntype marshalError string  func (me marshalError) Error() string { \treturn string(me) }  const ErrBadInt = marshalError(\"bad int\")  func testErr() error { \treturn fmt.Errorf(\"%w\", ErrBadInt) } For more complex errors type badValueError struct { \tkey string \tvalue interface{} }  func (bv badValueError) Error() string { \treturn fmt.Sprintf(\"bad value %v for key %s\", bv.value, bv.key) }  func testErr() error { \tv := 3 \tk := \"test\" \treturn badValueError{key: k, value: v} } Handling errors Error as values testable in the playground\npackage main  import ( \t\"errors\" \t\"fmt\" \t\"log\" )  type marshalError string  func (me marshalError) Error() string { \treturn string(me) }  const ErrBadInt = marshalError(\"bad int\")  func testErr() error { \treturn fmt.Errorf(\"%w\", ErrBadInt) }  func main() { \terr := testErr()  \tif errors.Is(err, ErrBadInt) { \tlog.Printf(\"%v\", err) \t} else { \tlog.Println(\"wrong\") \t} } Error as struct on the playground\npackage main  import ( \t\"errors\" \t\"fmt\" \t\"log\" )  type badValueError struct { \tkey string \tvalue interface{} }  func (bv badValueError) Error() string { \treturn fmt.Sprintf(\"bad value %v for key %s\", bv.value, bv.key) }  func testErr() error { \tv := 3 \tk := \"test\" \treturn badValueError{key: k, value: v} }  func main() { \terr := testErr()  \tvar e badValueError \tif errors.As(err, \u0026e) { \tlog.Printf(\"%v\", err) \t} else { \tlog.Println(\"wrong\") \t} } Further thoughts Panic or not panic? I tend to agree with uber recommendation to not panic in a library, especially when you’re expected to most likely handle user data. It allows the user of the lib to do whatever they want with the returned error.\nThat said, it’s important to actually notify the library user if the library is used improperly in cases that are supposedly “not possible” by panicking. The lib user is always able to handle these panics through a recover.\nWrapping or not wrapping? from go1.13 post on errors:\n\"wrapping an error makes that error part of your API. If you don't want to commit to supporting that error as part of your API in the future, you shouldn't wrap the error.\"  It also makes no sense to wrap unexported errors to the external user of the API, as the user has no way of testing/matching the error. External methods hence should not return internal errors and return their own exported type, catered at the lib user.\nNever inline errors? Simple cases don’t require to define sentinel values and a simple string is often enough to start with. If later on, you need to match on the error value or type, you can change this to an actual sentinel value.\nThat said, I think any error part of your API should be typed, as you want the lib user to be able to handle it according to its need.\n",
+  "wordCount" : "771",
+  "inLanguage": "en",
+  "datePublished": "2021-05-17T12:30:48+08:00",
+  "dateModified": "2021-05-17T12:30:48+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Me"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://vincentserpoul.github.io/post/go-errors/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "VS tech corner",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://vincentserpoul.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://vincentserpoul.github.io/" accesskey="h" title="Home (Alt + H)">Home</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
         </div>
-    </header>
-<main class="content" role="main">
-	<div class="container">
-		<article class="post">
-	<header class="post-header">
-        <h3 class="p-post-title">golang errors (after 1.13)</h3>
-    </header>
+        <ul id="menu">
+            <li>
+                <a href="https://vincentserpoul.github.io/tags/" title="tags">
+                    <span>tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://vincentserpoul.github.io/" title="vincentserpoul.github.io">
+                    <span>vincentserpoul.github.io</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
 
-    <section class="post-content">
-        <p>Since go 1.13, go has gone one step further in terms of error handling. Errors can be wrapped, bubbled up and act upon.</p>
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://vincentserpoul.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://vincentserpoul.github.io/post/">Posts</a></div>
+    <h1 class="post-title">
+      golang errors (after 1.13)
+    </h1>
+    <div class="post-description">
+      golang errors (after 1.13)
+    </div>
+    <div class="post-meta"><span title='2021-05-17 12:30:48 +0800 +08'>May 17, 2021</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Me
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#what-data-_could_-we-have-in-the-error" aria-label="What data could we have in the error?">What data <em>could</em> we have in the error?</a></li>
+                <li>
+                    <a href="#where-are-errors-displayed" aria-label="Where are errors displayed?">Where are errors displayed?</a></li>
+                <li>
+                    <a href="#ways-to-define-errors-after-golang-113" aria-label="Ways to define errors after golang 1.13">Ways to define errors after golang 1.13</a><ul>
+                        
+                <li>
+                    <a href="#a-inline-with-no-type-definition" aria-label="a) inline, with no type definition">a) inline, with no type definition</a></li>
+                <li>
+                    <a href="#b-sentinel-errors" aria-label="b) sentinel errors">b) sentinel errors</a></li>
+                <li>
+                    <a href="#c-structs-with-defined-context-and-string-formatting" aria-label="c) structs, with defined context and string formatting">c) structs, with defined context and string formatting</a></li></ul>
+                </li>
+                <li>
+                    <a href="#more-tricks-used-by-libs-out-there" aria-label="More tricks used by libs out there">More tricks used by libs out there</a><ul>
+                        
+                <li>
+                    <a href="#upspinhttpsgithubcomupspinupspinblobmastererrorserrorsgo-by-rob-pike-himself" aria-label="upspin by Rob Pike himself"><a href="https://github.com/upspin/upspin/blob/master/errors/errors.go">upspin</a> by Rob Pike himself</a></li>
+                <li>
+                    <a href="#big-cachehttpsgithubcomallegrobigcacheblob16762172f2ee433caf5bae1904cdbc11dcebffebiteratorgo" aria-label="big cache"><a href="https://github.com/allegro/bigcache/blob/16762172f2ee433caf5bae1904cdbc11dcebffeb/iterator.go">big cache</a></a></li></ul>
+                </li>
+                <li>
+                    <a href="#so-what-should-we-do" aria-label="So what should we do?">So what should we do?</a><ul>
+                        
+                <li>
+                    <a href="#for-simple-errors" aria-label="For simple errors">For simple errors</a></li>
+                <li>
+                    <a href="#for-more-complex-errors" aria-label="For more complex errors">For more complex errors</a></li></ul>
+                </li>
+                <li>
+                    <a href="#handling-errors" aria-label="Handling errors">Handling errors</a><ul>
+                        
+                <li>
+                    <a href="#error-as-values" aria-label="Error as values">Error as values</a></li>
+                <li>
+                    <a href="#error-as-struct" aria-label="Error as struct">Error as struct</a></li></ul>
+                </li>
+                <li>
+                    <a href="#further-thoughts" aria-label="Further thoughts">Further thoughts</a><ul>
+                        
+                <li>
+                    <a href="#panic-or-not-panic" aria-label="Panic or not panic?">Panic or not panic?</a></li>
+                <li>
+                    <a href="#wrapping-or-not-wrapping" aria-label="Wrapping or not wrapping?">Wrapping or not wrapping?</a></li>
+                <li>
+                    <a href="#never-inline-errors" aria-label="Never inline errors?">Never inline errors?</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p>Since go 1.13, go has gone one step further in terms of error handling. Errors can be wrapped, bubbled up and act upon.</p>
 <p>We will here take a step back on error handling in go, from the perspective of a library.</p>
-<h3 id="what-data-_could_-we-have-in-the-error">What data <em>could</em> we have in the error?</h3>
+<h3 id="what-data-_could_-we-have-in-the-error">What data <em>could</em> we have in the error?<a hidden class="anchor" aria-hidden="true" href="#what-data-_could_-we-have-in-the-error">#</a></h3>
 <p>Inspired by a <a href="https://www.youtube.com/watch?v=rAF8mLI0naQ">rust talk</a> from <a href="https://github.com/yaahc">Jan Lusby</a> about errors, here are a few things that error could contain:</p>
 <ul>
 <li>The reason of the error</li>
@@ -61,15 +274,15 @@
 <li>Stack trace: which part of the code triggered this error</li>
 <li>How to fix the error: suggest a way to fix it</li>
 </ul>
-<h3 id="where-are-errors-displayed">Where are errors displayed?</h3>
+<h3 id="where-are-errors-displayed">Where are errors displayed?<a hidden class="anchor" aria-hidden="true" href="#where-are-errors-displayed">#</a></h3>
 <ul>
 <li>In the logs of an application</li>
 <li>In front of the end user</li>
 </ul>
-<h3 id="ways-to-define-errors-after-golang-113">Ways to define errors after golang 1.13</h3>
-<h4 id="a-inline-with-no-type-definition">a) inline, with no type definition</h4>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"> <span style="color:#008000;font-weight:bold">return</span> fmt.<span style="color:#00f">Errorf</span>(<span style="color:#ba2121">&#34;bad int %d&#34;</span>, i)
-</code></pre></div><p>(+)</p>
+<h3 id="ways-to-define-errors-after-golang-113">Ways to define errors after golang 1.13<a hidden class="anchor" aria-hidden="true" href="#ways-to-define-errors-after-golang-113">#</a></h3>
+<h4 id="a-inline-with-no-type-definition">a) inline, with no type definition<a hidden class="anchor" aria-hidden="true" href="#a-inline-with-no-type-definition">#</a></h4>
+<div class="highlight"><pre tabindex="0" style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span> <span style="color:#008000;font-weight:bold">return</span> fmt.<span style="color:#00f">Errorf</span>(<span style="color:#ba2121">&#34;bad int %d&#34;</span>, i)
+</span></span></code></pre></div><p>(+)</p>
 <ul>
 <li>simple to write</li>
 <li>no runtime penalty</li>
@@ -78,10 +291,10 @@
 <ul>
 <li>impossible to handle properly as you can&rsquo;t match and react accordingly</li>
 </ul>
-<h4 id="b-sentinel-errors">b) sentinel errors</h4>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#008000;font-weight:bold">var</span> errBadInt = errors.<span style="color:#00f">New</span>(<span style="color:#ba2121">&#34;bad int&#34;</span>)
-<span style="color:#008000;font-weight:bold">return</span> fmt.<span style="color:#00f">Errorf</span>(<span style="color:#ba2121">&#34;%w %d&#34;</span>, i)
-</code></pre></div><p>(+)</p>
+<h4 id="b-sentinel-errors">b) sentinel errors<a hidden class="anchor" aria-hidden="true" href="#b-sentinel-errors">#</a></h4>
+<div class="highlight"><pre tabindex="0" style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">var</span> errBadInt = errors.<span style="color:#00f">New</span>(<span style="color:#ba2121">&#34;bad int&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">return</span> fmt.<span style="color:#00f">Errorf</span>(<span style="color:#ba2121">&#34;%w %d&#34;</span>, i)
+</span></span></code></pre></div><p>(+)</p>
 <ul>
 <li>match on error possible</li>
 </ul>
@@ -91,222 +304,238 @@
 <li>binary size penalty</li>
 <li>global vars (fragile)</li>
 </ul>
-<h4 id="c-structs-with-defined-context-and-string-formatting">c) structs, with defined context and string formatting</h4>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang">
-<span style="color:#008000;font-weight:bold">type</span> errBadInt <span style="color:#008000;font-weight:bold">struct</span> {
-   i <span style="color:#b00040">int</span>
-}
-
-<span style="color:#008000;font-weight:bold">func</span> (e errBadInt) <span style="color:#00f">Error</span>() <span style="color:#b00040">string</span> {
-  <span style="color:#008000;font-weight:bold">return</span> fmt.<span style="color:#00f">Errorf</span>(<span style="color:#ba2121">&#34;bad int: %d&#34;</span>, i)
-}
-
-<span style="color:#008000;font-weight:bold">func</span> <span style="color:#00f">newErrBadInt</span>(i <span style="color:#b00040">int</span>) errBadInt {
-    <span style="color:#008000;font-weight:bold">return</span> errBadInt{i}
-}
-</code></pre></div><h3 id="more-tricks-used-by-libs-out-there">More tricks used by libs out there</h3>
-<h4 id="upspinhttpsgithubcomupspinupspinblobmastererrorserrorsgo-by-rob-pike-himself"><a href="https://github.com/upspin/upspin/blob/master/errors/errors.go">upspin</a> by Rob Pike himself</h4>
+<h4 id="c-structs-with-defined-context-and-string-formatting">c) structs, with defined context and string formatting<a hidden class="anchor" aria-hidden="true" href="#c-structs-with-defined-context-and-string-formatting">#</a></h4>
+<div class="highlight"><pre tabindex="0" style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">type</span> errBadInt <span style="color:#008000;font-weight:bold">struct</span> {
+</span></span><span style="display:flex;"><span>   i <span style="color:#b00040">int</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">func</span> (e errBadInt) <span style="color:#00f">Error</span>() <span style="color:#b00040">string</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">return</span> fmt.<span style="color:#00f">Errorf</span>(<span style="color:#ba2121">&#34;bad int: %d&#34;</span>, i)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">func</span> <span style="color:#00f">newErrBadInt</span>(i <span style="color:#b00040">int</span>) errBadInt {
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">return</span> errBadInt{i}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="more-tricks-used-by-libs-out-there">More tricks used by libs out there<a hidden class="anchor" aria-hidden="true" href="#more-tricks-used-by-libs-out-there">#</a></h3>
+<h4 id="upspinhttpsgithubcomupspinupspinblobmastererrorserrorsgo-by-rob-pike-himself"><a href="https://github.com/upspin/upspin/blob/master/errors/errors.go">upspin</a> by Rob Pike himself<a hidden class="anchor" aria-hidden="true" href="#upspinhttpsgithubcomupspinupspinblobmastererrorserrorsgo-by-rob-pike-himself">#</a></h4>
 <ul>
 <li>smart use of const and redefine the Error struct with context</li>
 <li>return stack in debug mode</li>
 </ul>
-<h4 id="big-cachehttpsgithubcomallegrobigcacheblob16762172f2ee433caf5bae1904cdbc11dcebffebiteratorgo"><a href="https://github.com/allegro/bigcache/blob/16762172f2ee433caf5bae1904cdbc11dcebffeb/iterator.go">big cache</a></h4>
+<h4 id="big-cachehttpsgithubcomallegrobigcacheblob16762172f2ee433caf5bae1904cdbc11dcebffebiteratorgo"><a href="https://github.com/allegro/bigcache/blob/16762172f2ee433caf5bae1904cdbc11dcebffeb/iterator.go">big cache</a><a hidden class="anchor" aria-hidden="true" href="#big-cachehttpsgithubcomallegrobigcacheblob16762172f2ee433caf5bae1904cdbc11dcebffebiteratorgo">#</a></h4>
 <ul>
 <li>interesting usage of const + error interface to avoid global vars</li>
 </ul>
-<h3 id="so-what-should-we-do">So what should we do?</h3>
-<h4 id="for-simple-errors">For simple errors</h4>
+<h3 id="so-what-should-we-do">So what should we do?<a hidden class="anchor" aria-hidden="true" href="#so-what-should-we-do">#</a></h3>
+<h4 id="for-simple-errors">For simple errors<a hidden class="anchor" aria-hidden="true" href="#for-simple-errors">#</a></h4>
 <p>Keep the errors as they are, but turn them into const thanks to the bigcache trick.
 It keeps the nice opportunity to use errors.Is and removes the initialization cost.
 No wrapping when there is no additional context.
 Context is not stack trace.
 Externally available errors should be handling all errors, unwrap them and repackage them again.</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#008000;font-weight:bold">type</span> marshalError <span style="color:#b00040">string</span>
-
-<span style="color:#008000;font-weight:bold">func</span> (me marshalError) <span style="color:#00f">Error</span>() <span style="color:#b00040">string</span> {
-	<span style="color:#008000;font-weight:bold">return</span> <span style="color:#008000">string</span>(me)
-}
-
-<span style="color:#008000;font-weight:bold">const</span> ErrBadInt = <span style="color:#00f">marshalError</span>(<span style="color:#ba2121">&#34;bad int&#34;</span>)
-
-<span style="color:#008000;font-weight:bold">func</span> <span style="color:#00f">testErr</span>() <span style="color:#b00040">error</span> {
-	<span style="color:#008000;font-weight:bold">return</span> fmt.<span style="color:#00f">Errorf</span>(<span style="color:#ba2121">&#34;%w&#34;</span>, ErrBadInt)
-}
-</code></pre></div><h4 id="for-more-complex-errors">For more complex errors</h4>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#008000;font-weight:bold">type</span> badValueError <span style="color:#008000;font-weight:bold">struct</span> {
-	key   <span style="color:#b00040">string</span>
-	value <span style="color:#008000;font-weight:bold">interface</span>{}
-}
-
-<span style="color:#008000;font-weight:bold">func</span> (bv badValueError) <span style="color:#00f">Error</span>() <span style="color:#b00040">string</span> {
-	<span style="color:#008000;font-weight:bold">return</span> fmt.<span style="color:#00f">Sprintf</span>(<span style="color:#ba2121">&#34;bad value %v for key %s&#34;</span>, bv.value, bv.key)
-}
-
-<span style="color:#008000;font-weight:bold">func</span> <span style="color:#00f">testErr</span>() <span style="color:#b00040">error</span> {
-	v <span style="color:#666">:=</span> <span style="color:#666">3</span>
-	k <span style="color:#666">:=</span> <span style="color:#ba2121">&#34;test&#34;</span>
-	<span style="color:#008000;font-weight:bold">return</span> badValueError{key: k, value: v}
-}
-</code></pre></div><h3 id="handling-errors">Handling errors</h3>
-<h4 id="error-as-values">Error as values</h4>
+<div class="highlight"><pre tabindex="0" style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">type</span> marshalError <span style="color:#b00040">string</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">func</span> (me marshalError) <span style="color:#00f">Error</span>() <span style="color:#b00040">string</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#008000;font-weight:bold">return</span> <span style="color:#008000">string</span>(me)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">const</span> ErrBadInt = <span style="color:#00f">marshalError</span>(<span style="color:#ba2121">&#34;bad int&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">func</span> <span style="color:#00f">testErr</span>() <span style="color:#b00040">error</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#008000;font-weight:bold">return</span> fmt.<span style="color:#00f">Errorf</span>(<span style="color:#ba2121">&#34;%w&#34;</span>, ErrBadInt)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="for-more-complex-errors">For more complex errors<a hidden class="anchor" aria-hidden="true" href="#for-more-complex-errors">#</a></h4>
+<div class="highlight"><pre tabindex="0" style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">type</span> badValueError <span style="color:#008000;font-weight:bold">struct</span> {
+</span></span><span style="display:flex;"><span>	key   <span style="color:#b00040">string</span>
+</span></span><span style="display:flex;"><span>	value <span style="color:#008000;font-weight:bold">interface</span>{}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">func</span> (bv badValueError) <span style="color:#00f">Error</span>() <span style="color:#b00040">string</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#008000;font-weight:bold">return</span> fmt.<span style="color:#00f">Sprintf</span>(<span style="color:#ba2121">&#34;bad value %v for key %s&#34;</span>, bv.value, bv.key)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">func</span> <span style="color:#00f">testErr</span>() <span style="color:#b00040">error</span> {
+</span></span><span style="display:flex;"><span>	v <span style="color:#666">:=</span> <span style="color:#666">3</span>
+</span></span><span style="display:flex;"><span>	k <span style="color:#666">:=</span> <span style="color:#ba2121">&#34;test&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#008000;font-weight:bold">return</span> badValueError{key: k, value: v}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="handling-errors">Handling errors<a hidden class="anchor" aria-hidden="true" href="#handling-errors">#</a></h3>
+<h4 id="error-as-values">Error as values<a hidden class="anchor" aria-hidden="true" href="#error-as-values">#</a></h4>
 <p><a href="https://play.golang.org/p/gzCFQLfaGdL">testable in the playground</a></p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#008000;font-weight:bold">package</span> main
-
-<span style="color:#008000;font-weight:bold">import</span> (
-	<span style="color:#ba2121">&#34;errors&#34;</span>
-	<span style="color:#ba2121">&#34;fmt&#34;</span>
-	<span style="color:#ba2121">&#34;log&#34;</span>
-)
-
-<span style="color:#008000;font-weight:bold">type</span> marshalError <span style="color:#b00040">string</span>
-
-<span style="color:#008000;font-weight:bold">func</span> (me marshalError) <span style="color:#00f">Error</span>() <span style="color:#b00040">string</span> {
-	<span style="color:#008000;font-weight:bold">return</span> <span style="color:#008000">string</span>(me)
-}
-
-<span style="color:#008000;font-weight:bold">const</span> ErrBadInt = <span style="color:#00f">marshalError</span>(<span style="color:#ba2121">&#34;bad int&#34;</span>)
-
-<span style="color:#008000;font-weight:bold">func</span> <span style="color:#00f">testErr</span>() <span style="color:#b00040">error</span> {
-	<span style="color:#008000;font-weight:bold">return</span> fmt.<span style="color:#00f">Errorf</span>(<span style="color:#ba2121">&#34;%w&#34;</span>, ErrBadInt)
-}
-
-<span style="color:#008000;font-weight:bold">func</span> <span style="color:#00f">main</span>() {
-	err <span style="color:#666">:=</span> <span style="color:#00f">testErr</span>()
-
-	<span style="color:#008000;font-weight:bold">if</span> errors.<span style="color:#00f">Is</span>(err, ErrBadInt) {
-		log.<span style="color:#00f">Printf</span>(<span style="color:#ba2121">&#34;%v&#34;</span>, err)
-	} <span style="color:#008000;font-weight:bold">else</span> {
-		log.<span style="color:#00f">Println</span>(<span style="color:#ba2121">&#34;wrong&#34;</span>)
-	}
-}
-</code></pre></div><h4 id="error-as-struct">Error as struct</h4>
+<div class="highlight"><pre tabindex="0" style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">package</span> main
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">import</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#ba2121">&#34;errors&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ba2121">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ba2121">&#34;log&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">type</span> marshalError <span style="color:#b00040">string</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">func</span> (me marshalError) <span style="color:#00f">Error</span>() <span style="color:#b00040">string</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#008000;font-weight:bold">return</span> <span style="color:#008000">string</span>(me)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">const</span> ErrBadInt = <span style="color:#00f">marshalError</span>(<span style="color:#ba2121">&#34;bad int&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">func</span> <span style="color:#00f">testErr</span>() <span style="color:#b00040">error</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#008000;font-weight:bold">return</span> fmt.<span style="color:#00f">Errorf</span>(<span style="color:#ba2121">&#34;%w&#34;</span>, ErrBadInt)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">func</span> <span style="color:#00f">main</span>() {
+</span></span><span style="display:flex;"><span>	err <span style="color:#666">:=</span> <span style="color:#00f">testErr</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#008000;font-weight:bold">if</span> errors.<span style="color:#00f">Is</span>(err, ErrBadInt) {
+</span></span><span style="display:flex;"><span>		log.<span style="color:#00f">Printf</span>(<span style="color:#ba2121">&#34;%v&#34;</span>, err)
+</span></span><span style="display:flex;"><span>	} <span style="color:#008000;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>		log.<span style="color:#00f">Println</span>(<span style="color:#ba2121">&#34;wrong&#34;</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="error-as-struct">Error as struct<a hidden class="anchor" aria-hidden="true" href="#error-as-struct">#</a></h4>
 <p><a href="https://play.golang.org/p/XE7L2KWf3Au">on the playground</a></p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#008000;font-weight:bold">package</span> main
-
-<span style="color:#008000;font-weight:bold">import</span> (
-	<span style="color:#ba2121">&#34;errors&#34;</span>
-	<span style="color:#ba2121">&#34;fmt&#34;</span>
-	<span style="color:#ba2121">&#34;log&#34;</span>
-)
-
-<span style="color:#008000;font-weight:bold">type</span> badValueError <span style="color:#008000;font-weight:bold">struct</span> {
-	key   <span style="color:#b00040">string</span>
-	value <span style="color:#008000;font-weight:bold">interface</span>{}
-}
-
-<span style="color:#008000;font-weight:bold">func</span> (bv badValueError) <span style="color:#00f">Error</span>() <span style="color:#b00040">string</span> {
-	<span style="color:#008000;font-weight:bold">return</span> fmt.<span style="color:#00f">Sprintf</span>(<span style="color:#ba2121">&#34;bad value %v for key %s&#34;</span>, bv.value, bv.key)
-}
-
-<span style="color:#008000;font-weight:bold">func</span> <span style="color:#00f">testErr</span>() <span style="color:#b00040">error</span> {
-	v <span style="color:#666">:=</span> <span style="color:#666">3</span>
-	k <span style="color:#666">:=</span> <span style="color:#ba2121">&#34;test&#34;</span>
-	<span style="color:#008000;font-weight:bold">return</span> badValueError{key: k, value: v}
-}
-
-<span style="color:#008000;font-weight:bold">func</span> <span style="color:#00f">main</span>() {
-	err <span style="color:#666">:=</span> <span style="color:#00f">testErr</span>()
-
-	<span style="color:#008000;font-weight:bold">var</span> e badValueError
-	<span style="color:#008000;font-weight:bold">if</span> errors.<span style="color:#00f">As</span>(err, <span style="color:#666">&amp;</span>e) {
-		log.<span style="color:#00f">Printf</span>(<span style="color:#ba2121">&#34;%v&#34;</span>, err)
-	} <span style="color:#008000;font-weight:bold">else</span> {
-		log.<span style="color:#00f">Println</span>(<span style="color:#ba2121">&#34;wrong&#34;</span>)
-	}
-}
-</code></pre></div><h3 id="further-thoughts">Further thoughts</h3>
-<h4 id="panic-or-not-panic">Panic or not panic?</h4>
+<div class="highlight"><pre tabindex="0" style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">package</span> main
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">import</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#ba2121">&#34;errors&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ba2121">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ba2121">&#34;log&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">type</span> badValueError <span style="color:#008000;font-weight:bold">struct</span> {
+</span></span><span style="display:flex;"><span>	key   <span style="color:#b00040">string</span>
+</span></span><span style="display:flex;"><span>	value <span style="color:#008000;font-weight:bold">interface</span>{}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">func</span> (bv badValueError) <span style="color:#00f">Error</span>() <span style="color:#b00040">string</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#008000;font-weight:bold">return</span> fmt.<span style="color:#00f">Sprintf</span>(<span style="color:#ba2121">&#34;bad value %v for key %s&#34;</span>, bv.value, bv.key)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">func</span> <span style="color:#00f">testErr</span>() <span style="color:#b00040">error</span> {
+</span></span><span style="display:flex;"><span>	v <span style="color:#666">:=</span> <span style="color:#666">3</span>
+</span></span><span style="display:flex;"><span>	k <span style="color:#666">:=</span> <span style="color:#ba2121">&#34;test&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#008000;font-weight:bold">return</span> badValueError{key: k, value: v}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">func</span> <span style="color:#00f">main</span>() {
+</span></span><span style="display:flex;"><span>	err <span style="color:#666">:=</span> <span style="color:#00f">testErr</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#008000;font-weight:bold">var</span> e badValueError
+</span></span><span style="display:flex;"><span>	<span style="color:#008000;font-weight:bold">if</span> errors.<span style="color:#00f">As</span>(err, <span style="color:#666">&amp;</span>e) {
+</span></span><span style="display:flex;"><span>		log.<span style="color:#00f">Printf</span>(<span style="color:#ba2121">&#34;%v&#34;</span>, err)
+</span></span><span style="display:flex;"><span>	} <span style="color:#008000;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>		log.<span style="color:#00f">Println</span>(<span style="color:#ba2121">&#34;wrong&#34;</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="further-thoughts">Further thoughts<a hidden class="anchor" aria-hidden="true" href="#further-thoughts">#</a></h3>
+<h4 id="panic-or-not-panic">Panic or not panic?<a hidden class="anchor" aria-hidden="true" href="#panic-or-not-panic">#</a></h4>
 <p>I tend to agree with <a href="https://github.com/uber-go/guide/blob/master/style.md">uber recommendation</a> to not panic in a library, especially when you&rsquo;re expected to most likely handle user data. It allows the user of the lib to do whatever they want with the returned error.</p>
 <p>That said, it&rsquo;s important to actually notify the library user if the library is used improperly in cases that are supposedly &ldquo;not possible&rdquo; by panicking.
 The lib user is always able to handle these panics through a recover.</p>
-<h4 id="wrapping-or-not-wrapping">Wrapping or not wrapping?</h4>
+<h4 id="wrapping-or-not-wrapping">Wrapping or not wrapping?<a hidden class="anchor" aria-hidden="true" href="#wrapping-or-not-wrapping">#</a></h4>
 <p>from <a href="https://blog.golang.org/go1.13-errors#TOC_3.4.">go1.13 post on errors</a>:</p>
 <pre><code>&quot;wrapping an error makes that error part of your API. If you don't want to commit to supporting that error as part of your API in the future, you shouldn't wrap the error.&quot;
 </code></pre>
 <p>It also makes no sense to wrap unexported errors to the external user of the API, as the user has no way of testing/matching the error.
 External methods hence should not return internal errors and return their own exported type, catered at the lib user.</p>
-<h4 id="never-inline-errors">Never inline errors?</h4>
+<h4 id="never-inline-errors">Never inline errors?<a hidden class="anchor" aria-hidden="true" href="#never-inline-errors">#</a></h4>
 <p>Simple cases don&rsquo;t require to define sentinel values and a simple string is often enough to start with.
 If later on, you need to match on the error value or type, you can change this to an actual sentinel value.</p>
 <p>That said, I think any error part of your API should be typed, as you want the lib user to be able to handle it according to its need.</p>
 
-    </section>
 
-    <hr>
+  </div>
 
-    <footer class="post-footer">
-        <section class="f-1">
-            
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://vincentserpoul.github.io/tags/golang/">golang</a></li>
+      <li><a href="https://vincentserpoul.github.io/tags/errors/">errors</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://vincentserpoul.github.io/post/rust-optimized-container/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>deploying rust in containers</span>
+  </a>
+  <a class="next" href="https://vincentserpoul.github.io/post/stable-coins/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>The stable coins</span>
+  </a>
+</nav>
 
-            <p class="f-post-time"><time datetime="2021-05-17T12:30:48&#43;08:00">May 17, 2021</time></p>
-        </section>
-
-        <section class="f-2">
-            <section class="share">
-                <span>Share:
-                <a class="icon-twitter" href="http://twitter.com/share?text=golang%20errors%20%28after%201.13%29&url=https%3a%2f%2fvincentserpoul.github.io%2fpost%2fgo-errors%2f"
-                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
-                    <i class="fa fa-twitter"></i>
-                </a>
-                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fvincentserpoul.github.io%2fpost%2fgo-errors%2f"
-                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
-                    <i class="fa fa-facebook"></i>
-                </a>
-                <a class="icon-google-plus" href="https://plus.google.com/share?url=https%3a%2f%2fvincentserpoul.github.io%2fpost%2fgo-errors%2f"
-                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
-                    <i class="fa fa-google-plus"></i>
-                </a>
-                </span>
-            </section>
-
-            
-            	<span class="f-post-tags"><i class="fa fa-tag"></i>
-            	golang, errors
-            	</span>
-            
-        </section>
-    </footer>
-
-    <div id="disqus_thread"></div>
-<script>
-var disqus_config = function () {
-    this.page.url = "https://vincentserpoul.github.io/post/go-errors/";  
-    this.page.identifier = "https://vincentserpoul.github.io/post/go-errors/"; 
-};
-
-(function() { 
-    var d = document, s = d.createElement('script');
-    s.src = '//vincentserpoul-tech-corner.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </footer>
 </article>
-	</div>
-</main>
-    <footer id="site-footer">
-        <div class="container">
-            <a href="https://vincentserpoul.github.io/index.xml" title="Get the RSS feed"><span class="tooltip"><i class="fa fa-rss"></i></span></a>
-        </div>
-    </footer>
-
-    <script type="text/javascript" src="https://vincentserpoul.github.io/js/fittext.js"></script>
-    <script type="text/javascript">
-      $(".heading").fitText();
-    </script>
-
+    </main>
     
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-81802018-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://vincentserpoul.github.io/">VS tech corner</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
 
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
 </body>
+
 </html>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>microservices on VS tech corner</title>
     <link>https://vincentserpoul.github.io/tags/microservices/</link>
@@ -13,9 +13,7 @@
       <pubDate>Fri, 30 Sep 2016 12:06:01 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/on-microservices-and-scaling/</guid>
-      <description>I just watched that amazing videos from Matt Ranney
-Here are my takeaways and opinionated summary:
- Use RPC for service to service communications: gRPC seems to be a good way of tackling it Use many repositories Profiling should be unified: flamegraphs seem to be a good solution (Go profiling is great too) Premature optimization is bad but performance monitoring is crucial! Trace requests, keep context within all logs Log a lot, but only on a portion of your production architecture as logging can have a big cost.</description>
+      <description>TL;DW of great UBER talk on scaling microservices</description>
     </item>
     
   </channel>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>container on VS tech corner</title>
     <link>https://vincentserpoul.github.io/tags/container/</link>
@@ -13,10 +13,7 @@
       <pubDate>Wed, 02 Jun 2021 18:12:40 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/rust-optimized-container/</guid>
-      <description>The goal I am pretty familiar with containers and multi stage deployment have been my go to since quite a while now, for my golang codebases.
-Now that I have been picking up rust, deploying my first rust service in production did bring me back to my usual habits of containerization.
-We&amp;rsquo;ll be trying to optimize for speed of build and container size.
-The cargo.toml [...][lib]name = &amp;#34;vs&amp;#34;path = &amp;#34;src/lib.rs&amp;#34;[[bin]]name = &amp;#34;vs&amp;#34;path = &amp;#34;src/bin/vs.</description>
+      <description>leveraging multistage docker build to deploy rust</description>
     </item>
     
   </channel>

@@ -1,180 +1,385 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]><html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--><html class="no-js" prefix="og: http://ogp.me/ns#" xmlns:og="http://ogp.me/ns#"><!--<![endif]-->
+<html lang="en" dir="auto">
 
-    <head>
-                <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="description" content="alpine, docker, iot, zwave and zigbee">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
-        <meta name="mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <meta name="author" content="">
-        <meta name="keywords" content="awesome, definitely">
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>testing mozilla iot gateway | VS tech corner</title>
+<meta name="keywords" content="alpine, docker, iot, zwave, zigbee, mozilla-iot-gateway">
+<meta name="description" content="alpine, docker, iot, zwave and zigbee">
+<meta name="author" content="Me">
+<link rel="canonical" href="https://vincentserpoul.github.io/post/mozilla-iot-gateway/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.ec8da366ca2fb647537ccb7a8f6fa5b4e9cd3c7a0d3171dd2d3baad1e49c8bfc.css" integrity="sha256-7I2jZsovtkdTfMt6j2&#43;ltOnNPHoNMXHdLTuq0eSci/w=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.2840b7fccd34145847db71a290569594bdbdb00047097f75d6495d162f5d7dff.js" integrity="sha256-KEC3/M00FFhH23GikFaVlL29sABHCX911kldFi9dff8="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://vincentserpoul.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://vincentserpoul.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://vincentserpoul.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://vincentserpoul.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://vincentserpoul.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-81802018-1', 'auto');
 	
-        <meta property="og:site_name" content="VS tech corner">
-        <meta property="og:title" content="VS tech corner">
-        <meta property="og:url" content="https://vincentserpoul.github.io/post/mozilla-iot-gateway/">
-        <meta property="og:description" content="">
-    
-        <meta property="og:type" content="article" />
-        <meta property="og:article:author" content="" />
-        <meta property="og:article:published_time" content="2019-04-29T00:23:23&#43;08:00" />
-    
-        <meta name="generator" content="Hugo 0.83.1" />
-        <title>testing mozilla iot gateway &middot; VS tech corner </title>
-        <link rel="canonical" href="https://vincentserpoul.github.io/" />
-        <link rel="alternate" type="application/rss+xml" title="RSS" href="">
-        <link rel="stylesheet" type='text/css' href="https://vincentserpoul.github.io/css/main.css"/>
-        <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300|Montserrat:700' rel='stylesheet' type='text/css'>
-        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-        <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-    </head>
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="testing mozilla iot gateway" />
+<meta property="og:description" content="alpine, docker, iot, zwave and zigbee" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://vincentserpoul.github.io/post/mozilla-iot-gateway/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2019-04-29T00:23:23&#43;08:00" />
+<meta property="article:modified_time" content="2019-04-29T00:23:23&#43;08:00" /><meta property="og:site_name" content="Vincent Serpoul" />
 
-<body>
-<!--[if lt IE 7]><p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chrome/‎">install Google Chrome</a> to experience this site.</p><![endif]-->
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="testing mozilla iot gateway"/>
+<meta name="twitter:description" content="alpine, docker, iot, zwave and zigbee"/>
 
-    <header id="site-header">
-        <div class="container">
-            <a href="https://vincentserpoul.github.io/" alt="VS tech corner"><h1 class="blog-title heading">VS tech corner</h1></a>
-            <p class="blog-description"></p>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://vincentserpoul.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "testing mozilla iot gateway",
+      "item": "https://vincentserpoul.github.io/post/mozilla-iot-gateway/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "testing mozilla iot gateway",
+  "name": "testing mozilla iot gateway",
+  "description": "alpine, docker, iot, zwave and zigbee",
+  "keywords": [
+    "alpine", "docker", "iot", "zwave", "zigbee", "mozilla-iot-gateway"
+  ],
+  "articleBody": "Mozilla iot gateway Here is what I am going to setup. I am obviously not going to rewrite one more time the tutorial and docs from mozilla. I will simply describe the specific setup I used, and the little things I setup to make it work.\nPrerequisites  Raspberry pi 3b Zigbee dongle, zwave dongle list of compatible hardware - I used Digi XStick (ZB mesh version) and Aeotec Z-Stick (Gen5) Zigbee Smart bulb (i used a philips hue), zigbee motion detector (I used philips motion sensor)  Linux I used my favorite lean alpine linux, with the setup as I explained in this post minus the complexity brought up by the rpi0.\nDocker Again, following my previous post, minus the rpi0 complexity.\nLaunching the iot gateway with docker First thing first, if you are using a zwave dongle, you need to make sure /dev/ttyACM0 is owned by the dialout group, otherwise, it won’t be available. Assuming your alpine hostname is “home-gateway”:\nssh -i ~/.ssh/YOURPUBKEY maintenance@home-gateway sudo chown root:dialout /dev/ttyACM0 If you want this change to be permanent, you will need to use the eudev package:\nsudo apk add eudev printf 'SUBSYSTEM==\"tty\", KERNEL==\"ttyUSB0\", ATTRS{product}==\"XStick\", GROUP=\"dialout\"\\n\\nSUBSYSTEM==\"tty\", KERNEL==\"ttyACM0\", ATTRS{product}==\"DWC OTG Controller\", GROUP=\"dialout\"\\n' | sudo tee -a /etc/udev/rules.d/90-tty.rules  /dev/null sudo rc-update add udev sysinit sudo lbu ci Launching the container with the needed devices:\nsudo docker run -d --restart always --name mozilla-iot-gateway --net host -v /media/mmcblk0p3/mozilla-iot-gateway:/home/node/.mozilla-iot mozillaiot/gateway:arm A little explanation:\n restart always will simply restart if the container crashes, but also on startup –net host is unfortunately compulsory for some addons of the gateway mounting a volume saved on mmcblk0p3 allows to have persistent storage (remember alpine otherwise runs in ram)  The booting time is very long, so be patient.\nWithout the udev rule docker run -d --restart always --name mozilla-iot-gateway --net host -v /media/mmcblk0p3/mozilla-iot-gateway:/home/node/.mozilla-iot --device=/dev/ttyUSB0 --device=/dev/ttyACM0 moz illaiot/gateway:arm You have to add the device to docker run.\nReaching you gateway You should be able to use an external URL to reach your RPi, XXX.mozilla-iot.org. It is not a simple website, it’s also a PWA, allowing you to set it up as an app on your mobile phone! You can also reach it from within your network with https://home-gateway:4443/things\nConfiguration From there on, I had no issues, you an simply follow the mozilla tutorial\nConclusion Here I am: docker, minimal host alpine linux and iot devices. Next step: k3s!\n",
+  "wordCount" : "395",
+  "inLanguage": "en",
+  "datePublished": "2019-04-29T00:23:23+08:00",
+  "dateModified": "2019-04-29T00:23:23+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Me"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://vincentserpoul.github.io/post/mozilla-iot-gateway/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "VS tech corner",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://vincentserpoul.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://vincentserpoul.github.io/" accesskey="h" title="Home (Alt + H)">Home</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
         </div>
-    </header>
-<main class="content" role="main">
-	<div class="container">
-		<article class="post">
-	<header class="post-header">
-        <h3 class="p-post-title">testing mozilla iot gateway</h3>
-    </header>
+        <ul id="menu">
+            <li>
+                <a href="https://vincentserpoul.github.io/tags/" title="tags">
+                    <span>tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://vincentserpoul.github.io/" title="vincentserpoul.github.io">
+                    <span>vincentserpoul.github.io</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
 
-    <section class="post-content">
-        <h1 id="mozilla-iot-gateway">Mozilla iot gateway</h1>
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://vincentserpoul.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://vincentserpoul.github.io/post/">Posts</a></div>
+    <h1 class="post-title">
+      testing mozilla iot gateway
+    </h1>
+    <div class="post-description">
+      alpine, docker, iot, zwave and zigbee
+    </div>
+    <div class="post-meta"><span title='2019-04-29 00:23:23 +0800 +08'>April 29, 2019</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Me
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#mozilla-iot-gateway" aria-label="Mozilla iot gateway">Mozilla iot gateway</a><ul>
+                        
+                <li>
+                    <a href="#prerequisites" aria-label="Prerequisites">Prerequisites</a></li>
+                <li>
+                    <a href="#linux" aria-label="Linux">Linux</a></li>
+                <li>
+                    <a href="#docker" aria-label="Docker">Docker</a></li>
+                <li>
+                    <a href="#launching-the-iot-gateway-with-docker" aria-label="Launching the iot gateway with docker">Launching the iot gateway with docker</a></li>
+                <li>
+                    <a href="#without-the-udev-rule" aria-label="Without the udev rule">Without the udev rule</a></li>
+                <li>
+                    <a href="#reaching-you-gateway" aria-label="Reaching you gateway">Reaching you gateway</a></li>
+                <li>
+                    <a href="#configuration" aria-label="Configuration">Configuration</a></li>
+                <li>
+                    <a href="#conclusion" aria-label="Conclusion">Conclusion</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h1 id="mozilla-iot-gateway">Mozilla iot gateway<a hidden class="anchor" aria-hidden="true" href="#mozilla-iot-gateway">#</a></h1>
 <p><a href="https://iot.mozilla.org/gateway/">Here</a> is what I am going to setup.
 I am obviously not going to rewrite one more time the tutorial and docs from mozilla.
 I will simply describe the specific setup I used, and the little things I setup to make it work.</p>
-<h2 id="prerequisites">Prerequisites</h2>
+<h2 id="prerequisites">Prerequisites<a hidden class="anchor" aria-hidden="true" href="#prerequisites">#</a></h2>
 <ul>
 <li>Raspberry pi 3b</li>
 <li>Zigbee dongle, zwave dongle <a href="https://github.com/mozilla-iot/wiki/wiki/Supported-Hardware">list of compatible hardware</a> - I used Digi XStick (ZB mesh version) and Aeotec Z-Stick (Gen5)</li>
 <li>Zigbee Smart bulb (i used a philips hue), zigbee motion detector (I used philips motion sensor)</li>
 </ul>
-<h2 id="linux">Linux</h2>
+<h2 id="linux">Linux<a hidden class="anchor" aria-hidden="true" href="#linux">#</a></h2>
 <p>I used my favorite lean alpine linux, with the setup as I explained in <a href="https://vincentserpoul.github.io/post/alpine-linux-rpi0/">this post</a> minus the complexity brought up by the rpi0.</p>
-<h2 id="docker">Docker</h2>
+<h2 id="docker">Docker<a hidden class="anchor" aria-hidden="true" href="#docker">#</a></h2>
 <p>Again, following my <a href="https://vincentserpoul.github.io/post/alpine-linux-rpi0-docker/">previous post</a>, minus the rpi0 complexity.</p>
-<h2 id="launching-the-iot-gateway-with-docker">Launching the iot gateway with docker</h2>
+<h2 id="launching-the-iot-gateway-with-docker">Launching the iot gateway with docker<a hidden class="anchor" aria-hidden="true" href="#launching-the-iot-gateway-with-docker">#</a></h2>
 <p>First thing first, if you are using a zwave dongle, you need to make sure /dev/ttyACM0 is owned by the dialout group, otherwise, it won&rsquo;t be available.
 Assuming your alpine hostname is &ldquo;home-gateway&rdquo;:</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh -i ~/.ssh/YOURPUBKEY maintenance@home-gateway
-sudo chown root:dialout /dev/ttyACM0
-</code></pre></div><p>If you want this change to be permanent, you will need to use the eudev package:</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apk add eudev
-<span style="color:#008000">printf</span> <span style="color:#ba2121">&#39;SUBSYSTEM==&#34;tty&#34;, KERNEL==&#34;ttyUSB0&#34;, ATTRS{product}==&#34;XStick&#34;, GROUP=&#34;dialout&#34;\n\nSUBSYSTEM==&#34;tty&#34;, KERNEL==&#34;ttyACM0&#34;, ATTRS{product}==&#34;DWC OTG Controller&#34;, GROUP=&#34;dialout&#34;\n&#39;</span> | sudo tee -a /etc/udev/rules.d/90-tty.rules &gt; /dev/null
-sudo rc-update add udev sysinit
-sudo lbu ci
-</code></pre></div><p>Launching the container with the needed devices:</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo docker run -d --restart always --name mozilla-iot-gateway --net host -v /media/mmcblk0p3/mozilla-iot-gateway:/home/node/.mozilla-iot mozillaiot/gateway:arm
-</code></pre></div><p>A little explanation:</p>
+<div class="highlight"><pre tabindex="0" style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ssh -i ~/.ssh/YOURPUBKEY maintenance@home-gateway
+</span></span><span style="display:flex;"><span>sudo chown root:dialout /dev/ttyACM0
+</span></span></code></pre></div><p>If you want this change to be permanent, you will need to use the eudev package:</p>
+<div class="highlight"><pre tabindex="0" style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apk add eudev
+</span></span><span style="display:flex;"><span><span style="color:#008000">printf</span> <span style="color:#ba2121">&#39;SUBSYSTEM==&#34;tty&#34;, KERNEL==&#34;ttyUSB0&#34;, ATTRS{product}==&#34;XStick&#34;, GROUP=&#34;dialout&#34;\n\nSUBSYSTEM==&#34;tty&#34;, KERNEL==&#34;ttyACM0&#34;, ATTRS{product}==&#34;DWC OTG Controller&#34;, GROUP=&#34;dialout&#34;\n&#39;</span> | sudo tee -a /etc/udev/rules.d/90-tty.rules &gt; /dev/null
+</span></span><span style="display:flex;"><span>sudo rc-update add udev sysinit
+</span></span><span style="display:flex;"><span>sudo lbu ci
+</span></span></code></pre></div><p>Launching the container with the needed devices:</p>
+<div class="highlight"><pre tabindex="0" style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo docker run -d --restart always --name mozilla-iot-gateway --net host -v /media/mmcblk0p3/mozilla-iot-gateway:/home/node/.mozilla-iot mozillaiot/gateway:arm
+</span></span></code></pre></div><p>A little explanation:</p>
 <ul>
 <li>restart always will simply restart if the container crashes, but also on startup</li>
 <li>&ndash;net host is unfortunately compulsory for some addons of the gateway</li>
 <li>mounting a volume saved on mmcblk0p3 allows to have persistent storage (remember alpine otherwise runs in ram)</li>
 </ul>
 <p>The booting time is <strong>very</strong> long, so be patient.</p>
-<h2 id="without-the-udev-rule">Without the udev rule</h2>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker run -d --restart always --name mozilla-iot-gateway --net host -v /media/mmcblk0p3/mozilla-iot-gateway:/home/node/.mozilla-iot --device<span style="color:#666">=</span>/dev/ttyUSB0 --device<span style="color:#666">=</span>/dev/ttyACM0  moz
-illaiot/gateway:arm
-</code></pre></div><p>You have to add the device to docker run.</p>
-<h2 id="reaching-you-gateway">Reaching you gateway</h2>
+<h2 id="without-the-udev-rule">Without the udev rule<a hidden class="anchor" aria-hidden="true" href="#without-the-udev-rule">#</a></h2>
+<div class="highlight"><pre tabindex="0" style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker run -d --restart always --name mozilla-iot-gateway --net host -v /media/mmcblk0p3/mozilla-iot-gateway:/home/node/.mozilla-iot --device<span style="color:#666">=</span>/dev/ttyUSB0 --device<span style="color:#666">=</span>/dev/ttyACM0  moz
+</span></span><span style="display:flex;"><span>illaiot/gateway:arm
+</span></span></code></pre></div><p>You have to add the device to docker run.</p>
+<h2 id="reaching-you-gateway">Reaching you gateway<a hidden class="anchor" aria-hidden="true" href="#reaching-you-gateway">#</a></h2>
 <p>You should be able to use an external URL to reach your RPi, XXX.mozilla-iot.org.
 It is not a simple website, it&rsquo;s also a PWA, allowing you to set it up as an app on your mobile phone!
 You can also reach it from within your network with https://home-gateway:4443/things</p>
-<h2 id="configuration">Configuration</h2>
+<h2 id="configuration">Configuration<a hidden class="anchor" aria-hidden="true" href="#configuration">#</a></h2>
 <p>From there on, I had no issues, you an simply follow the <a href="https://iot.mozilla.org/docs/gateway-user-guide.html">mozilla tutorial</a></p>
-<h2 id="conclusion">Conclusion</h2>
+<h2 id="conclusion">Conclusion<a hidden class="anchor" aria-hidden="true" href="#conclusion">#</a></h2>
 <p>Here I am: docker, minimal host alpine linux and iot devices.
 Next step: k3s!</p>
 
-    </section>
 
-    <hr>
+  </div>
 
-    <footer class="post-footer">
-        <section class="f-1">
-            
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://vincentserpoul.github.io/tags/alpine/">alpine</a></li>
+      <li><a href="https://vincentserpoul.github.io/tags/docker/">docker</a></li>
+      <li><a href="https://vincentserpoul.github.io/tags/iot/">iot</a></li>
+      <li><a href="https://vincentserpoul.github.io/tags/zwave/">zwave</a></li>
+      <li><a href="https://vincentserpoul.github.io/tags/zigbee/">zigbee</a></li>
+      <li><a href="https://vincentserpoul.github.io/tags/mozilla-iot-gateway/">mozilla-iot-gateway</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://vincentserpoul.github.io/post/wasm-intro-talk/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>Wasm Prez</span>
+  </a>
+  <a class="next" href="https://vincentserpoul.github.io/post/alpine-rpi0-rust/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>cross compiling rust from linux to rpi0/alpine</span>
+  </a>
+</nav>
 
-            <p class="f-post-time"><time datetime="2019-04-29T00:23:23&#43;08:00">April 29, 2019</time></p>
-        </section>
-
-        <section class="f-2">
-            <section class="share">
-                <span>Share:
-                <a class="icon-twitter" href="http://twitter.com/share?text=testing%20mozilla%20iot%20gateway&url=https%3a%2f%2fvincentserpoul.github.io%2fpost%2fmozilla-iot-gateway%2f"
-                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
-                    <i class="fa fa-twitter"></i>
-                </a>
-                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fvincentserpoul.github.io%2fpost%2fmozilla-iot-gateway%2f"
-                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
-                    <i class="fa fa-facebook"></i>
-                </a>
-                <a class="icon-google-plus" href="https://plus.google.com/share?url=https%3a%2f%2fvincentserpoul.github.io%2fpost%2fmozilla-iot-gateway%2f"
-                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
-                    <i class="fa fa-google-plus"></i>
-                </a>
-                </span>
-            </section>
-
-            
-            	<span class="f-post-tags"><i class="fa fa-tag"></i>
-            	alpine, docker, iot, zwave, zigbee, mozilla-iot-gateway
-            	</span>
-            
-        </section>
-    </footer>
-
-    <div id="disqus_thread"></div>
-<script>
-var disqus_config = function () {
-    this.page.url = "https://vincentserpoul.github.io/post/mozilla-iot-gateway/";  
-    this.page.identifier = "https://vincentserpoul.github.io/post/mozilla-iot-gateway/"; 
-};
-
-(function() { 
-    var d = document, s = d.createElement('script');
-    s.src = '//vincentserpoul-tech-corner.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </footer>
 </article>
-	</div>
-</main>
-    <footer id="site-footer">
-        <div class="container">
-            <a href="https://vincentserpoul.github.io/index.xml" title="Get the RSS feed"><span class="tooltip"><i class="fa fa-rss"></i></span></a>
-        </div>
-    </footer>
-
-    <script type="text/javascript" src="https://vincentserpoul.github.io/js/fittext.js"></script>
-    <script type="text/javascript">
-      $(".heading").fitText();
-    </script>
-
+    </main>
     
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-81802018-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://vincentserpoul.github.io/">VS tech corner</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
 
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
 </body>
+
 </html>

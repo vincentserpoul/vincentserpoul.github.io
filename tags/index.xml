@@ -1,12 +1,48 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Tags on VS tech corner</title>
     <link>https://vincentserpoul.github.io/tags/</link>
     <description>Recent content in Tags on VS tech corner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 02 Jun 2021 18:12:40 +0800</lastBuildDate><atom:link href="https://vincentserpoul.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 30 Apr 2022 17:01:21 +0800</lastBuildDate><atom:link href="https://vincentserpoul.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>enterprise</title>
+      <link>https://vincentserpoul.github.io/tags/enterprise/</link>
+      <pubDate>Sat, 30 Apr 2022 17:01:21 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/tags/enterprise/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>git</title>
+      <link>https://vincentserpoul.github.io/tags/git/</link>
+      <pubDate>Sat, 30 Apr 2022 17:01:21 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/tags/git/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>golang</title>
+      <link>https://vincentserpoul.github.io/tags/golang/</link>
+      <pubDate>Sat, 30 Apr 2022 17:01:21 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/tags/golang/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>monorepo</title>
+      <link>https://vincentserpoul.github.io/tags/monorepo/</link>
+      <pubDate>Sat, 30 Apr 2022 17:01:21 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/tags/monorepo/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>container</title>
       <link>https://vincentserpoul.github.io/tags/container/</link>
@@ -40,15 +76,6 @@
       <pubDate>Mon, 17 May 2021 12:30:48 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/tags/errors/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>golang</title>
-      <link>https://vincentserpoul.github.io/tags/golang/</link>
-      <pubDate>Mon, 17 May 2021 12:30:48 +0800</pubDate>
-      
-      <guid>https://vincentserpoul.github.io/tags/golang/</guid>
       <description></description>
     </item>
     
@@ -553,15 +580,6 @@
       <pubDate>Fri, 20 Feb 2015 08:27:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/tags/commands/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>git</title>
-      <link>https://vincentserpoul.github.io/tags/git/</link>
-      <pubDate>Fri, 20 Feb 2015 08:27:27 +0800</pubDate>
-      
-      <guid>https://vincentserpoul.github.io/tags/git/</guid>
       <description></description>
     </item>
     

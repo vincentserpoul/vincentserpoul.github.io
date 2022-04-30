@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>alpine on VS tech corner</title>
     <link>https://vincentserpoul.github.io/tags/alpine/</link>
@@ -13,8 +13,7 @@
       <pubDate>Mon, 29 Apr 2019 00:23:23 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/mozilla-iot-gateway/</guid>
-      <description>Mozilla iot gateway Here is what I am going to setup. I am obviously not going to rewrite one more time the tutorial and docs from mozilla. I will simply describe the specific setup I used, and the little things I setup to make it work.
-Prerequisites  Raspberry pi 3b Zigbee dongle, zwave dongle list of compatible hardware - I used Digi XStick (ZB mesh version) and Aeotec Z-Stick (Gen5) Zigbee Smart bulb (i used a philips hue), zigbee motion detector (I used philips motion sensor)  Linux I used my favorite lean alpine linux, with the setup as I explained in this post minus the complexity brought up by the rpi0.</description>
+      <description>alpine, docker, iot, zwave and zigbee</description>
     </item>
     
     <item>
@@ -23,9 +22,7 @@ Prerequisites  Raspberry pi 3b Zigbee dongle, zwave dongle list of compatible ha
       <pubDate>Sat, 20 Apr 2019 19:02:02 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/alpine-rpi0-rust/</guid>
-      <description>If you read my previous posts, you should now have a raspberry-pi running alpine and docker.
-Resources are pretty limited on rpi0, so we are going to deploy programs using rust. Note: golang could have fit in there as well (and ofc all C and close to machine languages).
-Compiling from NOT a rpi0 Obviously, you don&amp;rsquo;t want to compile from a raspberry pi zero, unless you have all the time in the world and love waiting.</description>
+      <description>cross compilation for rust</description>
     </item>
     
     <item>
@@ -34,11 +31,7 @@ Compiling from NOT a rpi0 Obviously, you don&amp;rsquo;t want to compile from a 
       <pubDate>Tue, 16 Apr 2019 11:07:08 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/alpine-linux-rpi0-docker/</guid>
-      <description>Prerequisites  One raspberry pi zero W One sd card  Enable all cgroups On you local linux, mount the partition containing alpine files.
-In the cmdline.txt, add the following:
-echo -ne &amp;#34; cgroup_enable=memory cgroup_enable=cpuset swapaccount=1&amp;#34; &amp;gt;&amp;gt; /run/media/youruser/xxx/cmdline.txt Docker needs all cgroups enabled, so this will do the trick
-On you rpi0 As simple as:
-sudo apk add docker sudo rc-update add docker boot sudo rc-service docker start To make sure your docker env doesn&amp;rsquo;t go in memory (512MB RAM won&amp;rsquo;t bring you far&amp;hellip;), set it on mmcblk0p3 by editing /etc/docker/daemon.</description>
+      <description>installing docker</description>
     </item>
     
     <item>
@@ -47,8 +40,7 @@ sudo apk add docker sudo rc-update add docker boot sudo rc-service docker start 
       <pubDate>Thu, 11 Apr 2019 21:22:13 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/alpine-linux-rpi0/</guid>
-      <description>Prerequisites  One raspberry pi zero W One sd card  Download Alpine linux We&amp;rsquo;ll use the almost latest version: 3.9.2 (3.9.3 would not work for some reason) The one to use for RPI is the raspberry pi (surprising :P) armhf.
-On your local computer (assuming you re using linux) Mount the sdcard (should be automated, if not, you probably know how to do that and you probably don&amp;rsquo;t need that tutorial)</description>
+      <description>step by step</description>
     </item>
     
   </channel>

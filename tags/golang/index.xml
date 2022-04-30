@@ -1,22 +1,28 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>golang on VS tech corner</title>
     <link>https://vincentserpoul.github.io/tags/golang/</link>
     <description>Recent content in golang on VS tech corner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 17 May 2021 12:30:48 +0800</lastBuildDate><atom:link href="https://vincentserpoul.github.io/tags/golang/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 30 Apr 2022 17:01:21 +0800</lastBuildDate><atom:link href="https://vincentserpoul.github.io/tags/golang/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>golang enterprise, part 1, using a modules monorepo</title>
+      <link>https://vincentserpoul.github.io/post/golang-entreprise-part-1-modules-monorepo/</link>
+      <pubDate>Sat, 30 Apr 2022 17:01:21 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/post/golang-entreprise-part-1-modules-monorepo/</guid>
+      <description>go modules monorepo</description>
+    </item>
+    
     <item>
       <title>golang errors (after 1.13)</title>
       <link>https://vincentserpoul.github.io/post/go-errors/</link>
       <pubDate>Mon, 17 May 2021 12:30:48 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/go-errors/</guid>
-      <description>Since go 1.13, go has gone one step further in terms of error handling. Errors can be wrapped, bubbled up and act upon.
-We will here take a step back on error handling in go, from the perspective of a library.
-What data could we have in the error? Inspired by a rust talk from Jan Lusby about errors, here are a few things that error could contain:
- The reason of the error Context of the error: struct field, struct surrounding values&amp;hellip; Stack trace: which part of the code triggered this error How to fix the error: suggest a way to fix it  Where are errors displayed?</description>
+      <description>golang errors (after 1.13)</description>
     </item>
     
     <item>
@@ -25,10 +31,7 @@ What data could we have in the error? Inspired by a rust talk from Jan Lusby abo
       <pubDate>Sun, 28 Mar 2021 18:39:35 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/go-embed-1.16/</guid>
-      <description>What is it about In previous versions of go, you needed to reach out for an external package in order to embed static content inside your binary.
-My go to one was shurcool/vfsgen, but there were many others worth using.
-Go 1.16 brings a new package, &amp;ldquo;embed&amp;rdquo;, which allows to do that with just the standard library.
-How to do that The best part of this, it&amp;rsquo;s extremely simple, just see for yourself.</description>
+      <description>using go embed in go 1.16</description>
     </item>
     
     <item>
@@ -37,9 +40,7 @@ How to do that The best part of this, it&amp;rsquo;s extremely simple, just see 
       <pubDate>Sat, 29 Sep 2018 09:22:00 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/golang-binary-everything/</guid>
-      <description>Embedding anything in a golang binary What is it about? One good thing about golang is that you compile everything to a binary. So easy to deploy, so easy to manage, so small.
-But what happens when you need to embed files in there? Migration files, static files, whatever you can think of?
-Well, you can simply deploy it in a container, add this files, you are going to say, and you are probably right, that&amp;rsquo;s imho, the cleanest solution.</description>
+      <description>golang embedding binaries</description>
     </item>
     
     <item>
@@ -48,11 +49,7 @@ Well, you can simply deploy it in a container, add this files, you are going to 
       <pubDate>Mon, 27 Aug 2018 23:22:00 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/playwithwasm-golang/</guid>
-      <description>Here it is, go 1.11 is out, and with it a new compilation target, Web Assembly!
-Let&amp;rsquo;s try it out!
-The test As dumb as it sounds, I needed a simple usecase to test this out. I decided to settle for the dumbest possible thing: a for loop incrementing a variable for 100000000 times.
-The git repo Here it is
-I uploaded it as well on surge for you to see without the hassle</description>
+      <description>golang 1.11 is out, let&amp;#39;s try wasm</description>
     </item>
     
     <item>
@@ -61,10 +58,7 @@ I uploaded it as well on surge for you to see without the hassle</description>
       <pubDate>Tue, 27 Dec 2016 00:44:00 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/golang-playwithsql-oracle/</guid>
-      <description>Which library To this day, the most up to date library seems to be rana/ora
-How to install (linux &amp;amp; macosx) Download Oracle Instant Client for linux x64: both packages Basic and SDK Unzip each of them in the same folder /opt/oracle
-mkdir -p /opt/oracle cd /opt/oracle unzip ~/Downloads/instantclient-basiclite-linux.x64-12.2.0.1.0.zip unzip ~/Downloads/instantclient-sdk-linux.x64-12.2.0.1.0.zip cd /opt/oracle/instantclient_12_1 Add the necessary env variables and paths:
-# Oracle export LD_LIBRARY_PATH=/opt/oracle/instantclient_12_2:$LD_LIBRARY_PATH export PKG_CONFIG_PATH=/opt/oracle export ORACLE_HOME=$LD_LIBRARY_PATH copy from the go package .</description>
+      <description>How to use Oracle in golang</description>
     </item>
     
     <item>
@@ -73,9 +67,7 @@ mkdir -p /opt/oracle cd /opt/oracle unzip ~/Downloads/instantclient-basiclite-li
       <pubDate>Mon, 10 Oct 2016 12:54:00 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/binding-ethereum-golang/</guid>
-      <description>The contract contract Trigger { function () { throw; } address owner; function Trigger() { owner = msg.sender; } event TriggerEvt(address _sender, uint _trigger); function trigger(uint _trigger) { TriggerEvt(msg.sender, _trigger); } function getOwner() constant returns (address) { return owner; } } This is a very simple contract that we will take as an example.
-Getting the right tools for binding A good starting point is this wiki.
-You will need to follow the install procedure of go-ethereum.</description>
+      <description>binding Ethereum contracts in golang</description>
     </item>
     
     <item>
@@ -84,7 +76,7 @@ You will need to follow the install procedure of go-ethereum.</description>
       <pubDate>Mon, 01 Aug 2016 08:27:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/ethereum-dev-environment/</guid>
-      <description>Part 1 - Setup your ethereum node There are many ways you can setup a node to dev an Ethereum dapp. You can use the live network: not advisable obviously for cost and speed reasons. You can use the test network: not advisable for speed reasons. You can use a testchain set up with Geth: easy but a bit tedious as you need to mine. You can the ethereum testrpc: easiest!</description>
+      <description>Ethereum dev environment</description>
     </item>
     
     <item>
@@ -93,16 +85,7 @@ You will need to follow the install procedure of go-ethereum.</description>
       <pubDate>Sat, 20 Feb 2016 20:48:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/golang-dev-env-setup/</guid>
-      <description>Golang environment install golang
-http://www.wolfe.id.au/2015/03/05/using-sublime-text-for-go-development/
-Within sublimetext, from the package manager, install gosublime, install gooracle.
-install go/tools:
-go get -u golang.org/x/tools/cmd/goimports go get -u golang.org/x/tools/cmd/vet go get -u golang.org/x/tools/cmd/oracle go get -u golang.org/x/tools/cmd/godoc install gometalinter (https://github.com/alecthomas/gometalinter)
-install interfacer (https://github.com/mvdan/interfacer/)
-install gosimple (https://github.com/dominikh/go-simple)
-install gocov (https://github.com/axw/gocov)
-Here is the package settings I use for gosublime:
-{ // you may set specific environment variables here // e.g &amp;#34;env&amp;#34;: { &amp;#34;PATH&amp;#34;: &amp;#34;$HOME/go/bin:$PATH&amp;#34; } // in values, $PATH and ${PATH} are replaced with // the corresponding environment(PATH) variable, if it exists.</description>
+      <description>go tooling</description>
     </item>
     
   </channel>

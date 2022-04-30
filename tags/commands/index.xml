@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>commands on VS tech corner</title>
     <link>https://vincentserpoul.github.io/tags/commands/</link>
@@ -13,9 +13,7 @@
       <pubDate>Fri, 20 Feb 2015 08:27:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/git-basic-usage/</guid>
-      <description>Git basic commands When you have a new repo git clone git@github.com:vincentserpoul/rbac.git https or git? the git protocal provides better security and easiness if you are using a correct key.
-If you use the git protocol, you can easily associate your private key in the ~/.ssh/config file with the following:
-Host github Hostname github.com User vincentserpoul IdentityFile ~/.ssh/myprivatekey IdentitiesOnly yes When you have a new modification ready for commit git status You will get an overview of what&amp;rsquo;s new If there is any new files (Untracked files), you will first need to add them:</description>
+      <description>git usage for beginner</description>
     </item>
     
   </channel>

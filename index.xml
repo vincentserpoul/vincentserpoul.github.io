@@ -1,22 +1,28 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>VS tech corner</title>
     <link>https://vincentserpoul.github.io/</link>
     <description>Recent content on VS tech corner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 02 Jun 2021 18:12:40 +0800</lastBuildDate><atom:link href="https://vincentserpoul.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 30 Apr 2022 17:01:21 +0800</lastBuildDate><atom:link href="https://vincentserpoul.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>golang enterprise, part 1, using a modules monorepo</title>
+      <link>https://vincentserpoul.github.io/post/golang-entreprise-part-1-modules-monorepo/</link>
+      <pubDate>Sat, 30 Apr 2022 17:01:21 +0800</pubDate>
+      
+      <guid>https://vincentserpoul.github.io/post/golang-entreprise-part-1-modules-monorepo/</guid>
+      <description>go modules monorepo</description>
+    </item>
+    
     <item>
       <title>deploying rust in containers</title>
       <link>https://vincentserpoul.github.io/post/rust-optimized-container/</link>
       <pubDate>Wed, 02 Jun 2021 18:12:40 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/rust-optimized-container/</guid>
-      <description>The goal I am pretty familiar with containers and multi stage deployment have been my go to since quite a while now, for my golang codebases.
-Now that I have been picking up rust, deploying my first rust service in production did bring me back to my usual habits of containerization.
-We&amp;rsquo;ll be trying to optimize for speed of build and container size.
-The cargo.toml [...][lib]name = &amp;#34;vs&amp;#34;path = &amp;#34;src/lib.rs&amp;#34;[[bin]]name = &amp;#34;vs&amp;#34;path = &amp;#34;src/bin/vs.</description>
+      <description>leveraging multistage docker build to deploy rust</description>
     </item>
     
     <item>
@@ -25,10 +31,7 @@ The cargo.toml [...][lib]name = &amp;#34;vs&amp;#34;path = &amp;#34;src/lib.rs&a
       <pubDate>Mon, 17 May 2021 12:30:48 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/go-errors/</guid>
-      <description>Since go 1.13, go has gone one step further in terms of error handling. Errors can be wrapped, bubbled up and act upon.
-We will here take a step back on error handling in go, from the perspective of a library.
-What data could we have in the error? Inspired by a rust talk from Jan Lusby about errors, here are a few things that error could contain:
- The reason of the error Context of the error: struct field, struct surrounding values&amp;hellip; Stack trace: which part of the code triggered this error How to fix the error: suggest a way to fix it  Where are errors displayed?</description>
+      <description>golang errors (after 1.13)</description>
     </item>
     
     <item>
@@ -37,11 +40,7 @@ What data could we have in the error? Inspired by a rust talk from Jan Lusby abo
       <pubDate>Mon, 03 May 2021 22:50:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/stable-coins/</guid>
-      <description>In today&amp;rsquo;s crypto world, a few tokens are said stable. that means stable regarding a specific asset, like fiat or even BTC. Here is a compiled list of a few, with information on the way they are backed and audited. sources: https://en.wikipedia.org/wiki/Stablecoin
-Types of stable coins 💵 fiat based
-🪙 crypto curr based
-👑 Seigniorage Style Stablecoins (also called algorithmic or synthetic)
-List    name symbol backed how? audit     USD Coin USDC 💵 Grant Thornton, LLP 2021   Tether USDT 💵 FSS 2018 2021   Binance dollar BUSD 💵 Withum 2021   Gemini dollar GUSD 💵 bpmca 2021   Maker DAO dai DAI 🪙 300% smart contracts   True USD TUSD 💵 armanino 2021   StableUnit SU 🪙 smart contracts   Paxos standard PAX 💵 Withum 2021   Terra UST 👑 smart contracts   Ampleforth AMPL 👑 smart contracts   Augmint A-EUR 👑 smart contracts   Frax FRAX 🪙 👑 smart contracts   sUSD sUSD 🪙 👑 smart contracts   mStable mUSD 🪙 👑 smart contracts   Fei FEI 🪙 👑 smart contracts    Stability and risk The criterias to evaluate the different platforms and protocols would be among the following:</description>
+      <description>a tour of existing stable coins and their properties</description>
     </item>
     
     <item>
@@ -50,10 +49,7 @@ List    name symbol backed how? audit     USD Coin USDC 💵 Grant Thornton, LLP
       <pubDate>Sun, 28 Mar 2021 18:39:35 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/go-embed-1.16/</guid>
-      <description>What is it about In previous versions of go, you needed to reach out for an external package in order to embed static content inside your binary.
-My go to one was shurcool/vfsgen, but there were many others worth using.
-Go 1.16 brings a new package, &amp;ldquo;embed&amp;rdquo;, which allows to do that with just the standard library.
-How to do that The best part of this, it&amp;rsquo;s extremely simple, just see for yourself.</description>
+      <description>using go embed in go 1.16</description>
     </item>
     
     <item>
@@ -62,8 +58,7 @@ How to do that The best part of this, it&amp;rsquo;s extremely simple, just see 
       <pubDate>Mon, 03 Jun 2019 13:38:35 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/wasm-intro-talk/</guid>
-      <description>I presented at voxxed days last week.
-Here is the talk I gave, video coming when it&amp;rsquo;s published.</description>
+      <description>wasm talk at voxxed days singapore 2019</description>
     </item>
     
     <item>
@@ -72,8 +67,7 @@ Here is the talk I gave, video coming when it&amp;rsquo;s published.</descriptio
       <pubDate>Mon, 29 Apr 2019 00:23:23 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/mozilla-iot-gateway/</guid>
-      <description>Mozilla iot gateway Here is what I am going to setup. I am obviously not going to rewrite one more time the tutorial and docs from mozilla. I will simply describe the specific setup I used, and the little things I setup to make it work.
-Prerequisites  Raspberry pi 3b Zigbee dongle, zwave dongle list of compatible hardware - I used Digi XStick (ZB mesh version) and Aeotec Z-Stick (Gen5) Zigbee Smart bulb (i used a philips hue), zigbee motion detector (I used philips motion sensor)  Linux I used my favorite lean alpine linux, with the setup as I explained in this post minus the complexity brought up by the rpi0.</description>
+      <description>alpine, docker, iot, zwave and zigbee</description>
     </item>
     
     <item>
@@ -82,9 +76,7 @@ Prerequisites  Raspberry pi 3b Zigbee dongle, zwave dongle list of compatible ha
       <pubDate>Sat, 20 Apr 2019 19:02:02 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/alpine-rpi0-rust/</guid>
-      <description>If you read my previous posts, you should now have a raspberry-pi running alpine and docker.
-Resources are pretty limited on rpi0, so we are going to deploy programs using rust. Note: golang could have fit in there as well (and ofc all C and close to machine languages).
-Compiling from NOT a rpi0 Obviously, you don&amp;rsquo;t want to compile from a raspberry pi zero, unless you have all the time in the world and love waiting.</description>
+      <description>cross compilation for rust</description>
     </item>
     
     <item>
@@ -93,11 +85,7 @@ Compiling from NOT a rpi0 Obviously, you don&amp;rsquo;t want to compile from a 
       <pubDate>Tue, 16 Apr 2019 11:07:08 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/alpine-linux-rpi0-docker/</guid>
-      <description>Prerequisites  One raspberry pi zero W One sd card  Enable all cgroups On you local linux, mount the partition containing alpine files.
-In the cmdline.txt, add the following:
-echo -ne &amp;#34; cgroup_enable=memory cgroup_enable=cpuset swapaccount=1&amp;#34; &amp;gt;&amp;gt; /run/media/youruser/xxx/cmdline.txt Docker needs all cgroups enabled, so this will do the trick
-On you rpi0 As simple as:
-sudo apk add docker sudo rc-update add docker boot sudo rc-service docker start To make sure your docker env doesn&amp;rsquo;t go in memory (512MB RAM won&amp;rsquo;t bring you far&amp;hellip;), set it on mmcblk0p3 by editing /etc/docker/daemon.</description>
+      <description>installing docker</description>
     </item>
     
     <item>
@@ -106,8 +94,7 @@ sudo apk add docker sudo rc-update add docker boot sudo rc-service docker start 
       <pubDate>Thu, 11 Apr 2019 21:22:13 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/alpine-linux-rpi0/</guid>
-      <description>Prerequisites  One raspberry pi zero W One sd card  Download Alpine linux We&amp;rsquo;ll use the almost latest version: 3.9.2 (3.9.3 would not work for some reason) The one to use for RPI is the raspberry pi (surprising :P) armhf.
-On your local computer (assuming you re using linux) Mount the sdcard (should be automated, if not, you probably know how to do that and you probably don&amp;rsquo;t need that tutorial)</description>
+      <description>step by step</description>
     </item>
     
     <item>
@@ -116,9 +103,7 @@ On your local computer (assuming you re using linux) Mount the sdcard (should be
       <pubDate>Sat, 29 Sep 2018 09:22:00 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/golang-binary-everything/</guid>
-      <description>Embedding anything in a golang binary What is it about? One good thing about golang is that you compile everything to a binary. So easy to deploy, so easy to manage, so small.
-But what happens when you need to embed files in there? Migration files, static files, whatever you can think of?
-Well, you can simply deploy it in a container, add this files, you are going to say, and you are probably right, that&amp;rsquo;s imho, the cleanest solution.</description>
+      <description>golang embedding binaries</description>
     </item>
     
     <item>
@@ -127,11 +112,7 @@ Well, you can simply deploy it in a container, add this files, you are going to 
       <pubDate>Mon, 27 Aug 2018 23:22:00 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/playwithwasm-golang/</guid>
-      <description>Here it is, go 1.11 is out, and with it a new compilation target, Web Assembly!
-Let&amp;rsquo;s try it out!
-The test As dumb as it sounds, I needed a simple usecase to test this out. I decided to settle for the dumbest possible thing: a for loop incrementing a variable for 100000000 times.
-The git repo Here it is
-I uploaded it as well on surge for you to see without the hassle</description>
+      <description>golang 1.11 is out, let&amp;#39;s try wasm</description>
     </item>
     
     <item>
@@ -140,10 +121,7 @@ I uploaded it as well on surge for you to see without the hassle</description>
       <pubDate>Wed, 13 Jun 2018 11:37:00 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/gke-multi-accounts-clusters/</guid>
-      <description>Google cloud configs Download and install gcloud Simply follow this link
-Listing existing configurations gcloud config configurations list NAME IS_ACTIVE ACCOUNT PROJECT DEFAULT_ZONE DEFAULT_REGION This should give you only one line, with a default account.
-Creating a configuration gcloud config configurations create testconf This will guide you through the configuration of a new configuration. It allows you to set one config per account, project, cluster&amp;hellip;
-Activating a configuration gcloud config configurations activate testconf As simple as this to change your account/config.</description>
+      <description>Using GKE with multiple accounts and clusters</description>
     </item>
     
     <item>
@@ -152,9 +130,7 @@ Activating a configuration gcloud config configurations activate testconf As sim
       <pubDate>Mon, 03 Apr 2017 16:22:00 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/archlinux-bluetooth/</guid>
-      <description>Why? You might not have reach that point yet but bluez has been deprecating hciconfig and other tools. In bluez 5.44, it&amp;rsquo;s not there anymore.
-What is the problem? All hciconfig udev rules to activate bluetooth at startup won&amp;rsquo;t work anymore. Most forum posts solving bluetooth issues are now outdated. Once I updated to bluez 5.44, my service leveraging hciconfig to activate bluetooth at startup didn&amp;rsquo;t work anymore!
-What is the solution?</description>
+      <description>enabling bluetooth on bluez 5.44</description>
     </item>
     
     <item>
@@ -163,10 +139,7 @@ What is the solution?</description>
       <pubDate>Tue, 27 Dec 2016 00:44:00 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/golang-playwithsql-oracle/</guid>
-      <description>Which library To this day, the most up to date library seems to be rana/ora
-How to install (linux &amp;amp; macosx) Download Oracle Instant Client for linux x64: both packages Basic and SDK Unzip each of them in the same folder /opt/oracle
-mkdir -p /opt/oracle cd /opt/oracle unzip ~/Downloads/instantclient-basiclite-linux.x64-12.2.0.1.0.zip unzip ~/Downloads/instantclient-sdk-linux.x64-12.2.0.1.0.zip cd /opt/oracle/instantclient_12_1 Add the necessary env variables and paths:
-# Oracle export LD_LIBRARY_PATH=/opt/oracle/instantclient_12_2:$LD_LIBRARY_PATH export PKG_CONFIG_PATH=/opt/oracle export ORACLE_HOME=$LD_LIBRARY_PATH copy from the go package .</description>
+      <description>How to use Oracle in golang</description>
     </item>
     
     <item>
@@ -175,10 +148,7 @@ mkdir -p /opt/oracle cd /opt/oracle unzip ~/Downloads/instantclient-basiclite-li
       <pubDate>Thu, 27 Oct 2016 13:34:00 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/ethereum-react-dapps/</guid>
-      <description>I finished my first dapp with (react-boilerplate)[https://github.com/mxstbr/] this week and here are the few things I learnt. I won&amp;rsquo;t get into the redux, redux-saga details, I let you play with the amazing boilerplate.
-Interacting with constant functions Let&amp;rsquo;s use the typical balanceOf function of the EIP20 contracts:
-function balanceOf(address _owner) constant returns (uint256 balance) { return balances[_owner]; } Here are the sagas (redux-sagas) I used to interact:
-import { take, call, put, cancel, select, fork } from &amp;#39;redux-saga/effects&amp;#39;; import { BALANCE_OF_GET, } from &amp;#39;.</description>
+      <description>Ethereum contracts and dapps</description>
     </item>
     
     <item>
@@ -187,9 +157,7 @@ import { take, call, put, cancel, select, fork } from &amp;#39;redux-saga/effect
       <pubDate>Mon, 10 Oct 2016 12:54:00 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/binding-ethereum-golang/</guid>
-      <description>The contract contract Trigger { function () { throw; } address owner; function Trigger() { owner = msg.sender; } event TriggerEvt(address _sender, uint _trigger); function trigger(uint _trigger) { TriggerEvt(msg.sender, _trigger); } function getOwner() constant returns (address) { return owner; } } This is a very simple contract that we will take as an example.
-Getting the right tools for binding A good starting point is this wiki.
-You will need to follow the install procedure of go-ethereum.</description>
+      <description>binding Ethereum contracts in golang</description>
     </item>
     
     <item>
@@ -198,9 +166,7 @@ You will need to follow the install procedure of go-ethereum.</description>
       <pubDate>Fri, 30 Sep 2016 12:06:01 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/on-microservices-and-scaling/</guid>
-      <description>I just watched that amazing videos from Matt Ranney
-Here are my takeaways and opinionated summary:
- Use RPC for service to service communications: gRPC seems to be a good way of tackling it Use many repositories Profiling should be unified: flamegraphs seem to be a good solution (Go profiling is great too) Premature optimization is bad but performance monitoring is crucial! Trace requests, keep context within all logs Log a lot, but only on a portion of your production architecture as logging can have a big cost.</description>
+      <description>TL;DW of great UBER talk on scaling microservices</description>
     </item>
     
     <item>
@@ -209,7 +175,7 @@ Here are my takeaways and opinionated summary:
       <pubDate>Fri, 16 Sep 2016 13:44:00 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/ethereum-solidity/</guid>
-      <description>I participated to the devcon2 and blockchain summit last week. Here is my summary!</description>
+      <description>My summary of the blockchain week in Shanghai!</description>
     </item>
     
     <item>
@@ -218,10 +184,7 @@ Here are my takeaways and opinionated summary:
       <pubDate>Fri, 12 Aug 2016 12:00:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/ethereum-first-dapp-part-3/</guid>
-      <description>setting up a light wallet In order to have a setup close to what the DAPP would be, we will use (metamask) [http://www.metamask.io] as a light wallet (there are other choices).
-Metamask allows you to connect to a custom node.
-We will then connect to our node, http://localhost:9012 If everthing is fine, metamasks should indicate it&amp;rsquo;s connected.
-Then, we can import the metamask account to our local node by simply specifying the datadir we have setup the node data.</description>
+      <description>Ethereum first dapp - part 3</description>
     </item>
     
     <item>
@@ -230,9 +193,7 @@ Then, we can import the metamask account to our local node by simply specifying 
       <pubDate>Wed, 10 Aug 2016 15:00:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/ethereum-first-dapp-part-2/</guid>
-      <description>Frontend Prepare your folder for your dapp I will be using https://github.com/mxstbr/react-boilerplate as it&amp;rsquo;s quite nice and I&amp;rsquo;ve been playing with React for a bit now.
-I will not go into the details of setting this up, it&amp;rsquo;s a totally different topic. If you are not familiar with it, it&amp;rsquo;s probably a waste of time for you to read.
-Example web3 component with React This boilerplate uses immutable, redux and redux-sagas in order to deal with data.</description>
+      <description>Ethereum first dapp - part 2</description>
     </item>
     
     <item>
@@ -241,10 +202,7 @@ Example web3 component with React This boilerplate uses immutable, redux and red
       <pubDate>Mon, 08 Aug 2016 15:00:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/ethereum-first-dapp-part-1/</guid>
-      <description>Contracts Prepare your folder for your dapp mkdir dapp inside this folder, we&amp;rsquo;ll create one folder for truffle, one for geth.
-cd dapp mkdir truffle geth inside the geth folder, simply put the customGenesis block you can find in the ethereum-dev-environment blog post.
-We are going to use two Ethereum clients, one for tests and devs, testrpc and one for a more real interaction, geth.
-Let&amp;rsquo;s install truffle and testrpc</description>
+      <description>Ethereum first dapp - part 1</description>
     </item>
     
     <item>
@@ -253,10 +211,7 @@ Let&amp;rsquo;s install truffle and testrpc</description>
       <pubDate>Wed, 03 Aug 2016 20:00:00 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/ethereum-interacting-with-contracts/</guid>
-      <description>Check the address of the current deployed contract Remember when you mined your contract, it told your its address. Now, reuse it!
-eth.getCode(&amp;quot;0x5f3425ccedeae0eb36521c4cf93ec6544dbad9bd&amp;quot;) Test the contract with a simple interaction get the latest web3-light.min.js js from https://github.com/ethereum/web3.js/releases and simply copy the dist/web3-light.min.js into the same folder as the following HTML file.
-then, use this html to interact with your contract on the local node:
-&amp;lt;!doctype&amp;gt; &amp;lt;html&amp;gt; &amp;lt;head&amp;gt; &amp;lt;script type=&amp;#34;text/javascript&amp;#34; src=&amp;#34;https://cdnjs.cloudflare.com/ajax/libs/bignumber.js/2.4.0/bignumber.min.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;script type=&amp;#34;text/javascript&amp;#34; src=&amp;#34;.</description>
+      <description>frontend javascript to interact with smart contract</description>
     </item>
     
     <item>
@@ -265,8 +220,7 @@ then, use this html to interact with your contract on the local node:
       <pubDate>Wed, 03 Aug 2016 13:00:00 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/ethereum-first-contract/</guid>
-      <description>Launch your geth (or testrpc) private instance ./geth \  --identity &amp;#34;gethTest&amp;#34; \  --rpc --rpcport &amp;#34;9012&amp;#34; \  --rpccorsdomain &amp;#34;YOUR_TEST_DOMAIN_APP_RUN_FROM&amp;#34; \  --datadir &amp;#34;./testChain&amp;#34; \  --port &amp;#34;30303&amp;#34; \  --nodiscover \  --rpcapi &amp;#34;db,eth,net,web3&amp;#34; \  --networkid 1999 \  --dev console Within the console, compile your contract check this tutorial: https://www.ethereum.org/greeter
-I had an issue when I followed the contract tutorial, my contract would not be mined after I was trying to deploy it.</description>
+      <description>Ethereum dev environment</description>
     </item>
     
     <item>
@@ -275,7 +229,7 @@ I had an issue when I followed the contract tutorial, my contract would not be m
       <pubDate>Mon, 01 Aug 2016 08:27:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/ethereum-dev-environment/</guid>
-      <description>Part 1 - Setup your ethereum node There are many ways you can setup a node to dev an Ethereum dapp. You can use the live network: not advisable obviously for cost and speed reasons. You can use the test network: not advisable for speed reasons. You can use a testchain set up with Geth: easy but a bit tedious as you need to mine. You can the ethereum testrpc: easiest!</description>
+      <description>Ethereum dev environment</description>
     </item>
     
     <item>
@@ -284,13 +238,7 @@ I had an issue when I followed the contract tutorial, my contract would not be m
       <pubDate>Thu, 28 Jul 2016 22:27:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/kubernetes-talk/</guid>
-      <description>On the 28th, I was invited to talk at Google Singapore for the Kubernetes birthday http://www.meetup.com/fr-FR/GCPUGSG/events/232659329/?eventId=232659329
-I spoke about my experience with Kubernetes in production for one of my side projects.
-As I like to experiment stuff, I decide to drop power point and use React Spectacle library for my presentation!
-here is the result: https://kuberneprez.surge.sh
-here is the source code: https://github.com/vincentserpoul/prez-kubernetes
-The framework can be found here: http://stack.formidable.com/spectacle/#/?_k=cyx05u
-I will do it again!</description>
+      <description>It&amp;#39;s been 2 years since Kubernetes was open sourced and 1 year since it was announced production ready</description>
     </item>
     
     <item>
@@ -299,16 +247,7 @@ I will do it again!</description>
       <pubDate>Tue, 12 Apr 2016 12:22:20 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/learning-react/</guid>
-      <description>React Nothing beats the facebook React page:
-https://facebook.github.io/react/docs/getting-started.html
-Redux Nothing beats the redux tutorial:
-http://redux.js.org/
-And also available on egghead, by Dan Abramov himself:
-https://egghead.io/series/getting-started-with-redux
-A list of tutorials:
-https://github.com/happypoulp/redux-tutorial
-A great detailed introduction to your SPA setup http://blog.joanboixados.com/building-a-boilerplate-for-a-koa-redux-react-application-including-webpack-mocha-and-sass/
-An advanced SPA (still under construction) https://www.gitbook.com/book/tonyhb/redux-without-profanity/details</description>
+      <description>learning how to use react, redux, webpack...</description>
     </item>
     
     <item>
@@ -317,11 +256,7 @@ An advanced SPA (still under construction) https://www.gitbook.com/book/tonyhb/r
       <pubDate>Mon, 11 Apr 2016 20:48:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/react-dev-env-setup/</guid>
-      <description>Working with ES6-7 In order to work with ECMAScript 2015 and even with future implementations of ES, you can use Babel.
-Babel is a transpiler, it will convert your ES6-7 to plain ES5 javascript that most browsers (&amp;gt;ie9 most probably) will understand.
-To install babel
-npm install -g babel Then within your javascript project, you can create a .babelrc file with the following content:
-{ &amp;#34;presets&amp;#34;: [&amp;#34;es2015&amp;#34;, &amp;#34;stage-0&amp;#34;, &amp;#34;react&amp;#34;] } React and its surrounding libraries After starting using React, I realized it was vey good and was surrounded with libraries which makes it even better: redux, immutable, react-router&amp;hellip;</description>
+      <description>react setup with essential tools</description>
     </item>
     
     <item>
@@ -330,13 +265,7 @@ npm install -g babel Then within your javascript project, you can create a .babe
       <pubDate>Thu, 10 Mar 2016 20:48:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/javascript-dev-env-setup/</guid>
-      <description>NodeJS Go to the nodejs website and install nodejs latest stable version:
-https://nodejs.org/en/download/stable/
-NPM Go to the npm website and follow the instructions
-https://docs.npmjs.com/getting-started/installing-node
-Install nodejs essential packages npm install -g eslint webpack webpack-dev-server babel-eslint serve
-Install sublime-text essential plugins With the help of the package manager, in sublime-text, install the following packages: babel, Sublime-Linter-Contrib-eslint, React ES6 snippets
-Make sure your linter is working In sublime text, open the console (view &amp;gt; show console) and check if there is any error message.</description>
+      <description>javascript tooling</description>
     </item>
     
     <item>
@@ -345,16 +274,7 @@ Make sure your linter is working In sublime text, open the console (view &amp;gt
       <pubDate>Sat, 20 Feb 2016 20:48:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/golang-dev-env-setup/</guid>
-      <description>Golang environment install golang
-http://www.wolfe.id.au/2015/03/05/using-sublime-text-for-go-development/
-Within sublimetext, from the package manager, install gosublime, install gooracle.
-install go/tools:
-go get -u golang.org/x/tools/cmd/goimports go get -u golang.org/x/tools/cmd/vet go get -u golang.org/x/tools/cmd/oracle go get -u golang.org/x/tools/cmd/godoc install gometalinter (https://github.com/alecthomas/gometalinter)
-install interfacer (https://github.com/mvdan/interfacer/)
-install gosimple (https://github.com/dominikh/go-simple)
-install gocov (https://github.com/axw/gocov)
-Here is the package settings I use for gosublime:
-{ // you may set specific environment variables here // e.g &amp;#34;env&amp;#34;: { &amp;#34;PATH&amp;#34;: &amp;#34;$HOME/go/bin:$PATH&amp;#34; } // in values, $PATH and ${PATH} are replaced with // the corresponding environment(PATH) variable, if it exists.</description>
+      <description>go tooling</description>
     </item>
     
     <item>
@@ -363,12 +283,7 @@ Here is the package settings I use for gosublime:
       <pubDate>Wed, 10 Feb 2016 20:48:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/sublimetext-dev-env-setup/</guid>
-      <description>Download and install the latest Sublime text Go to the sublime text website and download Sublime text 3 for your OS.
-https://www.sublimetext.com/3
-Download and install the sublime text package manager Go the package control website, download and install it on your sublime text (follow the instructions on the website).
-https://packagecontrol.io/installation
-Download and install sublime linter Go to the sublime linter website, download and install it on your sublime text.
-http://www.sublimelinter.com/en/latest/installation.html</description>
+      <description>sublime text setup with essential tools</description>
     </item>
     
     <item>
@@ -377,9 +292,7 @@ http://www.sublimelinter.com/en/latest/installation.html</description>
       <pubDate>Fri, 20 Feb 2015 08:27:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/git-basic-usage/</guid>
-      <description>Git basic commands When you have a new repo git clone git@github.com:vincentserpoul/rbac.git https or git? the git protocal provides better security and easiness if you are using a correct key.
-If you use the git protocol, you can easily associate your private key in the ~/.ssh/config file with the following:
-Host github Hostname github.com User vincentserpoul IdentityFile ~/.ssh/myprivatekey IdentitiesOnly yes When you have a new modification ready for commit git status You will get an overview of what&amp;rsquo;s new If there is any new files (Untracked files), you will first need to add them:</description>
+      <description>git usage for beginner</description>
     </item>
     
     <item>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>setup on VS tech corner</title>
     <link>https://vincentserpoul.github.io/tags/setup/</link>
@@ -13,11 +13,7 @@
       <pubDate>Mon, 11 Apr 2016 20:48:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/react-dev-env-setup/</guid>
-      <description>Working with ES6-7 In order to work with ECMAScript 2015 and even with future implementations of ES, you can use Babel.
-Babel is a transpiler, it will convert your ES6-7 to plain ES5 javascript that most browsers (&amp;gt;ie9 most probably) will understand.
-To install babel
-npm install -g babel Then within your javascript project, you can create a .babelrc file with the following content:
-{ &amp;#34;presets&amp;#34;: [&amp;#34;es2015&amp;#34;, &amp;#34;stage-0&amp;#34;, &amp;#34;react&amp;#34;] } React and its surrounding libraries After starting using React, I realized it was vey good and was surrounded with libraries which makes it even better: redux, immutable, react-router&amp;hellip;</description>
+      <description>react setup with essential tools</description>
     </item>
     
     <item>
@@ -26,13 +22,7 @@ npm install -g babel Then within your javascript project, you can create a .babe
       <pubDate>Thu, 10 Mar 2016 20:48:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/javascript-dev-env-setup/</guid>
-      <description>NodeJS Go to the nodejs website and install nodejs latest stable version:
-https://nodejs.org/en/download/stable/
-NPM Go to the npm website and follow the instructions
-https://docs.npmjs.com/getting-started/installing-node
-Install nodejs essential packages npm install -g eslint webpack webpack-dev-server babel-eslint serve
-Install sublime-text essential plugins With the help of the package manager, in sublime-text, install the following packages: babel, Sublime-Linter-Contrib-eslint, React ES6 snippets
-Make sure your linter is working In sublime text, open the console (view &amp;gt; show console) and check if there is any error message.</description>
+      <description>javascript tooling</description>
     </item>
     
     <item>
@@ -41,16 +31,7 @@ Make sure your linter is working In sublime text, open the console (view &amp;gt
       <pubDate>Sat, 20 Feb 2016 20:48:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/golang-dev-env-setup/</guid>
-      <description>Golang environment install golang
-http://www.wolfe.id.au/2015/03/05/using-sublime-text-for-go-development/
-Within sublimetext, from the package manager, install gosublime, install gooracle.
-install go/tools:
-go get -u golang.org/x/tools/cmd/goimports go get -u golang.org/x/tools/cmd/vet go get -u golang.org/x/tools/cmd/oracle go get -u golang.org/x/tools/cmd/godoc install gometalinter (https://github.com/alecthomas/gometalinter)
-install interfacer (https://github.com/mvdan/interfacer/)
-install gosimple (https://github.com/dominikh/go-simple)
-install gocov (https://github.com/axw/gocov)
-Here is the package settings I use for gosublime:
-{ // you may set specific environment variables here // e.g &amp;#34;env&amp;#34;: { &amp;#34;PATH&amp;#34;: &amp;#34;$HOME/go/bin:$PATH&amp;#34; } // in values, $PATH and ${PATH} are replaced with // the corresponding environment(PATH) variable, if it exists.</description>
+      <description>go tooling</description>
     </item>
     
     <item>
@@ -59,12 +40,7 @@ Here is the package settings I use for gosublime:
       <pubDate>Wed, 10 Feb 2016 20:48:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/sublimetext-dev-env-setup/</guid>
-      <description>Download and install the latest Sublime text Go to the sublime text website and download Sublime text 3 for your OS.
-https://www.sublimetext.com/3
-Download and install the sublime text package manager Go the package control website, download and install it on your sublime text (follow the instructions on the website).
-https://packagecontrol.io/installation
-Download and install sublime linter Go to the sublime linter website, download and install it on your sublime text.
-http://www.sublimelinter.com/en/latest/installation.html</description>
+      <description>sublime text setup with essential tools</description>
     </item>
     
   </channel>

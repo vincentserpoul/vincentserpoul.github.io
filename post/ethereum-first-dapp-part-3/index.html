@@ -1,152 +1,338 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]><html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--><html class="no-js" prefix="og: http://ogp.me/ns#" xmlns:og="http://ogp.me/ns#"><!--<![endif]-->
+<html lang="en" dir="auto">
 
-    <head>
-                <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="description" content="Ethereum first dapp - part 3">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
-        <meta name="mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <meta name="author" content="">
-        <meta name="keywords" content="awesome, definitely">
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Ethereum first dapp - part 3 | VS tech corner</title>
+<meta name="keywords" content="ethereum, dapp, development, metamask">
+<meta name="description" content="Ethereum first dapp - part 3">
+<meta name="author" content="Me">
+<link rel="canonical" href="https://vincentserpoul.github.io/post/ethereum-first-dapp-part-3/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.ec8da366ca2fb647537ccb7a8f6fa5b4e9cd3c7a0d3171dd2d3baad1e49c8bfc.css" integrity="sha256-7I2jZsovtkdTfMt6j2&#43;ltOnNPHoNMXHdLTuq0eSci/w=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.2840b7fccd34145847db71a290569594bdbdb00047097f75d6495d162f5d7dff.js" integrity="sha256-KEC3/M00FFhH23GikFaVlL29sABHCX911kldFi9dff8="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://vincentserpoul.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://vincentserpoul.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://vincentserpoul.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://vincentserpoul.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://vincentserpoul.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-81802018-1', 'auto');
 	
-        <meta property="og:site_name" content="VS tech corner">
-        <meta property="og:title" content="VS tech corner">
-        <meta property="og:url" content="https://vincentserpoul.github.io/post/ethereum-first-dapp-part-3/">
-        <meta property="og:description" content="">
-    
-        <meta property="og:type" content="article" />
-        <meta property="og:article:author" content="" />
-        <meta property="og:article:published_time" content="2016-08-12T12:00:27&#43;08:00" />
-    
-        <meta name="generator" content="Hugo 0.83.1" />
-        <title>Ethereum first dapp - part 3 &middot; VS tech corner </title>
-        <link rel="canonical" href="https://vincentserpoul.github.io/" />
-        <link rel="alternate" type="application/rss+xml" title="RSS" href="">
-        <link rel="stylesheet" type='text/css' href="https://vincentserpoul.github.io/css/main.css"/>
-        <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300|Montserrat:700' rel='stylesheet' type='text/css'>
-        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-        <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-    </head>
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="Ethereum first dapp - part 3" />
+<meta property="og:description" content="Ethereum first dapp - part 3" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://vincentserpoul.github.io/post/ethereum-first-dapp-part-3/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2016-08-12T12:00:27&#43;08:00" />
+<meta property="article:modified_time" content="2016-08-12T12:00:27&#43;08:00" /><meta property="og:site_name" content="Vincent Serpoul" />
 
-<body>
-<!--[if lt IE 7]><p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chrome/‎">install Google Chrome</a> to experience this site.</p><![endif]-->
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Ethereum first dapp - part 3"/>
+<meta name="twitter:description" content="Ethereum first dapp - part 3"/>
 
-    <header id="site-header">
-        <div class="container">
-            <a href="https://vincentserpoul.github.io/" alt="VS tech corner"><h1 class="blog-title heading">VS tech corner</h1></a>
-            <p class="blog-description"></p>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://vincentserpoul.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Ethereum first dapp - part 3",
+      "item": "https://vincentserpoul.github.io/post/ethereum-first-dapp-part-3/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Ethereum first dapp - part 3",
+  "name": "Ethereum first dapp - part 3",
+  "description": "Ethereum first dapp - part 3",
+  "keywords": [
+    "ethereum", "dapp", "development", "metamask"
+  ],
+  "articleBody": "setting up a light wallet In order to have a setup close to what the DAPP would be, we will use (metamask) [http://www.metamask.io] as a light wallet (there are other choices).\nMetamask allows you to connect to a custom node.\nWe will then connect to our node, http://localhost:9012 If everthing is fine, metamasks should indicate it’s connected.\nThen, we can import the metamask account to our local node by simply specifying the datadir we have setup the node data.\nLet’s imagine metamask give us:\n0xcddddd76a763de6e9ac19e7ec8f71ed77d61eebc0a93068fc9f2a544462db7d2 as the key.\nThen let’s just copy this, without thw 0x inside a separate file.\necho \"cddddd76a763de6e9ac19e7ec8f71ed77d61eebc0a93068fc9f2a544462db7d2\"  pvkey.txt and then import it in our local chain\ngeth --datadir \"./testChain\" account import ./pvkey.txt if you look at the list of accounts in your local node, you should see now the newly imported account.\ngive me ether! Now, simply transfer some Ether to the newly imported account In geth, for example:\neth.sendTransaction({from: '0xfffffff', to: '0xddddddd', value: web3.toWei(1000, \"ether\")}) ",
+  "wordCount" : "162",
+  "inLanguage": "en",
+  "datePublished": "2016-08-12T12:00:27+08:00",
+  "dateModified": "2016-08-12T12:00:27+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Me"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://vincentserpoul.github.io/post/ethereum-first-dapp-part-3/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "VS tech corner",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://vincentserpoul.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://vincentserpoul.github.io/" accesskey="h" title="Home (Alt + H)">Home</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
         </div>
-    </header>
-<main class="content" role="main">
-	<div class="container">
-		<article class="post">
-	<header class="post-header">
-        <h3 class="p-post-title">Ethereum first dapp - part 3</h3>
-    </header>
+        <ul id="menu">
+            <li>
+                <a href="https://vincentserpoul.github.io/tags/" title="tags">
+                    <span>tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://vincentserpoul.github.io/" title="vincentserpoul.github.io">
+                    <span>vincentserpoul.github.io</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
 
-    <section class="post-content">
-        <h2 id="setting-up-a-light-wallet">setting up a light wallet</h2>
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://vincentserpoul.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://vincentserpoul.github.io/post/">Posts</a></div>
+    <h1 class="post-title">
+      Ethereum first dapp - part 3
+    </h1>
+    <div class="post-description">
+      Ethereum first dapp - part 3
+    </div>
+    <div class="post-meta"><span title='2016-08-12 12:00:27 +0800 +08'>August 12, 2016</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Me
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#setting-up-a-light-wallet" aria-label="setting up a light wallet">setting up a light wallet</a></li>
+                <li>
+                    <a href="#give-me-ether" aria-label="give me ether!">give me ether!</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="setting-up-a-light-wallet">setting up a light wallet<a hidden class="anchor" aria-hidden="true" href="#setting-up-a-light-wallet">#</a></h2>
 <p>In order to have a setup close to what the DAPP would be, we will use (metamask) [http://www.metamask.io] as a light wallet (there are other choices).</p>
 <p>Metamask allows you to connect to a custom node.</p>
 <p>We will then connect to our node, http://localhost:9012
 If everthing is fine, metamasks should indicate it&rsquo;s connected.</p>
 <p>Then, we can import the metamask account to our local node by simply specifying the datadir we have setup the node data.</p>
 <p>Let&rsquo;s imagine metamask give us:</p>
-<pre><code>0xcddddd76a763de6e9ac19e7ec8f71ed77d61eebc0a93068fc9f2a544462db7d2
+<pre tabindex="0"><code>0xcddddd76a763de6e9ac19e7ec8f71ed77d61eebc0a93068fc9f2a544462db7d2
 </code></pre><p>as the key.</p>
 <p>Then let&rsquo;s just copy this, without thw 0x inside a separate file.</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#008000">echo</span> <span style="color:#ba2121">&#34;cddddd76a763de6e9ac19e7ec8f71ed77d61eebc0a93068fc9f2a544462db7d2&#34;</span> &gt;&gt; pvkey.txt
-</code></pre></div><p>and then import it in our local chain</p>
-<pre><code>geth --datadir &quot;./testChain&quot; account import ./pvkey.txt
+<div class="highlight"><pre tabindex="0" style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#008000">echo</span> <span style="color:#ba2121">&#34;cddddd76a763de6e9ac19e7ec8f71ed77d61eebc0a93068fc9f2a544462db7d2&#34;</span> &gt;&gt; pvkey.txt
+</span></span></code></pre></div><p>and then import it in our local chain</p>
+<pre tabindex="0"><code>geth --datadir &#34;./testChain&#34; account import ./pvkey.txt
 </code></pre><p>if you look at the list of accounts in your local node, you should see now the newly imported account.</p>
-<h2 id="give-me-ether">give me ether!</h2>
+<h2 id="give-me-ether">give me ether!<a hidden class="anchor" aria-hidden="true" href="#give-me-ether">#</a></h2>
 <p>Now, simply transfer some Ether to the newly imported account
 In geth, for example:</p>
-<pre><code>eth.sendTransaction({from: '0xfffffff', to: '0xddddddd', value: web3.toWei(1000, &quot;ether&quot;)})
+<pre tabindex="0"><code>eth.sendTransaction({from: &#39;0xfffffff&#39;, to: &#39;0xddddddd&#39;, value: web3.toWei(1000, &#34;ether&#34;)})
 </code></pre>
-    </section>
 
-    <hr>
+  </div>
 
-    <footer class="post-footer">
-        <section class="f-1">
-            
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://vincentserpoul.github.io/tags/ethereum/">ethereum</a></li>
+      <li><a href="https://vincentserpoul.github.io/tags/dapp/">dapp</a></li>
+      <li><a href="https://vincentserpoul.github.io/tags/development/">development</a></li>
+      <li><a href="https://vincentserpoul.github.io/tags/metamask/">metamask</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://vincentserpoul.github.io/post/ethereum-solidity/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>Blockchain week in Shanghai!</span>
+  </a>
+  <a class="next" href="https://vincentserpoul.github.io/post/ethereum-first-dapp-part-2/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>Ethereum first dapp - part 2</span>
+  </a>
+</nav>
 
-            <p class="f-post-time"><time datetime="2016-08-12T12:00:27&#43;08:00">August 12, 2016</time></p>
-        </section>
-
-        <section class="f-2">
-            <section class="share">
-                <span>Share:
-                <a class="icon-twitter" href="http://twitter.com/share?text=Ethereum%20first%20dapp%20-%20part%203&url=https%3a%2f%2fvincentserpoul.github.io%2fpost%2fethereum-first-dapp-part-3%2f"
-                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
-                    <i class="fa fa-twitter"></i>
-                </a>
-                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fvincentserpoul.github.io%2fpost%2fethereum-first-dapp-part-3%2f"
-                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
-                    <i class="fa fa-facebook"></i>
-                </a>
-                <a class="icon-google-plus" href="https://plus.google.com/share?url=https%3a%2f%2fvincentserpoul.github.io%2fpost%2fethereum-first-dapp-part-3%2f"
-                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
-                    <i class="fa fa-google-plus"></i>
-                </a>
-                </span>
-            </section>
-
-            
-            	<span class="f-post-tags"><i class="fa fa-tag"></i>
-            	ethereum, dapp, development, metamask
-            	</span>
-            
-        </section>
-    </footer>
-
-    <div id="disqus_thread"></div>
-<script>
-var disqus_config = function () {
-    this.page.url = "https://vincentserpoul.github.io/post/ethereum-first-dapp-part-3/";  
-    this.page.identifier = "https://vincentserpoul.github.io/post/ethereum-first-dapp-part-3/"; 
-};
-
-(function() { 
-    var d = document, s = d.createElement('script');
-    s.src = '//vincentserpoul-tech-corner.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </footer>
 </article>
-	</div>
-</main>
-    <footer id="site-footer">
-        <div class="container">
-            <a href="https://vincentserpoul.github.io/index.xml" title="Get the RSS feed"><span class="tooltip"><i class="fa fa-rss"></i></span></a>
-        </div>
-    </footer>
-
-    <script type="text/javascript" src="https://vincentserpoul.github.io/js/fittext.js"></script>
-    <script type="text/javascript">
-      $(".heading").fitText();
-    </script>
-
+    </main>
     
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-81802018-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://vincentserpoul.github.io/">VS tech corner</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
 
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
 </body>
+
 </html>

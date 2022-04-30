@@ -1,226 +1,419 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]><html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--><html class="no-js" prefix="og: http://ogp.me/ns#" xmlns:og="http://ogp.me/ns#"><!--<![endif]-->
+<html lang="en" dir="auto">
 
-    <head>
-                <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="description" content="binding Ethereum contracts in golang">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
-        <meta name="mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <meta name="author" content="">
-        <meta name="keywords" content="awesome, definitely">
-	
-        <meta property="og:site_name" content="VS tech corner">
-        <meta property="og:title" content="VS tech corner">
-        <meta property="og:url" content="https://vincentserpoul.github.io/post/binding-ethereum-golang/">
-        <meta property="og:description" content="">
-    
-        <meta property="og:type" content="article" />
-        <meta property="og:article:author" content="" />
-        <meta property="og:article:published_time" content="2016-10-10T12:54:00&#43;08:00" />
-    
-        <meta name="generator" content="Hugo 0.83.1" />
-        <title>Ethereum contracts and Golang &middot; VS tech corner </title>
-        <link rel="canonical" href="https://vincentserpoul.github.io/" />
-        <link rel="alternate" type="application/rss+xml" title="RSS" href="">
-        <link rel="stylesheet" type='text/css' href="https://vincentserpoul.github.io/css/main.css"/>
-        <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300|Montserrat:700' rel='stylesheet' type='text/css'>
-        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-        <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-    </head>
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Ethereum contracts and Golang | VS tech corner</title>
+<meta name="keywords" content="golang, blockchain, ethereum, dev, testrpc">
+<meta name="description" content="binding Ethereum contracts in golang">
+<meta name="author" content="Me">
+<link rel="canonical" href="https://vincentserpoul.github.io/post/binding-ethereum-golang/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.ec8da366ca2fb647537ccb7a8f6fa5b4e9cd3c7a0d3171dd2d3baad1e49c8bfc.css" integrity="sha256-7I2jZsovtkdTfMt6j2&#43;ltOnNPHoNMXHdLTuq0eSci/w=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.2840b7fccd34145847db71a290569594bdbdb00047097f75d6495d162f5d7dff.js" integrity="sha256-KEC3/M00FFhH23GikFaVlL29sABHCX911kldFi9dff8="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://vincentserpoul.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://vincentserpoul.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://vincentserpoul.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://vincentserpoul.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://vincentserpoul.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
-<body>
-<!--[if lt IE 7]><p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chrome/‎">install Google Chrome</a> to experience this site.</p><![endif]-->
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
 
-    <header id="site-header">
-        <div class="container">
-            <a href="https://vincentserpoul.github.io/" alt="VS tech corner"><h1 class="blog-title heading">VS tech corner</h1></a>
-            <p class="blog-description"></p>
-        </div>
-    </header>
-<main class="content" role="main">
-	<div class="container">
-		<article class="post">
-	<header class="post-header">
-        <h3 class="p-post-title">Ethereum contracts and Golang</h3>
-    </header>
+            .list {
+                background: var(--theme);
+            }
 
-    <section class="post-content">
-        <h2 id="the-contract">The contract</h2>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-solidity" data-lang="solidity"><span style="color:#008000;font-weight:bold">contract</span> Trigger {
-  <span style="color:#008000;font-weight:bold">function</span> () {
-      <span style="color:#008000;font-weight:bold">throw</span>;
-  }
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
 
-  <span style="color:#b00040">address</span> owner;
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
 
-  <span style="color:#008000;font-weight:bold">function</span> Trigger() {
-      owner <span style="color:#666">=</span> <span style="color:#008000">msg</span>.<span style="color:#008000">sender</span>;
-  }
-
-  <span style="color:#008000;font-weight:bold">event</span> TriggerEvt(<span style="color:#b00040">address</span> _sender, <span style="color:#b00040">uint</span> _trigger);
-
-  <span style="color:#008000;font-weight:bold">function</span> trigger(<span style="color:#b00040">uint</span> _trigger) {
-      TriggerEvt(<span style="color:#008000">msg</span>.<span style="color:#008000">sender</span>, _trigger);
-  }
-
-  <span style="color:#008000;font-weight:bold">function</span> getOwner() <span style="color:#008000;font-weight:bold">constant</span> <span style="color:#008000;font-weight:bold">returns</span> (<span style="color:#b00040">address</span>) {
-    <span style="color:#008000;font-weight:bold">return</span> owner;
-  }
-
-}
-</code></pre></div><p>This is a very simple contract that we will take as an example.</p>
-<h2 id="getting-the-right-tools-for-binding">Getting the right tools for binding</h2>
-<p>A good starting point is this <a href="https://github.com/ethereum/go-ethereum/wiki/Native-DApps:-Go-bindings-to-Ethereum-contracts">wiki</a>.</p>
-<p>You will need to follow the install procedure of <a href="https://github.com/ethereum/go-ethereum">go-ethereum</a>.</p>
-<p>Once done, you should have the abigen executable available on your command line.</p>
-<h2 id="automatically-generating-the-go-file">Automatically generating the go file</h2>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">abigen --sol contracts/Trigger.sol --pkg main --out trigger.go
-</code></pre></div><p>If everything is fine, you should now have a file named trigger.go</p>
-<h2 id="using-the-generated-file-from-main">Using the generated file from main</h2>
-<p>You first need to have a node running (parity, geth, testrpc&hellip;). We will assume it&rsquo;s listening on port 9012.
-You then need to deploy your contract and write down the deployment address (you can use truffle or simple deploy your contract manually or use the following code with a working key pair).</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#008000;font-weight:bold">package</span> main
-
-<span style="color:#008000;font-weight:bold">import</span> (
-  <span style="color:#ba2121">&#34;fmt&#34;</span>
-  <span style="color:#ba2121">&#34;log&#34;</span>
-  <span style="color:#ba2121">&#34;strings&#34;</span>
-  <span style="color:#ba2121">&#34;time&#34;</span>
-
-  <span style="color:#ba2121">&#34;github.com/ethereum/go-ethereum/accounts/abi/bind&#34;</span>
-  <span style="color:#ba2121">&#34;github.com/ethereum/go-ethereum/accounts/abi/bind/backends&#34;</span>
-  <span style="color:#ba2121">&#34;github.com/ethereum/go-ethereum/rpc&#34;</span>
-)
-
-<span style="color:#008000;font-weight:bold">func</span> <span style="color:#00f">main</span>() {
-  <span style="color:#408080;font-style:italic">// Create an IPC based RPC connection to a remote node
-</span><span style="color:#408080;font-style:italic"></span>  conn, err <span style="color:#666">:=</span> rpc.<span style="color:#00f">NewHTTPClient</span>(<span style="color:#ba2121">&#34;http://localhost:9012&#34;</span>)
-  <span style="color:#008000;font-weight:bold">if</span> err <span style="color:#666">!=</span> <span style="color:#008000;font-weight:bold">nil</span> {
-    log.<span style="color:#00f">Fatalf</span>(<span style="color:#ba2121">&#34;Failed to connect to the Ethereum client: %v&#34;</span>, err)
-  }
-
-  <span style="color:#408080;font-style:italic">// IF YOU WANT TO DEPLOY YOURSELF
-</span><span style="color:#408080;font-style:italic"></span>  <span style="color:#408080;font-style:italic">// this is the json found in your geth chain/keystore folder
-</span><span style="color:#408080;font-style:italic"></span>  key <span style="color:#666">:=</span> <span style="color:#ba2121">`{&#34;address&#34;:&#34;f2759b4a699dae4fdc3383a0d7a92cfc246315cd&#34;,&#34;crypto&#34;:{&#34;cipher&#34;:&#34;aes-128-ctr&#34;,&#34;ciphertext&#34;:&#34;a96fe235356c7ebe6520d2fa1dcc0fd67199cb490fb18c39ffabbb6880a6b3d6&#34;,&#34;cipherparams&#34;:{&#34;iv&#34;:&#34;47182104a4811f8da09c0bafc3743e2a&#34;},&#34;kdf&#34;:&#34;scrypt&#34;,&#34;kdfparams&#34;:{&#34;dklen&#34;:32,&#34;n&#34;:262144,&#34;p&#34;:1,&#34;r&#34;:8,&#34;salt&#34;:&#34;81c82f97edb0ee1036e63d1de57b7851271273971803e60a5cbb011e85baa251&#34;},&#34;mac&#34;:&#34;09f107c9af8efcb932354d939beb7b2c0cebcfd70362d68905de554304a7cfff&#34;},&#34;id&#34;:&#34;eb7ed04f-e996-4bda-893b-28dc6ac24626&#34;,&#34;version&#34;:3}`</span>
-  auth, err <span style="color:#666">:=</span> bind.<span style="color:#00f">NewTransactor</span>(strings.<span style="color:#00f">NewReader</span>(key), <span style="color:#ba2121">&#34;1234567890&#34;</span>)
-  <span style="color:#008000;font-weight:bold">if</span> err <span style="color:#666">!=</span> <span style="color:#008000;font-weight:bold">nil</span> {
-    log.<span style="color:#00f">Fatalf</span>(<span style="color:#ba2121">&#34;Failed to create authorized transactor: %v&#34;</span>, err)
-  }
-  <span style="color:#408080;font-style:italic">// Deploy a new awesome contract for the binding demo
-</span><span style="color:#408080;font-style:italic"></span>  triggerAddr, _, trigger, err <span style="color:#666">:=</span> <span style="color:#00f">DeployTrigger</span>(auth, backends.<span style="color:#00f">NewRPCBackend</span>(conn))
-  <span style="color:#008000;font-weight:bold">if</span> err <span style="color:#666">!=</span> <span style="color:#008000;font-weight:bold">nil</span> {
-    log.<span style="color:#00f">Fatalf</span>(<span style="color:#ba2121">&#34;Failed to deploy new trigger contract: %v&#34;</span>, err)
-  }
-  <span style="color:#408080;font-style:italic">// Don&#39;t even wait, check its presence in the local pending state
-</span><span style="color:#408080;font-style:italic"></span>  time.<span style="color:#00f">Sleep</span>(<span style="color:#666">5</span> <span style="color:#666">*</span> time.Second) <span style="color:#408080;font-style:italic">// Allow it to be processed by the local node :P
-</span><span style="color:#408080;font-style:italic"></span>  <span style="color:#408080;font-style:italic">// END IF YOU WANT TO DEPLOY YOURSELF
-</span><span style="color:#408080;font-style:italic"></span>
-  <span style="color:#408080;font-style:italic">// IF YOU HAVE ALREADY DEPLOYED IT
-</span><span style="color:#408080;font-style:italic"></span>  <span style="color:#408080;font-style:italic">// deployedTriggerAddr := &#34;0xe2359b4a699dae4fdc3383a0d7a92cfc246315ce&#34;
-</span><span style="color:#408080;font-style:italic"></span>  deployedTriggerAddr <span style="color:#666">:=</span> triggerAddr
-  trigger, err = <span style="color:#00f">NewTrigger</span>(deployedTriggerAddr, backends.<span style="color:#00f">NewRPCBackend</span>(conn))
-  <span style="color:#008000;font-weight:bold">if</span> err <span style="color:#666">!=</span> <span style="color:#008000;font-weight:bold">nil</span> {
-    log.<span style="color:#00f">Fatalf</span>(<span style="color:#ba2121">&#34;Failed to instantiate a trigger contract: %v&#34;</span>, err)
-  }
-  <span style="color:#408080;font-style:italic">// END IF YOU HAVE ALREADY DEPLOYED IT
-</span><span style="color:#408080;font-style:italic"></span>
-  owner, err <span style="color:#666">:=</span> trigger.<span style="color:#00f">GetOwner</span>(<span style="color:#008000;font-weight:bold">nil</span>)
-  <span style="color:#008000;font-weight:bold">if</span> err <span style="color:#666">!=</span> <span style="color:#008000;font-weight:bold">nil</span> {
-    log.<span style="color:#00f">Fatalf</span>(<span style="color:#ba2121">&#34;Failed to retrieve token name: %v&#34;</span>, err)
-  }
-  fmt.<span style="color:#00f">Printf</span>(<span style="color:#ba2121">&#34;owner address: 0x%x\n&#34;</span>, owner)
-}
-</code></pre></div><p>then, just run it</p>
-<pre><code>go run *.go
-owner address: 0xf2759b4a699dae4fdc3383a0d7a92cfc246315cd
-</code></pre><p>Et voila!</p>
-<h2 id="existing-issues">Existing issues</h2>
-<p>We have still not talked about listening to events.
-There are also still issues as soon as the contract imports other contracts, I will finish the writing once these are done.</p>
-
-    </section>
-
-    <hr>
-
-    <footer class="post-footer">
-        <section class="f-1">
-            
-
-            <p class="f-post-time"><time datetime="2016-10-10T12:54:00&#43;08:00">October 10, 2016</time></p>
-        </section>
-
-        <section class="f-2">
-            <section class="share">
-                <span>Share:
-                <a class="icon-twitter" href="http://twitter.com/share?text=Ethereum%20contracts%20and%20Golang&url=https%3a%2f%2fvincentserpoul.github.io%2fpost%2fbinding-ethereum-golang%2f"
-                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
-                    <i class="fa fa-twitter"></i>
-                </a>
-                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fvincentserpoul.github.io%2fpost%2fbinding-ethereum-golang%2f"
-                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
-                    <i class="fa fa-facebook"></i>
-                </a>
-                <a class="icon-google-plus" href="https://plus.google.com/share?url=https%3a%2f%2fvincentserpoul.github.io%2fpost%2fbinding-ethereum-golang%2f"
-                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
-                    <i class="fa fa-google-plus"></i>
-                </a>
-                </span>
-            </section>
-
-            
-            	<span class="f-post-tags"><i class="fa fa-tag"></i>
-            	golang, blockchain, ethereum, dev, testrpc
-            	</span>
-            
-        </section>
-    </footer>
-
-    <div id="disqus_thread"></div>
-<script>
-var disqus_config = function () {
-    this.page.url = "https://vincentserpoul.github.io/post/binding-ethereum-golang/";  
-    this.page.identifier = "https://vincentserpoul.github.io/post/binding-ethereum-golang/"; 
-};
-
-(function() { 
-    var d = document, s = d.createElement('script');
-    s.src = '//vincentserpoul-tech-corner.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</article>
-	</div>
-</main>
-    <footer id="site-footer">
-        <div class="container">
-            <a href="https://vincentserpoul.github.io/index.xml" title="Get the RSS feed"><span class="tooltip"><i class="fa fa-rss"></i></span></a>
-        </div>
-    </footer>
-
-    <script type="text/javascript" src="https://vincentserpoul.github.io/js/fittext.js"></script>
-    <script type="text/javascript">
-      $(".heading").fitText();
-    </script>
-
-    
+    </style>
+</noscript>
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 	ga('create', 'UA-81802018-1', 'auto');
 	
 	ga('send', 'pageview');
 }
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
+</script><meta property="og:title" content="Ethereum contracts and Golang" />
+<meta property="og:description" content="binding Ethereum contracts in golang" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://vincentserpoul.github.io/post/binding-ethereum-golang/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2016-10-10T12:54:00&#43;08:00" />
+<meta property="article:modified_time" content="2016-10-10T12:54:00&#43;08:00" /><meta property="og:site_name" content="Vincent Serpoul" />
 
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Ethereum contracts and Golang"/>
+<meta name="twitter:description" content="binding Ethereum contracts in golang"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://vincentserpoul.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Ethereum contracts and Golang",
+      "item": "https://vincentserpoul.github.io/post/binding-ethereum-golang/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Ethereum contracts and Golang",
+  "name": "Ethereum contracts and Golang",
+  "description": "binding Ethereum contracts in golang",
+  "keywords": [
+    "golang", "blockchain", "ethereum", "dev", "testrpc"
+  ],
+  "articleBody": "The contract contract Trigger {  function () {  throw;  }   address owner;   function Trigger() {  owner = msg.sender;  }   event TriggerEvt(address _sender, uint _trigger);   function trigger(uint _trigger) {  TriggerEvt(msg.sender, _trigger);  }   function getOwner() constant returns (address) {  return owner;  }  } This is a very simple contract that we will take as an example.\nGetting the right tools for binding A good starting point is this wiki.\nYou will need to follow the install procedure of go-ethereum.\nOnce done, you should have the abigen executable available on your command line.\nAutomatically generating the go file abigen --sol contracts/Trigger.sol --pkg main --out trigger.go If everything is fine, you should now have a file named trigger.go\nUsing the generated file from main You first need to have a node running (parity, geth, testrpc…). We will assume it’s listening on port 9012. You then need to deploy your contract and write down the deployment address (you can use truffle or simple deploy your contract manually or use the following code with a working key pair).\npackage main  import (  \"fmt\"  \"log\"  \"strings\"  \"time\"   \"github.com/ethereum/go-ethereum/accounts/abi/bind\"  \"github.com/ethereum/go-ethereum/accounts/abi/bind/backends\"  \"github.com/ethereum/go-ethereum/rpc\" )  func main() {  // Create an IPC based RPC connection to a remote node  conn, err := rpc.NewHTTPClient(\"http://localhost:9012\")  if err != nil {  log.Fatalf(\"Failed to connect to the Ethereum client: %v\", err)  }   // IF YOU WANT TO DEPLOY YOURSELF  // this is the json found in your geth chain/keystore folder  key := `{\"address\":\"f2759b4a699dae4fdc3383a0d7a92cfc246315cd\",\"crypto\":{\"cipher\":\"aes-128-ctr\",\"ciphertext\":\"a96fe235356c7ebe6520d2fa1dcc0fd67199cb490fb18c39ffabbb6880a6b3d6\",\"cipherparams\":{\"iv\":\"47182104a4811f8da09c0bafc3743e2a\"},\"kdf\":\"scrypt\",\"kdfparams\":{\"dklen\":32,\"n\":262144,\"p\":1,\"r\":8,\"salt\":\"81c82f97edb0ee1036e63d1de57b7851271273971803e60a5cbb011e85baa251\"},\"mac\":\"09f107c9af8efcb932354d939beb7b2c0cebcfd70362d68905de554304a7cfff\"},\"id\":\"eb7ed04f-e996-4bda-893b-28dc6ac24626\",\"version\":3}`  auth, err := bind.NewTransactor(strings.NewReader(key), \"1234567890\")  if err != nil {  log.Fatalf(\"Failed to create authorized transactor: %v\", err)  }  // Deploy a new awesome contract for the binding demo  triggerAddr, _, trigger, err := DeployTrigger(auth, backends.NewRPCBackend(conn))  if err != nil {  log.Fatalf(\"Failed to deploy new trigger contract: %v\", err)  }  // Don't even wait, check its presence in the local pending state  time.Sleep(5 * time.Second) // Allow it to be processed by the local node :P  // END IF YOU WANT TO DEPLOY YOURSELF   // IF YOU HAVE ALREADY DEPLOYED IT  // deployedTriggerAddr := \"0xe2359b4a699dae4fdc3383a0d7a92cfc246315ce\"  deployedTriggerAddr := triggerAddr  trigger, err = NewTrigger(deployedTriggerAddr, backends.NewRPCBackend(conn))  if err != nil {  log.Fatalf(\"Failed to instantiate a trigger contract: %v\", err)  }  // END IF YOU HAVE ALREADY DEPLOYED IT   owner, err := trigger.GetOwner(nil)  if err != nil {  log.Fatalf(\"Failed to retrieve token name: %v\", err)  }  fmt.Printf(\"owner address: 0x%x\\n\", owner) } then, just run it\ngo run *.go owner address: 0xf2759b4a699dae4fdc3383a0d7a92cfc246315cd Et voila!\nExisting issues We have still not talked about listening to events. There are also still issues as soon as the contract imports other contracts, I will finish the writing once these are done.\n",
+  "wordCount" : "429",
+  "inLanguage": "en",
+  "datePublished": "2016-10-10T12:54:00+08:00",
+  "dateModified": "2016-10-10T12:54:00+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Me"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://vincentserpoul.github.io/post/binding-ethereum-golang/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "VS tech corner",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://vincentserpoul.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://vincentserpoul.github.io/" accesskey="h" title="Home (Alt + H)">Home</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://vincentserpoul.github.io/tags/" title="tags">
+                    <span>tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://vincentserpoul.github.io/" title="vincentserpoul.github.io">
+                    <span>vincentserpoul.github.io</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://vincentserpoul.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://vincentserpoul.github.io/post/">Posts</a></div>
+    <h1 class="post-title">
+      Ethereum contracts and Golang
+    </h1>
+    <div class="post-description">
+      binding Ethereum contracts in golang
+    </div>
+    <div class="post-meta"><span title='2016-10-10 12:54:00 +0800 +08'>October 10, 2016</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Me
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#the-contract" aria-label="The contract">The contract</a></li>
+                <li>
+                    <a href="#getting-the-right-tools-for-binding" aria-label="Getting the right tools for binding">Getting the right tools for binding</a></li>
+                <li>
+                    <a href="#automatically-generating-the-go-file" aria-label="Automatically generating the go file">Automatically generating the go file</a></li>
+                <li>
+                    <a href="#using-the-generated-file-from-main" aria-label="Using the generated file from main">Using the generated file from main</a></li>
+                <li>
+                    <a href="#existing-issues" aria-label="Existing issues">Existing issues</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="the-contract">The contract<a hidden class="anchor" aria-hidden="true" href="#the-contract">#</a></h2>
+<div class="highlight"><pre tabindex="0" style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-solidity" data-lang="solidity"><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">contract</span> <span style="color:#00f;font-weight:bold">Trigger</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">function</span> () {
+</span></span><span style="display:flex;"><span>      <span style="color:#008000;font-weight:bold">throw</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#b00040">address</span> owner;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">function</span> <span style="color:#00f">Trigger</span>() {
+</span></span><span style="display:flex;"><span>      owner <span style="color:#666">=</span> <span style="color:#008000">msg</span>.<span style="color:#008000">sender</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">event</span> <span style="color:#00f;font-weight:bold">TriggerEvt</span>(<span style="color:#b00040">address</span> _sender, <span style="color:#b00040">uint</span> _trigger);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">function</span> <span style="color:#00f">trigger</span>(<span style="color:#b00040">uint</span> _trigger) {
+</span></span><span style="display:flex;"><span>      TriggerEvt(<span style="color:#008000">msg</span>.<span style="color:#008000">sender</span>, _trigger);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">function</span> <span style="color:#00f">getOwner</span>() <span style="color:#008000;font-weight:bold">constant</span> <span style="color:#008000;font-weight:bold">returns</span> (<span style="color:#b00040">address</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#008000;font-weight:bold">return</span> owner;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>This is a very simple contract that we will take as an example.</p>
+<h2 id="getting-the-right-tools-for-binding">Getting the right tools for binding<a hidden class="anchor" aria-hidden="true" href="#getting-the-right-tools-for-binding">#</a></h2>
+<p>A good starting point is this <a href="https://github.com/ethereum/go-ethereum/wiki/Native-DApps:-Go-bindings-to-Ethereum-contracts">wiki</a>.</p>
+<p>You will need to follow the install procedure of <a href="https://github.com/ethereum/go-ethereum">go-ethereum</a>.</p>
+<p>Once done, you should have the abigen executable available on your command line.</p>
+<h2 id="automatically-generating-the-go-file">Automatically generating the go file<a hidden class="anchor" aria-hidden="true" href="#automatically-generating-the-go-file">#</a></h2>
+<div class="highlight"><pre tabindex="0" style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>abigen --sol contracts/Trigger.sol --pkg main --out trigger.go
+</span></span></code></pre></div><p>If everything is fine, you should now have a file named trigger.go</p>
+<h2 id="using-the-generated-file-from-main">Using the generated file from main<a hidden class="anchor" aria-hidden="true" href="#using-the-generated-file-from-main">#</a></h2>
+<p>You first need to have a node running (parity, geth, testrpc&hellip;). We will assume it&rsquo;s listening on port 9012.
+You then need to deploy your contract and write down the deployment address (you can use truffle or simple deploy your contract manually or use the following code with a working key pair).</p>
+<div class="highlight"><pre tabindex="0" style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">package</span> main
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">import</span> (
+</span></span><span style="display:flex;"><span>  <span style="color:#ba2121">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ba2121">&#34;log&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ba2121">&#34;strings&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ba2121">&#34;time&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ba2121">&#34;github.com/ethereum/go-ethereum/accounts/abi/bind&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ba2121">&#34;github.com/ethereum/go-ethereum/accounts/abi/bind/backends&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ba2121">&#34;github.com/ethereum/go-ethereum/rpc&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">func</span> <span style="color:#00f">main</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#408080;font-style:italic">// Create an IPC based RPC connection to a remote node
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"></span>  conn, err <span style="color:#666">:=</span> rpc.<span style="color:#00f">NewHTTPClient</span>(<span style="color:#ba2121">&#34;http://localhost:9012&#34;</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">if</span> err <span style="color:#666">!=</span> <span style="color:#008000;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>    log.<span style="color:#00f">Fatalf</span>(<span style="color:#ba2121">&#34;Failed to connect to the Ethereum client: %v&#34;</span>, err)
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#408080;font-style:italic">// IF YOU WANT TO DEPLOY YOURSELF
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"></span>  <span style="color:#408080;font-style:italic">// this is the json found in your geth chain/keystore folder
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"></span>  key <span style="color:#666">:=</span> <span style="color:#ba2121">`{&#34;address&#34;:&#34;f2759b4a699dae4fdc3383a0d7a92cfc246315cd&#34;,&#34;crypto&#34;:{&#34;cipher&#34;:&#34;aes-128-ctr&#34;,&#34;ciphertext&#34;:&#34;a96fe235356c7ebe6520d2fa1dcc0fd67199cb490fb18c39ffabbb6880a6b3d6&#34;,&#34;cipherparams&#34;:{&#34;iv&#34;:&#34;47182104a4811f8da09c0bafc3743e2a&#34;},&#34;kdf&#34;:&#34;scrypt&#34;,&#34;kdfparams&#34;:{&#34;dklen&#34;:32,&#34;n&#34;:262144,&#34;p&#34;:1,&#34;r&#34;:8,&#34;salt&#34;:&#34;81c82f97edb0ee1036e63d1de57b7851271273971803e60a5cbb011e85baa251&#34;},&#34;mac&#34;:&#34;09f107c9af8efcb932354d939beb7b2c0cebcfd70362d68905de554304a7cfff&#34;},&#34;id&#34;:&#34;eb7ed04f-e996-4bda-893b-28dc6ac24626&#34;,&#34;version&#34;:3}`</span>
+</span></span><span style="display:flex;"><span>  auth, err <span style="color:#666">:=</span> bind.<span style="color:#00f">NewTransactor</span>(strings.<span style="color:#00f">NewReader</span>(key), <span style="color:#ba2121">&#34;1234567890&#34;</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">if</span> err <span style="color:#666">!=</span> <span style="color:#008000;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>    log.<span style="color:#00f">Fatalf</span>(<span style="color:#ba2121">&#34;Failed to create authorized transactor: %v&#34;</span>, err)
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#408080;font-style:italic">// Deploy a new awesome contract for the binding demo
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"></span>  triggerAddr, _, trigger, err <span style="color:#666">:=</span> <span style="color:#00f">DeployTrigger</span>(auth, backends.<span style="color:#00f">NewRPCBackend</span>(conn))
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">if</span> err <span style="color:#666">!=</span> <span style="color:#008000;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>    log.<span style="color:#00f">Fatalf</span>(<span style="color:#ba2121">&#34;Failed to deploy new trigger contract: %v&#34;</span>, err)
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#408080;font-style:italic">// Don&#39;t even wait, check its presence in the local pending state
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"></span>  time.<span style="color:#00f">Sleep</span>(<span style="color:#666">5</span> <span style="color:#666">*</span> time.Second) <span style="color:#408080;font-style:italic">// Allow it to be processed by the local node :P
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"></span>  <span style="color:#408080;font-style:italic">// END IF YOU WANT TO DEPLOY YOURSELF
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>  <span style="color:#408080;font-style:italic">// IF YOU HAVE ALREADY DEPLOYED IT
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"></span>  <span style="color:#408080;font-style:italic">// deployedTriggerAddr := &#34;0xe2359b4a699dae4fdc3383a0d7a92cfc246315ce&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"></span>  deployedTriggerAddr <span style="color:#666">:=</span> triggerAddr
+</span></span><span style="display:flex;"><span>  trigger, err = <span style="color:#00f">NewTrigger</span>(deployedTriggerAddr, backends.<span style="color:#00f">NewRPCBackend</span>(conn))
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">if</span> err <span style="color:#666">!=</span> <span style="color:#008000;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>    log.<span style="color:#00f">Fatalf</span>(<span style="color:#ba2121">&#34;Failed to instantiate a trigger contract: %v&#34;</span>, err)
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#408080;font-style:italic">// END IF YOU HAVE ALREADY DEPLOYED IT
+</span></span></span><span style="display:flex;"><span><span style="color:#408080;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>  owner, err <span style="color:#666">:=</span> trigger.<span style="color:#00f">GetOwner</span>(<span style="color:#008000;font-weight:bold">nil</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">if</span> err <span style="color:#666">!=</span> <span style="color:#008000;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>    log.<span style="color:#00f">Fatalf</span>(<span style="color:#ba2121">&#34;Failed to retrieve token name: %v&#34;</span>, err)
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  fmt.<span style="color:#00f">Printf</span>(<span style="color:#ba2121">&#34;owner address: 0x%x\n&#34;</span>, owner)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>then, just run it</p>
+<pre tabindex="0"><code>go run *.go
+owner address: 0xf2759b4a699dae4fdc3383a0d7a92cfc246315cd
+</code></pre><p>Et voila!</p>
+<h2 id="existing-issues">Existing issues<a hidden class="anchor" aria-hidden="true" href="#existing-issues">#</a></h2>
+<p>We have still not talked about listening to events.
+There are also still issues as soon as the contract imports other contracts, I will finish the writing once these are done.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://vincentserpoul.github.io/tags/golang/">golang</a></li>
+      <li><a href="https://vincentserpoul.github.io/tags/blockchain/">blockchain</a></li>
+      <li><a href="https://vincentserpoul.github.io/tags/ethereum/">ethereum</a></li>
+      <li><a href="https://vincentserpoul.github.io/tags/dev/">dev</a></li>
+      <li><a href="https://vincentserpoul.github.io/tags/testrpc/">testrpc</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://vincentserpoul.github.io/post/ethereum-react-dapps/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>Ethereum react dapps</span>
+  </a>
+  <a class="next" href="https://vincentserpoul.github.io/post/on-microservices-and-scaling/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>Summary of UBER lessons on scaling microservices</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://vincentserpoul.github.io/">VS tech corner</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
 </body>
+
 </html>

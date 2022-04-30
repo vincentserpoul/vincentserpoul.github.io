@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>metamask on VS tech corner</title>
     <link>https://vincentserpoul.github.io/tags/metamask/</link>
@@ -13,10 +13,7 @@
       <pubDate>Fri, 12 Aug 2016 12:00:27 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/ethereum-first-dapp-part-3/</guid>
-      <description>setting up a light wallet In order to have a setup close to what the DAPP would be, we will use (metamask) [http://www.metamask.io] as a light wallet (there are other choices).
-Metamask allows you to connect to a custom node.
-We will then connect to our node, http://localhost:9012 If everthing is fine, metamasks should indicate it&amp;rsquo;s connected.
-Then, we can import the metamask account to our local node by simply specifying the datadir we have setup the node data.</description>
+      <description>Ethereum first dapp - part 3</description>
     </item>
     
   </channel>

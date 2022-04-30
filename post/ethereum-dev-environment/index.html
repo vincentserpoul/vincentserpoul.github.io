@@ -1,192 +1,394 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]><html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--><html class="no-js" prefix="og: http://ogp.me/ns#" xmlns:og="http://ogp.me/ns#"><!--<![endif]-->
+<html lang="en" dir="auto">
 
-    <head>
-                <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="description" content="Ethereum dev environment">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
-        <meta name="mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <meta name="author" content="">
-        <meta name="keywords" content="awesome, definitely">
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Ethereum dev environment | VS tech corner</title>
+<meta name="keywords" content="golang, blockchain, ethereum, geth, dev, testrpc">
+<meta name="description" content="Ethereum dev environment">
+<meta name="author" content="Me">
+<link rel="canonical" href="https://vincentserpoul.github.io/post/ethereum-dev-environment/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.ec8da366ca2fb647537ccb7a8f6fa5b4e9cd3c7a0d3171dd2d3baad1e49c8bfc.css" integrity="sha256-7I2jZsovtkdTfMt6j2&#43;ltOnNPHoNMXHdLTuq0eSci/w=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.2840b7fccd34145847db71a290569594bdbdb00047097f75d6495d162f5d7dff.js" integrity="sha256-KEC3/M00FFhH23GikFaVlL29sABHCX911kldFi9dff8="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://vincentserpoul.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://vincentserpoul.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://vincentserpoul.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://vincentserpoul.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://vincentserpoul.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-81802018-1', 'auto');
 	
-        <meta property="og:site_name" content="VS tech corner">
-        <meta property="og:title" content="VS tech corner">
-        <meta property="og:url" content="https://vincentserpoul.github.io/post/ethereum-dev-environment/">
-        <meta property="og:description" content="">
-    
-        <meta property="og:type" content="article" />
-        <meta property="og:article:author" content="" />
-        <meta property="og:article:published_time" content="2016-08-01T08:27:27&#43;08:00" />
-    
-        <meta name="generator" content="Hugo 0.83.1" />
-        <title>Ethereum dev environment &middot; VS tech corner </title>
-        <link rel="canonical" href="https://vincentserpoul.github.io/" />
-        <link rel="alternate" type="application/rss+xml" title="RSS" href="">
-        <link rel="stylesheet" type='text/css' href="https://vincentserpoul.github.io/css/main.css"/>
-        <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300|Montserrat:700' rel='stylesheet' type='text/css'>
-        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-        <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-    </head>
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="Ethereum dev environment" />
+<meta property="og:description" content="Ethereum dev environment" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://vincentserpoul.github.io/post/ethereum-dev-environment/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2016-08-01T08:27:27&#43;08:00" />
+<meta property="article:modified_time" content="2016-08-01T08:27:27&#43;08:00" /><meta property="og:site_name" content="Vincent Serpoul" />
 
-<body>
-<!--[if lt IE 7]><p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chrome/‎">install Google Chrome</a> to experience this site.</p><![endif]-->
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Ethereum dev environment"/>
+<meta name="twitter:description" content="Ethereum dev environment"/>
 
-    <header id="site-header">
-        <div class="container">
-            <a href="https://vincentserpoul.github.io/" alt="VS tech corner"><h1 class="blog-title heading">VS tech corner</h1></a>
-            <p class="blog-description"></p>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://vincentserpoul.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Ethereum dev environment",
+      "item": "https://vincentserpoul.github.io/post/ethereum-dev-environment/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Ethereum dev environment",
+  "name": "Ethereum dev environment",
+  "description": "Ethereum dev environment",
+  "keywords": [
+    "golang", "blockchain", "ethereum", "geth", "dev", "testrpc"
+  ],
+  "articleBody": "Part 1 - Setup your ethereum node There are many ways you can setup a node to dev an Ethereum dapp. You can use the live network: not advisable obviously for cost and speed reasons. You can use the test network: not advisable for speed reasons. You can use a testchain set up with Geth: easy but a bit tedious as you need to mine. You can the ethereum testrpc: easiest!\nI will talk about the last two setup in this article.\nUsing testrpc Simply install through npm (if you want it globally available, add -g after install, as usual)\nnpm install ethereumjs-testrpc And then run it\nnode_modules/ethereumjs-testrpc/bin/testrpc Using geth Download geth latest release (https://github.com/ethereum/go-ethereum/releases) and extract it.\nCreate a file customGenesis.json\n{  \"nonce\": \"0x0000000000000042\",  \"timestamp\": \"0x0\",  \"parentHash\": \"0x0000000000000000000000000000000000000000000000000000000000000000\",  \"extraData\": \"0x0\",  \"gasLimit\": \"0x8000000\",  \"difficulty\": \"0x400\",  \"mixhash\": \"0x0000000000000000000000000000000000000000000000000000000000000000\",  \"coinbase\": \"0x3333333333333333333333333333333333333333\",  \"alloc\": {} } then init yout node with the genesis block above\nchmod +x geth ./geth init ./customGenesis.json Run your node with console attached ./geth \\  --identity \"gethTest\" \\  --rpc --rpcport \"9012\" \\  --rpccorsdomain \"YOUR_TEST_DOMAIN_APP_RUN_FROM\" \\  --datadir \"./testChain\" \\  --port \"30303\" \\  --nodiscover \\  --rpcapi \"db,eth,net,web3\" \\  --networkid 1999 \\  --dev console Create a base account  eth.accounts []  personal.newAccount() Passphrase: Repeat passphrase: \"0xedea6958c57fc0cd4bd63b3e7b395393dc76bfb6\"  eth.accounts [\"0xedea6958c57fc0cd4bd63b3e7b395393dc76bfb6\"] Mine on your newly created account miner.setEtherbase(eth.accounts[0]) miner.start(8) miner.stop() Check if the mining worked\n eth.getBalance(eth.accounts[0]).toNumber(); 55000000000000000000 In the next posts, we will start talking about development of dapps.\n",
+  "wordCount" : "236",
+  "inLanguage": "en",
+  "datePublished": "2016-08-01T08:27:27+08:00",
+  "dateModified": "2016-08-01T08:27:27+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Me"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://vincentserpoul.github.io/post/ethereum-dev-environment/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "VS tech corner",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://vincentserpoul.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://vincentserpoul.github.io/" accesskey="h" title="Home (Alt + H)">Home</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
         </div>
-    </header>
-<main class="content" role="main">
-	<div class="container">
-		<article class="post">
-	<header class="post-header">
-        <h3 class="p-post-title">Ethereum dev environment</h3>
-    </header>
+        <ul id="menu">
+            <li>
+                <a href="https://vincentserpoul.github.io/tags/" title="tags">
+                    <span>tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://vincentserpoul.github.io/" title="vincentserpoul.github.io">
+                    <span>vincentserpoul.github.io</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
 
-    <section class="post-content">
-        <h2 id="part-1---setup-your-ethereum-node">Part 1 - Setup your ethereum node</h2>
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://vincentserpoul.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://vincentserpoul.github.io/post/">Posts</a></div>
+    <h1 class="post-title">
+      Ethereum dev environment
+    </h1>
+    <div class="post-description">
+      Ethereum dev environment
+    </div>
+    <div class="post-meta"><span title='2016-08-01 08:27:27 +0800 +08'>August 1, 2016</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Me
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#part-1---setup-your-ethereum-node" aria-label="Part 1 - Setup your ethereum node">Part 1 - Setup your ethereum node</a><ul>
+                        
+                <li>
+                    <a href="#using-testrpc" aria-label="Using testrpc">Using testrpc</a></li>
+                <li>
+                    <a href="#using-geth" aria-label="Using geth">Using geth</a><ul>
+                        
+                <li>
+                    <a href="#run-your-node-with-console-attached" aria-label="Run your node with console attached">Run your node with console attached</a></li>
+                <li>
+                    <a href="#create-a-base-account" aria-label="Create a base account">Create a base account</a></li>
+                <li>
+                    <a href="#mine-on-your-newly-created-account" aria-label="Mine on your newly created account">Mine on your newly created account</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="part-1---setup-your-ethereum-node">Part 1 - Setup your ethereum node<a hidden class="anchor" aria-hidden="true" href="#part-1---setup-your-ethereum-node">#</a></h2>
 <p>There are many ways you can setup a node to dev an Ethereum dapp.
 You can use the live network: not advisable obviously for cost and speed reasons.
 You can use the test network: not advisable for speed reasons.
 You can use a testchain set up with Geth: easy but a bit tedious as you need to mine.
 You can the ethereum testrpc: easiest!</p>
 <p>I will talk about the last two setup in this article.</p>
-<h3 id="using-testrpc">Using testrpc</h3>
+<h3 id="using-testrpc">Using testrpc<a hidden class="anchor" aria-hidden="true" href="#using-testrpc">#</a></h3>
 <p>Simply install through npm (if you want it globally available, add -g after install, as usual)</p>
-<pre><code>npm install ethereumjs-testrpc
+<pre tabindex="0"><code>npm install ethereumjs-testrpc
 </code></pre><p>And then run it</p>
-<pre><code>node_modules/ethereumjs-testrpc/bin/testrpc
-</code></pre><h3 id="using-geth">Using geth</h3>
+<pre tabindex="0"><code>node_modules/ethereumjs-testrpc/bin/testrpc
+</code></pre><h3 id="using-geth">Using geth<a hidden class="anchor" aria-hidden="true" href="#using-geth">#</a></h3>
 <p>Download geth latest release (<a href="https://github.com/ethereum/go-ethereum/releases">https://github.com/ethereum/go-ethereum/releases</a>)
 and extract it.</p>
 <p>Create a file customGenesis.json</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#008000;font-weight:bold">&#34;nonce&#34;</span>: <span style="color:#ba2121">&#34;0x0000000000000042&#34;</span>,
-  <span style="color:#008000;font-weight:bold">&#34;timestamp&#34;</span>: <span style="color:#ba2121">&#34;0x0&#34;</span>,
-  <span style="color:#008000;font-weight:bold">&#34;parentHash&#34;</span>: <span style="color:#ba2121">&#34;0x0000000000000000000000000000000000000000000000000000000000000000&#34;</span>,
-  <span style="color:#008000;font-weight:bold">&#34;extraData&#34;</span>: <span style="color:#ba2121">&#34;0x0&#34;</span>,
-  <span style="color:#008000;font-weight:bold">&#34;gasLimit&#34;</span>: <span style="color:#ba2121">&#34;0x8000000&#34;</span>,
-  <span style="color:#008000;font-weight:bold">&#34;difficulty&#34;</span>: <span style="color:#ba2121">&#34;0x400&#34;</span>,
-  <span style="color:#008000;font-weight:bold">&#34;mixhash&#34;</span>: <span style="color:#ba2121">&#34;0x0000000000000000000000000000000000000000000000000000000000000000&#34;</span>,
-  <span style="color:#008000;font-weight:bold">&#34;coinbase&#34;</span>: <span style="color:#ba2121">&#34;0x3333333333333333333333333333333333333333&#34;</span>,
-  <span style="color:#008000;font-weight:bold">&#34;alloc&#34;</span>: {}
-}
-</code></pre></div><p>then init yout node with the genesis block above</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">chmod +x geth
-./geth init ./customGenesis.json
-</code></pre></div><h4 id="run-your-node-with-console-attached">Run your node with console attached</h4>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">./geth <span style="color:#b62;font-weight:bold">\
-</span><span style="color:#b62;font-weight:bold"></span>    --identity <span style="color:#ba2121">&#34;gethTest&#34;</span> <span style="color:#b62;font-weight:bold">\
-</span><span style="color:#b62;font-weight:bold"></span>    --rpc --rpcport <span style="color:#ba2121">&#34;9012&#34;</span> <span style="color:#b62;font-weight:bold">\
-</span><span style="color:#b62;font-weight:bold"></span>    --rpccorsdomain <span style="color:#ba2121">&#34;YOUR_TEST_DOMAIN_APP_RUN_FROM&#34;</span> <span style="color:#b62;font-weight:bold">\
-</span><span style="color:#b62;font-weight:bold"></span>    --datadir <span style="color:#ba2121">&#34;./testChain&#34;</span> <span style="color:#b62;font-weight:bold">\
-</span><span style="color:#b62;font-weight:bold"></span>    --port <span style="color:#ba2121">&#34;30303&#34;</span> <span style="color:#b62;font-weight:bold">\
-</span><span style="color:#b62;font-weight:bold"></span>    --nodiscover <span style="color:#b62;font-weight:bold">\
-</span><span style="color:#b62;font-weight:bold"></span>    --rpcapi <span style="color:#ba2121">&#34;db,eth,net,web3&#34;</span> <span style="color:#b62;font-weight:bold">\
-</span><span style="color:#b62;font-weight:bold"></span>    --networkid <span style="color:#666">1999</span> <span style="color:#b62;font-weight:bold">\
-</span><span style="color:#b62;font-weight:bold"></span>    --dev console
-</code></pre></div><h4 id="create-a-base-account">Create a base account</h4>
-<pre><code>&gt; eth.accounts
+<div class="highlight"><pre tabindex="0" style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">&#34;nonce&#34;</span>: <span style="color:#ba2121">&#34;0x0000000000000042&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">&#34;timestamp&#34;</span>: <span style="color:#ba2121">&#34;0x0&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">&#34;parentHash&#34;</span>: <span style="color:#ba2121">&#34;0x0000000000000000000000000000000000000000000000000000000000000000&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">&#34;extraData&#34;</span>: <span style="color:#ba2121">&#34;0x0&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">&#34;gasLimit&#34;</span>: <span style="color:#ba2121">&#34;0x8000000&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">&#34;difficulty&#34;</span>: <span style="color:#ba2121">&#34;0x400&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">&#34;mixhash&#34;</span>: <span style="color:#ba2121">&#34;0x0000000000000000000000000000000000000000000000000000000000000000&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">&#34;coinbase&#34;</span>: <span style="color:#ba2121">&#34;0x3333333333333333333333333333333333333333&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#008000;font-weight:bold">&#34;alloc&#34;</span>: {}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>then init yout node with the genesis block above</p>
+<div class="highlight"><pre tabindex="0" style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>chmod +x geth
+</span></span><span style="display:flex;"><span>./geth init ./customGenesis.json
+</span></span></code></pre></div><h4 id="run-your-node-with-console-attached">Run your node with console attached<a hidden class="anchor" aria-hidden="true" href="#run-your-node-with-console-attached">#</a></h4>
+<div class="highlight"><pre tabindex="0" style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>./geth <span style="color:#b62;font-weight:bold">\
+</span></span></span><span style="display:flex;"><span><span style="color:#b62;font-weight:bold"></span>    --identity <span style="color:#ba2121">&#34;gethTest&#34;</span> <span style="color:#b62;font-weight:bold">\
+</span></span></span><span style="display:flex;"><span><span style="color:#b62;font-weight:bold"></span>    --rpc --rpcport <span style="color:#ba2121">&#34;9012&#34;</span> <span style="color:#b62;font-weight:bold">\
+</span></span></span><span style="display:flex;"><span><span style="color:#b62;font-weight:bold"></span>    --rpccorsdomain <span style="color:#ba2121">&#34;YOUR_TEST_DOMAIN_APP_RUN_FROM&#34;</span> <span style="color:#b62;font-weight:bold">\
+</span></span></span><span style="display:flex;"><span><span style="color:#b62;font-weight:bold"></span>    --datadir <span style="color:#ba2121">&#34;./testChain&#34;</span> <span style="color:#b62;font-weight:bold">\
+</span></span></span><span style="display:flex;"><span><span style="color:#b62;font-weight:bold"></span>    --port <span style="color:#ba2121">&#34;30303&#34;</span> <span style="color:#b62;font-weight:bold">\
+</span></span></span><span style="display:flex;"><span><span style="color:#b62;font-weight:bold"></span>    --nodiscover <span style="color:#b62;font-weight:bold">\
+</span></span></span><span style="display:flex;"><span><span style="color:#b62;font-weight:bold"></span>    --rpcapi <span style="color:#ba2121">&#34;db,eth,net,web3&#34;</span> <span style="color:#b62;font-weight:bold">\
+</span></span></span><span style="display:flex;"><span><span style="color:#b62;font-weight:bold"></span>    --networkid <span style="color:#666">1999</span> <span style="color:#b62;font-weight:bold">\
+</span></span></span><span style="display:flex;"><span><span style="color:#b62;font-weight:bold"></span>    --dev console
+</span></span></code></pre></div><h4 id="create-a-base-account">Create a base account<a hidden class="anchor" aria-hidden="true" href="#create-a-base-account">#</a></h4>
+<pre tabindex="0"><code>&gt; eth.accounts
 []
 &gt; personal.newAccount()
 Passphrase:
 Repeat passphrase:
-&quot;0xedea6958c57fc0cd4bd63b3e7b395393dc76bfb6&quot;
+&#34;0xedea6958c57fc0cd4bd63b3e7b395393dc76bfb6&#34;
 &gt; eth.accounts
-[&quot;0xedea6958c57fc0cd4bd63b3e7b395393dc76bfb6&quot;]
-</code></pre><h4 id="mine-on-your-newly-created-account">Mine on your newly created account</h4>
-<pre><code>miner.setEtherbase(eth.accounts[0])
+[&#34;0xedea6958c57fc0cd4bd63b3e7b395393dc76bfb6&#34;]
+</code></pre><h4 id="mine-on-your-newly-created-account">Mine on your newly created account<a hidden class="anchor" aria-hidden="true" href="#mine-on-your-newly-created-account">#</a></h4>
+<pre tabindex="0"><code>miner.setEtherbase(eth.accounts[0])
 miner.start(8)
 miner.stop()
 </code></pre><p>Check if the mining worked</p>
-<pre><code>&gt; eth.getBalance(eth.accounts[0]).toNumber();
+<pre tabindex="0"><code>&gt; eth.getBalance(eth.accounts[0]).toNumber();
 55000000000000000000
 </code></pre><p>In the next posts, we will start talking about development of dapps.</p>
 
-    </section>
 
-    <hr>
+  </div>
 
-    <footer class="post-footer">
-        <section class="f-1">
-            
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://vincentserpoul.github.io/tags/golang/">golang</a></li>
+      <li><a href="https://vincentserpoul.github.io/tags/blockchain/">blockchain</a></li>
+      <li><a href="https://vincentserpoul.github.io/tags/ethereum/">ethereum</a></li>
+      <li><a href="https://vincentserpoul.github.io/tags/geth/">geth</a></li>
+      <li><a href="https://vincentserpoul.github.io/tags/dev/">dev</a></li>
+      <li><a href="https://vincentserpoul.github.io/tags/testrpc/">testrpc</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://vincentserpoul.github.io/post/ethereum-first-contract/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>Ethereum first smart contract</span>
+  </a>
+  <a class="next" href="https://vincentserpoul.github.io/post/kubernetes-talk/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>Kubernetes Singapore Birthday Event</span>
+  </a>
+</nav>
 
-            <p class="f-post-time"><time datetime="2016-08-01T08:27:27&#43;08:00">August 1, 2016</time></p>
-        </section>
-
-        <section class="f-2">
-            <section class="share">
-                <span>Share:
-                <a class="icon-twitter" href="http://twitter.com/share?text=Ethereum%20dev%20environment&url=https%3a%2f%2fvincentserpoul.github.io%2fpost%2fethereum-dev-environment%2f"
-                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
-                    <i class="fa fa-twitter"></i>
-                </a>
-                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fvincentserpoul.github.io%2fpost%2fethereum-dev-environment%2f"
-                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
-                    <i class="fa fa-facebook"></i>
-                </a>
-                <a class="icon-google-plus" href="https://plus.google.com/share?url=https%3a%2f%2fvincentserpoul.github.io%2fpost%2fethereum-dev-environment%2f"
-                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
-                    <i class="fa fa-google-plus"></i>
-                </a>
-                </span>
-            </section>
-
-            
-            	<span class="f-post-tags"><i class="fa fa-tag"></i>
-            	golang, blockchain, ethereum, geth, dev, testrpc
-            	</span>
-            
-        </section>
-    </footer>
-
-    <div id="disqus_thread"></div>
-<script>
-var disqus_config = function () {
-    this.page.url = "https://vincentserpoul.github.io/post/ethereum-dev-environment/";  
-    this.page.identifier = "https://vincentserpoul.github.io/post/ethereum-dev-environment/"; 
-};
-
-(function() { 
-    var d = document, s = d.createElement('script');
-    s.src = '//vincentserpoul-tech-corner.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </footer>
 </article>
-	</div>
-</main>
-    <footer id="site-footer">
-        <div class="container">
-            <a href="https://vincentserpoul.github.io/index.xml" title="Get the RSS feed"><span class="tooltip"><i class="fa fa-rss"></i></span></a>
-        </div>
-    </footer>
-
-    <script type="text/javascript" src="https://vincentserpoul.github.io/js/fittext.js"></script>
-    <script type="text/javascript">
-      $(".heading").fitText();
-    </script>
-
+    </main>
     
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-81802018-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://vincentserpoul.github.io/">VS tech corner</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
 
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
 </body>
+
 </html>

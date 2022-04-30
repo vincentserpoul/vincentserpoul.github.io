@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>devcon2 on VS tech corner</title>
     <link>https://vincentserpoul.github.io/tags/devcon2/</link>
@@ -13,7 +13,7 @@
       <pubDate>Fri, 16 Sep 2016 13:44:00 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/ethereum-solidity/</guid>
-      <description>I participated to the devcon2 and blockchain summit last week. Here is my summary!</description>
+      <description>My summary of the blockchain week in Shanghai!</description>
     </item>
     
   </channel>

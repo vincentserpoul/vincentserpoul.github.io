@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>spa on VS tech corner</title>
     <link>https://vincentserpoul.github.io/tags/spa/</link>
@@ -13,16 +13,7 @@
       <pubDate>Tue, 12 Apr 2016 12:22:20 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/learning-react/</guid>
-      <description>React Nothing beats the facebook React page:
-https://facebook.github.io/react/docs/getting-started.html
-Redux Nothing beats the redux tutorial:
-http://redux.js.org/
-And also available on egghead, by Dan Abramov himself:
-https://egghead.io/series/getting-started-with-redux
-A list of tutorials:
-https://github.com/happypoulp/redux-tutorial
-A great detailed introduction to your SPA setup http://blog.joanboixados.com/building-a-boilerplate-for-a-koa-redux-react-application-including-webpack-mocha-and-sass/
-An advanced SPA (still under construction) https://www.gitbook.com/book/tonyhb/redux-without-profanity/details</description>
+      <description>learning how to use react, redux, webpack...</description>
     </item>
     
   </channel>

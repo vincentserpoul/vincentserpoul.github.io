@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>wasm on VS tech corner</title>
     <link>https://vincentserpoul.github.io/tags/wasm/</link>
@@ -13,8 +13,7 @@
       <pubDate>Mon, 03 Jun 2019 13:38:35 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/wasm-intro-talk/</guid>
-      <description>I presented at voxxed days last week.
-Here is the talk I gave, video coming when it&amp;rsquo;s published.</description>
+      <description>wasm talk at voxxed days singapore 2019</description>
     </item>
     
     <item>
@@ -23,11 +22,7 @@ Here is the talk I gave, video coming when it&amp;rsquo;s published.</descriptio
       <pubDate>Mon, 27 Aug 2018 23:22:00 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/playwithwasm-golang/</guid>
-      <description>Here it is, go 1.11 is out, and with it a new compilation target, Web Assembly!
-Let&amp;rsquo;s try it out!
-The test As dumb as it sounds, I needed a simple usecase to test this out. I decided to settle for the dumbest possible thing: a for loop incrementing a variable for 100000000 times.
-The git repo Here it is
-I uploaded it as well on surge for you to see without the hassle</description>
+      <description>golang 1.11 is out, let&amp;#39;s try wasm</description>
     </item>
     
   </channel>

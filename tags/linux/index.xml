@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>linux on VS tech corner</title>
     <link>https://vincentserpoul.github.io/tags/linux/</link>
@@ -13,9 +13,7 @@
       <pubDate>Sat, 20 Apr 2019 19:02:02 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/alpine-rpi0-rust/</guid>
-      <description>If you read my previous posts, you should now have a raspberry-pi running alpine and docker.
-Resources are pretty limited on rpi0, so we are going to deploy programs using rust. Note: golang could have fit in there as well (and ofc all C and close to machine languages).
-Compiling from NOT a rpi0 Obviously, you don&amp;rsquo;t want to compile from a raspberry pi zero, unless you have all the time in the world and love waiting.</description>
+      <description>cross compilation for rust</description>
     </item>
     
     <item>
@@ -24,11 +22,7 @@ Compiling from NOT a rpi0 Obviously, you don&amp;rsquo;t want to compile from a 
       <pubDate>Tue, 16 Apr 2019 11:07:08 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/alpine-linux-rpi0-docker/</guid>
-      <description>Prerequisites  One raspberry pi zero W One sd card  Enable all cgroups On you local linux, mount the partition containing alpine files.
-In the cmdline.txt, add the following:
-echo -ne &amp;#34; cgroup_enable=memory cgroup_enable=cpuset swapaccount=1&amp;#34; &amp;gt;&amp;gt; /run/media/youruser/xxx/cmdline.txt Docker needs all cgroups enabled, so this will do the trick
-On you rpi0 As simple as:
-sudo apk add docker sudo rc-update add docker boot sudo rc-service docker start To make sure your docker env doesn&amp;rsquo;t go in memory (512MB RAM won&amp;rsquo;t bring you far&amp;hellip;), set it on mmcblk0p3 by editing /etc/docker/daemon.</description>
+      <description>installing docker</description>
     </item>
     
     <item>
@@ -37,8 +31,7 @@ sudo apk add docker sudo rc-update add docker boot sudo rc-service docker start 
       <pubDate>Thu, 11 Apr 2019 21:22:13 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/alpine-linux-rpi0/</guid>
-      <description>Prerequisites  One raspberry pi zero W One sd card  Download Alpine linux We&amp;rsquo;ll use the almost latest version: 3.9.2 (3.9.3 would not work for some reason) The one to use for RPI is the raspberry pi (surprising :P) armhf.
-On your local computer (assuming you re using linux) Mount the sdcard (should be automated, if not, you probably know how to do that and you probably don&amp;rsquo;t need that tutorial)</description>
+      <description>step by step</description>
     </item>
     
     <item>
@@ -47,10 +40,7 @@ On your local computer (assuming you re using linux) Mount the sdcard (should be
       <pubDate>Tue, 27 Dec 2016 00:44:00 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/golang-playwithsql-oracle/</guid>
-      <description>Which library To this day, the most up to date library seems to be rana/ora
-How to install (linux &amp;amp; macosx) Download Oracle Instant Client for linux x64: both packages Basic and SDK Unzip each of them in the same folder /opt/oracle
-mkdir -p /opt/oracle cd /opt/oracle unzip ~/Downloads/instantclient-basiclite-linux.x64-12.2.0.1.0.zip unzip ~/Downloads/instantclient-sdk-linux.x64-12.2.0.1.0.zip cd /opt/oracle/instantclient_12_1 Add the necessary env variables and paths:
-# Oracle export LD_LIBRARY_PATH=/opt/oracle/instantclient_12_2:$LD_LIBRARY_PATH export PKG_CONFIG_PATH=/opt/oracle export ORACLE_HOME=$LD_LIBRARY_PATH copy from the go package .</description>
+      <description>How to use Oracle in golang</description>
     </item>
     
   </channel>

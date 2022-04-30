@@ -1,112 +1,286 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]><html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--><html class="no-js" prefix="og: http://ogp.me/ns#" xmlns:og="http://ogp.me/ns#"><!--<![endif]-->
+<html lang="en" dir="auto">
 
-    <head>
-                <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="description" content="leveraging multistage docker build to deploy rust">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
-        <meta name="mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <meta name="author" content="">
-        <meta name="keywords" content="awesome, definitely">
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>deploying rust in containers | VS tech corner</title>
+<meta name="keywords" content="rust, container, docker">
+<meta name="description" content="leveraging multistage docker build to deploy rust">
+<meta name="author" content="Me">
+<link rel="canonical" href="https://vincentserpoul.github.io/post/rust-optimized-container/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.ec8da366ca2fb647537ccb7a8f6fa5b4e9cd3c7a0d3171dd2d3baad1e49c8bfc.css" integrity="sha256-7I2jZsovtkdTfMt6j2&#43;ltOnNPHoNMXHdLTuq0eSci/w=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.2840b7fccd34145847db71a290569594bdbdb00047097f75d6495d162f5d7dff.js" integrity="sha256-KEC3/M00FFhH23GikFaVlL29sABHCX911kldFi9dff8="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://vincentserpoul.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://vincentserpoul.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://vincentserpoul.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://vincentserpoul.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://vincentserpoul.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-81802018-1', 'auto');
 	
-        <meta property="og:site_name" content="VS tech corner">
-        <meta property="og:title" content="VS tech corner">
-        <meta property="og:url" content="https://vincentserpoul.github.io/post/rust-optimized-container/">
-        <meta property="og:description" content="">
-    
-        <meta property="og:type" content="article" />
-        <meta property="og:article:author" content="" />
-        <meta property="og:article:published_time" content="2021-06-02T18:12:40&#43;08:00" />
-    
-        <meta name="generator" content="Hugo 0.83.1" />
-        <title>deploying rust in containers &middot; VS tech corner </title>
-        <link rel="canonical" href="https://vincentserpoul.github.io/" />
-        <link rel="alternate" type="application/rss+xml" title="RSS" href="">
-        <link rel="stylesheet" type='text/css' href="https://vincentserpoul.github.io/css/main.css"/>
-        <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300|Montserrat:700' rel='stylesheet' type='text/css'>
-        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-        <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-    </head>
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="deploying rust in containers" />
+<meta property="og:description" content="leveraging multistage docker build to deploy rust" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://vincentserpoul.github.io/post/rust-optimized-container/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-06-02T18:12:40&#43;08:00" />
+<meta property="article:modified_time" content="2021-06-02T18:12:40&#43;08:00" /><meta property="og:site_name" content="Vincent Serpoul" />
 
-<body>
-<!--[if lt IE 7]><p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chrome/‎">install Google Chrome</a> to experience this site.</p><![endif]-->
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="deploying rust in containers"/>
+<meta name="twitter:description" content="leveraging multistage docker build to deploy rust"/>
 
-    <header id="site-header">
-        <div class="container">
-            <a href="https://vincentserpoul.github.io/" alt="VS tech corner"><h1 class="blog-title heading">VS tech corner</h1></a>
-            <p class="blog-description"></p>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://vincentserpoul.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "deploying rust in containers",
+      "item": "https://vincentserpoul.github.io/post/rust-optimized-container/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "deploying rust in containers",
+  "name": "deploying rust in containers",
+  "description": "leveraging multistage docker build to deploy rust",
+  "keywords": [
+    "rust", "container", "docker"
+  ],
+  "articleBody": "The goal I am pretty familiar with containers and multi stage deployment have been my go to since quite a while now, for my golang codebases.\nNow that I have been picking up rust, deploying my first rust service in production did bring me back to my usual habits of containerization.\nWe’ll be trying to optimize for speed of build and container size.\nThe cargo.toml [...][lib]name = \"vs\"path = \"src/lib.rs\"[[bin]]name = \"vs\"path = \"src/bin/vs.rs\"[dependencies]serde = { version = \"^1.0\", features = [\"derive\"] }serde_json = \"^1.0\"serde_with = { version = \"^1.9\", features = [\"chrono\"] }serde_repr = \"0.1\"[...]I removed not relevant parts of the Cargo.toml.\nYou’ll pay attention to the lib and bin entries. They allow you to mix a lib and multiple binaries in the same codebase.\nI’ll be leveraging this in the Dockerfile.\nThe Dockerfile FROMrust:1.52.1 as builderWORKDIR/usr/codebaseCOPY ./Cargo.toml ./Cargo.tomlRUN sed -i 's#src/bin/vs.rs#fake.rs#' Cargo.tomlRUN sed -i 's#src/lib.rs#fake_lib.rs#' Cargo.tomlRUN echo \"fn main() {}\"  fake.rs \u0026\u0026\\  touch fake_lib.rsRUN cargo build --releaseRUN rm fake.rs fake_lib.rsRUN sed -i 's#fake.rs#src/bin/vs.rs#' Cargo.tomlRUN sed -i 's#fake_lib.rs#src/lib.rs#' Cargo.tomlCOPY ./ ./RUN cargo build --bin vs --release#FROMgcr.io/distroless/cc-debian10COPY --from=builder /usr/codebase/target/release/vs /app/WORKDIR/appENTRYPOINT [\"./vs\"]We first want to cache the compiled dependencies. To do that, we first copy the Cargo.toml alone and then create a fake.rs and a fake_lib.rs. Then we tell cargo to look at these new files instead of the previous ones and ask it to compile. Cargo will compile and cache all the dependencies (as well as your useless fake.rs). Bingo! All the deps will be compiled and cache in this image layer.\nYou can now restore the previous values, copy the rest of your codebase and voila, cargo will compile a LOT quicker in your next rebuild as it won’t have to compile your deps again (except if they change, of course).\nRegarding the container for runtime, instead of using a debian:bullseye-slim, you can go for the distroless image, ending up with a final size of around 20-30MB. Notice the use of cc-debian10, allowing non statically compiled binaries to run properly.\nThe .dockerignore You simply don’t want to copy your huge target repo to the docker image, so you want to add it to the .dockerignore file. You can also take this opportunity to add any files that should not be exposed, even though it won’t appear in the final container, you never know.\ntarget mysecret Cargo.lock On from scratch Usually, I go for a scratch image for my go runtime. The issue here is that some rust dependencies seems to be not so easy to compile statically (at least from what I see now). If possible, you can go for a musl cross compilation and if that works, go for a scratch container. Maybe another post!\n",
+  "wordCount" : "448",
+  "inLanguage": "en",
+  "datePublished": "2021-06-02T18:12:40+08:00",
+  "dateModified": "2021-06-02T18:12:40+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Me"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://vincentserpoul.github.io/post/rust-optimized-container/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "VS tech corner",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://vincentserpoul.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://vincentserpoul.github.io/" accesskey="h" title="Home (Alt + H)">Home</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
         </div>
-    </header>
-<main class="content" role="main">
-	<div class="container">
-		<article class="post">
-	<header class="post-header">
-        <h3 class="p-post-title">deploying rust in containers</h3>
-    </header>
+        <ul id="menu">
+            <li>
+                <a href="https://vincentserpoul.github.io/tags/" title="tags">
+                    <span>tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://vincentserpoul.github.io/" title="vincentserpoul.github.io">
+                    <span>vincentserpoul.github.io</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
 
-    <section class="post-content">
-        <h3 id="the-goal">The goal</h3>
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://vincentserpoul.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://vincentserpoul.github.io/post/">Posts</a></div>
+    <h1 class="post-title">
+      deploying rust in containers
+    </h1>
+    <div class="post-description">
+      leveraging multistage docker build to deploy rust
+    </div>
+    <div class="post-meta"><span title='2021-06-02 18:12:40 +0800 +08'>June 2, 2021</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Me
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#the-goal" aria-label="The goal">The goal</a></li>
+                <li>
+                    <a href="#the-cargotoml" aria-label="The cargo.toml">The cargo.toml</a></li>
+                <li>
+                    <a href="#the-dockerfile" aria-label="The Dockerfile">The Dockerfile</a></li>
+                <li>
+                    <a href="#the-dockerignore" aria-label="The .dockerignore">The .dockerignore</a></li>
+                <li>
+                    <a href="#on-from-scratch" aria-label="On from scratch">On from scratch</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h3 id="the-goal">The goal<a hidden class="anchor" aria-hidden="true" href="#the-goal">#</a></h3>
 <p>I am pretty familiar with containers and multi stage deployment have been my go to since quite a while now, for my golang codebases.</p>
 <p>Now that I have been picking up rust, deploying my first rust service in production did bring me back to my usual habits of containerization.</p>
 <p>We&rsquo;ll be trying to optimize for speed of build and container size.</p>
-<h3 id="the-cargotoml">The cargo.toml</h3>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">[...]<span style="color:#bbb">
-</span><span style="color:#bbb">
-</span><span style="color:#bbb"></span>[lib]<span style="color:#bbb">
-</span><span style="color:#bbb"></span>name = &#34;vs&#34;<span style="color:#bbb">
-</span><span style="color:#bbb"></span>path = &#34;src/lib.rs&#34;<span style="color:#bbb">
-</span><span style="color:#bbb">
-</span><span style="color:#bbb"></span>[[bin]]<span style="color:#bbb">
-</span><span style="color:#bbb"></span>name = &#34;vs&#34;<span style="color:#bbb">
-</span><span style="color:#bbb"></span>path = &#34;src/bin/vs.rs&#34;<span style="color:#bbb">
-</span><span style="color:#bbb">
-</span><span style="color:#bbb"></span>[dependencies]<span style="color:#bbb">
-</span><span style="color:#bbb"></span>serde = { version = &#34;^1.0&#34;, features = [&#34;derive&#34;] }<span style="color:#bbb">
-</span><span style="color:#bbb"></span>serde_json = &#34;^1.0&#34;<span style="color:#bbb">
-</span><span style="color:#bbb"></span>serde_with = { version = &#34;^1.9&#34;, features = [&#34;chrono&#34;] }<span style="color:#bbb">
-</span><span style="color:#bbb"></span>serde_repr = &#34;0.1&#34;<span style="color:#bbb">
-</span><span style="color:#bbb"></span>[...]<span style="color:#bbb">
-</span></code></pre></div><p>I removed not relevant parts of the Cargo.toml.</p>
+<h3 id="the-cargotoml">The cargo.toml<a hidden class="anchor" aria-hidden="true" href="#the-cargotoml">#</a></h3>
+<div class="highlight"><pre tabindex="0" style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>[...]<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>[lib]<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>name = &#34;vs&#34;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>path = &#34;src/lib.rs&#34;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>[[bin]]<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>name = &#34;vs&#34;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>path = &#34;src/bin/vs.rs&#34;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>[dependencies]<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>serde = { version = &#34;^1.0&#34;, features = [&#34;derive&#34;] }<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>serde_json = &#34;^1.0&#34;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>serde_with = { version = &#34;^1.9&#34;, features = [&#34;chrono&#34;] }<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>serde_repr = &#34;0.1&#34;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>[...]<span style="color:#bbb">
+</span></span></span></code></pre></div><p>I removed not relevant parts of the Cargo.toml.</p>
 <p>You&rsquo;ll pay attention to the lib and bin entries. They allow you to mix a lib and multiple binaries in the same codebase.</p>
 <p>I&rsquo;ll be leveraging this in the Dockerfile.</p>
-<h3 id="the-dockerfile">The Dockerfile</h3>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-docker" data-lang="docker"><span style="color:#008000;font-weight:bold">FROM</span><span style="color:#ba2121"> rust:1.52.1 as builder</span><span style="">
-</span><span style="">
-</span><span style=""></span><span style="color:#008000;font-weight:bold">WORKDIR</span><span style="color:#ba2121"> /usr/codebase</span><span style="">
-</span><span style="">
-</span><span style=""></span><span style="color:#008000;font-weight:bold">COPY</span> ./Cargo.toml ./Cargo.toml<span style="">
-</span><span style="">
-</span><span style=""></span><span style="color:#008000;font-weight:bold">RUN</span> sed -i <span style="color:#ba2121">&#39;s#src/bin/vs.rs#fake.rs#&#39;</span> Cargo.toml<span style="">
-</span><span style=""></span><span style="color:#008000;font-weight:bold">RUN</span> sed -i <span style="color:#ba2121">&#39;s#src/lib.rs#fake_lib.rs#&#39;</span> Cargo.toml<span style="">
-</span><span style="">
-</span><span style=""></span><span style="color:#008000;font-weight:bold">RUN</span> <span style="color:#008000">echo</span> <span style="color:#ba2121">&#34;fn main() {}&#34;</span> &gt; fake.rs <span style="color:#666">&amp;&amp;</span><span style="color:#b62;font-weight:bold">\
-</span><span style="color:#b62;font-weight:bold"></span>    touch fake_lib.rs<span style="">
-</span><span style="">
-</span><span style=""></span><span style="color:#008000;font-weight:bold">RUN</span> cargo build --release<span style="">
-</span><span style=""></span><span style="color:#008000;font-weight:bold">RUN</span> rm fake.rs fake_lib.rs<span style="">
-</span><span style="">
-</span><span style=""></span><span style="color:#008000;font-weight:bold">RUN</span> sed -i <span style="color:#ba2121">&#39;s#fake.rs#src/bin/vs.rs#&#39;</span> Cargo.toml<span style="">
-</span><span style=""></span><span style="color:#008000;font-weight:bold">RUN</span> sed -i <span style="color:#ba2121">&#39;s#fake_lib.rs#src/lib.rs#&#39;</span> Cargo.toml<span style="">
-</span><span style="">
-</span><span style=""></span><span style="color:#008000;font-weight:bold">COPY</span> ./ ./<span style="">
-</span><span style="">
-</span><span style=""></span><span style="color:#008000;font-weight:bold">RUN</span> cargo build --bin vs --release<span style="">
-</span><span style="">
-</span><span style=""></span><span style="color:#408080;font-style:italic">#</span><span style="">
-</span><span style=""></span><span style="color:#008000;font-weight:bold">FROM</span><span style="color:#ba2121"> gcr.io/distroless/cc-debian10</span><span style="">
-</span><span style="">
-</span><span style=""></span><span style="color:#008000;font-weight:bold">COPY</span> --from<span style="color:#666">=</span>builder /usr/codebase/target/release/vs /app/<span style="">
-</span><span style="">
-</span><span style=""></span><span style="color:#008000;font-weight:bold">WORKDIR</span><span style="color:#ba2121"> /app</span><span style="">
-</span><span style="">
-</span><span style=""></span><span style="color:#008000;font-weight:bold">ENTRYPOINT</span> [<span style="color:#ba2121">&#34;./vs&#34;</span>]<span style="">
-</span></code></pre></div><p>We first want to cache the compiled dependencies.
+<h3 id="the-dockerfile">The Dockerfile<a hidden class="anchor" aria-hidden="true" href="#the-dockerfile">#</a></h3>
+<div class="highlight"><pre tabindex="0" style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-docker" data-lang="docker"><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">FROM</span><span style="color:#ba2121"> rust:1.52.1 as builder</span><span style="">
+</span></span></span><span style="display:flex;"><span><span style="">
+</span></span></span><span style="display:flex;"><span><span style=""></span><span style="color:#008000;font-weight:bold">WORKDIR</span><span style="color:#ba2121"> /usr/codebase</span><span style="">
+</span></span></span><span style="display:flex;"><span><span style="">
+</span></span></span><span style="display:flex;"><span><span style=""></span><span style="color:#008000;font-weight:bold">COPY</span> ./Cargo.toml ./Cargo.toml<span style="">
+</span></span></span><span style="display:flex;"><span><span style="">
+</span></span></span><span style="display:flex;"><span><span style=""></span><span style="color:#008000;font-weight:bold">RUN</span> sed -i <span style="color:#ba2121">&#39;s#src/bin/vs.rs#fake.rs#&#39;</span> Cargo.toml<span style="">
+</span></span></span><span style="display:flex;"><span><span style=""></span><span style="color:#008000;font-weight:bold">RUN</span> sed -i <span style="color:#ba2121">&#39;s#src/lib.rs#fake_lib.rs#&#39;</span> Cargo.toml<span style="">
+</span></span></span><span style="display:flex;"><span><span style="">
+</span></span></span><span style="display:flex;"><span><span style=""></span><span style="color:#008000;font-weight:bold">RUN</span> <span style="color:#008000">echo</span> <span style="color:#ba2121">&#34;fn main() {}&#34;</span> &gt; fake.rs <span style="color:#666">&amp;&amp;</span><span style="color:#b62;font-weight:bold">\
+</span></span></span><span style="display:flex;"><span><span style="color:#b62;font-weight:bold"></span>    touch fake_lib.rs<span style="">
+</span></span></span><span style="display:flex;"><span><span style="">
+</span></span></span><span style="display:flex;"><span><span style=""></span><span style="color:#008000;font-weight:bold">RUN</span> cargo build --release<span style="">
+</span></span></span><span style="display:flex;"><span><span style=""></span><span style="color:#008000;font-weight:bold">RUN</span> rm fake.rs fake_lib.rs<span style="">
+</span></span></span><span style="display:flex;"><span><span style="">
+</span></span></span><span style="display:flex;"><span><span style=""></span><span style="color:#008000;font-weight:bold">RUN</span> sed -i <span style="color:#ba2121">&#39;s#fake.rs#src/bin/vs.rs#&#39;</span> Cargo.toml<span style="">
+</span></span></span><span style="display:flex;"><span><span style=""></span><span style="color:#008000;font-weight:bold">RUN</span> sed -i <span style="color:#ba2121">&#39;s#fake_lib.rs#src/lib.rs#&#39;</span> Cargo.toml<span style="">
+</span></span></span><span style="display:flex;"><span><span style="">
+</span></span></span><span style="display:flex;"><span><span style=""></span><span style="color:#008000;font-weight:bold">COPY</span> ./ ./<span style="">
+</span></span></span><span style="display:flex;"><span><span style="">
+</span></span></span><span style="display:flex;"><span><span style=""></span><span style="color:#008000;font-weight:bold">RUN</span> cargo build --bin vs --release<span style="">
+</span></span></span><span style="display:flex;"><span><span style="">
+</span></span></span><span style="display:flex;"><span><span style=""></span><span style="color:#408080;font-style:italic">#</span><span style="">
+</span></span></span><span style="display:flex;"><span><span style=""></span><span style="color:#008000;font-weight:bold">FROM</span><span style="color:#ba2121"> gcr.io/distroless/cc-debian10</span><span style="">
+</span></span></span><span style="display:flex;"><span><span style="">
+</span></span></span><span style="display:flex;"><span><span style=""></span><span style="color:#008000;font-weight:bold">COPY</span> --from<span style="color:#666">=</span>builder /usr/codebase/target/release/vs /app/<span style="">
+</span></span></span><span style="display:flex;"><span><span style="">
+</span></span></span><span style="display:flex;"><span><span style=""></span><span style="color:#008000;font-weight:bold">WORKDIR</span><span style="color:#ba2121"> /app</span><span style="">
+</span></span></span><span style="display:flex;"><span><span style="">
+</span></span></span><span style="display:flex;"><span><span style=""></span><span style="color:#008000;font-weight:bold">ENTRYPOINT</span> [<span style="color:#ba2121">&#34;./vs&#34;</span>]<span style="">
+</span></span></span></code></pre></div><p>We first want to cache the compiled dependencies.
 To do that, we first copy the Cargo.toml alone and then create a fake.rs and a fake_lib.rs.
 Then we tell cargo to look at these new files instead of the previous ones and ask it to compile.
 Cargo will compile and cache all the dependencies (as well as your useless fake.rs).
@@ -114,94 +288,111 @@ Bingo! All the deps will be compiled and cache in this image layer.</p>
 <p>You can now restore the previous values, copy the rest of your codebase and voila, cargo will compile a LOT quicker in your next rebuild as it won&rsquo;t have to compile your deps again (except if they change, of course).</p>
 <p>Regarding the container for runtime, instead of using a debian:bullseye-slim, you can go for the distroless image, ending up with a final size of around 20-30MB.
 Notice the use of cc-debian10, allowing non statically compiled binaries to run properly.</p>
-<h3 id="the-dockerignore">The .dockerignore</h3>
+<h3 id="the-dockerignore">The .dockerignore<a hidden class="anchor" aria-hidden="true" href="#the-dockerignore">#</a></h3>
 <p>You simply don&rsquo;t want to copy your huge target repo to the docker image, so you want to add it to the .dockerignore file.
 You can also take this opportunity to add any files that should not be exposed, even though it won&rsquo;t appear in the final container, you never know.</p>
-<pre><code>target
+<pre tabindex="0"><code>target
 mysecret
 Cargo.lock
-</code></pre><h3 id="on-from-scratch">On from scratch</h3>
+</code></pre><h3 id="on-from-scratch">On from scratch<a hidden class="anchor" aria-hidden="true" href="#on-from-scratch">#</a></h3>
 <p>Usually, I go for a scratch image for my go runtime. The issue here is that some rust dependencies seems to be not so easy to compile statically (at least from what I see now).
 If possible, you can go for a musl cross compilation and if that works, go for a scratch container.
 Maybe another post!</p>
 
-    </section>
 
-    <hr>
+  </div>
 
-    <footer class="post-footer">
-        <section class="f-1">
-            
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://vincentserpoul.github.io/tags/rust/">rust</a></li>
+      <li><a href="https://vincentserpoul.github.io/tags/container/">container</a></li>
+      <li><a href="https://vincentserpoul.github.io/tags/docker/">docker</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://vincentserpoul.github.io/post/golang-entreprise-part-1-modules-monorepo/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>golang enterprise, part 1, using a modules monorepo</span>
+  </a>
+  <a class="next" href="https://vincentserpoul.github.io/post/go-errors/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>golang errors (after 1.13)</span>
+  </a>
+</nav>
 
-            <p class="f-post-time"><time datetime="2021-06-02T18:12:40&#43;08:00">June 2, 2021</time></p>
-        </section>
-
-        <section class="f-2">
-            <section class="share">
-                <span>Share:
-                <a class="icon-twitter" href="http://twitter.com/share?text=deploying%20rust%20in%20containers&url=https%3a%2f%2fvincentserpoul.github.io%2fpost%2frust-optimized-container%2f"
-                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
-                    <i class="fa fa-twitter"></i>
-                </a>
-                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fvincentserpoul.github.io%2fpost%2frust-optimized-container%2f"
-                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
-                    <i class="fa fa-facebook"></i>
-                </a>
-                <a class="icon-google-plus" href="https://plus.google.com/share?url=https%3a%2f%2fvincentserpoul.github.io%2fpost%2frust-optimized-container%2f"
-                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
-                    <i class="fa fa-google-plus"></i>
-                </a>
-                </span>
-            </section>
-
-            
-            	<span class="f-post-tags"><i class="fa fa-tag"></i>
-            	rust, container, docker
-            	</span>
-            
-        </section>
-    </footer>
-
-    <div id="disqus_thread"></div>
-<script>
-var disqus_config = function () {
-    this.page.url = "https://vincentserpoul.github.io/post/rust-optimized-container/";  
-    this.page.identifier = "https://vincentserpoul.github.io/post/rust-optimized-container/"; 
-};
-
-(function() { 
-    var d = document, s = d.createElement('script');
-    s.src = '//vincentserpoul-tech-corner.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </footer>
 </article>
-	</div>
-</main>
-    <footer id="site-footer">
-        <div class="container">
-            <a href="https://vincentserpoul.github.io/index.xml" title="Get the RSS feed"><span class="tooltip"><i class="fa fa-rss"></i></span></a>
-        </div>
-    </footer>
-
-    <script type="text/javascript" src="https://vincentserpoul.github.io/js/fittext.js"></script>
-    <script type="text/javascript">
-      $(".heading").fitText();
-    </script>
-
+    </main>
     
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-81802018-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://vincentserpoul.github.io/">VS tech corner</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
 
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
 </body>
+
 </html>

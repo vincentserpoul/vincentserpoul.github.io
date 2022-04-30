@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>simple on VS tech corner</title>
     <link>https://vincentserpoul.github.io/tags/simple/</link>
@@ -13,10 +13,7 @@
       <pubDate>Sun, 28 Mar 2021 18:39:35 +0800</pubDate>
       
       <guid>https://vincentserpoul.github.io/post/go-embed-1.16/</guid>
-      <description>What is it about In previous versions of go, you needed to reach out for an external package in order to embed static content inside your binary.
-My go to one was shurcool/vfsgen, but there were many others worth using.
-Go 1.16 brings a new package, &amp;ldquo;embed&amp;rdquo;, which allows to do that with just the standard library.
-How to do that The best part of this, it&amp;rsquo;s extremely simple, just see for yourself.</description>
+      <description>using go embed in go 1.16</description>
     </item>
     
   </channel>
