@@ -147,7 +147,7 @@ if (!doNotTrack) {
     <p>Leveraging go workspaces Since go 1.18, we have a nice features, which is go workspaces.
 One thing that this brings is allowing to work nicely with multiple modules within one single workspace. Guess what it brings you? having multiple modules in one single monorepo!
 Take a look at this example
-Benefits  Have all the important reusable company modules at the same place. Bringin a better collaboration, and easier discovery. Mutualize the CI (which is pretty easy) Have good folder structure, allowing the grouping of modules in topics  Drawback The only drawback I could see until now it the coverage during the CI....</p>
+Benefits Have all the important reusable company modules at the same place. Bringin a better collaboration, and easier discovery. Mutualize the CI (which is pretty easy) Have good folder structure, allowing the grouping of modules in topics Drawback The only drawback I could see until now it the coverage during the CI....</p>
   </div>
   <footer class="entry-footer"><span title='2022-04-30 17:01:21 +0800 +08'>April 30, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Me</footer>
   <a class="entry-link" aria-label="post link to golang enterprise, part 1, using a modules monorepo" href="https://vincentserpoul.github.io/post/golang-entreprise-part-1-modules-monorepo/"></a>
@@ -162,9 +162,9 @@ Benefits  Have all the important reusable company modules at the same place. Bri
     <p>Since go 1.13, go has gone one step further in terms of error handling. Errors can be wrapped, bubbled up and act upon.
 We will here take a step back on error handling in go, from the perspective of a library.
 What data could we have in the error? Inspired by a rust talk from Jan Lusby about errors, here are a few things that error could contain:
- The reason of the error Context of the error: struct field, struct surrounding values… Stack trace: which part of the code triggered this error How to fix the error: suggest a way to fix it  Where are errors displayed?...</p>
+The reason of the error Context of the error: struct field, struct surrounding values… Stack trace: which part of the code triggered this error How to fix the error: suggest a way to fix it Where are errors displayed?...</p>
   </div>
-  <footer class="entry-footer"><span title='2021-05-17 12:30:48 +0800 +08'>May 17, 2021</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Me</footer>
+  <footer class="entry-footer"><span title='2021-05-17 12:30:48 +0800 +08'>May 17, 2021</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Me</footer>
   <a class="entry-link" aria-label="post link to golang errors (after 1.13)" href="https://vincentserpoul.github.io/post/go-errors/"></a>
 </article>
 
@@ -234,7 +234,9 @@ mkdir -p /opt/oracle cd /opt/oracle unzip ~/Downloads/instantclient-basiclite-li
     </h2>
   </header>
   <div class="entry-content">
-    <p>The contract contract Trigger {  function () {  throw;  }   address owner;   function Trigger() {  owner = msg.sender;  }   event TriggerEvt(address _sender, uint _trigger);   function trigger(uint _trigger) {  TriggerEvt(msg.sender, _trigger);  }   function getOwner() constant returns (address) {  return owner;  }  } This is a very simple contract that we will take as an example....</p>
+    <p>The contract contract Trigger { function () { throw; } address owner; function Trigger() { owner = msg.sender; } event TriggerEvt(address _sender, uint _trigger); function trigger(uint _trigger) { TriggerEvt(msg.sender, _trigger); } function getOwner() constant returns (address) { return owner; } } This is a very simple contract that we will take as an example.
+Getting the right tools for binding A good starting point is this wiki.
+You will need to follow the install procedure of go-ethereum....</p>
   </div>
   <footer class="entry-footer"><span title='2016-10-10 12:54:00 +0800 +08'>October 10, 2016</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Me</footer>
   <a class="entry-link" aria-label="post link to Ethereum contracts and Golang" href="https://vincentserpoul.github.io/post/binding-ethereum-golang/"></a>
@@ -267,7 +269,7 @@ install interfacer (https://github.com/mvdan/interfacer/)
 install gosimple (https://github.com/dominikh/go-simple)
 install gocov (https://github.com/axw/gocov)
 Here is the package settings I use for gosublime:
-{   // you may set specific environment variables here  // e.g &#34;env&#34;: { &#34;PATH&#34;: &#34;$HOME/go/bin:$PATH&#34; }  // in values, $PATH and ${PATH} are replaced with  // the corresponding environment(PATH) variable, if it exists....</p>
+{ // you may set specific environment variables here // e.g &#34;env&#34;: { &#34;PATH&#34;: &#34;$HOME/go/bin:$PATH&#34; } // in values, $PATH and ${PATH} are replaced with // the corresponding environment(PATH) variable, if it exists....</p>
   </div>
   <footer class="entry-footer"><span title='2016-02-20 20:48:27 +0800 +08'>February 20, 2016</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Me</footer>
   <a class="entry-link" aria-label="post link to golang dev environment setup" href="https://vincentserpoul.github.io/post/golang-dev-env-setup/"></a>

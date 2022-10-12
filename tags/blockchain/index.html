@@ -146,7 +146,8 @@ if (!doNotTrack) {
   <div class="entry-content">
     <p>I finished my first dapp with (react-boilerplate)[https://github.com/mxstbr/] this week and here are the few things I learnt. I won’t get into the redux, redux-saga details, I let you play with the amazing boilerplate.
 Interacting with constant functions Let’s use the typical balanceOf function of the EIP20 contracts:
- function balanceOf(address _owner) constant returns (uint256 balance) {  return balances[_owner];  } Here are the sagas (redux-sagas) I used to interact:...</p>
+function balanceOf(address _owner) constant returns (uint256 balance) { return balances[_owner]; } Here are the sagas (redux-sagas) I used to interact:
+import { take, call, put, cancel, select, fork } from &#39;redux-saga/effects&#39;; import { BALANCE_OF_GET, } from &#39;....</p>
   </div>
   <footer class="entry-footer"><span title='2016-10-27 13:34:00 +0800 +08'>October 27, 2016</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Me</footer>
   <a class="entry-link" aria-label="post link to Ethereum react dapps" href="https://vincentserpoul.github.io/post/ethereum-react-dapps/"></a>
@@ -158,7 +159,9 @@ Interacting with constant functions Let’s use the typical balanceOf function o
     </h2>
   </header>
   <div class="entry-content">
-    <p>The contract contract Trigger {  function () {  throw;  }   address owner;   function Trigger() {  owner = msg.sender;  }   event TriggerEvt(address _sender, uint _trigger);   function trigger(uint _trigger) {  TriggerEvt(msg.sender, _trigger);  }   function getOwner() constant returns (address) {  return owner;  }  } This is a very simple contract that we will take as an example....</p>
+    <p>The contract contract Trigger { function () { throw; } address owner; function Trigger() { owner = msg.sender; } event TriggerEvt(address _sender, uint _trigger); function trigger(uint _trigger) { TriggerEvt(msg.sender, _trigger); } function getOwner() constant returns (address) { return owner; } } This is a very simple contract that we will take as an example.
+Getting the right tools for binding A good starting point is this wiki.
+You will need to follow the install procedure of go-ethereum....</p>
   </div>
   <footer class="entry-footer"><span title='2016-10-10 12:54:00 +0800 +08'>October 10, 2016</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Me</footer>
   <a class="entry-link" aria-label="post link to Ethereum contracts and Golang" href="https://vincentserpoul.github.io/post/binding-ethereum-golang/"></a>
@@ -185,7 +188,7 @@ Interacting with constant functions Let’s use the typical balanceOf function o
     <p>Check the address of the current deployed contract Remember when you mined your contract, it told your its address. Now, reuse it!
 eth.getCode(&#34;0x5f3425ccedeae0eb36521c4cf93ec6544dbad9bd&#34;) Test the contract with a simple interaction get the latest web3-light.min.js js from https://github.com/ethereum/web3.js/releases and simply copy the dist/web3-light.min.js into the same folder as the following HTML file.
 then, use this html to interact with your contract on the local node:
-&lt;!doctype&gt; &lt;html&gt; &lt;head&gt;  &lt;script type=&#34;text/javascript&#34; src=&#34;https://cdnjs....</p>
+&lt;!doctype&gt; &lt;html&gt; &lt;head&gt; &lt;script type=&#34;text/javascript&#34; src=&#34;https://cdnjs.cloudflare.com/ajax/libs/bignumber.js/2.4.0/bignumber.min.js&#34;&gt;&lt;/script&gt; &lt;script type=&#34;text/javascript&#34; src=&#34;....</p>
   </div>
   <footer class="entry-footer"><span title='2016-08-03 20:00:00 +0800 +08'>August 3, 2016</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Me</footer>
   <a class="entry-link" aria-label="post link to Interacting with an Ethereum smart contract" href="https://vincentserpoul.github.io/post/ethereum-interacting-with-contracts/"></a>
@@ -197,8 +200,9 @@ then, use this html to interact with your contract on the local node:
     </h2>
   </header>
   <div class="entry-content">
-    <p>Launch your geth (or testrpc) private instance ./geth \  --identity &#34;gethTest&#34; \  --rpc --rpcport &#34;9012&#34; \  --rpccorsdomain &#34;YOUR_TEST_DOMAIN_APP_RUN_FROM&#34; \  --datadir &#34;./testChain&#34; \  --port &#34;30303&#34; \  --nodiscover \  --rpcapi &#34;db,eth,net,web3&#34; \  --networkid 1999 \  --dev console Within the console, compile your contract check this tutorial: https://www.ethereum.org/greeter
-I had an issue when I followed the contract tutorial, my contract would not be mined after I was trying to deploy it....</p>
+    <p>Launch your geth (or testrpc) private instance ./geth \ --identity &#34;gethTest&#34; \ --rpc --rpcport &#34;9012&#34; \ --rpccorsdomain &#34;YOUR_TEST_DOMAIN_APP_RUN_FROM&#34; \ --datadir &#34;./testChain&#34; \ --port &#34;30303&#34; \ --nodiscover \ --rpcapi &#34;db,eth,net,web3&#34; \ --networkid 1999 \ --dev console Within the console, compile your contract check this tutorial: https://www.ethereum.org/greeter
+I had an issue when I followed the contract tutorial, my contract would not be mined after I was trying to deploy it.
+The issue was that my account was locked :/ and the greeter contract stupidly silently fails… Here is the modified code to see the obvious error....</p>
   </div>
   <footer class="entry-footer"><span title='2016-08-03 13:00:00 +0800 +08'>August 3, 2016</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Me</footer>
   <a class="entry-link" aria-label="post link to Ethereum first smart contract" href="https://vincentserpoul.github.io/post/ethereum-first-contract/"></a>

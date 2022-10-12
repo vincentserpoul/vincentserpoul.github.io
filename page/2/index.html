@@ -2,7 +2,7 @@
 <html lang="en" dir="auto">
 
 <head>
-	<meta name="generator" content="Hugo 0.97.3" /><meta charset="utf-8">
+	<meta name="generator" content="Hugo 0.104.3" /><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
@@ -184,7 +184,7 @@ I uploaded it as well on surge for you to see without the hassle...</p>
   </header>
   <div class="entry-content">
     <p>Google cloud configs Download and install gcloud Simply follow this link
-Listing existing configurations gcloud config configurations list  NAME IS_ACTIVE ACCOUNT PROJECT DEFAULT_ZONE DEFAULT_REGION This should give you only one line, with a default account.
+Listing existing configurations gcloud config configurations list NAME IS_ACTIVE ACCOUNT PROJECT DEFAULT_ZONE DEFAULT_REGION This should give you only one line, with a default account.
 Creating a configuration gcloud config configurations create testconf This will guide you through the configuration of a new configuration. It allows you to set one config per account, project, cluster…
 Activating a configuration gcloud config configurations activate testconf As simple as this to change your account/config....</p>
   </div>
@@ -229,7 +229,8 @@ mkdir -p /opt/oracle cd /opt/oracle unzip ~/Downloads/instantclient-basiclite-li
   <div class="entry-content">
     <p>I finished my first dapp with (react-boilerplate)[https://github.com/mxstbr/] this week and here are the few things I learnt. I won’t get into the redux, redux-saga details, I let you play with the amazing boilerplate.
 Interacting with constant functions Let’s use the typical balanceOf function of the EIP20 contracts:
- function balanceOf(address _owner) constant returns (uint256 balance) {  return balances[_owner];  } Here are the sagas (redux-sagas) I used to interact:...</p>
+function balanceOf(address _owner) constant returns (uint256 balance) { return balances[_owner]; } Here are the sagas (redux-sagas) I used to interact:
+import { take, call, put, cancel, select, fork } from &#39;redux-saga/effects&#39;; import { BALANCE_OF_GET, } from &#39;....</p>
   </div>
   <footer class="entry-footer"><span title='2016-10-27 13:34:00 +0800 +08'>October 27, 2016</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Me</footer>
   <a class="entry-link" aria-label="post link to Ethereum react dapps" href="https://vincentserpoul.github.io/post/ethereum-react-dapps/"></a>
@@ -241,7 +242,9 @@ Interacting with constant functions Let’s use the typical balanceOf function o
     </h2>
   </header>
   <div class="entry-content">
-    <p>The contract contract Trigger {  function () {  throw;  }   address owner;   function Trigger() {  owner = msg.sender;  }   event TriggerEvt(address _sender, uint _trigger);   function trigger(uint _trigger) {  TriggerEvt(msg.sender, _trigger);  }   function getOwner() constant returns (address) {  return owner;  }  } This is a very simple contract that we will take as an example....</p>
+    <p>The contract contract Trigger { function () { throw; } address owner; function Trigger() { owner = msg.sender; } event TriggerEvt(address _sender, uint _trigger); function trigger(uint _trigger) { TriggerEvt(msg.sender, _trigger); } function getOwner() constant returns (address) { return owner; } } This is a very simple contract that we will take as an example.
+Getting the right tools for binding A good starting point is this wiki.
+You will need to follow the install procedure of go-ethereum....</p>
   </div>
   <footer class="entry-footer"><span title='2016-10-10 12:54:00 +0800 +08'>October 10, 2016</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Me</footer>
   <a class="entry-link" aria-label="post link to Ethereum contracts and Golang" href="https://vincentserpoul.github.io/post/binding-ethereum-golang/"></a>
@@ -255,7 +258,7 @@ Interacting with constant functions Let’s use the typical balanceOf function o
   <div class="entry-content">
     <p>I just watched that amazing videos from Matt Ranney
 Here are my takeaways and opinionated summary:
- Use RPC for service to service communications: gRPC seems to be a good way of tackling it Use many repositories Profiling should be unified: flamegraphs seem to be a good solution (Go profiling is great too) Premature optimization is bad but performance monitoring is crucial! Trace requests, keep context within all logs Log a lot, but only on a portion of your production architecture as logging can have a big cost....</p>
+Use RPC for service to service communications: gRPC seems to be a good way of tackling it Use many repositories Profiling should be unified: flamegraphs seem to be a good solution (Go profiling is great too) Premature optimization is bad but performance monitoring is crucial! Trace requests, keep context within all logs Log a lot, but only on a portion of your production architecture as logging can have a big cost....</p>
   </div>
   <footer class="entry-footer"><span title='2016-09-30 12:06:01 +0800 +08'>September 30, 2016</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Me</footer>
   <a class="entry-link" aria-label="post link to Summary of UBER lessons on scaling microservices" href="https://vincentserpoul.github.io/post/on-microservices-and-scaling/"></a>
