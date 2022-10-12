@@ -110,8 +110,8 @@ if (!doNotTrack) {
   "keywords": [
     "golang", "enterprise", "git", "monorepo"
   ],
-  "articleBody": "Leveraging go workspaces Since go 1.18, we have a nice features, which is go workspaces.\nOne thing that this brings is allowing to work nicely with multiple modules within one single workspace. Guess what it brings you? having multiple modules in one single monorepo!\nTake a look at this example\nBenefits Have all the important reusable company modules at the same place. Bringin a better collaboration, and easier discovery. Mutualize the CI (which is pretty easy) Have good folder structure, allowing the grouping of modules in topics Drawback The only drawback I could see until now it the coverage during the CI. It took quite some time to configure coveralls.io to display one number which was the aggregate of all modules. Which also has the consequence of having to run all coverages, each time there is one change in one of the repo (it can probably be mitigated with some cache management).\nVersioning How do you then version your modules independantly? Simple: use semantic versioning including the path. For example, for the module z located in x/y/z, you do:\ngit tag x/y/z/v1.0.0 and that’s it, you have differentiated versioning! You can even pull another version of a module in one of the other modules in the same repo.\nBonus: Docs For the documentation, you often don’t have access to a pkg.dev portal. Easy way out: generate your doc in markdown thanks to gomarkdoc.\n",
-  "wordCount" : "233",
+  "articleBody": "Leveraging go workspaces Since go 1.18, we have a nice features, which is go workspaces.\nOne thing that this brings is allowing to work nicely with multiple modules within one single workspace. Guess what it brings you? having multiple modules in one single monorepo!\nTake a look at this example\nBenefits Have all the important reusable company modules at the same place. Bringin a better collaboration, and easier discovery. Mutualize the CI (which is pretty easy) Have good folder structure, allowing the grouping of modules in topics Drawback ( The only drawback I could see until now it the coverage during the CI. It took quite some time to configure coveralls.io to display one number which was the aggregate of all modules. Which also has the consequence of having to run all coverages, each time there is one change in one of the repo (it can probably be mitigated with some cache management). )\nUPDATE 20222-10-12: you can actually run go tests, hence go coverage over multiple folders, so the coverage drawback does not even exist anymore.\nVersioning How do you then version your modules independantly? Simple: use semantic versioning including the path. For example, for the module z located in x/y/z, you do:\ngit tag x/y/z/v1.0.0 and that’s it, you have differentiated versioning! You can even pull another version of a module in one of the other modules in the same repo.\nBonus: Docs For the documentation, you often don’t have access to a pkg.dev portal. Easy way out: generate your doc in markdown thanks to gomarkdoc.\n",
+  "wordCount" : "258",
   "inLanguage": "en",
   "datePublished": "2022-04-30T17:01:21+08:00",
   "dateModified": "2022-04-30T17:01:21+08:00",
@@ -237,9 +237,12 @@ Guess what it brings you? having multiple modules in one single monorepo!</p>
 <li>Have good folder structure, allowing the grouping of modules in topics</li>
 </ul>
 <h2 id="drawback">Drawback<a hidden class="anchor" aria-hidden="true" href="#drawback">#</a></h2>
-<p>The only drawback I could see until now it the coverage during the CI.
+<p>(
+The only drawback I could see until now it the coverage during the CI.
 It took quite some time to configure <a href="https://coveralls.io">coveralls.io</a> to display one number which was the aggregate of all modules.
-Which also has the consequence of having to run all coverages, each time there is one change in one of the repo (it can probably be mitigated with some cache management).</p>
+Which also has the consequence of having to run all coverages, each time there is one change in one of the repo (it can probably be mitigated with some cache management).
+)</p>
+<p><strong>UPDATE 20222-10-12</strong>: you can actually run go tests, hence go coverage over multiple folders, so the coverage drawback does not even exist anymore.</p>
 <h2 id="versioning">Versioning<a hidden class="anchor" aria-hidden="true" href="#versioning">#</a></h2>
 <p>How do you then version your modules independantly?
 Simple: use semantic versioning including the path. For example, for the module z located in x/y/z, you do:</p>
